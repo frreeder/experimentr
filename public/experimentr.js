@@ -163,6 +163,8 @@ var experimentr = (function() {
   // seconds is the number of seconds in the countdown
   // cb is a function which executes at the end of the countdown (write a custom callback to suite your experiment needs)
   // Note, for an invisible timer, set target to null (e.g. attachTimer(null, 10, <insert your callback here>))
+  experimentr.attachTimerInterval;
+
   experimentr.attachTimer = function(target, seconds, cb) {
     d3.select(target).text(seconds);
 
@@ -176,12 +178,19 @@ var experimentr = (function() {
         timesCalled++;
     }
 
-    var interval = setInterval(update, 1000);
+    // var interval = setInterval(update, 1000);
+    experimentr.attachTimerInterval = setInterval(update, 1000);
 
     var end = function() {
-      clearInterval(interval);
+      clearInterval(experimentr.attachTimerInterval);
       cb();
     }
+  }
+
+  experimentr.attachTimerEnd = function(target){
+    d3.select(target).remove()
+    clearInterval(experimentr.attachTimerInterval)
+
   }
 
   // Make sure that backspace doesn't trigger navigation

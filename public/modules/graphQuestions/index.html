@@ -3,6 +3,7 @@
 <p id="graphQInstructions">
 <strong>Please play close attention to the story. You will be asked to answer questions about the story's content.</strong>
 </p>
+<div id="graphQImage"></div>
 <div id="graphQText"></div>
 <div id="graphQVerification"></div>
 </div>
@@ -22,24 +23,35 @@
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
 
-    experimentr.attachTimer('#graphQTimer', 10, function() {
+    experimentr.attachTimer('#graphQTimer', 20, function() {
       d3.select('#graphQTimer').remove();
       loadQuestion();
     });
 
-    d3.json('modules/emotion-prime-story/stories.json', function(err, d) {
-      data.primingType = rand === 0 ? 'negative' : rand === 1 ? 'positive' : 'neutral';
-      storyData = data.primingType === 'negative' ? d[0] : data.primingType === 'positive' ? d[1] : d[2]; // 0 negative; 1 positive; 2 neutral
+    d3.json('modules/graphQuestions/graphList.json', function(err, d) {
+      storyData = d[0]
+      // data.primingType = rand === 0 ? 'negative' : rand === 1 ? 'positive' : 'neutral';
+      // storyData = data.primingType === 'negative' ? d[0] : data.primingType === 'positive' ? d[1] : d[2]; // 0 negative; 1 positive; 2 neutral
       loadStory();
     });
   }
   function loadStory() {
-    d3.select('#graphQText').append('div')
-      .html(storyData.story);
+    // Appending the graph Image...hardcoded for now...
+    d3.select('#graphQImage').append('img')
+      .attr('class', 'picture')
+      .attr('src', function(d) { return "modules/graphQuestions/graphImages/line_climateChange.png"; });
+    // Used to add the text of story
+    // d3.select('#graphQText').append('div')
+    //   .html(storyData.story);
+    // Adds the option for the participant to skip past waiting....might include for testing purposes and remove later. s
     d3.select('#graphQText').append('button')
       .attr('type', 'button')
       .text('I have finished reading the story and I am ready for the questions.')
-      .on('click', loadQuestion);
+      .on('click',
+        function(d) {
+          loadQuestion();
+          experimentr.attachTimerEnd('#graphQTimer')
+        });
   }
   function loadQuestion() {
     experimentr.showNext();

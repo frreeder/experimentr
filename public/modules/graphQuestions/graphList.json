@@ -1,0 +1,23 @@
+[
+  {
+    "type": "line",
+    "imagePath": "modules/graphQuestions/graphImages/line_climateChange.png",
+    "question": "What year had the least C02 Emissions?",
+    "choices": ["2000", "2003", "2001", "2005", "omit"],
+    "answer": "2003"
+  },
+  {
+    "type": "bar",
+    "imagePath": "modules/graphQuestions/graphImages/bar_developerPlatforms.png",
+    "question": "What is the second least used development platform?",
+    "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
+    "answer": "Blackberry"
+  },
+  {
+    "type": "pie",
+    "imagePath": "modules/graphQuestions/graphImages/pie_beauty.png",
+    "question": "What is the second highest beauty product being used?",
+    "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+    "answer": "Hair"
+  }
+]
