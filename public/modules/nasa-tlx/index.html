@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>NASA Task Load Index</title>
-</head>
-<body>
 
-<h3>Figure 8.6</h3>
 <h1>NASA Task Load Index </h1>
 
 <p>Hart and Stavelands NASA Task Load Index (TLX) method assesses <br>work load on five 7-point scales. Increments of high, medium and low<br> estimates for each point result in 21 gradations on the scales.</p>
@@ -56,27 +49,26 @@ Very Low<input type="range" name ="frustration" min="0.0" max="1.0" value="0" st
 
 <hr style="height:5px;border:none;color:#333;background-color:#333; align:"LEFT";" />
 
-
+<style></style>
 
 <script>
 (function() {
   var data = {};
-
   experimentr.startTimer('nasatlx');
   //d3.select('#status').text(experimentr.status());
-  
+
   d3.selectAll('input')
   .filter(function(d) { return this.name === 'name' ? this : null; })
   .on('change', function() { data.name = this.value; validate(); });
-  
+
   d3.selectAll('input')
   .filter(function(d) { return this.name === 'task' ? this : null; })
   .on('change', function() { data.task = this.value; validate(); });
-  
+
   d3.selectAll('input')
   .filter(function(d) { return this.name === 'date' ? this : null; })
   .on('change', function() { data.date= this.value; validate(); });
-  
+
   ////////////////////////////////////////////////////////////////////////////
 
   d3.selectAll('input')
@@ -108,6 +100,9 @@ Very Low<input type="range" name ="frustration" min="0.0" max="1.0" value="0" st
       data.effort && data.frustration) {
 
         grade(data);
+        // console.log("validateNASA")
+        // seeing if this helps move to next
+        experimentr.showNext();
         experimentr.endTimer('nasatlx');
         experimentr.addData(data);
         experimentr.release();
@@ -120,8 +115,8 @@ Very Low<input type="range" name ="frustration" min="0.0" max="1.0" value="0" st
     for (answer in data) {
 
       //Odd numbered questions grading
-      if (answer == 'mental_demand' || answer == 'physical_demand' || 
-          answer == 'temporal_demand' || answer == 'performance' || 
+      if (answer == 'mental_demand' || answer == 'physical_demand' ||
+          answer == 'temporal_demand' || answer == 'performance' ||
           answer == 'effort' || answer == 'frustration') {
 
             score += data[answer];
@@ -135,12 +130,9 @@ Very Low<input type="range" name ="frustration" min="0.0" max="1.0" value="0" st
       }
 
     }
-	
+
     data.nasatlx_score = score;
 
   }
-});
+}());
 </script>
-
-</body>
-</html>

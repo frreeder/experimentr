@@ -1,10 +1,10 @@
-<div id="storyPrime">
-<div id="storyTimer"></div>
-<p id="storyInstructions">
+<div id="graphQuestions">
+<div id="graphQTimer"></div>
+<p id="graphQInstructions">
 <strong>Please play close attention to the story. You will be asked to answer questions about the story's content.</strong>
 </p>
-<div id="storyText"></div>
-<div id="storyVerification"></div>
+<div id="graphQText"></div>
+<div id="graphQVerification"></div>
 </div>
 
 <style>
@@ -20,10 +20,10 @@
 
   function init() {
     experimentr.hideNext();
-    experimentr.startTimer('storyPrime');
+    experimentr.startTimer('graphQuestions');
 
-    experimentr.attachTimer('#storyTimer', 10, function() {
-      d3.select('#storyTimer').remove();
+    experimentr.attachTimer('#graphQTimer', 10, function() {
+      d3.select('#graphQTimer').remove();
       loadQuestion();
     });
 
@@ -34,46 +34,47 @@
     });
   }
   function loadStory() {
-    d3.select('#storyText').append('div')
+    d3.select('#graphQText').append('div')
       .html(storyData.story);
-    d3.select('#storyText').append('button')
+    d3.select('#graphQText').append('button')
       .attr('type', 'button')
       .text('I have finished reading the story and I am ready for the questions.')
       .on('click', loadQuestion);
   }
   function loadQuestion() {
     experimentr.showNext();
-    d3.select('#storyText').remove();
-    d3.select('#storyInstructions').remove();
-    d3.select('#storyVerification').append('p')
+    d3.select('#graphQText').remove();
+    d3.select('#graphQInstructions').remove();
+    d3.select('#graphQVerification').append('p')
       .text(storyData.question);
-    var choices = d3.select('#storyVerification').selectAll('.choice')
+    var choices = d3.select('#graphQVerification').selectAll('.choice')
       .data(storyData.choices)
       .enter().append('div')
       .classed('choice', true);
     choices.append('input')
       .attr('type', 'radio')
-      .attr('name', 'storyVerification')
+      .attr('name', 'graphQVerification')
       .attr('value', function(d) { return d; });
     choices.append('label')
       .text(function(d) { return d; });
   d3.selectAll('input')
-    .filter(function(d) { return this.name === 'storyVerification' ? this : null; })
-    .on('change', function() { data.storyVerification = this.value; validate(); });
+    .filter(function(d) { return this.name === 'graphQVerification' ? this : null; })
+    .on('change', function() { data.graphQVerification = this.value; validate(); });
   }
+  // allow the participant to move on to the next
   function validate() {
-    if(data.storyVerification) {
+    if(data.graphQVerification) {
       grade();
-      experimentr.endTimer('storyPrime');
+      experimentr.endTimer('graphQuestions');
       experimentr.addData(data);
       experimentr.release();
     }
   }
   function grade() {
-    if(data.storyVerification === storyData.answer)
-      data.storyVerificationResult = true;
+    if(data.graphQVerification === storyData.answer)
+      data.graphQVerificationResult = true;
     else
-      data.storyVerificationResult = false;
+      data.graphQVerificationResult = false;
   }
 }());
 </script>
