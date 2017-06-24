@@ -60,31 +60,35 @@
     d3.select('#graphQInstructions').remove();
     // only looking at one thing for now
     for (var i=0; i<1; i++){
-      data.mod1.push({key: storyData.type})
+      data.mod1.push({key: storyData.type, inputData: []})
     }
-    // for (var i=0; i<storyData.questionBank.length; i++)
-    d3.select('#graphQVerification').append('p')
-      .text(storyData.question);
-    var choices = d3.select('#graphQVerification').selectAll('.choice')
-      .data(storyData.choices)
-      .enter().append('div')
-      .classed('choice', true);
-    choices.append('input')
-      .attr('type', 'radio')
-      .attr('name', 'graphQVerification')
-      .attr('value', function(d) { return d; });
-    choices.append('label')
-      .text(function(d) { return d; });
-  d3.selectAll('input')
-    .filter(function(d) { return this.name === 'graphQVerification' ? this : null; })
-    .on('change', function() {
-      data.mod1[0].inputData = [{
-        questionType: storyData.questionBank[0].key,
-        userAnswer: this.value
-      }]
-      diffGradeMeth();
-      data.graphQVerification = this.value; validate();
-    });
+    for (let i=0; i<storyData.questionBank.length; i++){
+      data.mod1[0].inputData.push({questionType: storyData.questionBank[i].key})
+      var question = d3.select('#graphQVerification').append("g")
+      question.append('p')
+        .text(storyData.questionBank[i].question);
+      var choices = question.selectAll('.choice')
+        .data(storyData.questionBank[i].choices)
+        .enter().append('div')
+        .classed('choice', true);
+      choices.append('input')
+        .attr('type', 'radio')
+        .attr('name', 'graphQVerification'+i.toString())
+        .attr('value', function(d) { return d; });
+      choices.append('label')
+        .text(function(d) { return d; });
+      d3.selectAll('input')
+        .filter(function(d) {
+          console.log("i", i)
+          return this.name === 'graphQVerification'+i.toString() ? this : null; })
+        .on('change', function() {
+          console.log("i2", i)
+          console.log(this.name, this.value, data.mod1[0].inputData[i], i)
+          data.mod1[0].inputData[i].userAnswer = this.value
+          diffGradeMeth();
+          data.graphQVerification = this.value; validate();
+        });
+    }
   }
   // allow the participant to move on to the next
   function validate() {
