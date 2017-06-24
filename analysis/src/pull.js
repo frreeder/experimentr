@@ -19,6 +19,13 @@ function keys () {
 
 function data (k, i, arr) {
   client.hgetall(k, function (err, obj) {
+    // This is a gross way of checking for all string JSON objects and parsing if true.
+    for (var j in obj) {
+      try {
+        obj[j]=JSON.parse(obj[j]);
+      } catch (e){
+      }
+    }
     dataset.push(obj)
     if(i === arr.length-1) log(dataset)
   });

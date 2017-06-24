@@ -3,6 +3,22 @@
     "type": "line",
     "imagePath": "modules/graphQuestions/graphImages/line_climateChange.png",
     "question": "What year had the least C02 Emissions?",
+    "questionBank": [
+      {
+        "question": "What year had the least C02 Emissions?",
+        "choices": ["2000", "2003", "2001", "2005", "omit"],
+        "answer": "2003",
+        "key": "identify"
+      },
+      {
+        "question": "Pancakes or waffles?",
+        "choices": ["pancakes", "waffles", "f*%$ it waffles", "omit"],
+        "answer": "pancakes",
+        "key": "compare"
+      }
+    ],
+    "questions": ["What year had the least C02 Emissions?", "Pancakes or pie?"],
+    "choiceBank": [["2000", "2003", "2001", "2005", "omit"], ["Pancakes", "Pie"]],
     "choices": ["2000", "2003", "2001", "2005", "omit"],
     "answer": "2003"
   },

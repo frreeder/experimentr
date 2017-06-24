@@ -1,3 +1,4 @@
+console.log("here")
 var j2c    = require('json2csv')
   , fs     = require('fs')
   , file   = process.argv[2]
@@ -11,22 +12,27 @@ var j2c    = require('json2csv')
     ]
   , data
 
+console.log("converting")
+
 fs.readFile(file, 'utf8', function (err, data) {
   if (err) console.log(err)
 
   data = JSON.parse(data)
+  console.log("data", data)
+  console.log("stuff")
 
   // filters any undefined data (it makes R scripting easier)
   data = filterUndefined(data)
 
-  // use 'debug' for your workerId when testing experiments, 
+  // use 'debug' for your workerId when testing experiments,
   //   comment out if you want to analyze data from yourself
-  data = filterDebug(data) 
+  data = filterDebug(data)
 
   convert( data )
 })
 
 function convert(d) {
+  console.log("convertFunction")
   var params = {
     data: d,
     fields: fields

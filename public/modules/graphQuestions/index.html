@@ -20,6 +20,7 @@
   init();
 
   function init() {
+    data.mod1=[]
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
 
@@ -57,6 +58,11 @@
     experimentr.showNext();
     d3.select('#graphQText').remove();
     d3.select('#graphQInstructions').remove();
+    // only looking at one thing for now
+    for (var i=0; i<1; i++){
+      data.mod1.push({key: storyData.type})
+    }
+    // for (var i=0; i<storyData.questionBank.length; i++)
     d3.select('#graphQVerification').append('p')
       .text(storyData.question);
     var choices = d3.select('#graphQVerification').selectAll('.choice')
@@ -71,15 +77,33 @@
       .text(function(d) { return d; });
   d3.selectAll('input')
     .filter(function(d) { return this.name === 'graphQVerification' ? this : null; })
-    .on('change', function() { data.graphQVerification = this.value; validate(); });
+    .on('change', function() {
+      data.mod1[0].inputData = [{
+        questionType: storyData.questionBank[0].key,
+        userAnswer: this.value
+      }]
+      diffGradeMeth();
+      data.graphQVerification = this.value; validate();
+    });
   }
   // allow the participant to move on to the next
   function validate() {
+    console.log("validate")
     if(data.graphQVerification) {
       grade();
       experimentr.endTimer('graphQuestions');
       experimentr.addData(data);
       experimentr.release();
+    }
+  }
+  function diffGradeMeth(){
+    for (var i=0; i<data.mod1[0].inputData.length; i++){
+      if (data.mod1[0].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        data.mod1[0].inputData[i].answerVerification = true
+      } else { data.mod1[0].inputData[i].answerVerification = false}
+      data.modStuff=JSON.stringify(data.mod1)
+      console.log(JSON.parse(data.modStuff))
+      // console.log("apples", JSON.parse("apples"))
     }
   }
   function grade() {
