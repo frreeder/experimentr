@@ -1,11 +1,9 @@
 <div id="graphQuestions">
 <div id="graphQTimer"></div>
-<p id="graphQInstructions">
-<strong>Please play close attention to the story. You will be asked to answer questions about the story's content.</strong>
-</p>
+<p id="graphQInstructions"></p>
 <div id="graphQImage"></div>
-<div id="graphQText"></div>
 <div id="graphQVerification"></div>
+<div id="graphQText"></div>
 </div>
 
 <style>
@@ -15,7 +13,37 @@
 (function() {
   var data = {}
     , rand = Math.floor(Math.random()*3) // 0, 1, 2
+    , graphCounter = 0
+    , lastGraph = false
+    , isValid = false
     , storyData;
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function getRandomImageArray(data){
+    var graphArray = []
+    for (var i in data){
+      for (let j = 0; j < data[i].length; j++){
+        let k = getRandomInt(j, data[i].length)
+        let tempI = data[i][j]
+        data[i][j]=data[i][k]
+        data[i][j].chartType=i
+        data[i][k]=tempI
+      }
+      graphArray=graphArray.concat(data[i])
+      // console.log("dataI", data[i])
+    }
+    for (let i=0; i<graphArray.length; i++){
+        let j = getRandomInt(i, graphArray.length)
+        let tempI = graphArray[i]
+        graphArray[i]=graphArray[j]
+        graphArray[j]=tempI
+    }
+    // freq[arrList.indexOf(3)]++
+    console.log("gArray", graphArray)
+  }
 
   init();
 
@@ -24,30 +52,52 @@
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
 
+    d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
+      console.log("e", err, "d", d)
+      getRandomImageArray(d);
+    })
+
+    loadData();
+  }
+
+  function loadData() {
+    isValid = false
     experimentr.attachTimer('#graphQTimer', 20, function() {
       d3.select('#graphQTimer').remove();
       loadQuestion();
     });
-
+    // if (graphCounter)
+    // var rand =
     d3.json('modules/graphQuestions/graphList.json', function(err, d) {
-      storyData = d[0]
+      if (data.mod1.length == 0){
+        for (var i=0; i<d.length; i++){
+          data.mod1.push({key: d[i].type, inputData: []})
+        }
+      }
+      if (graphCounter == d.length-1){
+          lastGraph = true;
+      }
+      storyData = d[graphCounter]
       // data.primingType = rand === 0 ? 'negative' : rand === 1 ? 'positive' : 'neutral';
       // storyData = data.primingType === 'negative' ? d[0] : data.primingType === 'positive' ? d[1] : d[2]; // 0 negative; 1 positive; 2 neutral
-      loadStory();
+      loadImage();
     });
   }
-  function loadStory() {
+
+  function loadImage() {
     // Appending the graph Image...hardcoded for now...
+    d3.select("#graphQInstructions").append("strong")
+      .text("Please play close attention to the graph.")
+    d3.select('#graphQImage').selectAll("*").remove()
     d3.select('#graphQImage').append('img')
       .attr('class', 'picture')
-      .attr('src', function(d) { return "modules/graphQuestions/graphImages/line_climateChange.png"; });
-    // Used to add the text of story
-    // d3.select('#graphQText').append('div')
-    //   .html(storyData.story);
+      .attr('src', function(d) { return storyData.imagePath; })
+      .attr('width', "100%");
     // Adds the option for the participant to skip past waiting....might include for testing purposes and remove later. s
+    d3.select('#graphQText').selectAll("*").remove()
     d3.select('#graphQText').append('button')
       .attr('type', 'button')
-      .text('I have finished reading the story and I am ready for the questions.')
+      .text('I have finished looking at the graph and am ready for the questions.')
       .on('click',
         function(d) {
           loadQuestion();
@@ -55,15 +105,24 @@
         });
   }
   function loadQuestion() {
-    experimentr.showNext();
-    d3.select('#graphQText').remove();
-    d3.select('#graphQInstructions').remove();
+    d3.select('#graphQInstructions').selectAll("*").remove();
+    d3.select('#graphQText').selectAll("*").remove();
+    if (!lastGraph){
+      d3.select('#graphQText').append('button')
+        .attr('type', 'button')
+        .text('Next Graph')
+        .on('click',
+          function(d) {
+            if (isValid){
+              d3.select('#graphQVerification').selectAll("*").remove()
+              graphCounter++;
+              loadData();
+            }
+          });
+    } else {experimentr.showNext();}
     // only looking at one thing for now
-    for (var i=0; i<1; i++){
-      data.mod1.push({key: storyData.type, inputData: []})
-    }
     for (let i=0; i<storyData.questionBank.length; i++){
-      data.mod1[0].inputData.push({questionType: storyData.questionBank[i].key})
+      data.mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .text(storyData.questionBank[i].question);
@@ -83,28 +142,47 @@
           return this.name === 'graphQVerification'+i.toString() ? this : null; })
         .on('change', function() {
           console.log("i2", i)
-          console.log(this.name, this.value, data.mod1[0].inputData[i], i)
-          data.mod1[0].inputData[i].userAnswer = this.value
-          diffGradeMeth();
-          data.graphQVerification = this.value; validate();
+          console.log(this.name, this.value, data.mod1[graphCounter].inputData[i], i)
+          data.mod1[graphCounter].inputData[i].userAnswer = this.value
+          // var validate = true;
+          if (!isValid){
+            // for (var inD in data.mod1[graphCounter].inputData){
+            // isValid = true;
+            for (let k=0; k<data.mod1[graphCounter].inputData.length; k++){
+              var inD = data.mod1[graphCounter].inputData[k]
+              console.log("inData", inD, data.mod1[graphCounter].inputData)
+              if (inD.userAnswer==null){
+                isValid = false
+                break;
+              } else {
+                isValid = true;
+              }
+            }
+          }
+          if (isValid){
+            console.log("isValidated!!!")
+            diffGradeMeth();
+            if (lastGraph) validate();
+            // data.graphQVerification = this.value; validate();
+          }
         });
     }
   }
   // allow the participant to move on to the next
   function validate() {
     console.log("validate")
-    if(data.graphQVerification) {
-      grade();
+    // if(data.graphQVerification) {
+      // grade();
       experimentr.endTimer('graphQuestions');
       experimentr.addData(data);
       experimentr.release();
-    }
+    // }
   }
   function diffGradeMeth(){
-    for (var i=0; i<data.mod1[0].inputData.length; i++){
-      if (data.mod1[0].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        data.mod1[0].inputData[i].answerVerification = true
-      } else { data.mod1[0].inputData[i].answerVerification = false}
+    for (var i=0; i<data.mod1[graphCounter].inputData.length; i++){
+      if (data.mod1[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        data.mod1[graphCounter].inputData[i].answerVerification = true
+      } else { data.mod1[graphCounter].inputData[i].answerVerification = false}
       data.modStuff=JSON.stringify(data.mod1)
       console.log(JSON.parse(data.modStuff))
       // console.log("apples", JSON.parse("apples"))

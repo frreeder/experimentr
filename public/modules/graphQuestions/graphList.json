@@ -2,7 +2,6 @@
   {
     "type": "line",
     "imagePath": "modules/graphQuestions/graphImages/line_climateChange.png",
-    "question": "What year had the least C02 Emissions?",
     "questionBank": [
       {
         "question": "What year had the least C02 Emissions?",
@@ -12,28 +11,46 @@
       },
       {
         "question": "Pancakes or waffles?",
-        "choices": ["pancakes", "waffles", "f*%$ it waffles", "omit"],
+        "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
         "answer": "pancakes",
         "key": "compare"
       }
-    ],
-    "questions": ["What year had the least C02 Emissions?", "Pancakes or pie?"],
-    "choiceBank": [["2000", "2003", "2001", "2005", "omit"], ["Pancakes", "Pie"]],
-    "choices": ["2000", "2003", "2001", "2005", "omit"],
-    "answer": "2003"
+    ]
   },
   {
     "type": "bar",
     "imagePath": "modules/graphQuestions/graphImages/bar_developerPlatforms.png",
-    "question": "What is the second least used development platform?",
-    "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
-    "answer": "Blackberry"
+    "questionBank": [
+      {
+        "question": "What is the second least used development platform?",
+        "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
+        "answer": "Blackberry",
+        "key": "identify"
+      },
+      {
+        "question": "Pancakes or waffles?",
+        "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+        "answer": "pancakes",
+        "key": "compare"
+      }
+    ]
   },
   {
     "type": "pie",
     "imagePath": "modules/graphQuestions/graphImages/pie_beauty.png",
-    "question": "What is the second highest beauty product being used?",
-    "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
-    "answer": "Hair"
+    "questionBank": [
+      {
+        "question": "What is the second highest beauty product being used?",
+        "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+        "answer": "Hair",
+        "key": "identify"
+      },
+      {
+        "question": "Pancakes or waffles?",
+        "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+        "answer": "pancakes",
+        "key": "compare"
+      }
+    ]
   }
 ]

@@ -1,0 +1,382 @@
+{
+  "line": [
+    {
+      "title": "Global Catch of American Lobsters",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/line_embellished_americanCrabsCaught.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What year had the least C02 Emissions?",
+          "choices": ["2000", "2003", "2001", "2005", "omit"],
+          "answer": "2003",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Climate Changes",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/line_embellished_climateChange.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What year had the least C02 Emissions?",
+          "choices": ["2000", "2003", "2001", "2005", "omit"],
+          "answer": "2003",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Sales of Ford's F-Series",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/line_embellished_fordFSeries.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What year had the least C02 Emissions?",
+          "choices": ["2000", "2003", "2001", "2005", "omit"],
+          "answer": "2003",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Average U.S. Prices for Gasoline",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/line_embellished_gasolinePrices.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What year had the least C02 Emissions?",
+          "choices": ["2000", "2003", "2001", "2005", "omit"],
+          "answer": "2003",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "The Future of U.S. Manufacturing",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/line_embellished_manuEmployment.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What year had the least C02 Emissions?",
+          "choices": ["2000", "2003", "2001", "2005", "omit"],
+          "answer": "2003",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Average Hours of Freeway Congestion",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/line_embellished_trafficCongestion.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What year had the least C02 Emissions?",
+          "choices": ["2000", "2003", "2001", "2005", "omit"],
+          "answer": "2003",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    }
+  ],
+  "pie": [
+    {
+      "title": "Beauty Products Being Purchased",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/pie_embellished_beauty.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second highest beauty product being used?",
+          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+          "answer": "Hair",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Most Bought Girl Scout Cookies",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/pie_embellished_girlScouts.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second highest beauty product being used?",
+          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+          "answer": "Hair",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Renewable Energy in the U.K.",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/pie_embellished_renewable.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second highest beauty product being used?",
+          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+          "answer": "Hair",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Star Wars Revenue Throughout the Galaxy",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/pie_embellished_starWars.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second highest beauty product being used?",
+          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+          "answer": "Hair",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Top Internet Browsers, 2011",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/pie_embellished_topBrowser.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second highest beauty product being used?",
+          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+          "answer": "Hair",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Women at Work",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/pie_embellished_womenWork.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second highest beauty product being used?",
+          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
+          "answer": "Hair",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    }
+  ],
+  "bar": [
+    {
+      "title": "Most Expensive Artwork Sold At Auction",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/bar_embellished_artwork.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/bar_norm_artwork.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second least used development platform?",
+          "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
+          "answer": "Blackberry",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Top Platforms Being Used By Developers",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/bar_developerPlatforms.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second least used development platform?",
+          "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
+          "answer": "Blackberry",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Summer Olympics' Share of TV Viewership",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/bar_embellished_olympics.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second least used development platform?",
+          "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
+          "answer": "Blackberry",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Most Visited Theme Parks",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/bar_embellished_themePark.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second least used development platform?",
+          "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
+          "answer": "Blackberry",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    },
+    {
+      "title": "Countries' Unemployment Rates",
+      "imagePath": [
+        "modules/graphQuestions/graphImages/color/bar_embellished_unemploymentRate.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+        "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
+      ],
+      "questionBank": [
+        {
+          "question": "What is the second least used development platform?",
+          "choices": ["Blackberry", "Android", "iOS", "Flash", "iOS"],
+          "answer": "Blackberry",
+          "key": "identify"
+        },
+        {
+          "question": "Pancakes or waffles?",
+          "choices": ["pancakes", "waffles", "fish with red bean filling", "f*%$ it EVERYTHING!", "omit"],
+          "answer": "pancakes",
+          "key": "compare"
+        }
+      ]
+    }
+  ]
+}
