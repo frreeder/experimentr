@@ -188,9 +188,7 @@ var experimentr = (function() {
   }
 
   experimentr.attachTimerEnd = function(target){
-    d3.select(target).remove()
     clearInterval(experimentr.attachTimerInterval)
-
   }
 
   // Make sure that backspace doesn't trigger navigation
