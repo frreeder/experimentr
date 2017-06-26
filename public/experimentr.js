@@ -166,6 +166,7 @@ var experimentr = (function() {
   experimentr.attachTimerInterval;
 
   experimentr.attachTimer = function(target, seconds, cb) {
+    console.log("seconds", seconds)
     d3.select(target).text(seconds);
 
     var timesCalled = 0;
@@ -183,12 +184,16 @@ var experimentr = (function() {
 
     var end = function() {
       clearInterval(experimentr.attachTimerInterval);
+      d3.select(target).text("")
+      console.log("clear", experimentr.attachTimerInterval)
       cb();
     }
   }
 
   experimentr.attachTimerEnd = function(target){
+    d3.select(target).text("")
     clearInterval(experimentr.attachTimerInterval)
+    console.log("clear", experimentr.attachTimerInterval)
   }
 
   // Make sure that backspace doesn't trigger navigation

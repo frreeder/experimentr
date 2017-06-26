@@ -92,6 +92,7 @@
   function loadData() {
     isValid = false
     experimentr.attachTimer('#graphQTimer', 5, function() {
+      d3.select('#graphQTimer').selectAll("*").remove();
       loadQuestion();
     });
 
@@ -121,21 +122,13 @@
         .on('click',
           function(d) {
             loadQuestion();
-            // d3.select("#graphQTimer").selectAll("*").remove()
-            // d3.select('#graphQTimer').text("")
+            d3.select("#graphQTimer").selectAll("*").remove()
             experimentr.attachTimerEnd('#graphQTimer')
           });
     }
 
   }
   function loadQuestion() {
-    // experimentr.attachTimer('#graphQTimer', 20, function() {
-    // //   d3.select('#graphQVerification').selectAll("*").remove()
-    // //   graphCounter++;
-    // //   diffGradeMeth();
-    // //   if (lastGraph) validate();
-    // //   loadData();
-    // });
     d3.select('#graphQInstructions').selectAll("*").remove();
     d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
     d3.select('#graphQText').selectAll("*").remove();
