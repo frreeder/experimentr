@@ -1,9 +1,8 @@
-<div id="graphQuestions">
-<div id="graphQTimer"></div>
+<div id="graphNoChartQuestions">
 <p id="graphQInstructions"></p>
-<div id="graphQImage"></div>
-<div id="graphQVerification"></div>
+<div id="graphQVerification"></div><br>
 <div id="graphQText"></div>
+<div id="graphQTimer"></div>
 </div>
 
 <style>
@@ -12,10 +11,9 @@
 <script>
 (function() {
   // for testing purposes
-  var skip = true;
+  var skip = false;
 
   var data = {}
-    , rand = Math.floor(Math.random()*3) // 0, 1, 2
     , graphCounter = 0
     , lastGraph = false
     , isValid = false
@@ -78,7 +76,7 @@
   function init() {
     data.mod1=[]
     experimentr.hideNext();
-    experimentr.startTimer('graphQuestions');
+    experimentr.startTimer('graphNoChartQuestions');
 
     d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
       getRandomImageArray(d);
@@ -91,59 +89,47 @@
 
   function loadData() {
     isValid = false
-    experimentr.attachTimer('#graphQTimer', 5, function() {
-      d3.select('#graphQTimer').selectAll("*").remove();
-      loadQuestion();
-    });
 
     if (graphCounter == graphArray.length-1){
         lastGraph = true;
     }
     storyData = graphArray[graphCounter];
-    loadImage();
-  }
-
-  function loadImage() {
-    d3.select('#graphQInstructions').selectAll("*").remove();
-    d3.select("#graphQInstructions").append("strong")
-      .text("Please play close attention to the graph.")
-    d3.select('#graphQImage').selectAll("*").remove()
-    d3.select('#graphQImage').append('img')
-      .attr('class', 'picture')
-      // .attr('src', function(d) { return storyData.imagePath[0]; })
-      .attr('src', function(d) { return storyData.imagePath[embellishType.indexOf(storyData.embType)]; })
-      .attr('width', "100%");
-    // Adds the option for the participant to skip past waiting....might include for testing purposes and remove later. s
-    d3.select('#graphQText').selectAll("*").remove()
-    if (skip){
-      d3.select('#graphQText').append('button')
-        .attr('type', 'button')
-        .text('I have finished looking at the graph and am ready for the questions.')
-        .on('click',
-          function(d) {
-            loadQuestion();
-            d3.select("#graphQTimer").selectAll("*").remove()
-            experimentr.attachTimerEnd('#graphQTimer')
-          });
-    }
-
+    // loadImage();
+    loadQuestion()
   }
   function loadQuestion() {
     d3.select('#graphQInstructions').selectAll("*").remove();
     d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
     d3.select('#graphQText').selectAll("*").remove();
     if (!lastGraph){
-      d3.select('#graphQText').append('button')
-        .attr('type', 'button')
-        .text('Next Graph')
-        .on('click',
-          function(d) {
-            if (isValid || skip){
-              d3.select('#graphQVerification').selectAll("*").remove()
-              graphCounter++;
-              loadData();
-            }
-          });
+      if (skip){
+        experimentr.attachTimer('#graphQTimer', 5, function() {
+          d3.select('#graphQTimer').selectAll("*").remove();
+          d3.select('#graphQText').append('button')
+            .attr('type', 'button')
+            .text('Next Graph')
+            .on('click',
+              function(d) {
+                if (isValid || skip){
+                  d3.select('#graphQVerification').selectAll("*").remove()
+                  graphCounter++;
+                  loadData();
+                }
+              });
+        });
+      } else {
+        d3.select('#graphQText').append('button')
+          .attr('type', 'button')
+          .text('Next Graph')
+          .on('click',
+            function(d) {
+              if (isValid || skip){
+                d3.select('#graphQVerification').selectAll("*").remove()
+                graphCounter++;
+                loadData();
+              }
+            });
+      }
     } else {experimentr.showNext();}
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
@@ -198,7 +184,7 @@
     // console.log("validate")
     // if(data.graphQVerification) {
       // grade();
-      experimentr.endTimer('graphQuestions');
+      experimentr.endTimer('graphNoChartQuestions');
       experimentr.addData(data);
       experimentr.release();
     // }

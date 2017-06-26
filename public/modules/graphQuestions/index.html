@@ -2,7 +2,7 @@
 <div id="graphQTimer"></div>
 <p id="graphQInstructions"></p>
 <div id="graphQImage"></div>
-<div id="graphQVerification"></div>
+<div id="graphQVerification"></div><br>
 <div id="graphQText"></div>
 </div>
 
@@ -91,9 +91,10 @@
 
   function loadData() {
     isValid = false
-    experimentr.attachTimer('#graphQTimer', 5, function() {
-      loadQuestion();
-    });
+    // Why is this up here? Shoudln't it be in load image? Might be why I'm getting issues...
+    // experimentr.attachTimer('#graphQTimer', 5, function() {
+    //   loadQuestion();
+    // });
 
     if (graphCounter == graphArray.length-1){
         lastGraph = true;
@@ -103,6 +104,9 @@
   }
 
   function loadImage() {
+    experimentr.attachTimer('#graphQTimer', 5, function() {
+      loadQuestion();
+    });
     d3.select('#graphQInstructions').selectAll("*").remove();
     d3.select("#graphQInstructions").append("strong")
       .text("Please play close attention to the graph.")
@@ -129,6 +133,8 @@
 
   }
   function loadQuestion() {
+    // two options....one force user to go to next question after x time or place timer below to have user spend x time before proceeding. IF doing that I would probably need to make a new div to have it where the next graph button is.
+    // nvm....glitching again
     // experimentr.attachTimer('#graphQTimer', 20, function() {
     // //   d3.select('#graphQVerification').selectAll("*").remove()
     // //   graphCounter++;
