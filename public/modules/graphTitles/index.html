@@ -1,0 +1,64 @@
+<div id="graphTitles">
+<div id="graphQTimer"></div>
+</div>
+
+<p>
+Please select the titles that were included in the previous study session.
+</p>
+
+<table id="graphTitlesTable"></table>
+
+<script>
+(function(){
+  let graphArray = []
+  let dropSel = []
+  let skip = false
+  init()
+
+  function init(){
+    experimentr.startTimer('graphTitles');
+    d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
+      // grabbing data from image list and putting into an array.
+      for (let i in d){
+        dropSel.push(i)
+        for (let j=0; j<d[i].length; j++){
+          graphArray.push({chartType: i, title: d[i][j].title})
+        }
+      }
+      console.log("graphArray", graphArray, dropSel)
+      makeTable()
+        if (!skip){
+          experimentr.hideNext()
+          experimentr.attachTimer('#graphQTimer', 20, function() {
+            experimentr.showNext()
+            validate();
+          });
+        } else {
+          validate()
+        }
+    })
+  }
+
+  function makeTable(){
+    let tableBody = d3.select("#graphTitlesTable").append('tbody')
+    let rows = tableBody.selectAll("tr")
+      .data(graphArray)
+      .enter().append("tr")
+      // .append("td").text(function (d) { return d.title; });
+    // need to make three things per row; radio button, text, dropdown
+    let rowRadio = rows.append('input')
+      .attr('type', 'radio')
+    let rowText = rows
+      .append("td").text(function(d){return d.title})
+    let rowDrop = rows.append("select").selectAll("option")
+      .data(dropSel).enter().append("option").text(function(d){return d})
+  }
+
+  function validate(){
+    experimentr.endTimer('graphTitles');
+    // experimentr.addData(data);
+    experimentr.release();
+  }
+
+}());
+</script>
