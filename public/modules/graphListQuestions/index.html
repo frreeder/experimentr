@@ -11,7 +11,7 @@
 <script>
 (function() {
   // for testing purposes
-  var skip = false;
+  var skip = true;
 
   var data = {}
     , graphCounter = 0
@@ -74,14 +74,16 @@
   init();
 
   function init() {
-    data.mod1=[]
+    // need to change this to mod3
+    // also need to get rid of randomization and somehow pull information from the database ...
+    data.mod3=[]
     experimentr.hideNext();
     experimentr.startTimer('graphNoChartQuestions');
 
-    d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
+    d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
       for (var i=0; i<graphArray.length; i++){
-          data.mod1.push({key: graphArray[i].chartType, inputData: []})
+          data.mod3.push({key: graphArray[i].chartType, inputData: []})
       }
       loadData();
     })
@@ -91,7 +93,8 @@
     isValid = false
 
     if (graphCounter == graphArray.length-1){
-        lastGraph = true;
+      // console.log("lastGraph")
+      lastGraph = true;
     }
     storyData = graphArray[graphCounter];
     // loadImage();
@@ -102,7 +105,7 @@
     d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
     d3.select('#graphQText').selectAll("*").remove();
     if (!lastGraph){
-      if (skip){
+      if (!skip){
         experimentr.attachTimer('#graphQTimer', 5, function() {
           d3.select('#graphQTimer').selectAll("*").remove();
           d3.select('#graphQText').append('button')
@@ -130,10 +133,16 @@
               }
             });
       }
-    } else {experimentr.showNext();}
+    } else {
+      if (skip){
+        diffGradeMeth();
+        validate()
+      }
+      experimentr.showNext();
+    }
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
-      data.mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+      data.mod3[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .text(storyData.questionBank[i].question);
@@ -153,15 +162,16 @@
           return this.name === 'graphQVerification'+i.toString() ? this : null; })
         .on('change', function() {
           // console.log("i2", i)
-          console.log(this.name, this.value, data.mod1[graphCounter].inputData[i], i)
-          data.mod1[graphCounter].inputData[i].userAnswer = this.value
+          // if (skip){isValid = true}
+          console.log(this.name, this.value, data.mod3[graphCounter].inputData[i], i)
+          data.mod3[graphCounter].inputData[i].userAnswer = this.value
           // var validate = true;
           if (!isValid){
-            // for (var inD in data.mod1[graphCounter].inputData){
+            // for (var inD in data.mod3[graphCounter].inputData){
             // isValid = true;
-            for (let k=0; k<data.mod1[graphCounter].inputData.length; k++){
-              var inD = data.mod1[graphCounter].inputData[k]
-              // console.log("inData", inD, data.mod1[graphCounter].inputData)
+            for (let k=0; k<data.mod3[graphCounter].inputData.length; k++){
+              var inD = data.mod3[graphCounter].inputData[k]
+              // console.log("inData", inD, data.mod3[graphCounter].inputData)
               if (inD.userAnswer==null){
                 isValid = false
                 break;
@@ -190,20 +200,14 @@
     // }
   }
   function diffGradeMeth(){
-    for (var i=0; i<data.mod1[graphCounter].inputData.length; i++){
-      if (data.mod1[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        data.mod1[graphCounter].inputData[i].answerVerification = true
-      } else { data.mod1[graphCounter].inputData[i].answerVerification = false}
-      data.modStuff=JSON.stringify(data.mod1)
+    for (var i=0; i<data.mod3[graphCounter].inputData.length; i++){
+      if (data.mod3[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        data.mod3[graphCounter].inputData[i].answerVerification = true
+      } else { data.mod3[graphCounter].inputData[i].answerVerification = false}
+      data.modStuff=JSON.stringify(data.mod3)
       console.log(JSON.parse(data.modStuff))
       // console.log("apples", JSON.parse("apples"))
     }
-  }
-  function grade() {
-    if(data.graphQVerification === storyData.answer)
-      data.graphQVerificationResult = true;
-    else
-      data.graphQVerificationResult = false;
   }
 }());
 </script>

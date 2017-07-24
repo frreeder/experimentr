@@ -1,0 +1,478 @@
+<div id="graphInteract">
+<div id="graphITimer"></div>
+<p id="graphIInstructions"></p>
+<div id="graphIImage" class="graphIImage"></div>
+<div id="graphIVerification"></div><br>
+<div id="graphIText"></div>
+</div>
+
+<style>
+.graphIImage {
+  /*width: 100%;
+  height: 100%;*/
+  width: 800px;
+  height: 700px;
+}
+
+svg.lineGraph {
+	width: 100%;
+	height: 100%;
+	position: center;
+}
+
+.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 2px;
+	}
+
+	.clip-svg1 {
+		clip-path: url(#clipper1);
+  	-webkit-clip-path: url(#clipper1);
+	}
+
+	.clip-svg2 {
+		clip-path: url(#clipper2);
+  	-webkit-clip-path: url(#clipper2);
+	}
+
+	.clip-svg3 {
+		clip-path: url(#clipper3);
+  	-webkit-clip-path: url(#clipper3);
+	}
+
+	.clip-svg4 {
+		clip-path: url(#clipper4);
+  	-webkit-clip-path: url(#clipper4);
+	}
+
+	.clip-svg5 {
+		clip-path: url(#clipper5);
+  	-webkit-clip-path: url(#clipper5);
+	}
+
+	.clip-svg6 {
+		clip-path: url(#clipper6);
+  	-webkit-clip-path: url(#clipper6);
+	}
+
+</style>
+
+<script>
+(function() {
+  // for testing purposes
+  var skip = true;
+
+  // Specific to interact
+  // accessors = ["label", "value"]
+
+  var chart;
+  var bodyDim = {h:parseInt(d3.select('#graphIImage').style('height'), 10)*.6 , w:parseInt(d3.select('#graphIImage').style('width'), 10)*1}
+  console.log("bod", bodyDim)
+
+  var data = {}
+    , rand = Math.floor(Math.random()*3) // 0, 1, 2
+    , graphCounter = 0
+    , lastGraph = false
+    , isValid = false
+    , graphArray
+    , storyData;
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function getRandomImageArray(data){
+    graphArray = []
+    for (var i in data){
+      for (let j = 0; j < data[i].length; j++){
+        let k = getRandomInt(j, data[i].length)
+        let tempI = data[i][j]
+        data[i][j]=data[i][k]
+        data[i][j].embType=getEmbType(j)
+        // data[i][j].
+        data[i][j].chartType=i
+        data[i][k]=tempI
+      }
+      graphArray=graphArray.concat(data[i])
+      // console.log("dataI", data[i])
+    }
+    for (let i=0; i<graphArray.length; i++){
+        let j = getRandomInt(i, graphArray.length)
+        let tempI = graphArray[i]
+        graphArray[i]=graphArray[j]
+        graphArray[j]=tempI
+    }
+    // freq[arrList.indexOf(3)]++
+    console.log("gArray", graphArray)
+    console.log("asd", data)
+    // return graphArray;
+  }
+
+  var embellishType = ["embellished", "normal", "normal2", "unrelated", "unrelated2"]
+  function getEmbType(i){
+    let embType = ""
+    switch (i) {
+      case 0:
+      case 1:
+        embType=embellishType[0];
+        break;
+      case 2:
+        embType=embellishType[1];
+        break;
+      case 3:
+        embType=embellishType[2];
+        break;
+      case 4:
+        embType=embellishType[3];
+        break;
+      case 5:
+        embType=embellishType[4];
+        break;
+      default:
+        console.log("ack!!!");
+    }
+    return embType
+  }
+
+  init();
+
+  function init() {
+    data.mod1=[]
+    experimentr.hideNext();
+    experimentr.startTimer('');
+
+    d3.json('modules/graphQuestions/data.json', function(err, d) {
+      getRandomImageArray(d);
+      for (var i=0; i<graphArray.length; i++){
+          data.mod1.push({key: graphArray[i].chartType, inputData: []})
+      }
+      for (let i = 0; i < graphArray.length; i++){
+        if (graphArray[i].chartType!="line") continue;
+        d3.csv(graphArray[i].interact.dataPath, function(iData){
+          graphArray[i].interact.accessors = [d3.keys(iData[0])[0], d3.keys(iData[0])[1]]
+          iData.map((d)=>{
+    				d[graphArray[i].interact.accessors[1]]= parseFloat(d[graphArray[i].interact.accessors[1]])
+    			})
+          graphArray[i].interact.data = iData
+        })
+      }
+      console.log("iData", graphArray)
+      // This is here to ensure the data gets loaded....
+      d3.select('#graphIText').selectAll("*").remove()
+      d3.select('#graphIText').append('button')
+        .attr('type', 'button')
+        .text('I have finished looking at the graph and am ready for the questions.')
+        .on('click',
+          function(d) {
+            loadData();
+            // d3.select("#graphQTimer").selectAll("*").remove()
+            // d3.select('#graphQTimer').text("")
+            // experimentr.attachTimerEnd('#graphQTimer')
+          });
+      // loadData();
+    })
+  }
+
+  function loadData() {
+    isValid = false
+
+    if (graphCounter == graphArray.length-1){
+        lastGraph = true;
+    }
+    storyData = graphArray[graphCounter];
+    loadImage();
+  }
+
+  function loadImage() {
+    d3.select('#graphIInstructions').selectAll("*").remove();
+    d3.select("#graphIInstructions").append("strong")
+      .text("Please use arrow keys to adjust the graph to memory.")
+    d3.select('#graphIImage').selectAll("*").remove()
+    // If not line for now
+    if (storyData.chartType!="line"){
+      d3.select('#graphIImage').append('img')
+        .attr('class', 'picture')
+        // .attr('src', function(d) { return storyData.imagePath[0]; })
+        .attr('src', function(d) { return "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"; })
+        .attr('width', "70%");
+    } else {
+      // console.log("here", storyData.interact, storyData.interact.imageDim[0])
+      let labelArray = storyData.interact.data.map((d)=>{return d[storyData.interact.accessors[0]]})
+      let accessors = storyData.interact.accessors
+      let lineData = storyData.interact.data
+      console.log("labelArray", labelArray)
+      chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
+        .style("height", "70%").style("width", "100%")
+      chart.margin = {top: bodyDim.h*.05, right: bodyDim.w*.1, bottom: bodyDim.h*.05, left: bodyDim.w*.1}
+      for (let i =0; i<2; i++){
+        let buttonType = i==0? "up" : "down"
+        let isInc = i==0
+        d3.select('#graphIImage').append("button")
+          .style("height", "20%")
+          .attr("class", "button1")
+          .on("click", ()=>{
+            incSlice(isInc, .005)
+          })
+          .append("img")
+          .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
+            .style("height", "100%")
+      }
+      chart.plotArea = chart.append("g")
+
+      chart.plotArea.height = bodyDim.h - chart.margin.top - chart.margin.bottom;
+      chart.plotArea.width = bodyDim.w - chart.margin.left - chart.margin.right
+      console.log("ww", chart.plotArea.width, chart.plotArea.height, storyData.interact.imageDim[0])
+      chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]
+      chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[0][1]/storyData.interact.imageDim[0][0] : chart.plotArea.height
+      console.log("ch", chart.plotArea.height, chart.plotArea.width, chart.margin)
+
+      // set the ranges
+      chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(0, chart.plotArea.width, chart.plotArea.width/labelArray.length));
+      chart.yScale = d3.scale.linear().range([chart.plotArea.height, 0])
+        .domain([0, 1.1*d3.max(storyData.interact.data, function(d) { return d[storyData.interact.accessors[1]]; })])
+        .clamp(true)
+      console.log("char3", chart.xScale(storyData.interact.data[3][storyData.interact.accessors[0]]), chart.xScale.domain())
+      storyData.interact.stepSize = chart.yScale.domain()[1]/20
+      // define the line
+      var valueline = d3.svg.line()
+        .x(function(d) { return chart.xScale(d[storyData.interact.accessors[0]]); })
+        .y(function(d) { return chart.yScale(d[storyData.interact.accessors[1]]); });
+
+      // append the svg obgect to the body of the page
+      // appends a 'group' element to 'svg'
+      // moves the 'group' element to the top left margin
+      chart.plotArea
+          .attr("width", chart.plotArea.width)
+          .attr("height", chart.plotArea.height)
+          .attr("transform",
+                "translate(" + chart.margin.left + "," + chart.margin.top + ")");
+
+      iconDim = chart.plotArea.width/13
+
+      chart.plotArea.append("image")
+          // .style("height", chart.plotArea.height)
+          .attr("class", "clip-svg2")
+          .style("width", chart.plotArea.width)
+          // .attr("href", "/data/lineCheese/bg.png")
+          .attr("href", storyData.interact.imagePath[1])
+
+      chart.plotArea.append("image")
+        // .style("height", chart.plotArea.height)
+        .attr("class", "clip-svg1")
+        .style("width", chart.plotArea.width)
+        // .attr("href", "/data/lineCheese/cheese.png")
+        .attr("href", storyData.interact.imagePath[0])
+
+      chart.plotArea.append("path")
+        .datum(storyData.interact.data)
+        .attr("class", "lineOutline")
+        .style("stroke", "black")
+        .style("stroke-width", 3)
+        .style("fill", "none")
+        .attr("d", d3.svg.line()
+  		    .x(function(d) {
+  					console.log(chart.xScale(d[storyData.interact.accessors[0]]), chart.yScale(d[storyData.interact.accessors[1]]), d[storyData.interact.accessors[1]])
+  					return chart.xScale(d[storyData.interact.accessors[0]]); })
+  		    .y(function(d) { return chart.yScale(d[storyData.interact.accessors[1]]); })
+    			);
+
+      // this is the icon attached to the line chart if used... a bit buggy but I suspect it has something to do with the rotation point.
+      let m = -(chart.yScale(lineData[3][accessors[1]])-chart.yScale(lineData[2][accessors[1]]))/(chart.xScale(lineData[3][accessors[0]])-chart.xScale(lineData[2][accessors[0]]))
+      let xPos = (chart.xScale(lineData[3][accessors[0]])-chart.xScale(lineData[2][accessors[0]]))/2+chart.xScale(lineData[2][accessors[0]])
+      let yPos = (chart.yScale(lineData[3][accessors[1]])-chart.yScale(lineData[2][accessors[1]]))/2+chart.yScale(lineData[2][accessors[1]])-iconDim
+      chart.plotArea.append("image")
+          .attr("class", "icon")
+          .style("width", iconDim)
+          .attr("position", "center")
+          .attr("href", storyData.interact.imagePath[2])
+          .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
+          .attr("x", xPos)
+          .attr("y", yPos)
+
+
+      // Need to add the stacked line charts here and make it the clipping mask.
+      var area = d3.svg.area()
+        .x(function(d, i) { return chart.xScale(d[accessors[0]]); })
+        .y0(function(d) { return chart.yScale(0); })
+        .y1(function(d) { return chart.yScale(d[accessors[1]]); });
+
+      var area2 = d3.svg.area()
+        .x(function(d, i) { return chart.xScale(d[accessors[0]]); })
+        .y0(function(d) { return chart.yScale.range()[1] })
+        .y1(function(d) { return chart.yScale(d[accessors[1]]); });
+
+      chart.plotArea
+        .append("defs").append("clipPath")
+        .attr("class", "c1")
+        .attr("id", "clipper1")
+        .append("path")
+        .datum(lineData)
+        .attr("class", "stackLine")
+        .attr("fill", "blue")
+        .attr("d", area)
+
+      chart.plotArea
+        .append("defs").append("clipPath")
+        .attr("class", "c2")
+        .attr("id", "clipper2")
+        .append("path")
+        .datum(lineData)
+        .attr("class", "stackLine")
+        .attr("fill", "blue")
+        .attr("d", area2)
+
+      // Add the X Axis
+  	  chart.xAxis = chart.plotArea.append("g").attr("class", "xScale")
+  	      .attr("transform", "translate(0," + chart.plotArea.height + ")")
+  	      .call(d3.svg.axis().scale(chart.xScale).orient("bottom"));
+
+  	  // Add the Y Axis
+  	  chart.yAxis = chart.plotArea.append("g").attr("class", "yScale")
+  	      .call(d3.svg.axis().scale(chart.yScale).orient("left"));
+
+    }
+
+    loadQuestion();
+  }
+  function loadQuestion() {
+    d3.select('#graphIInstructions').selectAll("*").remove();
+    d3.select('#graphIInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
+    d3.select('#graphIText').selectAll("*").remove();
+    if (!lastGraph){
+      d3.select('#graphIText').append('button')
+        .attr('type', 'button')
+        .text('Next Graph')
+        .on('click',
+          function(d) {
+            if (isValid || skip){
+              d3.select('#graphIVerification').selectAll("*").remove()
+              graphCounter++;
+              loadData();
+            }
+          });
+    } else {
+      if (skip){
+        diffGradeMeth();
+        validate()
+      }
+      experimentr.showNext();
+    }
+    // only looking at one thing for now
+    for (let i=0; i<storyData.questionBank.length; i++){
+      data.mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+      var question = d3.select('#graphIVerification').append("g")
+      question.append('p')
+        .text(storyData.questionBank[i].question);
+      var choices = question.selectAll('.choice')
+        .data(storyData.questionBank[i].choices)
+        .enter().append('div')
+        .classed('choice', true);
+      choices.append('input')
+        .attr('type', 'radio')
+        .attr('name', 'graphIVerification'+i.toString())
+        .attr('value', function(d) { return d; });
+      choices.append('label')
+        .text(function(d) { return d; });
+      d3.selectAll('input')
+        .filter(function(d) {
+          // console.log("i", i)
+          return this.name === 'graphIVerification'+i.toString() ? this : null; })
+        .on('change', function() {
+          // console.log("i2", i)
+          console.log(this.name, this.value, data.mod1[graphCounter].inputData[i], i)
+          data.mod1[graphCounter].inputData[i].userAnswer = this.value
+          // var validate = true;
+          if (!isValid){
+            // for (var inD in data.mod1[graphCounter].inputData){
+            // isValid = true;
+            for (let k=0; k<data.mod1[graphCounter].inputData.length; k++){
+              var inD = data.mod1[graphCounter].inputData[k]
+              // console.log("inData", inD, data.mod1[graphCounter].inputData)
+              if (inD.userAnswer==null){
+                isValid = false
+                break;
+              } else {
+                isValid = true;
+              }
+            }
+          }
+          if (isValid || skip){
+            // console.log("isValidated!!!")
+            diffGradeMeth();
+            if (lastGraph) validate();
+            // data.graphIVerification = this.value; validate();
+          }
+        });
+    }
+  }
+
+  function incSlice (isInc, inc2){
+    let lineData = storyData.interact.data
+    let accessors = storyData.interact.accessors
+    let inc = storyData.interact.stepSize
+    if (isInc){
+      // if ()
+      lineData[3][accessors[1]]+=inc
+      console.log(lineData[3][accessors[1]])
+    } else {lineData[3][accessors[1]]-=inc}
+
+    var area = d3.svg.area()
+      .x(function(d, i) { return chart.xScale(d[accessors[0]]); })
+      .y0(function(d) { return chart.yScale(0); })
+      .y1(function(d) { return chart.yScale(d[accessors[1]]); });
+
+    var area2 = d3.svg.area()
+      .x(function(d, i) { return chart.xScale(d[accessors[0]]); })
+      .y0(function(d) { return chart.yScale.range()[1] })
+      .y1(function(d) { return chart.yScale(d[accessors[1]]); });
+
+    chart.plotArea.selectAll(".c1").select("path")
+      .datum(lineData)
+      .attr("d", area)
+
+    chart.plotArea.selectAll(".c2").select("path")
+      .datum(lineData)
+      .attr("d", area2)
+
+    chart.plotArea.selectAll(".lineOutline")
+      .datum(lineData)
+      .attr("d", d3.svg.line()
+        .x(function(d) {
+          console.log(chart.xScale(d[accessors[0]]), chart.yScale(d[accessors[1]]))
+          return chart.xScale(d[accessors[0]]); })
+        .y(function(d) { return chart.yScale(d[accessors[1]]); })
+      );
+
+    let m = -(chart.yScale(lineData[3][accessors[1]])-chart.yScale(lineData[2][accessors[1]]))/(chart.xScale(lineData[3][accessors[0]])-chart.xScale(lineData[2][accessors[0]]))
+    // console.log("mm", chart.yScale(lineData[3][accessors[1]])-chart.yScale(lineData[2][accessors[1]]), chart.xScale(lineData[3][accessors[0]])-chart.xScale(lineData[2][accessors[0]]), chart.yScale(lineData[3][accessors[1]]))
+    let xPos = (chart.xScale(lineData[3][accessors[0]])-chart.xScale(lineData[2][accessors[0]]))/2+chart.xScale(lineData[2][accessors[0]])
+    let yPos = (chart.yScale(lineData[3][accessors[1]])-chart.yScale(lineData[2][accessors[1]]))/2+chart.yScale(lineData[2][accessors[1]])-iconDim
+    console.log("m", xPos, yPos, m, Math.atan(m)*180/Math.PI)
+    chart.plotArea.selectAll(".icon")
+        .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
+        // .attr("x", xPos)
+        .attr("y", yPos)
+
+  }
+
+  // allow the participant to move on to the next
+  function validate() {
+    // console.log("validate")
+      experimentr.endTimer('graphInteract');
+      experimentr.addData(data);
+      experimentr.release();
+    // }
+  }
+  function diffGradeMeth(){
+    for (var i=0; i<data.mod1[graphCounter].inputData.length; i++){
+      if (data.mod1[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        data.mod1[graphCounter].inputData[i].answerVerification = true
+      } else { data.mod1[graphCounter].inputData[i].answerVerification = false}
+      data.modStuff=JSON.stringify(data.mod1)
+      console.log(JSON.parse(data.modStuff))
+      // console.log("apples", JSON.parse("apples"))
+    }
+  }
+}());
+</script>

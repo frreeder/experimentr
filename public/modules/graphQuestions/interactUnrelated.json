@@ -1,0 +1,39 @@
+{
+  "line": [
+    {
+      "key": "cheese",
+      "withIcon": true,
+      "imagePath": [],
+      "imageDim": []
+    },
+    {
+      "key": "recession",
+      "withIcon": false,
+      "imagePath": [],
+      "imageDim": []
+    }
+  ],
+  "pie": [
+    {
+      "key": "seaAnimals",
+      "withIcon": true,
+      "imagePath": [],
+      "colorArray": []
+    },
+    {
+      "key": "sideCarbs",
+      "withIcon": false,
+      "imagePath": []
+    }
+  ],
+  "bar": [
+    {
+      "key": "powerRangers",
+      "imagePath": []
+    },
+    {
+      "key": "fruitsBasket",
+      "imagePath": []
+    }
+  ]
+}

@@ -34,6 +34,7 @@
         let tempI = data[i][j]
         data[i][j]=data[i][k]
         data[i][j].embType=getEmbType(j)
+        // data[i][j].
         data[i][j].chartType=i
         data[i][k]=tempI
       }
@@ -48,10 +49,11 @@
     }
     // freq[arrList.indexOf(3)]++
     console.log("gArray", graphArray)
+    console.log("asd", data)
     // return graphArray;
   }
 
-  var embellishType = ["embellished", "unrelated", "normal"]
+  var embellishType = ["embellished", "normal", "normal2", "unrelated", "unrelated2"]
   function getEmbType(i){
     let embType = ""
     switch (i) {
@@ -60,12 +62,16 @@
         embType=embellishType[0];
         break;
       case 2:
-      case 3:
         embType=embellishType[1];
         break;
-      case 4:
-      case 5:
+      case 3:
         embType=embellishType[2];
+        break;
+      case 4:
+        embType=embellishType[3];
+        break;
+      case 5:
+        embType=embellishType[4];
         break;
       default:
         console.log("ack!!!");
@@ -80,7 +86,7 @@
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
 
-    d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
+    d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
       for (var i=0; i<graphArray.length; i++){
           data.mod1.push({key: graphArray[i].chartType, inputData: []})
@@ -157,7 +163,13 @@
               loadData();
             }
           });
-    } else {experimentr.showNext();}
+    } else {
+      if (skip){
+        diffGradeMeth();
+        validate()
+      }
+      experimentr.showNext();
+    }
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
       data.mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
@@ -209,8 +221,6 @@
   // allow the participant to move on to the next
   function validate() {
     // console.log("validate")
-    // if(data.graphQVerification) {
-      // grade();
       experimentr.endTimer('graphQuestions');
       experimentr.addData(data);
       experimentr.release();
@@ -225,12 +235,6 @@
       console.log(JSON.parse(data.modStuff))
       // console.log("apples", JSON.parse("apples"))
     }
-  }
-  function grade() {
-    if(data.graphQVerification === storyData.answer)
-      data.graphQVerificationResult = true;
-    else
-      data.graphQVerificationResult = false;
   }
 }());
 </script>
