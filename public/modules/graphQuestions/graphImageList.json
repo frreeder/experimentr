@@ -25,7 +25,8 @@
       "interact": {
           "withIcon": false,
           "imagePath": [],
-          "imageDim": []
+          "imageDim": [],
+          "pointLoc": 7
       }
     },
     {
@@ -53,7 +54,8 @@
       "interact": {
           "withIcon": false,
           "imagePath": [],
-          "imageDim": []
+          "imageDim": [],
+          "pointLoc": 3
       }
     },
     {
@@ -81,7 +83,8 @@
       "interact": {
           "withIcon": false,
           "imagePath": [],
-          "imageDim": []
+          "imageDim": [],
+          "pointLoc": 10
       }
     },
     {
@@ -109,7 +112,8 @@
       "interact": {
           "withIcon": false,
           "imagePath": [],
-          "imageDim": []
+          "imageDim": [],
+          "pointLoc": 11
       }
     },
     {
@@ -137,7 +141,8 @@
       "interact": {
           "withIcon": false,
           "imagePath": [],
-          "imageDim": []
+          "imageDim": [],
+          "pointLoc": 9
       }
     },
     {
@@ -165,7 +170,8 @@
       "interact": {
           "withIcon": false,
           "imagePath": [],
-          "imageDim": []
+          "imageDim": [],
+          "pointLoc": 4
       }
     }
   ],
@@ -193,9 +199,9 @@
         }
       ],
       "interact": {
-        "withIcon": false,
+        "withIcon": true,
         "imagePath": [],
-        "colorArray": []
+        "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099"]
       }
     },
     {
@@ -277,9 +283,9 @@
         }
       ],
       "interact": {
-        "withIcon": false,
+        "withIcon": true,
         "imagePath": [],
-        "colorArray": []
+        "colorArray": ["#cc33c9", "#109618", "#ff9900", "#dc3912", "#3366cc"]
       }
     },
     {
@@ -305,9 +311,9 @@
         }
       ],
       "interact": {
-        "withIcon": false,
+        "withIcon": true,
         "imagePath": [],
-        "colorArray": []
+        "colorArray": ["#e2ed32", "#c400eb", "#1fb257", "#373ce1"]
       }
     },
     {
@@ -333,9 +339,9 @@
         }
       ],
       "interact": {
-        "withIcon": false,
+        "withIcon": true,
         "imagePath": [],
-        "colorArray": []
+        "colorArray": ["#dc3912", "#3d9e27", "#ff9900", "#36a8e1"]
       }
     }
   ],
