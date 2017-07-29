@@ -7,10 +7,14 @@
 </div>
 
 <style>
+#module #graphInteract{
+  width: 100%
+}
+
 .graphIImage {
-  /*width: 100%;
-  height: 100%;*/
-  width: 800px;
+  width: 100%;
+  /*height: 100%;*/
+  /*width: 800px;*/
   height: 500px;
 }
 
@@ -243,12 +247,15 @@ svg.pie {
   }
 
   function makeBar(){
+    // bodyDim = {w:400, h:250}
     chart = d3.select('#graphIImage').append("svg")
-      .attr("viewbox", "0 0 "+(bodyDim.w*perc[0]).toString()+" "+(bodyDim.h*perc[1]).toString())
+      .attr("viewBox", "0 0 "+(bodyDim.w*perc[0]).toString()+" "+(bodyDim.h*perc[1]).toString())
       // .style('height', bodyDim.h*perc[1])
       // .style('width', bodyDim.w*perc[0])
-      .style('height', perc[1]*100+"%")
-      .style('width', perc[0]*100+"%")
+      // .style('height', perc[1]*100+"%")
+      // .style('width', perc[0]*100+"%")
+      .attr('height', perc[1]*100+"%")
+      .attr('width', perc[0]*100+"%")
 
     chart.append('image')
       .attr('class', 'picture')
