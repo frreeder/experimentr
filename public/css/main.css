@@ -30,3 +30,109 @@ body {
   color: steelblue;
   font-weight: bold;
 }
+
+
+#module #graphInteract{
+  width: 100%
+}
+
+.graphIImage {
+  width: 100%;
+  /*height: 100%;*/
+  /*width: 800px;*/
+  /*height: 500px;*/
+  /*height: auto*/
+  display: inline-block;
+  /*min-height: 500px;*/
+}
+
+svg {
+  /*transform-origin: 0 0;*/
+   /*margin-left: 10px;*/
+   /*preserveAspectRatio: xMinYMax meet;*/
+}
+
+svg.lineGraph {
+	width: 100%;
+	height: 100%;
+	position: center;
+  max-height: 400px;
+}
+
+svg.pie {
+      /*width: 70%;*/
+      /*height: 100%;*/
+			float: left;
+      /*min-height: 500px*/
+      max-height: 400px;
+      /*min-height: 300px;*/
+  }
+
+  svg.bar {
+    max-height: 400px;
+    /*min-height: 300px;*/
+  }
+
+	table.pie {
+		/*width: 30%;*/
+		/*height: 100%;*/
+		float:left;
+	}
+
+.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 2px;
+	}
+
+.clip-svg1 {
+	clip-path: url(#clipper1);
+	-webkit-clip-path: url(#clipper1);
+  /*transform-origin: 0 0;*/
+}
+
+.clip-svg2 {
+	clip-path: url(#clipper2);
+	-webkit-clip-path: url(#clipper2);
+}
+
+.clip-svg3 {
+	clip-path: url(#clipper3);
+	-webkit-clip-path: url(#clipper3);
+}
+
+.clip-svg4 {
+	clip-path: url(#clipper4);
+	-webkit-clip-path: url(#clipper4);
+}
+
+.clip-svg5 {
+	clip-path: url(#clipper5);
+	-webkit-clip-path: url(#clipper5);
+}
+
+.clip-svg6 {
+	clip-path: url(#clipper6);
+	-webkit-clip-path: url(#clipper6);
+}
+
+.lineOutline {
+  stroke: black;
+  stroke-width: 3px;
+  fill: none
+}
+
+.button1 {
+  background-size: 100% 100%;
+  /*background-color: transparent*/
+  height: 30px;
+  width: 20px;
+}
+
+.button1.up {
+  background-image: url( '../modules/graphInteract/buttons/up.png' );
+}
+
+.button1.down{
+    background-image: url( '../modules/graphInteract/buttons/down.png' );
+}

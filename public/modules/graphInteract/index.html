@@ -2,87 +2,14 @@
 <div id="graphITimer"></div>
 <p id="graphIInstructions"></p>
 <div id="graphIImage" class="graphIImage"></div>
+<div id="interactButtons">
+  </br><text>Use buttons to visually adjust the value of the chart.</text></br>
+</div>
 <div id="graphIVerification"></div><br>
 <div id="graphIText"></div>
 </div>
 
 <style>
-#module #graphInteract{
-  width: 100%
-}
-
-.graphIImage {
-  width: 100%;
-  /*height: 100%;*/
-  /*width: 800px;*/
-  height: 500px;
-}
-
-svg {
-  /*transform-origin: 0 0;*/
-}
-
-svg.lineGraph {
-	width: 100%;
-	height: 100%;
-	position: center;
-}
-
-svg.pie {
-      width: 70%;
-      /*height: 100%;*/
-			float: left;
-  }
-
-	table.pie {
-		width: 30%;
-		/*height: 100%;*/
-		float:left;
-	}
-
-.line {
-	  fill: none;
-	  stroke: steelblue;
-	  stroke-width: 2px;
-	}
-
-.clip-svg1 {
-	clip-path: url(#clipper1);
-	-webkit-clip-path: url(#clipper1);
-  /*transform-origin: 0 0;*/
-}
-
-.clip-svg2 {
-	clip-path: url(#clipper2);
-	-webkit-clip-path: url(#clipper2);
-}
-
-.clip-svg3 {
-	clip-path: url(#clipper3);
-	-webkit-clip-path: url(#clipper3);
-}
-
-.clip-svg4 {
-	clip-path: url(#clipper4);
-	-webkit-clip-path: url(#clipper4);
-}
-
-.clip-svg5 {
-	clip-path: url(#clipper5);
-	-webkit-clip-path: url(#clipper5);
-}
-
-.clip-svg6 {
-	clip-path: url(#clipper6);
-	-webkit-clip-path: url(#clipper6);
-}
-
-.lineOutline {
-  stroke: black;
-  stroke-width: 3px;
-  fill: none
-}
-
 </style>
 
 <script>
@@ -96,7 +23,9 @@ svg.pie {
   // let perc = [.8, 1]
   // var bodyDim = {h:parseInt(d3.select('#graphIImage').style('height'), 10)*perc[0] , w:parseInt(d3.select('#graphIImage').style('width'), 10)*perc[1]}
   let perc = [1, .8]
+  // Might need to change this to hard coded numbers, but keeping for now.
   var bodyDim = {w:parseInt(d3.select('#graphIImage').style('width'), 10)*perc[0], h:parseInt(d3.select('#graphIImage').style('height'), 10)*perc[1]}
+  bodyDim.h = 500*perc[1]
   console.log("bod", bodyDim)
 
   var data = {}
@@ -217,6 +146,7 @@ svg.pie {
     d3.select('#graphIInstructions').selectAll("*").remove();
     d3.select("#graphIInstructions").append("strong")
       .text("Please use arrow keys to adjust the graph to memory.")
+    d3.select('#interactButtons').selectAll("button").remove();
     d3.select('#graphIImage').selectAll("*").remove()
     // If not line for now
 
@@ -247,9 +177,21 @@ svg.pie {
   }
 
   function makeBar(){
-    // bodyDim = {w:400, h:250}
-    chart = d3.select('#graphIImage').append("svg")
-      .attr("viewBox", "0 0 "+(bodyDim.w*perc[0]).toString()+" "+(bodyDim.h*perc[1]).toString())
+    // temp
+    imgDim = [1611,896]
+    imgRat = imgDim[0]/imgDim[1]
+
+    chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
+
+    chart.bodyDim = {w: bodyDim.w, h: bodyDim.h}
+    chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*imgRat : chart.bodyDim.w;
+    chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/imgRat;
+    console.log("img", chart.bodyDim, imgRat)
+    // Append the SVG setting the viewbox based on bodyDim and scaling based on window
+    chart
+      .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
+      .attr("preserveAspectRatio", "xMinYMax meet")
+      // .attr("viewBox", "0 0 "+(bodyDim.w*perc[0]).toString()+" "+(bodyDim.h*perc[1]).toString())
       // .style('height', bodyDim.h*perc[1])
       // .style('width', bodyDim.w*perc[0])
       // .style('height', perc[1]*100+"%")
@@ -257,30 +199,37 @@ svg.pie {
       .attr('height', perc[1]*100+"%")
       .attr('width', perc[0]*100+"%")
 
+    // Append the background image for all the bars except the one being modified.
     chart.append('image')
       .attr('class', 'picture')
       .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_01_artwork.png"; })
-      .attr('height', bodyDim.h*perc[1])
-      .attr('width', bodyDim.w*perc[0])
+      .attr('height', chart.bodyDim.h)
+      .attr('width', chart.bodyDim.w)
+      // .attr('height', bodyDim.h*perc[1])
+      // .attr('width', bodyDim.w*perc[0])
       // .style('height',"100%")
       // .style('width', "100%")
 
+    // Append the buttons for controlling the width of the bars.
     for (let i =0; i<2; i++){
       let buttonType = i==0? "up" : "down"
       let isInc = i==0
-      d3.select('#graphIImage').append("button")
-        .style("height", "20%")
-        .attr("class", "button1")
+      d3.select('#interactButtons').append("button")
+        // .style("height", (100*(1-perc[1])).toString()+"%")
+        .attr("class", "button1 "+buttonType)
         .on("click", ()=>{
-          incBar(isInc, 1)
+          incBar(isInc, .01)
         })
-        .append("img")
-          .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
-          .style("height", "100%")
+        // .append("img")
+        //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
+        //   .attr("class", "button1")
+        //   .style("height", "100%")
     }
 
-    chart.barWidth = 100
+    // Reminding you that bar width needs to be between 0 and 1.
+    chart.barWidth = clampThings(1, 0, 1)
 
+    // Adding a clipping path to clip the image with the bar that we want to manipulate.
     chart.bar = chart
       .append("defs")
       .append("clipPath")
@@ -288,90 +237,92 @@ svg.pie {
       .append("rect")
       // .style('height',"100%")
       // .style('width', (chart.barWidth-2).toString()+"%")
-      .attr('height',bodyDim.h*perc[1])
-      .attr('width', (chart.barWidth)/100*bodyDim.w*perc[0])
+      // .attr('height',bodyDim.h*perc[1])
+      // .attr('width', (chart.barWidth)/100*bodyDim.w*perc[0])
+      .attr('height',chart.bodyDim.h)
+      .attr('width', (chart.barWidth)*chart.bodyDim.w)
 
+    // Adding the image of the bar that we want to manipulate. The file must be the bar in the same space as background bar image.
     chart.append('image')
       .attr('class', 'picture clip-svg1')
       .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_02_artwork.png"; })
-      .attr('height', bodyDim.h*perc[1])
-      .attr('width', (chart.barWidth)/100*bodyDim.w*perc[0])
-
-    // Thought I could make an outline for the rectangle...but it won't work due to the bar being a full sized png
-    // chart.barOutline = chart
-    //   .append("rect")
-    //   .style('height',"100%")
-    //   .style('width', (chart.barWidth).toString()+"%")
+      // .attr('height', bodyDim.h*perc[1])
+      // .attr('width', (chart.barWidth)/100*bodyDim.w*perc[0])
+      .attr('height', chart.bodyDim.h)
+      .attr('width', (chart.barWidth)*chart.bodyDim.w)
   }
 
   function incBar(isInc, step){
-    // chart.barWidth= isInc? chart.barWidth+step : chart.barWidth-step
-    // chart.bar.style('width', chart.barWidth-2+"%")
-    // // chart.barOutline.style('width', chart.barWidth+"%")
-    chart.barWidth= isInc? chart.barWidth+step : chart.barWidth-step
-    chart.bar.attr('width', (chart.barWidth)/100*bodyDim.w*perc[0])
-    // chart.barOutline.style('width', chart.barWidth+"%")
+    // Making sure the bar does not exceed the 0 and 1.
+    chart.barWidth= clampThings((isInc? chart.barWidth+step : chart.barWidth-step), 0, 1)
+    // Updating the clipping path.
+    chart.bar.attr('width', (chart.barWidth)*chart.bodyDim.w*perc[0])
   }
 
   function makePie() {
     let pieData = storyData.interact.data
     let accessors = storyData.interact.accessors
-    // Will need to fix this eventually, but this is under the assumption that the legend takes 30% of the div total
-    // bodyDim.w = bodyDim.w*.65
+    let piePerc = .9
+
+    // Setting the chart
     chart = d3.select('#graphIImage')
+    // Setting the width to almost 70 to give room for legend...though legend might not be necessary in future iterations...
     chart.bodyDim = {w:bodyDim.w*.65, h: bodyDim.h}
     console.log("pieTime", storyData, chart.bodyDim)
-      // .attr("class", "pieGraph")
-      // .style("height", perc[0]*100+"%").style("width", perc[1]*100+"%")
-    // Adding buttons for changing the values
     // I'm thinking of placing this up in the switch statement area and having the function be a variable based on switch.
     // Redudant for now
     // Or add a variable to inc function and do something based on that...
     for (let i =0; i<2; i++){
       let buttonType = i==0? "up" : "down"
       let isInc = i==0
-      d3.select('#graphIImage').append("button")
-        .style("height", "20%")
-        .attr("class", "button1")
+      d3.select('#interactButtons').append("button")
+        // .style("height", (100*(1-perc[1])).toString()+"%")
+        .attr("class", "button1 "+buttonType)
         .on("click", ()=>{
           incSlice(isInc, 1)
         })
-        .append("img")
-          .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
-          .style("height", "100%")
+        // .append("img")
+        //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
+        //   .style("height", "100%")
     }
+    // Setting a color scale if not predefined.
     chart.colorScale = d3.scale.category10()
-    chart.plotArea = chart.append("svg").attr("class", "pie")
-      // .attr("width", "100%")
-      .attr("height", chart.bodyDim.h)
-    chart.piePlace = chart.plotArea.append("g")
-    chart.pieArea = chart.plotArea.append("g")
-      // .attr()
-    let bodyPerc = chart.bodyDim.w/chart.bodyDim.h
+      // .attr("height", chart.bodyDim.h)
+
+    // Getting the minimum chart Dimensions and setting it as the diameter of the circle.
     let dia  = Math.min(chart.bodyDim.w, chart.bodyDim.h)
-    chart.pieArea.w = dia
-    chart.pieArea.h = dia
+
+    // Create the SVG
+    chart.plotArea = chart.append("svg").attr("class", "pie")
+      .attr('width', perc[0]*100*piePerc+"%")
+      .attr('height', perc[1]*100+"%")
+      .attr("viewBox", ((chart.bodyDim.w-dia)/2).toString()+" "+((chart.bodyDim.h-dia)/2).toString()+" "+(dia).toString()+" "+(dia).toString())
+      .attr("preserveAspectRatio", "xMinYMax meet")
+      // .attr("viewBox", "0 0 "+(bodyDim.w).toString()+" "+(bodyDim.h).toString())
+
+    // Appending a group for random SVG elements and dimensions
+    chart.pieArea = chart.plotArea.append("g")
+
     chart.pieArea.r = dia / 2
+
     chart.pieArea.raySize = chart.pieArea.r*.7
     let raySize = chart.pieArea.raySize
     chart.legendArea = chart.append("table").attr('class','legend pie')
+      .attr('width', perc[0]*100*(1-piePerc)+"%")
       // .style("margin-top", (chart.pieArea.r).toString()+"px").append("tbody")
 
-    console.log("chart.pieAra", chart.pieArea)
+    // The arc function to specify the paths for the pie.
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
-    // create a function to compute the pie slice angles.
+    // A function to specify the angles of the pie.
     var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
 
     // Add pie make here
     if (storyData.interact.withIcon){
-      chart.bodyPerc =  bodyPerc
       // Creating pie slices
       var pieInfo = pie(pieData)
-
-      // should be the clipping paths...
+      // The clipping paths for the icons.
       chart.pieArea
         .selectAll("path")
-        // .remove().exit()
         .data(pie(pieData)).enter()
         .append("defs").append("clipPath")
         .attr("id", function(d,i){
@@ -394,13 +345,14 @@ svg.pie {
         .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
           .attr("d", arc)
           .style("fill", (d,i)=>{return storyData.interact.colorArray[i]})
-          .style("stroke", "black")
-          .style("stroke-width", 3)
+          .style("stroke", "none")
+          // .style("stroke-width", 3)
           .each(function(d) { this._current = d; })
 
       // Creating icons
       // console.log("bodyDim", chart.bodyDim, chart.pieArea.r)
       imgCon = {max: chart.pieArea.r*.6, min: 50}
+      chart.pieArea.imgCon = imgCon
       chart.pieArea.icons=chart.plotArea.append("g")
         .attr("class", "icons")
         .selectAll("image")
@@ -411,7 +363,7 @@ svg.pie {
           .attr("class", (d,i)=>{return "clip-svg"+(i+1).toString()})
           // .style("width", 100)
           // .style("height", 100)
-          .style("width", (d,i)=>{
+          .attr("width", (d,i)=>{
             var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
             var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
             // console.log("x", xChange, yChange)
@@ -420,7 +372,7 @@ svg.pie {
             // console.log("s", d.width, imgCon, Math.sqrt(xChange+yChange)*raySize, clampThings(Math.sqrt(xChange+yChange)*raySize, imgCon.min, imgCon.max))
             return d.width
           })
-          .style("height", (d, i)=>{return d.width})
+          .attr("height", (d, i)=>{return d.width})
           .attr("x", (d, i)=>{
             return Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*raySize+chart.bodyDim.w/2-d.width/2
               // console.log("d", d, pieInfo[i])
@@ -461,48 +413,49 @@ svg.pie {
         chart.plotArea.append("g")
           .attr("class", "clip-svg"+(i+1).toString())
           // .append("image").attr("href", "/data/land.png").style("width", "auto").style("height", "100%")
-          .append("image").attr("href", storyData.interact.imagePath[i].path).style("width", imgD).style("height", imgD)
+          .append("image").attr("href", storyData.interact.imagePath[i].path)
+          .attr("width", imgD).attr("height", imgD)
           .attr("x", chart.bodyDim.w/2-storyData.interact.imageDim[1]/storyData.interact.imageDim[0]*chart.pieArea.r)
           .attr("y", chart.bodyDim.h/2-storyData.interact.imageDim[0]/storyData.interact.imageDim[1]*chart.pieArea.r)
           .style("position", "absolute")
       }
-
-      // this is responsible for the outline of the pie slices
-      chart.plotArea.append("g")
-        .attr("class", "outline")
-        .selectAll("path")
-        // .remove().exit()
-        .data(pie(pieData)).enter()
-        .append("path")
-        // I need to put transform here to have the group in the same coordinates as the clipping path.
-        .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
-        // .transition().delay(100)
-          .attr("d", arc)
-          .style("fill", "none")
-          .style("stroke", "black")
-          .style("stroke-width", 3)
-          .each(function(d) { this._current = d; })
     }
-    // making the legend
-    // var leg = {};
+    // this is responsible for the outline of the pie slices
+    chart.plotArea.append("g")
+      .attr("class", "outline")
+      .selectAll("path")
+      // .remove().exit()
+      .data(pie(pieData)).enter()
+      .append("path")
+      // I need to put transform here to have the group in the same coordinates as the clipping path.
+      .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+      // .transition().delay(100)
+        .attr("d", arc)
+        .style("fill", "none")
+        .style("stroke", "black")
+        .style("stroke-width", 3)
+        .each(function(d) { this._current = d; })
 
-    // create one row per segment.
-    var legend = chart.legendArea.selectAll("tr")
-			// .exit().remove()
-			.data(pieData).enter().append("tr");
-
-    // create the first column for each segment.
-    legend.append("td").attr("width", '16').append("svg").attr("width", '16').attr("height", '16').append("rect")
-      .attr("width", '16').attr("height", '16')
-			.attr("fill",function(d, i){ return chart.colorScale(i); });
-
-    // create the second column for each segment.
-    legend.append("td").attr("class",'legendFreq').text(function(d){ return d[accessors[0]];});
-
-    // create the third column for each segment.
-    legend.append("td").attr("class",'legendFreq')
-      .text(function(d){ return d3.format(".1%")(d[accessors[1]]/100.0);});
-    // bodyDim.w=bodyDim.w/.65
+    // // making the legend
+    // // var leg = {};
+    //
+    // // create one row per segment.
+    // var legend = chart.legendArea.selectAll("tr")
+		// 	// .exit().remove()
+		// 	.data(pieData).enter().append("tr");
+    //
+    // // create the first column for each segment.
+    // legend.append("td").attr("width", '16').append("svg").attr("width", '16').attr("height", '16').append("rect")
+    //   .attr("width", '16').attr("height", '16')
+		// 	.attr("fill",function(d, i){ return chart.colorScale(i); });
+    //
+    // // create the second column for each segment.
+    // legend.append("td").attr("class",'legendFreq').text(function(d){ return d[accessors[0]];});
+    //
+    // // create the third column for each segment.
+    // legend.append("td").attr("class",'legendFreq')
+    //   .text(function(d){ return d3.format(".1%")(d[accessors[1]]/100.0);});
+    // // bodyDim.w=bodyDim.w/.65
   }
 
   function incSlice (isInc, inc){
@@ -511,18 +464,19 @@ svg.pie {
     // pieData[0]
     // here I need to increase or decrease the value of a slice and adjust the surrounding accordingly.
     // if (pieData[0][accessors[1]]>=inc&&pieData[1][accessors[1]]>=inc){
-      if (isInc && pieData[1][accessors[1]]>inc/2 && pieData[pieData.length-1][accessors[1]]>inc/2){
+      if (isInc && pieData[0][accessors[1]]>inc/2 && pieData[2][accessors[1]]>inc/2){
         pieData[1][accessors[1]]+=inc
         pieData[0][accessors[1]]-=inc/2
         // pieData[pieData.length-1][accessors[1]]-=inc/2
         pieData[2][accessors[1]]-=inc/2
-        // console.log(pieData[0][accessors[1]], pieData[1][accessors[1]])
-      } else if (!isInc && pieData[0][accessors[1]]>inc) {
+      } else if (!isInc && pieData[1][accessors[1]]>inc) {
+        console.log(pieData[0][accessors[1]], pieData[1][accessors[1]])
         pieData[1][accessors[1]]-=inc
         pieData[0][accessors[1]]+=inc/2
         // pieData[pieData.length-1][accessors[1]]+=inc/2
         pieData[2][accessors[1]]+=inc/2
-      } else { return; }
+      } else {
+        return; }
     // }
 
     // console.log("slices", pieData[0][accessors[1]], pieData[1][accessors[1]])
@@ -533,13 +487,13 @@ svg.pie {
     // create a function to compute the pie slice angles.
     var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
     var pieInfo = pie(pieData)
-    // console.log("newPi", pieInfo)
+    console.log("newPi", pieInfo)
 
     chart.pieArea.selectAll("path")
       .data(pie(pieData))
       .attr("d", arc)
 
-    chart.plotArea.select(".outline").selectAll("path")
+    chart.plotArea.selectAll(".outline").selectAll("path")
       .data(pie(pieData))
       .attr("d", arc)
 
@@ -551,10 +505,10 @@ svg.pie {
       // .data(storyData.interact.imagePath)
       // .each(()=>{console.log("doing stuff")})
       .style("width", (d, i)=>{
-        if (i<2){
+        if (i<3){
           var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
           var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
-          d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize, imgCon.min, imgCon.max)
+          d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize, chart.pieArea.imgCon.min, chart.pieArea.imgCon.max)
         }
         return d.width
       })
@@ -574,39 +528,52 @@ svg.pie {
     let lineData = storyData.interact.data
     let pointLoc = typeof(storyData.interact.pointLoc)==='number'? clampThings(storyData.interact.pointLoc, 1, lineData.length-1) : (2<lineData.length-1? 2 : 1)
     storyData.interact.pointLoc = pointLoc
+
+    chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
+      .attr("preserveAspectRatio", "xMinYMax meet")
+
+    chart.bodyDim = {w: bodyDim.w, h: bodyDim.h}
+    chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]) : chart.bodyDim.w;
+    chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]);
+
     // console.log("ptLoc", pointLoc)
     // Adding the chart svg
-    chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
-      .style("height", perc[1]*100+"%").style("width", perc[0]*100+"%")
+    chart
+      .attr("height", perc[1]*100+"%").attr("width", perc[0]*100+"%")
+      .attr("viewBox", "0 0 "+chart.bodyDim.w.toString()+" "+chart.bodyDim.h.toString())
     // Setting the margin
-    chart.margin = {top: bodyDim.h*.05, right: bodyDim.w*.1, bottom: bodyDim.h*.05, left: bodyDim.w*.1}
+    chart.margin = {top: chart.bodyDim.h*.05, right: chart.bodyDim.w*.1, bottom: chart.bodyDim.h*.05, left: chart.bodyDim.w*.1}
     // Adding buttons for changing the values
     for (let i =0; i<2; i++){
       let buttonType = i==0? "up" : "down"
       let isInc = i==0
-      d3.select('#graphIImage').append("button")
-        .style("height", "20%")
-        .attr("class", "button1")
+      d3.select('#interactButtons').append("button")
+        // .style("height", "20%")
+        .attr("class", "button1 "+buttonType)
         .on("click", ()=>{
           incPoint(isInc)
         })
-        .append("img")
-          .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
-          .style("height", "100%")
+        // .append("img")
+        //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
+        //   .style("height", "100%")
     }
     // Setting the plot area
     chart.plotArea = chart.append("g")
 
     // Setting the height and width of the chart based on the ratio of the image.
-    chart.plotArea.height = bodyDim.h - chart.margin.top - chart.margin.bottom;
-    chart.plotArea.width = bodyDim.w - chart.margin.left - chart.margin.right
-    // console.log("ww", chart.plotArea.width, chart.plotArea.height, storyData.interact.imageDim[0])
+    chart.plotArea.height = chart.bodyDim.h - chart.margin.top - chart.margin.bottom;
+    chart.plotArea.width = chart.bodyDim.w - chart.margin.left - chart.margin.right
+    // Need to redo this step because allocating room for the margin messes up the ratio of the chart body
     chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]
     chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[0][1]/storyData.interact.imageDim[0][0] : chart.plotArea.height
+
+    // console.log("ww", chart.plotArea.width, chart.plotArea.height, chart.bodyDim.w, chart.bodyDim.h)
     // console.log("ch", chart.plotArea.height, chart.plotArea.width, chart.margin)
 
     // Setting the scales for the x and y coordinate system
-    chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(0, chart.plotArea.width, chart.plotArea.width/labelArray.length));
+    // chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(0, chart.plotArea.width, chart.plotArea.width/(labelArray.length)));
+    chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(labelArray.length).map((d)=>{ return d / labelArray.length * chart.plotArea.width; }));
+    // console.log("sc", chart.xScale.domain(), chart.xScale.range(), d3.range(labelArray.length).map((d)=>{ return d / labelArray.length * chart.plotArea.width; }))
     chart.yScale = d3.scale.linear().range([chart.plotArea.height, 0])
       .domain([0, 1.1*d3.max(storyData.interact.data, function(d) { return d[storyData.interact.accessors[1]]; })])
       .clamp(true)
@@ -631,13 +598,15 @@ svg.pie {
     // This is the background image / the top
     chart.plotArea.append("image")
         .attr("class", "clip-svg2")
-        .style("width", chart.plotArea.width)
+        .attr("width", chart.plotArea.width)
+        .attr("height", chart.plotArea.height)
         .attr("href", storyData.interact.imagePath[1])
 
     // This is the foreground image / the bottom
     chart.plotArea.append("image")
       .attr("class", "clip-svg1")
-      .style("width", chart.plotArea.width)
+      .attr("width", chart.plotArea.width)
+      .attr("height", chart.plotArea.height)
       .attr("href", storyData.interact.imagePath[0])
 
     // This is the line outline
@@ -657,7 +626,7 @@ svg.pie {
       let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-storyData.interact.iconDim
       chart.plotArea.append("image")
           .attr("class", "icon")
-          .style("width", storyData.interact.iconDim)
+          .attr("width", storyData.interact.iconDim)
           .attr("position", "center")
           .attr("href", storyData.interact.imagePath[2])
           .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
