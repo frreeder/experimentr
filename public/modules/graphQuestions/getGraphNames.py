@@ -33,6 +33,10 @@ for j in data["pie"]:
     j["interact"]["withIcon"]= False
     j["interact"]["dataPath"]="modules/graphInteract/csvFiles/pie_data_"+j["key"]+".csv"
 
+# Adding an imagePath for the lines
+for j in data["bar"]:
+    j["interact"]["dataPath"]="modules/graphInteract/csvFiles/bar_data_"+j["key"]+".csv"
+
 # for i in data:
 #     for j in data[i]:
 #         apple=2
@@ -137,13 +141,27 @@ for x in interactNames:
             else:
                 print("notCaught: ", j["key"], x)
 
-# # Trimming the list if the last value not used...probably a more efficient way to do this.
-# for i in graphTypes:
-#     for j in data[i]:
-#         if "modules/graphQuestions/graphImages/color/rangerPoseGreen.png" in j["interactPath"]:
-#             j["interactPath"].remove("modules/graphQuestions/graphImages/color/rangerPoseGreen.png")
-#         # if j["interactPath"][2] == "modules/graphQuestions/graphImages/color/rangerPoseGreen.png":
-#         #     j["interactPath"].
+# Getting the interact image files for the bars
+inType = ("interact_01", "interact_02")
+#  For line interact files.
+for x in interactNames:
+    # for i in graphTypes:
+    if graphTypes[2] in x:
+        # pprint (data[i])
+        for j in data[graphTypes[2]]:
+            if j["key"] in x:
+                # https://stackoverflow.com/questions/15684605/python-for-loop-get-indexs
+                for ind, k in enumerate(inType):
+                    if k in x:
+                        if ind == 0:
+                            img = cv2.imread("./graphImages/interact/"+x,1)
+                            # print ("img", x)
+                            j["interact"]["imageDim"] = (img.shape[1], img.shape[0])
+                        j["interact"]["imagePath"].append("modules/graphQuestions/graphImages/interact/"+x)
+            else:
+                print("notCaught: ", j["key"], x)
+
+
 
 
 # Print the new object

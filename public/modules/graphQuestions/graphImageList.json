@@ -367,7 +367,12 @@
           "answer": "Dora Maar au Chat",
           "key": "compare"
         }
-      ]
+      ],
+      "interact": {
+        "imagePath": [],
+        "imageDim": [],
+        "dataPath": ""
+      }
     },
     {
       "title": "Salaries By College Undergraduate Major",
@@ -390,7 +395,12 @@
           "answer": "Chemical Engineering",
           "key": "compare"
         }
-      ]
+      ],
+      "interact": {
+        "imagePath": [],
+        "imageDim": [],
+        "dataPath": ""
+      }
     },
     {
       "title": "Top Platforms Being Used By Developers",
@@ -413,7 +423,12 @@
           "answer": "iOS",
           "key": "compare"
         }
-      ]
+      ],
+      "interact": {
+        "imagePath": [],
+        "imageDim": [],
+        "dataPath": ""
+      }
     },
     {
       "title": "Summer Olympics' Share of TV Viewership",
@@ -436,7 +451,12 @@
           "answer": "Athens 2004",
           "key": "compare"
         }
-      ]
+      ],
+      "interact": {
+        "imagePath": [],
+        "imageDim": [],
+        "dataPath": ""
+      }
     },
     {
       "title": "Most Visited Theme Parks",
@@ -459,7 +479,12 @@
           "answer": "Animal Kingdom",
           "key": "compare"
         }
-      ]
+      ],
+      "interact": {
+        "imagePath": [],
+        "imageDim": [],
+        "dataPath": ""
+      }
     },
     {
       "title": "Countries' Unemployment Rates",
@@ -482,7 +507,12 @@
           "answer": "France",
           "key": "compare"
         }
-      ]
+      ],
+      "interact": {
+        "imagePath": [],
+        "imageDim": [],
+        "dataPath": ""
+      }
     }
   ]
 }

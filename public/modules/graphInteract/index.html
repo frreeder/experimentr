@@ -2,9 +2,7 @@
 <div id="graphITimer"></div>
 <p id="graphIInstructions"></p>
 <div id="graphIImage" class="graphIImage"></div>
-<div id="interactButtons">
-  </br><text>Use buttons to visually adjust the value of the chart.</text></br>
-</div>
+<div id="interactButtons"></div>
 <div id="graphIVerification"></div><br>
 <div id="graphIText"></div>
 </div>
@@ -146,7 +144,10 @@
     d3.select('#graphIInstructions').selectAll("*").remove();
     d3.select("#graphIInstructions").append("strong")
       .text("Please use arrow keys to adjust the graph to memory.")
-    d3.select('#interactButtons').selectAll("button").remove();
+    d3.select('#interactButtons').selectAll("*").remove();
+    d3.select('#interactButtons').append('br')
+    d3.select('#interactButtons').append('text').text('Use buttons to visually adjust the value of the chart.')
+    d3.select('#interactButtons').append('br')
     d3.select('#graphIImage').selectAll("*").remove()
     // If not line for now
 
@@ -178,7 +179,7 @@
 
   function makeBar(){
     // temp
-    imgDim = [1611,896]
+    imgDim = storyData.interact.imageDim
     imgRat = imgDim[0]/imgDim[1]
 
     chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
@@ -202,7 +203,7 @@
     // Append the background image for all the bars except the one being modified.
     chart.append('image')
       .attr('class', 'picture')
-      .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_01_artwork.png"; })
+      .attr('href', function(d) { return storyData.interact.imagePath[0]; })
       .attr('height', chart.bodyDim.h)
       .attr('width', chart.bodyDim.w)
       // .attr('height', bodyDim.h*perc[1])
@@ -235,19 +236,13 @@
       .append("clipPath")
       .attr("id", "clipper1")
       .append("rect")
-      // .style('height',"100%")
-      // .style('width', (chart.barWidth-2).toString()+"%")
-      // .attr('height',bodyDim.h*perc[1])
-      // .attr('width', (chart.barWidth)/100*bodyDim.w*perc[0])
       .attr('height',chart.bodyDim.h)
       .attr('width', (chart.barWidth)*chart.bodyDim.w)
 
     // Adding the image of the bar that we want to manipulate. The file must be the bar in the same space as background bar image.
     chart.append('image')
       .attr('class', 'picture clip-svg1')
-      .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_02_artwork.png"; })
-      // .attr('height', bodyDim.h*perc[1])
-      // .attr('width', (chart.barWidth)/100*bodyDim.w*perc[0])
+      .attr('href', function(d) { return storyData.interact.imagePath[1]; })
       .attr('height', chart.bodyDim.h)
       .attr('width', (chart.barWidth)*chart.bodyDim.w)
   }
@@ -281,9 +276,6 @@
         .on("click", ()=>{
           incSlice(isInc, 1)
         })
-        // .append("img")
-        //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
-        //   .style("height", "100%")
     }
     // Setting a color scale if not predefined.
     chart.colorScale = d3.scale.category10()
