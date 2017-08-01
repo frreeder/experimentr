@@ -136,3 +136,11 @@ svg.pie {
 .button1.down{
     background-image: url( '../modules/graphInteract/buttons/down.png' );
 }
+
+tr:nth-child(even) {
+    background-color: #F0F8FF;
+}
+
+tr:nth-child(even) {
+    background-color: #B0C4DE;
+}

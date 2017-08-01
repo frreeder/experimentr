@@ -13,6 +13,17 @@ Please select the titles that were included in the previous study session.
   let graphArray = []
   let dropSel = []
   let skip = true
+
+  let chartType = ["line", "pie", "bar"]
+
+  let fakeNames = ["Super Hero Abilities", "Fruit Popularity", "Roadtrip Popularity Throughout the Year", "Favorite Side Dishes",
+      "Top Browsers", "Grooming Time", "Halloween Candy Favorites", "Most Purchased Books", "Average University Enrollment at Texas A&M",
+      "Peak Marathon Season", "Minimum Wage Throughout the Years"]
+  let fakeNamesList = []
+  for (let i=0; i<fakeNames.length; i++){
+    fakeNamesList.push({title: fakeNames[i], chartType: chartType[Math.floor(Math.random()*2.99)]})
+  }
+
   init()
 
   function init(){
@@ -25,18 +36,41 @@ Please select the titles that were included in the previous study session.
           graphArray.push({chartType: i, title: d[i][j].title})
         }
       }
+      // Add the fake names
+      Array.prototype.push.apply(graphArray, fakeNamesList)
+      console.log("num", getCountPerPage(graphArray.length, 3))
+
       console.log("graphArray", graphArray, dropSel)
       makeTable()
-        if (!skip){
-          experimentr.hideNext()
-          experimentr.attachTimer('#graphQTimer', 20, function() {
-            experimentr.showNext()
-            validate();
-          });
-        } else {
-          validate()
-        }
+      if (!skip){
+        experimentr.hideNext()
+        experimentr.attachTimer('#graphQTimer', 20, function() {
+          experimentr.showNext()
+          validate();
+        });
+      } else {
+        validate()
+      }
     })
+  }
+
+  function getCountPerPage(x, numPages){
+    let calcNum = x / numPages
+    // console.log("c", calcNum, numPages)
+    if (calcNum > 10){
+      // console.log("c1", x%numPages, numPages/2)
+      if (x%numPages > numPages/2 || (calcNum - 10)>1){
+        return getCountPerPage(x, numPages+1)
+      } else {return numPages}
+    } else if (calcNum < 5 && numPages!=1) {
+      // console.log("c2")
+      if (x%numPages > numPages/2 || (5 - calcNum)>1){
+        return getCountPerPage(x, numPages-1)
+      } else {return numPages}
+    } else {
+      // console.log("c3", numPages)
+      return numPages;
+    }
   }
 
   function makeTable(){
@@ -47,11 +81,12 @@ Please select the titles that were included in the previous study session.
       // .append("td").text(function (d) { return d.title; });
     // need to make three things per row; radio button, text, dropdown
     let rowRadio = rows.append('input')
-      .attr('type', 'radio')
+      .attr('type', 'checkbox')
     let rowText = rows
       .append("td").text(function(d){return d.title})
-    let rowDrop = rows.append("select").selectAll("option")
-      .data(dropSel).enter().append("option").text(function(d){return d})
+    // Was going to add an option selector for choosing what type of chart.
+    // let rowDrop = rows.append("select").selectAll("option")
+    //   .data(dropSel).enter().append("option").text(function(d){return d})
   }
 
   function validate(){

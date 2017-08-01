@@ -145,9 +145,10 @@
     d3.select("#graphIInstructions").append("strong")
       .text("Please use arrow keys to adjust the graph to memory.")
     d3.select('#interactButtons').selectAll("*").remove();
-    d3.select('#interactButtons').append('br')
-    d3.select('#interactButtons').append('text').text('Use buttons to visually adjust the value of the chart.')
-    d3.select('#interactButtons').append('br')
+    // $('#interactButtons').html("<br><text>Use buttons to visually adjust the value of the chart.<text><br>")
+    d3.select('#interactButtons').html("<br><text>Use buttons to visually adjust the value of the chart.<text><br>")
+    // d3.select('#interactButtons').append('text').text('Use buttons to visually adjust the value of the chart.')
+    // d3.select('#interactButtons').append('br')
     d3.select('#graphIImage').selectAll("*").remove()
     // If not line for now
 
