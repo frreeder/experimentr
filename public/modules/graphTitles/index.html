@@ -1,18 +1,24 @@
 <div id="graphTitles">
-<div id="graphQTimer"></div>
-</div>
-
+<div id="graphTTimer"></div>
 <p>
 Please select the titles that were included in the previous study session.
 </p>
+<table id="graphTitlesTable"></table><br>
+<div id="graphTText"></div>
+</div>
 
-<table id="graphTitlesTable"></table>
+
 
 <script>
 (function(){
   let graphArray = []
   let dropSel = []
   let skip = true
+  let numPages = 3;
+  let pageInfo = [];
+  let graphCounter = 0
+  let lastGraph = false
+  let isValid = true;
 
   let chartType = ["line", "pie", "bar"]
 
@@ -38,15 +44,18 @@ Please select the titles that were included in the previous study session.
       }
       // Add the fake names
       Array.prototype.push.apply(graphArray, fakeNamesList)
-      console.log("num", getCountPerPage(graphArray.length, 3))
+      pageInfo = getCountPerPage(graphArray.length, numPages)
+      numPages = pageInfo[0]
+      // console.log("num", getCountPerPage(107, numPages))
 
       console.log("graphArray", graphArray, dropSel)
-      makeTable()
+      // makeTable()
+      loadData()
       if (!skip){
         experimentr.hideNext()
-        experimentr.attachTimer('#graphQTimer', 20, function() {
-          experimentr.showNext()
-          validate();
+        experimentr.attachTimer('#graphTTimer', 20, function() {
+          // experimentr.showNext()
+          // validate();
         });
       } else {
         validate()
@@ -54,29 +63,43 @@ Please select the titles that were included in the previous study session.
     })
   }
 
-  function getCountPerPage(x, numPages){
-    let calcNum = x / numPages
-    // console.log("c", calcNum, numPages)
+  function getCountPerPage(x, n){
+    let calcNum = x / n
+    // let nPerPage = calcNum.floor();
+    console.log("c", calcNum, numPages)
     if (calcNum > 10){
-      // console.log("c1", x%numPages, numPages/2)
-      if (x%numPages > numPages/2 || (calcNum - 10)>1){
-        return getCountPerPage(x, numPages+1)
-      } else {return numPages}
-    } else if (calcNum < 5 && numPages!=1) {
-      // console.log("c2")
-      if (x%numPages > numPages/2 || (5 - calcNum)>1){
-        return getCountPerPage(x, numPages-1)
-      } else {return numPages}
+      console.log("c1", x%numPages, numPages/2)
+      if (x%n > n/2 || (calcNum - 10)>1){
+        return getCountPerPage(x, n+1)
+      } else {return [n, calcNum, x%n]}
+    } else if (calcNum < 5 && n!=1) {
+      console.log("c2")
+      if (x%n > n/2 || (5 - calcNum)>1){
+        return getCountPerPage(x, n-1)
+      } else {return [n, calcNum, x%n]}
     } else {
-      // console.log("c3", numPages)
-      return numPages;
+      console.log("c3", numPages)
+      return [n, calcNum, x%n];
     }
   }
 
+  function loadData(){
+    if (graphCounter == numPages-1){
+        lastGraph = true;
+    }
+    if (graphCounter > pageInfo[2]-1){
+      storyData = graphArray.slice(Math.floor(pageInfo[1])*graphCounter, Math.floor(pageInfo[1])*(graphCounter+1)-1);
+    } else {
+      storyData = graphArray.slice(Math.ceil(pageInfo[1])*graphCounter, Math.ceil(pageInfo[1])*(graphCounter+1)-1);
+    }
+    makeTable();
+  }
+
   function makeTable(){
+    d3.select('#graphTitlesTable').selectAll("*").remove()
     let tableBody = d3.select("#graphTitlesTable").append('tbody')
     let rows = tableBody.selectAll("tr")
-      .data(graphArray)
+      .data(storyData)
       .enter().append("tr")
       // .append("td").text(function (d) { return d.title; });
     // need to make three things per row; radio button, text, dropdown
@@ -87,6 +110,23 @@ Please select the titles that were included in the previous study session.
     // Was going to add an option selector for choosing what type of chart.
     // let rowDrop = rows.append("select").selectAll("option")
     //   .data(dropSel).enter().append("option").text(function(d){return d})
+    d3.select('#graphTText').selectAll("*").remove();
+    if (!lastGraph){
+      d3.select('#graphTText').append('button')
+        .attr('type', 'button')
+        .text('Next Graph')
+        .on('click',
+          function(d) {
+            if (isValid || skip){
+              graphCounter++;
+              loadData();
+            }
+          });
+    } else {
+      // diffGradeMeth();
+      validate()
+      experimentr.showNext();
+    }
   }
 
   function validate(){

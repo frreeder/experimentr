@@ -46,11 +46,19 @@ body {
   /*min-height: 500px;*/
 }
 
+#graphQImage {
+  width: 100%;
+  display: inline-block;
+  max-height: 500px;
+}
+
 svg {
   /*transform-origin: 0 0;*/
    /*margin-left: 10px;*/
    /*preserveAspectRatio: xMinYMax meet;*/
 }
+
+/*.graph*/
 
 svg.lineGraph {
 	width: 100%;

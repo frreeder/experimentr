@@ -119,9 +119,11 @@
     d3.select('#graphQImage').selectAll("*").remove()
     d3.select('#graphQImage').append('img')
       .attr('class', 'picture')
+      .style('max-height', "inherit")
+      .style("height", "100%")
       // .attr('src', function(d) { return storyData.imagePath[0]; })
       .attr('src', function(d) { return storyData.imagePath[embellishType.indexOf(storyData.embType)]; })
-      .attr('width', "100%");
+      // .attr('width', "100%");
     // Adds the option for the participant to skip past waiting....might include for testing purposes and remove later. s
     d3.select('#graphQText').selectAll("*").remove()
     if (skip){
