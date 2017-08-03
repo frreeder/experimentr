@@ -497,15 +497,16 @@
     // chart.pieArea.icons
       // .data(storyData.interact.imagePath)
       // .each(()=>{console.log("doing stuff")})
-      .style("width", (d, i)=>{
+      .attr("width", (d, i)=>{
         if (i<3){
           var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
           var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
           d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize, chart.pieArea.imgCon.min, chart.pieArea.imgCon.max)
         }
+        // console.log("d.w", d.width)
         return d.width
       })
-      .style("height", (d)=>{return d.width})
+      .attr("height", (d)=>{return d.width})
       .attr("x", (d, i)=>{
         // console.log("ray", chart.pieArea.raySize, Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize, d.width)
         return Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize+chart.bodyDim.w/2-d.width/2
