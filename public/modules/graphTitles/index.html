@@ -19,6 +19,8 @@ Please select the titles that were included in the previous study session.
   let graphCounter = 0
   let lastGraph = false
   let isValid = true;
+  let data = {}
+  let mod2 = []
 
   let chartType = ["line", "pie", "bar"]
 
@@ -105,6 +107,14 @@ Please select the titles that were included in the previous study session.
     // need to make three things per row; radio button, text, dropdown
     let rowRadio = rows.append('input')
       .attr('type', 'checkbox')
+      .attr('value', (d)=>{return d.title})
+      .attr("class", "checkBox")
+      // .property("checked", true)
+      // .each(function(){console.log(this.checked)})
+      // .on("change", ()=>{
+      //   console.log(d3.select(this).property("checked"))
+      //   console.log(d3.select(this).node().checked)
+      // })
     let rowText = rows
       .append("td").text(function(d){return d.title})
     // Was going to add an option selector for choosing what type of chart.
@@ -117,13 +127,14 @@ Please select the titles that were included in the previous study session.
         .text('Next Graph')
         .on('click',
           function(d) {
+            diffGradeMeth();
             if (isValid || skip){
               graphCounter++;
               loadData();
             }
           });
     } else {
-      // diffGradeMeth();
+      diffGradeMeth();
       validate()
       experimentr.showNext();
     }
@@ -131,8 +142,15 @@ Please select the titles that were included in the previous study session.
 
   function validate(){
     experimentr.endTimer('graphTitles');
-    // experimentr.addData(data);
+    data.mod2=mod2
+    experimentr.addData(data);
     experimentr.release();
+  }
+  function diffGradeMeth(){
+    d3.selectAll(".checkBox").each(function(d){
+      if (this.checked)
+        mod2.push(this.value)
+    })
   }
 
 }());

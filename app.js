@@ -33,6 +33,7 @@ app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 // If the study has finished, write the data to file
 app.post('/finish', function(req, res) {
+  console.log("finished!!!")
   fs.readFile('public/modules/blocked-workers.json', 'utf8', function(err,data) {
     if (err) console.log(err);
     var data = JSON.parse(data);
@@ -48,6 +49,7 @@ app.post('/finish', function(req, res) {
 
 // Handle POSTs from frontend
 app.post('/', function handlePost(req, res) {
+  console.log("posting")
   // Get experiment data from request body
   var d = req.body
   // If a postId doesn't exist, add one (it's random, based on date)

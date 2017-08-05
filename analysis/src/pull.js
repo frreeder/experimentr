@@ -12,6 +12,7 @@ client.on('connect', keys)
 
 function keys () {
   client.keys("*", function (err, res) {
+    console.log(res)
     res.forEach(data)
     client.quit()
   });

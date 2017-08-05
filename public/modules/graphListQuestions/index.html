@@ -12,6 +12,7 @@
 (function() {
   // for testing purposes
   var skip = true;
+  let mod3 = []
 
   var data = {}
     , graphCounter = 0
@@ -76,14 +77,14 @@
   function init() {
     // need to change this to mod3
     // also need to get rid of randomization and somehow pull information from the database ...
-    data.mod3=[]
+    // data.mod3=[]
     experimentr.hideNext();
     experimentr.startTimer('graphNoChartQuestions');
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
       for (var i=0; i<graphArray.length; i++){
-          data.mod3.push({key: graphArray[i].chartType, inputData: []})
+          mod3.push({key: graphArray[i].chartType, inputData: []})
       }
       loadData();
     })
@@ -142,7 +143,7 @@
     }
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
-      data.mod3[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+      mod3[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .text(storyData.questionBank[i].question);
@@ -163,14 +164,14 @@
         .on('change', function() {
           // console.log("i2", i)
           // if (skip){isValid = true}
-          console.log(this.name, this.value, data.mod3[graphCounter].inputData[i], i)
-          data.mod3[graphCounter].inputData[i].userAnswer = this.value
+          console.log(this.name, this.value, mod3[graphCounter].inputData[i], i)
+          mod3[graphCounter].inputData[i].userAnswer = this.value
           // var validate = true;
           if (!isValid){
             // for (var inD in data.mod3[graphCounter].inputData){
             // isValid = true;
-            for (let k=0; k<data.mod3[graphCounter].inputData.length; k++){
-              var inD = data.mod3[graphCounter].inputData[k]
+            for (let k=0; k<mod3[graphCounter].inputData.length; k++){
+              var inD = mod3[graphCounter].inputData[k]
               // console.log("inData", inD, data.mod3[graphCounter].inputData)
               if (inD.userAnswer==null){
                 isValid = false
@@ -195,17 +196,17 @@
     // if(data.graphQVerification) {
       // grade();
       experimentr.endTimer('graphNoChartQuestions');
+      data.mod3=JSON.stringify(mod3)
+      console.log(JSON.parse(data.mod3))
       experimentr.addData(data);
       experimentr.release();
     // }
   }
   function diffGradeMeth(){
-    for (var i=0; i<data.mod3[graphCounter].inputData.length; i++){
-      if (data.mod3[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        data.mod3[graphCounter].inputData[i].answerVerification = true
-      } else { data.mod3[graphCounter].inputData[i].answerVerification = false}
-      data.modStuff=JSON.stringify(data.mod3)
-      console.log(JSON.parse(data.modStuff))
+    for (var i=0; i<mod3[graphCounter].inputData.length; i++){
+      if (mod3[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        mod3[graphCounter].inputData[i].answerVerification = true
+      } else { mod3[graphCounter].inputData[i].answerVerification = false}
       // console.log("apples", JSON.parse("apples"))
     }
   }

@@ -285,7 +285,7 @@
       "interact": {
         "withIcon": true,
         "imagePath": [],
-        "colorArray": ["#cc33c9", "#109618", "#ff9900", "#dc3912", "#3366cc"]
+        "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#cc33c9"]
       }
     },
     {
@@ -313,7 +313,7 @@
       "interact": {
         "withIcon": true,
         "imagePath": [],
-        "colorArray": ["#e2ed32", "#c400eb", "#1fb257", "#373ce1"]
+        "colorArray": ["#373ce1", "#1fb257", "#c400eb", "#e2ed32"]
       }
     },
     {
@@ -341,7 +341,7 @@
       "interact": {
         "withIcon": true,
         "imagePath": [],
-        "colorArray": ["#dc3912", "#3d9e27", "#ff9900", "#36a8e1"]
+        "colorArray": ["#36a8e1", "#ff9900", "#3d9e27", "#dc3912"]
       }
     }
   ],

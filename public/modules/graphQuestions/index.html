@@ -13,6 +13,8 @@
 (function() {
   // for testing purposes
   var skip = true;
+  let mod1 = []
+  let graphOrder = []
 
   var data = {}
     , rand = Math.floor(Math.random()*3) // 0, 1, 2
@@ -36,6 +38,7 @@
         data[i][j].embType=getEmbType(j)
         // data[i][j].
         data[i][j].chartType=i
+        data[i][j].index = j
         data[i][k]=tempI
       }
       graphArray=graphArray.concat(data[i])
@@ -46,9 +49,10 @@
         let tempI = graphArray[i]
         graphArray[i]=graphArray[j]
         graphArray[j]=tempI
+        graphOrder.push({chartType: graphArray[i].chartType, embType: graphArray[i].embType, key: graphArray[i].key, index: graphArray[i].index})
     }
     // freq[arrList.indexOf(3)]++
-    console.log("gArray", graphArray)
+    console.log("gArray", graphArray, graphOrder)
     console.log("asd", data)
     // return graphArray;
   }
@@ -82,14 +86,14 @@
   init();
 
   function init() {
-    data.mod1=[]
+    // data.mod1=[]
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
       for (var i=0; i<graphArray.length; i++){
-          data.mod1.push({key: graphArray[i].chartType, inputData: []})
+          mod1.push({key: graphArray[i].chartType, inputData: []})
       }
       loadData();
     })
@@ -174,7 +178,7 @@
     }
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
-      data.mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+      mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .text(storyData.questionBank[i].question);
@@ -194,14 +198,14 @@
           return this.name === 'graphQVerification'+i.toString() ? this : null; })
         .on('change', function() {
           // console.log("i2", i)
-          console.log(this.name, this.value, data.mod1[graphCounter].inputData[i], i)
-          data.mod1[graphCounter].inputData[i].userAnswer = this.value
+          console.log(this.name, this.value, mod1[graphCounter].inputData[i], i)
+          mod1[graphCounter].inputData[i].userAnswer = this.value
           // var validate = true;
           if (!isValid){
             // for (var inD in data.mod1[graphCounter].inputData){
             // isValid = true;
-            for (let k=0; k<data.mod1[graphCounter].inputData.length; k++){
-              var inD = data.mod1[graphCounter].inputData[k]
+            for (let k=0; k<mod1[graphCounter].inputData.length; k++){
+              var inD = mod1[graphCounter].inputData[k]
               // console.log("inData", inD, data.mod1[graphCounter].inputData)
               if (inD.userAnswer==null){
                 isValid = false
@@ -224,17 +228,19 @@
   function validate() {
     // console.log("validate")
       experimentr.endTimer('graphQuestions');
+      data.mod1=JSON.stringify(mod1)
+      data.graphOrder=JSON.stringify(graphOrder)
       experimentr.addData(data);
       experimentr.release();
     // }
   }
   function diffGradeMeth(){
-    for (var i=0; i<data.mod1[graphCounter].inputData.length; i++){
-      if (data.mod1[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        data.mod1[graphCounter].inputData[i].answerVerification = true
-      } else { data.mod1[graphCounter].inputData[i].answerVerification = false}
-      data.modStuff=JSON.stringify(data.mod1)
-      console.log(JSON.parse(data.modStuff))
+    // console.log("sadalkjd", mod1)
+    for (var i=0; i<mod1[graphCounter].inputData.length; i++){
+      if (mod1[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        mod1[graphCounter].inputData[i].answerVerification = true
+      } else { mod1[graphCounter].inputData[i].answerVerification = false}
+      // console.log(JSON.parse(data.mod1))
       // console.log("apples", JSON.parse("apples"))
     }
   }
