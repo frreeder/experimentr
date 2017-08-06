@@ -6,8 +6,8 @@ data = []
 # Good only if expecting strings stored...https://stackoverflow.com/questions/23256932/redis-py-and-hgetall-behavior
 client = redis.StrictRedis(decode_responses=True)
 
-print ("keys")
-print(client.keys())
+# print ("keys")
+# print(client.keys())
 keys = client.keys()
 
 for k in keys:
@@ -15,17 +15,21 @@ for k in keys:
     users = client.hgetall(k)
     # https://stackoverflow.com/questions/15219858/how-to-store-a-complex-object-in-redis-using-redis-py
     for u in users:
-        # print("u"+k+u)
+        # print("u"+str(type(u)))
+        # print(u)
+        # print(users[u])
         try:
-            print ("trying")
-            u=json.loads(u.decode('utf-8'))
-            # u = "adakjdsalkhdklas"
-            print (u)
-        except Exception as e:
+            # print ("trying"+u)
+            users[u]=json.loads(users[u])
+            # users[u] = "adakjdsalkhdklas"
+            # print (u)
+            continue;
+        except ValueError as e:
+            # print ("ex"+u)
             continue;
     data.append(users)
-    print (users)
-    print("\n")
+    # print (users)
+    # print("\n")
 
 # client.on('connect', keys)
 
@@ -57,4 +61,5 @@ for k in keys:
 # }
 
 with open('./results/data2.json', 'w') as f:
+    # make json legible here
      json.dump(data, f)
