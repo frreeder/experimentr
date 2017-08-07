@@ -15,6 +15,7 @@
   // for testing purposes
   var skip = true;
   var stepSize = .005
+  let mod4 = []
 
   // Specific to interact
   var chart;
@@ -92,14 +93,14 @@
   init();
 
   function init() {
-    data.mod1=[]
+    // data.mod1=[]
     experimentr.hideNext();
     experimentr.startTimer('');
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
       for (var i=0; i<graphArray.length; i++){
-          data.mod1.push({key: graphArray[i].chartType, inputData: []})
+          mod4.push({key: graphArray[i].chartType, inputData: []})
       }
       // Getting the line interact data
       for (let i = 0; i < graphArray.length; i++){
@@ -204,7 +205,8 @@
     // Append the background image for all the bars except the one being modified.
     chart.append('image')
       .attr('class', 'picture')
-      .attr('href', function(d) { return storyData.interact.imagePath[0]; })
+      // .attr('href', function(d) { return storyData.interact.imagePath[0]; })
+      .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_01_developers.png"; })
       .attr('height', chart.bodyDim.h)
       .attr('width', chart.bodyDim.w)
       // .attr('height', bodyDim.h*perc[1])
@@ -222,6 +224,12 @@
         .on("click", ()=>{
           incBar(isInc, .01)
         })
+        .on("mousedown", ()=>{
+          clearTimeout(chart.timer)
+          chart.outline.style("opacity", 1)
+          chart.timer = setTimeout(()=>{chart.outline.style("opacity", .2)}, 500)
+        })
+        // .on("mouseup", ()=>{chart.outline.style("opacity", .2)})
         // .append("img")
         //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
         //   .attr("class", "button1")
@@ -240,10 +248,20 @@
       .attr('height',chart.bodyDim.h)
       .attr('width', (chart.barWidth)*chart.bodyDim.w)
 
+    // This would be the outline
+    chart.outline=chart.append('image')
+      .attr('class', 'picture clip-svg1')
+      // .attr('href', function(d) { return storyData.interact.imagePath[1]; })
+      .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_03_developers.png"; })
+      .attr('height', chart.bodyDim.h)
+      .attr('width', (chart.barWidth)*chart.bodyDim.w)
+      .style("opacity", .2)
+
     // Adding the image of the bar that we want to manipulate. The file must be the bar in the same space as background bar image.
     chart.append('image')
       .attr('class', 'picture clip-svg1')
-      .attr('href', function(d) { return storyData.interact.imagePath[1]; })
+      // .attr('href', function(d) { return storyData.interact.imagePath[1]; })
+      .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_02_developers.png"; })
       .attr('height', chart.bodyDim.h)
       .attr('width', (chart.barWidth)*chart.bodyDim.w)
   }
@@ -276,6 +294,9 @@
         .attr("class", "button1 "+buttonType)
         .on("click", ()=>{
           incSlice(isInc, 1)
+          clearTimeout(chart.timer)
+          chart.highSlice.style("opacity", 1)
+          chart.timer = setTimeout(()=>{chart.highSlice.style("opacity", .4)}, 500)
         })
     }
     // Setting a color scale if not predefined.
@@ -428,27 +449,16 @@
         .style("stroke", "black")
         .style("stroke-width", 3)
         .each(function(d) { this._current = d; })
+    chart.highSlice = chart.plotArea.append("g")
+      .attr("class", "highlight")
+      .append("path").datum(pie(pieData)[1])
+      .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+        .attr("d", arc)
+        .style("fill", "none")
+        .style("stroke", "#FF1493")
+        .style("stroke-width", 3)
+        .style("opacity", .4)
 
-    // // making the legend
-    // // var leg = {};
-    //
-    // // create one row per segment.
-    // var legend = chart.legendArea.selectAll("tr")
-		// 	// .exit().remove()
-		// 	.data(pieData).enter().append("tr");
-    //
-    // // create the first column for each segment.
-    // legend.append("td").attr("width", '16').append("svg").attr("width", '16').attr("height", '16').append("rect")
-    //   .attr("width", '16').attr("height", '16')
-		// 	.attr("fill",function(d, i){ return chart.colorScale(i); });
-    //
-    // // create the second column for each segment.
-    // legend.append("td").attr("class",'legendFreq').text(function(d){ return d[accessors[0]];});
-    //
-    // // create the third column for each segment.
-    // legend.append("td").attr("class",'legendFreq')
-    //   .text(function(d){ return d3.format(".1%")(d[accessors[1]]/100.0);});
-    // // bodyDim.w=bodyDim.w/.65
   }
 
   function incSlice (isInc, inc){
@@ -484,6 +494,10 @@
 
     chart.pieArea.selectAll("path")
       .data(pie(pieData))
+      .attr("d", arc)
+
+    chart.highSlice
+      .datum(pie(pieData)[1])
       .attr("d", arc)
 
     chart.plotArea.selectAll(".outline").selectAll("path")
@@ -546,6 +560,9 @@
         .attr("class", "button1 "+buttonType)
         .on("click", ()=>{
           incPoint(isInc)
+          clearTimeout(chart.timer);
+          chart.highLine.style("opacity", "1")
+          chart.timer = setTimeout(()=>{chart.highLine.style("opacity", ".5")}, 500)
         })
         // .append("img")
         //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
@@ -608,10 +625,39 @@
       .datum(storyData.interact.data)
       .attr("class", "lineOutline")
       .attr("d", chart.lineFunc)
+      // .style("stroke", (d, i)=>{if (i==pointLoc || i == pointLoc-1){return "pink"} else {return "black"}})
+      // .style("stroke-width", (d, i)=>{if (i==pointLoc || i == pointLoc-1){return "pink"} else {return "black"}})
       // .attr("d", d3.svg.line()
 		  //   .x(function(d) { return chart.xScale(d[storyData.interact.accessors[0]]); })
 		  //   .y(function(d) { return chart.yScale(d[storyData.interact.accessors[1]]); })
 			// );
+    // Get segment of the lines.
+    // manipLineData = [{source: storyData.interact.data[pointLoc-1], target:storyData.interact.data[pointLoc]},
+    //   {source: storyData.interact.data[pointLoc], target:storyData.interact.data[pointLoc+1>storyData.interact.data.length-1?pointLoc:pointLoc+1]}]
+    // for (let i = pointLoc-1; i < pointLoc+2; i++){
+    //   if ()
+    //   manipLineData
+    // }
+    chart.manipLines = storyData.interact.data.slice(pointLoc-1, pointLoc+2)
+    // chart.highLine = chart.plotArea.append("g").selectAll("line")
+    //   .data(manipLineData)
+    //   .enter().append("line")
+    //     .attr("x1", (d)=>{return chart.xScale(d.source[accessors[0]])})
+    //     .attr("x2", (d)=>{return chart.xScale(d.target[accessors[0]])})
+    //     .attr("y1", (d)=>{return chart.yScale(d.source[accessors[1]])})
+    //     .attr("y2", (d)=>{return chart.yScale(d.target[accessors[1]])})
+    //     .style("stroke", "#FF1493")
+    //     .style("stroke-width", 3)
+    //     .style("opacity", .5)
+
+    chart.highLine = chart.plotArea.append("g").append("path")
+      .datum(chart.manipLines)
+      .attr("d", chart.lineFunc)
+      .style("stroke", "#FF1493")
+      .style("stroke-width", 3)
+      .style("fill", "none")
+      .style("opacity", .5)
+
 
     // this is the icon attached to the line chart if used... a bit buggy but I suspect it has something to do with the rotation point.
     if (storyData.interact.withIcon){
@@ -680,7 +726,7 @@
     }
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
-      data.mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+      mod4[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
       var question = d3.select('#graphIVerification').append("g")
       question.append('p')
         .text(storyData.questionBank[i].question);
@@ -700,14 +746,14 @@
           return this.name === 'graphIVerification'+i.toString() ? this : null; })
         .on('change', function() {
           // console.log("i2", i)
-          console.log(this.name, this.value, data.mod1[graphCounter].inputData[i], i)
-          data.mod1[graphCounter].inputData[i].userAnswer = this.value
+          console.log(this.name, this.value, mod4[graphCounter].inputData[i], i)
+          mod4[graphCounter].inputData[i].userAnswer = this.value
           // var validate = true;
           if (!isValid){
             // for (var inD in data.mod1[graphCounter].inputData){
             // isValid = true;
-            for (let k=0; k<data.mod1[graphCounter].inputData.length; k++){
-              var inD = data.mod1[graphCounter].inputData[k]
+            for (let k=0; k<mod4[graphCounter].inputData.length; k++){
+              var inD = mod4[graphCounter].inputData[k]
               // console.log("inData", inD, data.mod1[graphCounter].inputData)
               if (inD.userAnswer==null){
                 isValid = false
@@ -747,6 +793,14 @@
         .attr("d", area)
     }
 
+    chart.highLine
+      // .datum(chart.manipLines)
+      .attr("d", chart.lineFunc)
+        // .attr("x1", (d)=>{return chart.xScale(d.source[accessors[0]])})
+        // .attr("x2", (d)=>{return chart.xScale(d.target[accessors[0]])})
+        // .attr("y1", (d)=>{return chart.yScale(d.source[accessors[1]])})
+        // .attr("y2", (d)=>{return chart.yScale(d.target[accessors[1]])})
+
     chart.plotArea.selectAll(".lineOutline")
       .datum(lineData)
       .attr("d", chart.lineFunc);
@@ -765,17 +819,18 @@
   function validate() {
     // console.log("validate")
       experimentr.endTimer('graphInteract');
+      data.mod4=JSON.stringify(mod4)
+      console.log(JSON.parse(data.mod4))
       experimentr.addData(data);
       experimentr.release();
     // }
   }
+  // need to edit this
   function diffGradeMeth(){
-    for (var i=0; i<data.mod1[graphCounter].inputData.length; i++){
-      if (data.mod1[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        data.mod1[graphCounter].inputData[i].answerVerification = true
-      } else { data.mod1[graphCounter].inputData[i].answerVerification = false}
-      data.modStuff=JSON.stringify(data.mod1)
-      console.log(JSON.parse(data.modStuff))
+    for (var i=0; i<mod4[graphCounter].inputData.length; i++){
+      if (mod4[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        mod4[graphCounter].inputData[i].answerVerification = true
+      } else { mod4[graphCounter].inputData[i].answerVerification = false}
       // console.log("apples", JSON.parse("apples"))
     }
   }
