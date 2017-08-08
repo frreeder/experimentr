@@ -27,7 +27,22 @@
           "imagePath": [],
           "imageDim": [],
           "pointLoc": 7
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Climate Changes",
@@ -56,7 +71,22 @@
           "imagePath": [],
           "imageDim": [],
           "pointLoc": 3
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Sales of Ford's F-Series",
@@ -85,7 +115,22 @@
           "imagePath": [],
           "imageDim": [],
           "pointLoc": 10
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Average U.S. Prices for Gasoline",
@@ -114,7 +159,22 @@
           "imagePath": [],
           "imageDim": [],
           "pointLoc": 11
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "The Future of U.S. Manufacturing",
@@ -143,7 +203,22 @@
           "imagePath": [],
           "imageDim": [],
           "pointLoc": 9
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Average Hours of Freeway Congestion",
@@ -172,7 +247,22 @@
           "imagePath": [],
           "imageDim": [],
           "pointLoc": 4
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     }
   ],
   "pie": [
@@ -202,7 +292,22 @@
         "withIcon": true,
         "imagePath": [],
         "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099"]
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Most Bought Girl Scout Cookies",
@@ -230,7 +335,22 @@
         "withIcon": false,
         "imagePath": [],
         "colorArray": []
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Renewable Energy in the U.K.",
@@ -258,7 +378,22 @@
         "withIcon": false,
         "imagePath": [],
         "colorArray": []
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Star Wars Revenue Throughout the Galaxy",
@@ -286,7 +421,22 @@
         "withIcon": true,
         "imagePath": [],
         "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#cc33c9"]
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Top Internet Browsers, 2011",
@@ -314,7 +464,22 @@
         "withIcon": true,
         "imagePath": [],
         "colorArray": ["#373ce1", "#1fb257", "#c400eb", "#e2ed32"]
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Women at Work",
@@ -342,7 +507,22 @@
         "withIcon": true,
         "imagePath": [],
         "colorArray": ["#36a8e1", "#ff9900", "#3d9e27", "#dc3912"]
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     }
   ],
   "bar": [
@@ -372,7 +552,22 @@
         "imagePath": [],
         "imageDim": [],
         "dataPath": ""
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Salaries By College Undergraduate Major",
@@ -400,7 +595,22 @@
         "imagePath": [],
         "imageDim": [],
         "dataPath": ""
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Top Platforms Being Used By Developers",
@@ -428,7 +638,22 @@
         "imagePath": [],
         "imageDim": [],
         "dataPath": ""
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Summer Olympics' Share of TV Viewership",
@@ -456,7 +681,22 @@
         "imagePath": [],
         "imageDim": [],
         "dataPath": ""
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Most Visited Theme Parks",
@@ -484,7 +724,22 @@
         "imagePath": [],
         "imageDim": [],
         "dataPath": ""
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     },
     {
       "title": "Countries' Unemployment Rates",
@@ -512,7 +767,22 @@
         "imagePath": [],
         "imageDim": [],
         "dataPath": ""
-      }
+      },
+      "axesPath":{},
+      "axesQuestions":[
+        {
+          "question": "What was the y-axis value?",
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "answer": "2010",
+          "key": "identify"
+        },
+        {
+          "question": "Do we need second question?",
+          "choices": ["Fo Sho", "Nah", "Maybe", "I Dunno", "omit"],
+          "answer": "2008",
+          "key": "compare"
+        }
+      ]
     }
   ]
 }

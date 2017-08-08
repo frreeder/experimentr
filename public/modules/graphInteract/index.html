@@ -15,7 +15,7 @@
   // for testing purposes
   var skip = true;
   var stepSize = .005
-  let mod3 = []
+  let mod4 = []
   let changeAllSlices = true;
 
   // Specific to interact
@@ -101,7 +101,7 @@
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
       for (var i=0; i<graphArray.length; i++){
-          mod3.push({key: graphArray[i].chartType, inputData: []})
+          mod4.push({key: graphArray[i].chartType, inputData: []})
       }
       // Getting the line interact data
       for (let i = 0; i < graphArray.length; i++){
@@ -272,7 +272,7 @@
     chart.barWidth= clampThings((isInc? chart.barWidth+step : chart.barWidth-step), 0, 1)
     // Updating the clipping path.
     chart.bar.attr('width', (chart.barWidth)*chart.bodyDim.w*perc[0])
-    mod3[graphCounter].value = chart.barWidth
+    mod4[graphCounter].value = chart.barWidth
   }
 
   function makePie() {
@@ -500,7 +500,7 @@
     }
 
     // save the pieSlice value
-    mod3[graphCounter].value = pieData[1][accessors[1]]
+    mod4[graphCounter].value = pieData[1][accessors[1]]
     // console.log("slices", pieData[0][accessors[1]], pieData[1][accessors[1]])
 
     // create function to draw the arcs of the pie slices.
@@ -745,7 +745,7 @@
     }
     // only looking at one thing for now
     // // for (let i=0; i<storyData.questionBank.length; i++){
-    // //   mod3[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+    // //   mod4[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
     // //   var question = d3.select('#graphIVerification').append("g")
     // //   question.append('p')
     // //     .text(storyData.questionBank[i].question);
@@ -765,14 +765,14 @@
     // //       return this.name === 'graphIVerification'+i.toString() ? this : null; })
     // //     .on('change', function() {
     // //       // console.log("i2", i)
-    // //       console.log(this.name, this.value, mod3[graphCounter].inputData[i], i)
-    // //       mod3[graphCounter].inputData[i].userAnswer = this.value
+    // //       console.log(this.name, this.value, mod4[graphCounter].inputData[i], i)
+    // //       mod4[graphCounter].inputData[i].userAnswer = this.value
     // //       // var validate = true;
     // //       if (!isValid){
     // //         // for (var inD in data.mod1[graphCounter].inputData){
     // //         // isValid = true;
-    // //         for (let k=0; k<mod3[graphCounter].inputData.length; k++){
-    // //           var inD = mod3[graphCounter].inputData[k]
+    // //         for (let k=0; k<mod4[graphCounter].inputData.length; k++){
+    // //           var inD = mod4[graphCounter].inputData[k]
     // //           // console.log("inData", inD, data.mod1[graphCounter].inputData)
     // //           if (inD.userAnswer==null){
     // //             isValid = false
@@ -800,7 +800,7 @@
     if (isInc){
       lineData[pointLoc][accessors[1]]+=inc
     } else {lineData[pointLoc][accessors[1]]-=inc}
-    mod3[graphCounter].value = lineData[pointLoc][accessors[1]]
+    mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
 
     for (let i = 0; i <2; i++){
       let y0 = i==0? chart.yScale(0) : chart.yScale.range()[1]
@@ -839,18 +839,18 @@
   function validate() {
     // console.log("validate")
       experimentr.endTimer('graphInteract');
-      data.mod3=JSON.stringify(mod3)
-      console.log(JSON.parse(data.mod3))
+      data.mod4=JSON.stringify(mod4)
+      console.log(JSON.parse(data.mod4))
       experimentr.addData(data);
       experimentr.release();
     // }
   }
   // need to edit this
   function diffGradeMeth(){
-    for (var i=0; i<mod3[graphCounter].inputData.length; i++){
-      if (mod3[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        mod3[graphCounter].inputData[i].answerVerification = true
-      } else { mod3[graphCounter].inputData[i].answerVerification = false}
+    for (var i=0; i<mod4[graphCounter].inputData.length; i++){
+      if (mod4[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        mod4[graphCounter].inputData[i].answerVerification = true
+      } else { mod4[graphCounter].inputData[i].answerVerification = false}
       // console.log("apples", JSON.parse("apples"))
     }
   }

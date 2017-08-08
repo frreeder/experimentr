@@ -46,7 +46,7 @@ pprint(data["line"][0])
 
 # I can a list of the directory image files.
 
-F = open("./graphList.json", "r")
+F = open("./graphImageList.json", "r")
 print ("pot")
 # print (F.read())
 

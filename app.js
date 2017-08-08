@@ -12,6 +12,7 @@ var express     = require('express')
   , debug       = process.argv[4] || null
   , path        = require('path')
   , fs          = require('fs')
+  , pid
 
 // Database setup
 redisClient = redis.createClient(rport)
@@ -22,7 +23,9 @@ redisClient.on('connect', function() {
 
 // Data handling
 var save = function save(d) {
-  redisClient.hmset(d.postId, d)
+  console.log(pid)
+  redisClient.hmset(pid, d)
+  // redisClient.hmset(d.postId, d)
   if( debug )
     console.log('saved to redis: ' + d.postId +', at: '+ (new Date()).toString())
 }
@@ -75,6 +78,7 @@ app.get('/', function(req, res){
     res.send(404)
     return;
   } else if (req.query.pid=="test"){
+    pid = "qTest:"+(req.query.name!=null?req.query.name:(+new Date()).toString(36))
     // checks to see if session specified, if not using a default index file
     if (req.query.s==1){
       res.sendfile(__dirname+"/public/indexSess1.html")
@@ -86,23 +90,29 @@ app.get('/', function(req, res){
           if(err) console.log(err);
           // if session 2 or default index file
           if (req.query.s == 2){
-            res.sendfile(__dirname+"/public/indexTest.html")
-          } else {
             res.sendfile(__dirname+"/public/indexSess2.html")
+          } else {
+            res.sendfile(__dirname+"/public/indexTest.html")
           }
         });
       })
     }
   } else {
+    pid = "p:"+req.query.pid
     // Lookup if user in database, ex: pid = j60wtjs8
-    redisClient.exists(req.query.pid, function (err, exist){
+    redisClient.exists("p:"+req.query.pid, function (err, exist){
       // If the participant exists pull up session 2.
       if (exist){
         // graph order is added in session and is the randomization of the graphs
-        redisClient.hget(req.query.pid, "graphOrder", function(err, gO){
+        redisClient.hget("p:"+req.query.pid, "graphOrder", function(err, gO){
           // Adding the graph order to a json file to be accessed on client side
           // Could also use a template like jade or something to inject into html
           // or make things dynamic using socket.io ...
+          if (gO==null){
+            console.log("graphOrderDNE")
+            res.sendfile(__dirname+"/public/indexSess1.html")
+            return;
+          }
           fs.writeFile('public/modules/graphOrder.json', gO, function(err) {
             if(err) console.log(err);
             res.sendfile(__dirname+"/public/indexSess2.html")

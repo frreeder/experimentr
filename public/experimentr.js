@@ -7,6 +7,10 @@ var experimentr = (function() {
 
   // Add a random postId for each new participant
   data.postId = (+new Date()).toString(36);
+  // experimentr.post = (type)=>{
+  //   data.postId = type+(+new Date()).toString(36);
+  // }
+  // if (data.postId ==null){data.postId=(+new Date()).toString(36)}
 
   // Accessor for postId
   experimentr.postId = function() {

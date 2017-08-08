@@ -18,75 +18,31 @@
     , graphCounter = 0
     , lastGraph = false
     , isValid = false
-    , graphArray
+    , graphArray = []
     , storyData;
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function getRandomImageArray(data){
-    graphArray = []
-    for (var i in data){
-      for (let j = 0; j < data[i].length; j++){
-        let k = getRandomInt(j, data[i].length)
-        let tempI = data[i][j]
-        data[i][j]=data[i][k]
-        data[i][j].embType=getEmbType(j)
-        data[i][j].chartType=i
-        data[i][k]=tempI
-      }
-      graphArray=graphArray.concat(data[i])
-      // console.log("dataI", data[i])
+  function getGraphArray(d, gO) {
+    for (let i=0; i<gO.length; i++){
+      // Either this or for loop...
+      graphArray.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
     }
-    for (let i=0; i<graphArray.length; i++){
-        let j = getRandomInt(i, graphArray.length)
-        let tempI = graphArray[i]
-        graphArray[i]=graphArray[j]
-        graphArray[j]=tempI
-    }
-    // freq[arrList.indexOf(3)]++
-    console.log("gArray", graphArray)
-    // return graphArray;
-  }
-
-  var embellishType = ["embellished", "unrelated", "normal"]
-  function getEmbType(i){
-    let embType = ""
-    switch (i) {
-      case 0:
-      case 1:
-        embType=embellishType[0];
-        break;
-      case 2:
-      case 3:
-        embType=embellishType[1];
-        break;
-      case 4:
-      case 5:
-        embType=embellishType[2];
-        break;
-      default:
-        console.log("ack!!!");
-    }
-    return embType
   }
 
   init();
 
   function init() {
-    // need to change this to mod3
-    // also need to get rid of randomization and somehow pull information from the database ...
-    // data.mod3=[]
     experimentr.hideNext();
     experimentr.startTimer('graphNoChartQuestions');
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
-      getRandomImageArray(d);
-      for (var i=0; i<graphArray.length; i++){
-          mod3.push({key: graphArray[i].chartType, inputData: []})
-      }
-      loadData();
+      d3.json('modules/graphOrder.json', function(err2,gO){
+      console.log("go", graphArray)
+        getGraphArray(d, gO);
+        for (var i=0; i<graphArray.length; i++){
+            mod3.push({key: graphArray[i].chartType, inputData: []})
+        }
+        loadData();
+      })
     })
   }
 
@@ -103,7 +59,7 @@
   }
   function loadQuestion() {
     d3.select('#graphQInstructions').selectAll("*").remove();
-    d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
+    d3.select('#graphQInstructions').append("strong").text(storyData.title)
     d3.select('#graphQText').selectAll("*").remove();
     if (!lastGraph){
       if (!skip){
