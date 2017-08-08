@@ -142,7 +142,7 @@ for x in interactNames:
                 print("notCaught: ", j["key"], x)
 
 # Getting the interact image files for the bars
-inType = ("interact_01", "interact_02")
+inType = ("interact_01", "interact_02", "interact_03")
 #  For line interact files.
 for x in interactNames:
     # for i in graphTypes:
