@@ -96,7 +96,7 @@
   function init() {
     // data.mod1=[]
     experimentr.hideNext();
-    experimentr.startTimer('');
+    experimentr.startTimer('graphInteract');
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
@@ -265,6 +265,8 @@
       // .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_02_developers.png"; })
       .attr('height', chart.bodyDim.h)
       .attr('width', (chart.barWidth)*chart.bodyDim.w)
+
+    mod4[graphCounter].value = chart.barWidth
   }
 
   function incBar(isInc, step){
@@ -279,6 +281,9 @@
     let pieData = storyData.interact.data
     let accessors = storyData.interact.accessors
     let piePerc = .9
+
+    // save the pieSlice value, will be changed if chart changed
+    mod4[graphCounter].value = pieData[1][accessors[1]]
 
     // Setting the chart
     chart = d3.select('#graphIImage')
@@ -556,6 +561,9 @@
     let pointLoc = typeof(storyData.interact.pointLoc)==='number'? clampThings(storyData.interact.pointLoc, 1, lineData.length-1) : (2<lineData.length-1? 2 : 1)
     storyData.interact.pointLoc = pointLoc
 
+    // saving value, will change if interacted with
+    mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+
     chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
       .attr("preserveAspectRatio", "xMinYMax meet")
 
@@ -644,30 +652,8 @@
       .datum(storyData.interact.data)
       .attr("class", "lineOutline")
       .attr("d", chart.lineFunc)
-      // .style("stroke", (d, i)=>{if (i==pointLoc || i == pointLoc-1){return "pink"} else {return "black"}})
-      // .style("stroke-width", (d, i)=>{if (i==pointLoc || i == pointLoc-1){return "pink"} else {return "black"}})
-      // .attr("d", d3.svg.line()
-		  //   .x(function(d) { return chart.xScale(d[storyData.interact.accessors[0]]); })
-		  //   .y(function(d) { return chart.yScale(d[storyData.interact.accessors[1]]); })
-			// );
-    // Get segment of the lines.
-    // manipLineData = [{source: storyData.interact.data[pointLoc-1], target:storyData.interact.data[pointLoc]},
-    //   {source: storyData.interact.data[pointLoc], target:storyData.interact.data[pointLoc+1>storyData.interact.data.length-1?pointLoc:pointLoc+1]}]
-    // for (let i = pointLoc-1; i < pointLoc+2; i++){
-    //   if ()
-    //   manipLineData
-    // }
+
     chart.manipLines = storyData.interact.data.slice(pointLoc-1, pointLoc+2)
-    // chart.highLine = chart.plotArea.append("g").selectAll("line")
-    //   .data(manipLineData)
-    //   .enter().append("line")
-    //     .attr("x1", (d)=>{return chart.xScale(d.source[accessors[0]])})
-    //     .attr("x2", (d)=>{return chart.xScale(d.target[accessors[0]])})
-    //     .attr("y1", (d)=>{return chart.yScale(d.source[accessors[1]])})
-    //     .attr("y2", (d)=>{return chart.yScale(d.target[accessors[1]])})
-    //     .style("stroke", "#FF1493")
-    //     .style("stroke-width", 3)
-    //     .style("opacity", .5)
 
     chart.highLine = chart.plotArea.append("g").append("path")
       .datum(chart.manipLines)
@@ -709,15 +695,46 @@
         .attr("d", area)
     }
 
-    // Add the X Axis
-	  // chart.xAxis = chart.plotArea.append("g").attr("class", "xScale")
-	  //     .attr("transform", "translate(0," + chart.plotArea.height + ")")
-	  //     .call(d3.svg.axis().scale(chart.xScale).orient("bottom"));
-    //
-	  // // Add the Y Axis
-	  // chart.yAxis = chart.plotArea.append("g").attr("class", "yScale")
-	  //     .call(d3.svg.axis().scale(chart.yScale).orient("left"));
+    // Add gridlines
+    // Need to add variable in information for these
+    let wLine = 2
+    let hLine = 5
+    // Get the data to filter out widths by 2
+    let wData = lineData.filter((d,i)=>{ return i%wLine == 0 })
+    // let hData = lineData.filter((d,i)=>{ return i%hLine == 0 })
+    let hData = new Array(hLine)
+    chart.xGrid = chart.plotArea.append("g").attr("class", "xGrid")
+      .selectAll("line")
+      .data(wData)
+      .enter().append("line")
+      .attr("x1", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("x2", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("y1", (d)=>{return chart.yScale.range()[1]})
+      .attr("y2", (d)=>{return chart.yScale.range()[0]})
+      .style("stroke", "grey")
 
+    chart.yGrid = chart.plotArea.append("g").attr("class", "yGrid")
+      .selectAll("line")
+      .data(hData)
+      .enter().append("line")
+      .attr("x1", (d)=>{return chart.xScale.range()[0]})
+      .attr("x2", (d)=>{return chart.xScale(lineData[lineData.length-1][accessors[0]])})
+      .attr("y1", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
+      .attr("y2", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
+      .style("stroke", "grey")
+
+
+    // Adding rectangular border
+    chart.outline = chart.plotArea.append("g").attr("class", "lineOutline")
+      .append("rect")
+      .attr("x", chart.xScale.range()[0])
+      .attr("y", chart.yScale.range()[1])
+      // .attr("width", chart.plotArea.width)
+      .attr("height", chart.plotArea.height)
+      .attr("width", chart.xScale(lineData[lineData.length-1][accessors[0]])-chart.xScale(lineData[0][accessors[0]]))
+      // .attr("height", chart.yScale(lineData[0][accessors[0]])-chart.yScale(lineData[lineData.length-1][accessors[0]]))
+      .style("fill", "none")
+      .style("stroke-width", 4)
   }
 
   function loadQuestion() {
@@ -800,6 +817,8 @@
     if (isInc){
       lineData[pointLoc][accessors[1]]+=inc
     } else {lineData[pointLoc][accessors[1]]-=inc}
+
+    // saving value
     mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
 
     for (let i = 0; i <2; i++){

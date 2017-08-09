@@ -23,7 +23,8 @@ redisClient.on('connect', function() {
 
 // Data handling
 var save = function save(d) {
-  console.log(pid)
+  // console.log(pid)
+  d.pid=pid
   redisClient.hmset(pid, d)
   // redisClient.hmset(d.postId, d)
   if( debug )

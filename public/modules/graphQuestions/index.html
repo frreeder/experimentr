@@ -178,7 +178,7 @@
     }
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
-      mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+      mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key, userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .text(storyData.questionBank[i].question);
@@ -207,7 +207,7 @@
             for (let k=0; k<mod1[graphCounter].inputData.length; k++){
               var inD = mod1[graphCounter].inputData[k]
               // console.log("inData", inD, data.mod1[graphCounter].inputData)
-              if (inD.userAnswer==null){
+              if (inD.userAnswer==""){
                 isValid = false
                 break;
               } else {

@@ -14,7 +14,6 @@
   // for testing purposes
   var skip = true;
   let mod5 = []
-  let graphOrder = []
 
   var data = {}
     , rand = Math.floor(Math.random()*3) // 0, 1, 2
@@ -24,44 +23,12 @@
     , graphArray = []
     , storyData;
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function getRandomImageArray(data){
-    graphArray = []
-    for (var i in data){
-      for (let j = 0; j < data[i].length; j++){
-        let k = getRandomInt(j, data[i].length)
-        let tempI = data[i][j]
-        data[i][j]=data[i][k]
-        data[i][j].embType=getEmbType(j)
-        // data[i][j].
-        data[i][j].chartType=i
-        data[i][j].index = j
-        data[i][k]=tempI
-      }
-      graphArray=graphArray.concat(data[i])
-      // console.log("dataI", data[i])
-    }
-    for (let i=0; i<graphArray.length; i++){
-        let j = getRandomInt(i, graphArray.length)
-        let tempI = graphArray[i]
-        graphArray[i]=graphArray[j]
-        graphArray[j]=tempI
-        graphOrder.push({chartType: graphArray[i].chartType, embType: graphArray[i].embType, key: graphArray[i].key, index: graphArray[i].index})
-    }
-    // freq[arrList.indexOf(3)]++
-    console.log("gArray", graphArray, graphOrder)
-    console.log("asd", data)
-    // return graphArray;
-  }
-
   function getGraphArray(d, gO) {
     for (let i=0; i<gO.length; i++){
       // Either this or for loop...
       graphArray.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
       graphArray[i].embType = gO[i].embType
+      graphArray[i].chartType = gO[i].chartType
     }
   }
 
@@ -96,7 +63,7 @@
   function init() {
     // data.mod5=[]
     experimentr.hideNext();
-    experimentr.startTimer('graphQuestions');
+    experimentr.startTimer('graphAxes');
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       d3.json('modules/graphOrder.json', function(err2,gO){
@@ -164,7 +131,7 @@
     }
     // only looking at one thing for now
     for (let i=0; i<storyData.axesQuestions.length; i++){
-      // mod5[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
+      mod5[graphCounter].inputData.push({questionType: "notMadeUP", userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .text(storyData.axesQuestions[i].question);
@@ -193,7 +160,7 @@
             for (let k=0; k<mod5[graphCounter].inputData.length; k++){
               var inD = mod5[graphCounter].inputData[k]
               // console.log("inData", inD, data.mod5[graphCounter].inputData)
-              if (inD.userAnswer==null){
+              if (inD.userAnswer==""){
                 isValid = false
                 break;
               } else {
@@ -213,9 +180,9 @@
   // allow the participant to move on to the next
   function validate() {
     // console.log("validate")
-      experimentr.endTimer('graphQuestions');
+      console.log("mod5", mod5)
+      experimentr.endTimer('graphAxes');
       data.mod5=JSON.stringify(mod5)
-      data.graphOrder=JSON.stringify(graphOrder)
       experimentr.addData(data);
       experimentr.release();
     // }
