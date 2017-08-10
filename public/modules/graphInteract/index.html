@@ -26,6 +26,7 @@
   // Might need to change this to hard coded numbers, but keeping for now.
   var bodyDim = {w:parseInt(d3.select('#graphIImage').style('width'), 10)*perc[0], h:parseInt(d3.select('#graphIImage').style('height'), 10)*perc[1]}
   bodyDim.h = 500*perc[1]
+  bodyDim.w = 850*perc[0]
   console.log("bod", bodyDim)
 
   var data = {}
@@ -195,11 +196,6 @@
     chart
       .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
       .attr("preserveAspectRatio", "xMinYMax meet")
-      // .attr("viewBox", "0 0 "+(bodyDim.w*perc[0]).toString()+" "+(bodyDim.h*perc[1]).toString())
-      // .style('height', bodyDim.h*perc[1])
-      // .style('width', bodyDim.w*perc[0])
-      // .style('height', perc[1]*100+"%")
-      // .style('width', perc[0]*100+"%")
       .attr('height', perc[1]*100+"%")
       .attr('width', perc[0]*100+"%")
 
@@ -210,10 +206,6 @@
       // .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_01_developers.png"; })
       .attr('height', chart.bodyDim.h)
       .attr('width', chart.bodyDim.w)
-      // .attr('height', bodyDim.h*perc[1])
-      // .attr('width', bodyDim.w*perc[0])
-      // .style('height',"100%")
-      // .style('width', "100%")
 
     // Append the buttons for controlling the width of the bars.
     for (let i =0; i<2; i++){
@@ -280,7 +272,7 @@
   function makePie() {
     let pieData = storyData.interact.data
     let accessors = storyData.interact.accessors
-    let piePerc = .9
+    let piePerc = 1
 
     // save the pieSlice value, will be changed if chart changed
     mod4[graphCounter].value = pieData[1][accessors[1]]
@@ -324,7 +316,8 @@
     // Appending a group for random SVG elements and dimensions
     chart.pieArea = chart.plotArea.append("g")
 
-    chart.pieArea.r = dia / 2
+    chart.pieArea.r = dia / 2 * .8
+    chart.arrowSize  = dia/2*.15
 
     chart.pieArea.raySize = chart.pieArea.r*.7
     let raySize = chart.pieArea.raySize
@@ -351,10 +344,12 @@
       }
     }
 
+
+    // Creating pie slices
+    var pieInfo = pie(pieData)
+
     // Add pie make here
     if (storyData.interact.withIcon){
-      // Creating pie slices
-      var pieInfo = pie(pieData)
       // The clipping paths for the icons.
       chart.pieArea
         .selectAll("path")
@@ -414,16 +409,7 @@
           })
           .attr("y", (d, i)=>{return Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*raySize+(chart.bodyDim.h/2-d.width/2)})
     } else {
-      // chart.pieArea
-      //   .append("circle")
-      //   .attr("r", chart.pieArea.r)
-      //   .attr("cx", chart.bodyDim.w/2)
-      //   .attr("cy", chart.bodyDim.h/2)
-      //   .attr("fill", "red")
-      //   .style("opacity", .2)
-
       // Draw the pie slices.
-      // Removed the transition because it was showing black artifact ... probably from the fille...
       chart.pieArea
         .selectAll("path")
         // .remove().exit()
@@ -455,7 +441,7 @@
           .style("position", "absolute")
       }
     }
-    // this is responsible for the outline of the pie slices
+    // This is responsible for the outline of the pie slices
     chart.plotArea.append("g")
       .attr("class", "outline")
       .selectAll("path")
@@ -470,6 +456,8 @@
         .style("stroke", "black")
         .style("stroke-width", 3)
         .each(function(d) { this._current = d; })
+
+    // Highlights the slice being changed
     chart.highSlice = chart.plotArea.append("g")
       .attr("class", "highlight")
       .append("path").datum(pie(pieData)[1])
@@ -480,26 +468,47 @@
         .style("stroke-width", 3)
         .style("opacity", .4)
 
+    // Sets and arrow image pointing at pie slice being changed.
+    let pointerCoor = [Math.cos((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*(1)+chart.bodyDim.w/2-chart.arrowSize/2
+      , Math.sin((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
+    let pAngle = (pieInfo[1].endAngle-pieInfo[1].startAngle)/2 + pieInfo[1].startAngle
+    // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
+    chart.arrow = chart.plotArea.append("g")
+      .attr("class", "arrowPointer")
+      .append("image").attr("href", "modules/graphInteract/buttons/up.png")
+      .attr("width", chart.arrowSize).attr("height", chart.ArrowSize)
+        .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
+      .attr("x", (d, i)=>{
+        return pointerCoor[0]
+          // console.log("d", d, pieInfo[i])
+      })
+      .attr("y", (d, i)=>{return pointerCoor[1]})
+      // .attr("x", chart.bodyDim.w/2-storyData.interact.imageDim[1]/storyData.interact.imageDim[0]*chart.pieArea.r)
+      // .attr("y", chart.bodyDim.h/2-storyData.interact.imageDim[0]/storyData.interact.imageDim[1]*chart.pieArea.r)
+
   }
 
   function incSlice (isInc, inc){
     let pieData = storyData.interact.data
     let accessors = storyData.interact.accessors
-    if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(pieData.length-1)){
+    if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(100-pieData[chart.pieMin][accessors[1]])){
+    // if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(pieData.length-1)){
       editPie(true)
     } else if (!isInc && pieData[1][accessors[1]]>inc) {
       editPie(false)
     } else {
       return; }
     // probably a prettier way to do this, but just increasing or decreasing pie slices
+    // Right now get the percentage each pie slice against the remaining pie slices and inc/dec by that.
     function editPie(doInc){
       let incBy = doInc? inc:-inc
       let pieTestRange = changeAllSlices? pieData.length:3
       let decBy = incBy/(pieTestRange-1)
       for (let i = 0; i <pieTestRange; i++){
         if (i == 1){pieData[i][accessors[1]]+=incBy} else {
+          decBy = pieData[i][accessors[1]]/(100 - pieData[0][accessors[1]])*incBy
           pieData[i][accessors[1]]-=decBy
-          console.log("i", i, decBy)
+          console.log("i", i, pieData[i][accessors[1]])
         }
       }
     }
@@ -515,6 +524,18 @@
     var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
     var pieInfo = pie(pieData)
     console.log("newPi", pieInfo)
+
+
+    let pointerCoor = [Math.cos((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+chart.bodyDim.w/2-chart.arrowSize/2
+      , Math.sin((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
+    let pAngle = (pieInfo[1].endAngle-pieInfo[1].startAngle)/2 + pieInfo[1].startAngle
+    // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
+    chart.arrow
+      .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
+      .attr("x", (d, i)=>{
+        return pointerCoor[0]
+      })
+      .attr("y", (d, i)=>{return pointerCoor[1]})
 
     chart.pieArea.selectAll("path")
       .data(pie(pieData))
