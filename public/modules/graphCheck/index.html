@@ -1,0 +1,157 @@
+<div id="graphTitles">
+<div id="graphTTimer"></div>
+<p>
+Please select the titles that were included in the previous study session.
+</p>
+<table id="graphTitlesTable"></table><br>
+<div id="graphTText"></div>
+</div>
+
+
+
+<script>
+(function(){
+  let graphArray = []
+  let dropSel = []
+  let skip = true
+  let numPages = 3;
+  let pageInfo = [];
+  let graphCounter = 0
+  let lastGraph = false
+  let isValid = true;
+  let data = {}
+  let mod2 = []
+
+  let chartType = ["line", "pie", "bar"]
+
+  let fakeNames = ["Super Hero Abilities", "Fruit Popularity", "Roadtrip Popularity Throughout the Year", "Favorite Side Dishes",
+      "Top Browsers", "Grooming Time", "Halloween Candy Favorites", "Most Purchased Books", "Average University Enrollment at Texas A&M",
+      "Peak Marathon Season", "Minimum Wage Throughout the Years"]
+  let fakeNamesList = []
+  for (let i=0; i<fakeNames.length; i++){
+    fakeNamesList.push({title: fakeNames[i], chartType: chartType[Math.floor(Math.random()*2.99)]})
+  }
+
+  init()
+
+  function init(){
+    experimentr.startTimer('graphTitles');
+    d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
+      // grabbing data from image list and putting into an array.
+      for (let i in d){
+        dropSel.push(i)
+        for (let j=0; j<d[i].length; j++){
+          graphArray.push({chartType: i, title: d[i][j].title})
+        }
+      }
+      // Add the fake names
+      Array.prototype.push.apply(graphArray, fakeNamesList)
+      pageInfo = getCountPerPage(graphArray.length, numPages)
+      numPages = pageInfo[0]
+      // console.log("num", getCountPerPage(107, numPages))
+
+      console.log("graphArray", graphArray, dropSel)
+      // makeTable()
+      loadData()
+      if (!skip){
+        experimentr.hideNext()
+        experimentr.attachTimer('#graphTTimer', 20, function() {
+          // experimentr.showNext()
+          // validate();
+        });
+      } else {
+        validate()
+      }
+    })
+  }
+
+  function getCountPerPage(x, n){
+    let calcNum = x / n
+    // let nPerPage = calcNum.floor();
+    console.log("c", calcNum, numPages)
+    if (calcNum > 10){
+      console.log("c1", x%numPages, numPages/2)
+      if (x%n > n/2 || (calcNum - 10)>1){
+        return getCountPerPage(x, n+1)
+      } else {return [n, calcNum, x%n]}
+    } else if (calcNum < 5 && n!=1) {
+      console.log("c2")
+      if (x%n > n/2 || (5 - calcNum)>1){
+        return getCountPerPage(x, n-1)
+      } else {return [n, calcNum, x%n]}
+    } else {
+      console.log("c3", numPages)
+      return [n, calcNum, x%n];
+    }
+  }
+
+  function loadData(){
+    if (graphCounter == numPages-1){
+        lastGraph = true;
+    }
+    if (graphCounter > pageInfo[2]-1){
+      storyData = graphArray.slice(Math.floor(pageInfo[1])*graphCounter, Math.floor(pageInfo[1])*(graphCounter+1)-1);
+    } else {
+      storyData = graphArray.slice(Math.ceil(pageInfo[1])*graphCounter, Math.ceil(pageInfo[1])*(graphCounter+1)-1);
+    }
+    makeTable();
+  }
+
+  function makeTable(){
+    d3.select('#graphTitlesTable').selectAll("*").remove()
+    let tableBody = d3.select("#graphTitlesTable").append('tbody')
+    let rows = tableBody.selectAll("tr")
+      .data(storyData)
+      .enter().append("tr")
+      // .append("td").text(function (d) { return d.title; });
+    // need to make three things per row; radio button, text, dropdown
+    let rowRadio = rows.append('input')
+      .attr('type', 'checkbox')
+      .attr('value', (d)=>{return d.title})
+      .attr("class", "checkBox")
+      // .property("checked", true)
+      // .each(function(){console.log(this.checked)})
+      // .on("change", ()=>{
+      //   console.log(d3.select(this).property("checked"))
+      //   console.log(d3.select(this).node().checked)
+      // })
+    let rowText = rows
+      .append("td").text(function(d){return d.title})
+    // Was going to add an option selector for choosing what type of chart.
+    // let rowDrop = rows.append("select").selectAll("option")
+    //   .data(dropSel).enter().append("option").text(function(d){return d})
+    d3.select('#graphTText').selectAll("*").remove();
+    if (!lastGraph){
+      d3.select('#graphTText').append('button')
+        .attr('type', 'button')
+        .text('Next Graph')
+        .on('click',
+          function(d) {
+            diffGradeMeth();
+            if (isValid || skip){
+              graphCounter++;
+              loadData();
+            }
+          });
+    } else {
+      diffGradeMeth();
+      validate()
+      experimentr.showNext();
+    }
+  }
+
+  function validate(){
+    experimentr.endTimer('graphTitles');
+    data.mod2=mod2
+    experimentr.addData(data);
+    experimentr.release();
+  }
+  function diffGradeMeth(){
+    d3.selectAll(".checkBox").each(function(d){
+      if (this.checked)
+        mod2.push(this.value)
+    })
+  }
+
+}());
+</script>

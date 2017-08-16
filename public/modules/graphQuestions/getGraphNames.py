@@ -37,6 +37,9 @@ for j in data["pie"]:
 for j in data["bar"]:
     j["interact"]["dataPath"]="modules/graphInteract/csvFiles/bar_data_"+j["key"]+".csv"
 
+# for all the images!
+allImages = []
+
 # for i in data:
 #     for j in data[i]:
 #         apple=2
@@ -91,10 +94,12 @@ for x in fileNames:
                         if k in x:
                             print ("iCaught a : ", j["key"])
                             j["imagePath"][ind] = "modules/graphQuestions/graphImages/color/"+x
+                            allImages.append("modules/graphQuestions/graphImages/color/"+x)
                             # j["newPath"] = j["newPath"] + [x]
                 else:
                     print("notCaught: ", j["key"], x)
 
+# Getting interact files for lines
 inType = ("interact_01", "interact_02", "interact_03")
 #  For line interact files.
 for x in interactNames:
@@ -110,8 +115,10 @@ for x in interactNames:
                             j["interact"]["imagePath"].append("")
                             j["interact"]["imageDim"].append(tuple())
                             j["interact"]["withIcon"] = True
+                            # img = cv2.imread("./graphImages")
                         # print ("iCaught a : ", j["key"])
                         j["interact"]["imagePath"][ind] = "modules/graphQuestions/graphImages/interact/"+x
+                        allImages.append("modules/graphQuestions/graphImages/interact/"+x)
                         img = cv2.imread("./graphImages/interact/"+x,1)
                         print ("img", x)
                         # print (img)
@@ -120,6 +127,7 @@ for x in interactNames:
             else:
                 print("notCaught: ", j["key"], x)
 
+# pies!
 inType = ("interact_00", "interact_01", "interact_02", "interact_03", "interact_04")
 #  For line interact files.
 for x in interactNames:
@@ -131,11 +139,14 @@ for x in interactNames:
                 # https://stackoverflow.com/questions/15684605/python-for-loop-get-indexs
                 for ind, k in enumerate(inType):
                     if k in x:
+                        # getting the image dim for the first icon?
                         if ind == 0:
                             img = cv2.imread("./graphImages/interact/"+x,1)
                             # print ("img", x)
                             j["interact"]["imageDim"] = (img.shape[1], img.shape[0])
-                        j["interact"]["imagePath"].append({"path":"modules/graphQuestions/graphImages/interact/"+x})
+                        img = cv2.imread("./graphImages/interact/"+x, 1)
+                        j["interact"]["imagePath"].append({"path":"modules/graphQuestions/graphImages/interact/"+x, "iconDim":(img.shape[1], img.shape[0])})
+                        allImages.append("modules/graphQuestions/graphImages/interact/"+x)
                         if len(j["interact"]["colorArray"])!=0:
                             j["interact"]["withIcon"] = True
             else:
@@ -158,6 +169,7 @@ for x in interactNames:
                             # print ("img", x)
                             j["interact"]["imageDim"] = (img.shape[1], img.shape[0])
                         j["interact"]["imagePath"].append("modules/graphQuestions/graphImages/interact/"+x)
+                        allImages.append("modules/graphQuestions/graphImages/interact/"+x)
             else:
                 print("notCaught: ", j["key"], x)
 
@@ -178,4 +190,7 @@ pprint(data["line"][0]["imagePath"][2])
 # https://www.safaribooksonline.com/library/view/python-cookbook-3rd/9781449357337/ch06s02.html
 # Writing JSON data
 with open('data.json', 'w') as f:
-     json.dump(data, f)
+     json.dump(data, f, indent=4)
+
+with open('allImages.json', 'w') as aI:
+    json.dump(allImages, aI)

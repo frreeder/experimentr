@@ -29,6 +29,8 @@
   bodyDim.w = 850*perc[0]
   console.log("bod", bodyDim)
 
+  let pieEdit = 0;
+
   var data = {}
     , rand = Math.floor(Math.random()*3) // 0, 1, 2
     , graphCounter = 0
@@ -188,7 +190,8 @@
 
     chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
 
-    chart.bodyDim = {w: bodyDim.w, h: bodyDim.h}
+    chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
+    chart.arrowSize = bodyDim.w*.2
     chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*imgRat : chart.bodyDim.w;
     chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/imgRat;
     console.log("img", chart.bodyDim, imgRat)
@@ -212,7 +215,6 @@
       let buttonType = i==0? "up" : "down"
       let isInc = i==0
       d3.select('#interactButtons').append("button")
-        // .style("height", (100*(1-perc[1])).toString()+"%")
         .attr("class", "button1 "+buttonType)
         .on("click", ()=>{
           incBar(isInc, .01)
@@ -222,11 +224,6 @@
           chart.outline.style("opacity", 1)
           chart.timer = setTimeout(()=>{chart.outline.style("opacity", .2)}, 500)
         })
-        // .on("mouseup", ()=>{chart.outline.style("opacity", .2)})
-        // .append("img")
-        //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
-        //   .attr("class", "button1")
-        //   .style("height", "100%")
     }
 
     // Reminding you that bar width needs to be between 0 and 1.
@@ -259,6 +256,15 @@
       .attr('width', (chart.barWidth)*chart.bodyDim.w)
 
     mod4[graphCounter].value = chart.barWidth
+
+    // Since the images are hardcoded ... no y position to place arrow....will need to add arrow to image file or just cave in an make fully interactive...
+    // chart.arrowPointer = chart.append('image')
+    //   .attr('class', 'pointerArrow')
+    //   .attr('href', 'modules/graphInteract/buttons/left.png')
+    //   .attr('height', chart.arrowSize)
+    //   .attr('width', chart.arrowSize)
+    //   .attr('x', )
+
   }
 
   function incBar(isInc, step){
@@ -397,17 +403,61 @@
             var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
             var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
             // console.log("x", xChange, yChange)
-            d.width = clampThings(Math.sqrt(xChange+yChange)*raySize, imgCon.min, imgCon.max)
+            d.width = clampThings(Math.sqrt(xChange+yChange)*raySize*.8, imgCon.min, imgCon.max)
+            d.raySize = chart.pieArea.r - d.width*.65 -10
             // d.width = Math.min(Math.max(Math.sqrt(xChange+yChange)*raySize, imgCon.min), imgCon.max)
             // console.log("s", d.width, imgCon, Math.sqrt(xChange+yChange)*raySize, clampThings(Math.sqrt(xChange+yChange)*raySize, imgCon.min, imgCon.max))
             return d.width
           })
           .attr("height", (d, i)=>{return d.width})
           .attr("x", (d, i)=>{
-            return Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*raySize+chart.bodyDim.w/2-d.width/2
+            d.xPos = Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+chart.bodyDim.w/2-d.width/2
+            // return Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*raySize+chart.bodyDim.w/2-d.width/2
+            return d.xPos
               // console.log("d", d, pieInfo[i])
           })
-          .attr("y", (d, i)=>{return Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*raySize+(chart.bodyDim.h/2-d.width/2)})
+          .on("click", (d)=>{
+            pieEdit=pieEdit+1<3?pieEdit+1:0
+            console.log("de", pieEdit)
+          })
+          .attr("y", (d, i)=>{return d.yPos=Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+(chart.bodyDim.h/2-d.width/2)})
+          .call(d3.behavior.drag().on("drag", function(d){
+            console.log("dragging!", pieEdit)
+              d3.select(this).attr("x", (d)=>{return d3.event.x-d.width/2}).attr("y", (d)=>{return d3.event.y-d.width/2})
+            // if (pieEdit=0){
+            //   d3.select(this).attr("x", (d)=>{return d3.event.x-d.width/2}).attr("y", (d)=>{return d3.event.y-d.width/2})
+            // } else if (pieEdit=1){
+            //   d3.select(this)
+            //   .attr("width", (d)=>{
+            //     d.width-=.5
+            //     return d.width
+            //   })
+            //   .attr("height", (d)=>{
+            //     d.width-=.5
+            //     return d.width})
+            // } else {
+            //   d3.select(this)
+            //   .attr("width", (d)=>{
+            //     d.width+=.5
+            //     return d.width
+            //   })
+            //   .attr("height", (d)=>{
+            //     d.width+=.5
+            //     return d.width})
+            // }
+          }))
+        chart.plotArea.append("g")
+        .selectAll("circle")
+        .data(storyData.interact.imagePath)
+        .enter().append("circle").attr("cx", (d)=>{return d.xPos}).attr("cy", (d)=>{return d.yPos}).attr("r", 5)
+
+        chart.testCirc = chart.plotArea.append("g").attr("class","testCirc")
+          .selectAll("circle")
+          .data(storyData.interact.imagePath).enter().append("circle")
+          .attr("cx", (d)=>{return d.xPos+d.width/2})
+          .attr("cy", (d)=>{return d.yPos+d.width/2})
+          .attr("r", (d)=>{return d.width/2}).style("fill", "green")
+          .style("opacity", 0)
     } else {
       // Draw the pie slices.
       chart.pieArea
@@ -515,7 +565,6 @@
 
     // save the pieSlice value
     mod4[graphCounter].value = pieData[1][accessors[1]]
-    // console.log("slices", pieData[0][accessors[1]], pieData[1][accessors[1]])
 
     // create function to draw the arcs of the pie slices.
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
@@ -553,24 +602,28 @@
     // console.log("char", chart.plotArea.select(".icons").selectAll("image"), chart.plotArea.select(".outline").selectAll("path"))
     chart.plotArea.select(".icons")
       .selectAll("image")
-    // chart.pieArea.icons
-      // .data(storyData.interact.imagePath)
-      // .each(()=>{console.log("doing stuff")})
       .attr("width", (d, i)=>{
-        if (i<3){
+        // if (i<3){
           var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
           var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
-          d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize, chart.pieArea.imgCon.min, chart.pieArea.imgCon.max)
-        }
-        // console.log("d.w", d.width)
+          d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize*.8, chart.pieArea.imgCon.min, chart.pieArea.imgCon.max)
+          d.raySize = chart.pieArea.r - d.width*.65 -10
+          // console.log("rd", d.width, d.raySize, chart.pieArea.r)
+        // }
         return d.width
       })
       .attr("height", (d)=>{return d.width})
       .attr("x", (d, i)=>{
         // console.log("ray", chart.pieArea.raySize, Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize, d.width)
-        return Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize+chart.bodyDim.w/2-d.width/2
+        // return d.xPos = Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize+chart.bodyDim.w/2-d.width/2
+        return d.xPos = Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+chart.bodyDim.w/2-d.width/2
       })
-      .attr("y", (d, i)=>{return Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize+(chart.bodyDim.h/2-d.width/2)})
+      .attr("y", (d, i)=>{return d.yPos=Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+(chart.bodyDim.h/2-d.width/2)})
+
+    chart.testCirc
+      .attr("cx", (d)=>{return d.xPos+d.width/2})
+      .attr("cy", (d)=>{return d.yPos+d.width/2})
+      .attr("r", (d)=>{return d.width/2})
 
   }
 
@@ -592,13 +645,12 @@
     chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]) : chart.bodyDim.w;
     chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]);
 
-    // console.log("ptLoc", pointLoc)
     // Adding the chart svg
     chart
       .attr("height", perc[1]*100+"%").attr("width", perc[0]*100+"%")
       .attr("viewBox", "0 0 "+chart.bodyDim.w.toString()+" "+chart.bodyDim.h.toString())
     // Setting the margin
-    chart.margin = {top: chart.bodyDim.h*.05, right: chart.bodyDim.w*.1, bottom: chart.bodyDim.h*.05, left: chart.bodyDim.w*.1}
+    chart.margin = {top: chart.bodyDim.h*.01, right: chart.bodyDim.w*.01, bottom: chart.bodyDim.h*.01, left: chart.bodyDim.w*.01}
     // Adding buttons for changing the values
     for (let i =0; i<2; i++){
       let buttonType = i==0? "up" : "down"
@@ -610,11 +662,11 @@
           incPoint(isInc)
           clearTimeout(chart.timer);
           chart.highLine.style("opacity", "1")
-          chart.timer = setTimeout(()=>{chart.highLine.style("opacity", ".5")}, 500)
-        })
-        // .append("img")
-        //   .attr("src", "modules/graphInteract/buttons/"+buttonType+".png")
-        //   .style("height", "100%")
+          chart.lineDot.style("opacity", ".6")
+          chart.timer = setTimeout(()=>{
+            chart.highLine.style("opacity", ".5")
+            chart.lineDot.style("opacity", ".1")
+          }, 500)})
     }
     // Setting the plot area
     chart.plotArea = chart.append("g")
@@ -626,16 +678,23 @@
     chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]
     chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[0][1]/storyData.interact.imageDim[0][0] : chart.plotArea.height
 
-    // console.log("ww", chart.plotArea.width, chart.plotArea.height, chart.bodyDim.w, chart.bodyDim.h)
-    // console.log("ch", chart.plotArea.height, chart.plotArea.width, chart.margin)
-
     // Setting the scales for the x and y coordinate system
     // chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(0, chart.plotArea.width, chart.plotArea.width/(labelArray.length)));
-    chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(labelArray.length).map((d)=>{ return d / labelArray.length * chart.plotArea.width; }));
+    labelArray.push("end")
+    chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(labelArray.length).map((d)=>{
+      if (d==labelArray.length-1){
+        return chart.plotArea.width
+      } else {
+        return d / (labelArray.length-2) * (chart.plotArea.width-d / (labelArray.length-2)*storyData.interact.gridPadding[0]);
+      }
+    }));
+    // chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(labelArray.length).map((d)=>{ return d / (labelArray.length-1) * chart.plotArea.width; }));
     // console.log("sc", chart.xScale.domain(), chart.xScale.range(), d3.range(labelArray.length).map((d)=>{ return d / labelArray.length * chart.plotArea.width; }))
     chart.yScale = d3.scale.linear().range([chart.plotArea.height, 0])
-      .domain([0, 1.1*d3.max(storyData.interact.data, function(d) { return d[storyData.interact.accessors[1]]; })])
+      // .domain([0, 1.1*d3.max(storyData.interact.data, function(d) { return d[storyData.interact.accessors[1]]; })])
+      .domain([0, (storyData.interact.gridLines[1]+storyData.interact.gridPadding[1])*storyData.interact.yGridVal])
       .clamp(true)
+    console.log("do", chart.yScale.domain())
     storyData.interact.stepSize = chart.yScale.domain()[1]*stepSize
 
     // define the line function
@@ -653,6 +712,7 @@
     // If there is an icon, setting it to a percent of the chart plot area
     // Needs to be fixed...
     storyData.interact.iconDim = chart.plotArea.width/13
+    chart.iconDim = chart.plotArea.width/13
 
     // This is the background image / the top
     chart.plotArea.append("image")
@@ -685,17 +745,38 @@
       .style("opacity", .5)
 
 
+    chart.lineDot = chart.plotArea.append("g").append("circle")
+      .datum(chart.manipLines[1])
+      .attr("cx", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("cy", (d)=>{return chart.yScale(d[accessors[1]])})
+      .attr("r", 10)
+      .attr("fill", "yellow")
+      .style("opacity", 0.1)
+
+
+    // NEED ICON DIM!!!
     // this is the icon attached to the line chart if used... a bit buggy but I suspect it has something to do with the rotation point.
     if (storyData.interact.withIcon){
+      console.log("storyData.inte", storyData.interact)
+      let iconD = {w: storyData.interact.imageDim[2][0], h:storyData.interact.imageDim[2][1]}
+      let iconR = iconD.w/iconD.h
+      console.log("iD", iconD.w, iconD.h)
+      chart.iconD = {}
+      chart.iconD.w = iconR < 1 ? chart.iconDim * iconR :chart.iconDim
+      chart.iconD.h = iconR < 1 ? chart.iconDim : chart.iconDim * (1/iconR)
+      console.log("iD", chart.iconD)
+      // >storyData.interact.imageDim[3][1]?chart.iconDim/storyData.interact.imageDim[3][1]*storyData.interact.imageDim[3][0]:storyData.interact.imageDim[3][0]
       let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
-      let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])
-      let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-storyData.interact.iconDim
+      let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])-chart.iconD.w/2
+      let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-chart.iconD.h
       chart.plotArea.append("image")
           .attr("class", "icon")
-          .attr("width", storyData.interact.iconDim)
-          .attr("position", "center")
+          .attr("width", chart.iconD.w)
+          .attr("height", chart.iconD.h)
+          // .attr("position", "center")
           .attr("href", storyData.interact.imagePath[2])
-          .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
+          .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos+chart.iconD.w/2)+","+(yPos+chart.iconD.h)+")")
+          // .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
           .attr("x", xPos)
           .attr("y", yPos)
     }
@@ -718,12 +799,39 @@
 
     // Add gridlines
     // Need to add variable in information for these
-    let wLine = 2
-    let hLine = 5
+    // let wLine = 2
+    // let hLine = 3
+    // let mLine = 2
+    let wLine = storyData.interact.gridLines[0]
+    let hLine = storyData.interact.gridLines[1]
+    let mLine = storyData.interact.gridLines[2]
+    console.log(storyData.interact.gridLines)
     // Get the data to filter out widths by 2
     let wData = lineData.filter((d,i)=>{ return i%wLine == 0 })
+    // let wData = []
+    // for (let i=0; i<wLine+1; i++){
+    //   wData.push({col:storyData.interact.gridColor[0], xPos: chart.})
+    // }
+    // let hData = []
+    // for (let i = 0; i < hLine+1; i++){
+    //   hData.push({col: "black", yPos: chart.yScale.range()[0]/(hLine+1)*(i+1)})
+    //   for (let j = 0; j < mLine; j++){
+    //     hData.push({col: "grey", yPos: chart.yScale.range()[0]/(hLine+1)*(i)+chart.yScale.range()[0]/(hLine+1)/(mLine+1)*(j+1)})
+    //   }
+    // }
     // let hData = lineData.filter((d,i)=>{ return i%hLine == 0 })
-    let hData = new Array(hLine)
+    console.log(chart.yScale(storyData.interact.yGridVal))
+
+    let hData = []
+    for (let i = 0; i < hLine+1; i++){
+      // hData.push({col: storyData.interact.gridColor[0], yPos: chart.yScale.range()[0]/(hLine+1)*(i+1)})
+      hData.push({col: storyData.interact.gridColor[0], yPos: chart.plotArea.height-(i+1)*(chart.plotArea.height-chart.yScale(storyData.interact.yGridVal))})
+      for (let j = 0; j < mLine; j++){
+        // hData.push({col: storyData.interact.gridColor[1], yPos: chart.yScale.range()[0]/(hLine+1)*(i)+chart.yScale.range()[0]/(hLine+1)/(mLine+1)*(j+1)})
+        hData.push({col: storyData.interact.gridColor[1], yPos: chart.plotArea.height-(i)*(chart.plotArea.height-chart.yScale(storyData.interact.yGridVal))+(chart.plotArea.height-chart.yScale(storyData.interact.yGridVal))/(mLine+1)*(j+1)})
+      }
+    }
+    // let hData = new Array(hLine)
     chart.xGrid = chart.plotArea.append("g").attr("class", "xGrid")
       .selectAll("line")
       .data(wData)
@@ -732,17 +840,21 @@
       .attr("x2", (d)=>{return chart.xScale(d[accessors[0]])})
       .attr("y1", (d)=>{return chart.yScale.range()[1]})
       .attr("y2", (d)=>{return chart.yScale.range()[0]})
-      .style("stroke", "grey")
+      .style("stroke", storyData.interact.gridColor[0])
 
     chart.yGrid = chart.plotArea.append("g").attr("class", "yGrid")
       .selectAll("line")
       .data(hData)
       .enter().append("line")
+      // .attr("x1", (d)=>{return chart.xScale.range()[0]})
+      // .attr("x2", (d)=>{return chart.xScale(lineData[lineData.length-1][accessors[0]])})
+      // .attr("y1", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
+      // .attr("y2", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
       .attr("x1", (d)=>{return chart.xScale.range()[0]})
       .attr("x2", (d)=>{return chart.xScale(lineData[lineData.length-1][accessors[0]])})
-      .attr("y1", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
-      .attr("y2", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
-      .style("stroke", "grey")
+      .attr("y1", (d, i)=>{return d.yPos})
+      .attr("y2", (d, i)=>{return d.yPos})
+      .style("stroke", (d)=>{return d.col})
 
 
     // Adding rectangular border
@@ -781,53 +893,6 @@
       }
       experimentr.showNext();
     }
-    // only looking at one thing for now
-    // // for (let i=0; i<storyData.questionBank.length; i++){
-    // //   mod4[graphCounter].inputData.push({questionType: storyData.questionBank[i].key})
-    // //   var question = d3.select('#graphIVerification').append("g")
-    // //   question.append('p')
-    // //     .text(storyData.questionBank[i].question);
-    // //   var choices = question.selectAll('.choice')
-    // //     .data(storyData.questionBank[i].choices)
-    // //     .enter().append('div')
-    // //     .classed('choice', true);
-    // //   choices.append('input')
-    // //     .attr('type', 'radio')
-    // //     .attr('name', 'graphIVerification'+i.toString())
-    // //     .attr('value', function(d) { return d; });
-    // //   choices.append('label')
-    // //     .text(function(d) { return d; });
-    // //   d3.selectAll('input')
-    // //     .filter(function(d) {
-    // //       // console.log("i", i)
-    // //       return this.name === 'graphIVerification'+i.toString() ? this : null; })
-    // //     .on('change', function() {
-    // //       // console.log("i2", i)
-    // //       console.log(this.name, this.value, mod4[graphCounter].inputData[i], i)
-    // //       mod4[graphCounter].inputData[i].userAnswer = this.value
-    // //       // var validate = true;
-    // //       if (!isValid){
-    // //         // for (var inD in data.mod1[graphCounter].inputData){
-    // //         // isValid = true;
-    // //         for (let k=0; k<mod4[graphCounter].inputData.length; k++){
-    // //           var inD = mod4[graphCounter].inputData[k]
-    // //           // console.log("inData", inD, data.mod1[graphCounter].inputData)
-    // //           if (inD.userAnswer==null){
-    // //             isValid = false
-    // //             break;
-    // //           } else {
-    // //             isValid = true;
-    // //           }
-    // //         }
-    // //       }
-    // //       if (isValid || skip){
-    // //         // console.log("isValidated!!!")
-    // //         diffGradeMeth();
-    // //         if (lastGraph) validate();
-    // //         // data.graphIVerification = this.value; validate();
-    // //       }
-    // //     });
-    // }
   }
 
   function incPoint (isInc){
@@ -854,24 +919,31 @@
     }
 
     chart.highLine
-      // .datum(chart.manipLines)
       .attr("d", chart.lineFunc)
-        // .attr("x1", (d)=>{return chart.xScale(d.source[accessors[0]])})
-        // .attr("x2", (d)=>{return chart.xScale(d.target[accessors[0]])})
-        // .attr("y1", (d)=>{return chart.yScale(d.source[accessors[1]])})
-        // .attr("y2", (d)=>{return chart.yScale(d.target[accessors[1]])})
+
+    chart.lineDot
+      .attr("cx", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("cy", (d)=>{return chart.yScale(d[accessors[1]])})
 
     chart.plotArea.selectAll(".lineOutline")
       .datum(lineData)
       .attr("d", chart.lineFunc);
 
     if (storyData.interact.withIcon){
-      let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
-      let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])
-      let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-storyData.interact.iconDim
+    let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
+    let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])-chart.iconD.w/2
+    let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-chart.iconD.h
       chart.plotArea.selectAll(".icon")
-          .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
+          .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos+chart.iconD.w/2)+","+(yPos+chart.iconD.h)+")")
           .attr("y", yPos)
+          .attr("x", xPos)
+      // let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
+      // let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])-storyData.interact.iconDim/2
+      // let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-storyData.interact.iconDim
+      // chart.plotArea.selectAll(".icon")
+      //     .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos+storyData.interact.icondDim/2)+","+(yPos)+")")
+      //     .attr("y", yPos)
+      //     .attr("x", xPos)
     }
   }
 

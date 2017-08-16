@@ -16,7 +16,7 @@
           "key": "identify"
         },
         {
-          "question": "What year had a comparable amount of crabs caughe to 2006",
+          "question": "What year had a comparable amount of crabs caught to 2006",
           "choices": ["2010", "2007", "2008", "2001", "omit"],
           "answer": "2008",
           "key": "compare"
@@ -24,9 +24,14 @@
       ],
       "interact": {
           "withIcon": false,
+          "iconDim": [],
           "imagePath": [],
           "imageDim": [],
-          "pointLoc": 7
+          "pointLoc": 7,
+          "gridLines": [2, 5, 0],
+          "gridColor": ["grey", "grey"],
+          "gridPadding": [0,0],
+          "yGridVal": 25
       },
       "axesPath":{},
       "axesQuestions":[
@@ -68,9 +73,14 @@
       ],
       "interact": {
           "withIcon": false,
+          "iconDim": [],
           "imagePath": [],
           "imageDim": [],
-          "pointLoc": 3
+          "pointLoc": 3,
+          "gridLines": [0, 6, 0],
+          "gridColor": ["white", "white"],
+          "gridPadding": [0.2, 0],
+          "yGridVal": 0.1
       },
       "axesPath":{},
       "axesQuestions":[
@@ -112,9 +122,14 @@
       ],
       "interact": {
           "withIcon": false,
+          "iconDim": [],
           "imagePath": [],
           "imageDim": [],
-          "pointLoc": 10
+          "pointLoc": 10,
+          "gridLines": [2, 4, 2],
+          "gridColor": ["black", "grey"],
+          "gridPadding": [0, 0],
+          "yGridVal": 250
       },
       "axesPath":{},
       "axesQuestions":[
@@ -156,9 +171,14 @@
       ],
       "interact": {
           "withIcon": false,
+          "iconDim": [],
           "imagePath": [],
           "imageDim": [],
-          "pointLoc": 11
+          "pointLoc": 11,
+          "gridLines": [4, 4, 1],
+          "gridColor": ["black", "darkgrey"],
+          "gridPadding": [0,0.5],
+          "yGridVal": 1
       },
       "axesPath":{},
       "axesQuestions":[
@@ -200,9 +220,14 @@
       ],
       "interact": {
           "withIcon": false,
+          "iconDim": [],
           "imagePath": [],
           "imageDim": [],
-          "pointLoc": 9
+          "pointLoc": 9,
+          "gridLines": [2, 4, 0],
+          "gridColor": ["black", "grey"],
+          "gridPadding": [0,0],
+          "yGridVal": 5
       },
       "axesPath":{},
       "axesQuestions":[
@@ -244,9 +269,14 @@
       ],
       "interact": {
           "withIcon": false,
+          "iconDim": [],
           "imagePath": [],
           "imageDim": [],
-          "pointLoc": 4
+          "pointLoc": 4,
+          "gridLines": [2, 5, 0],
+          "gridColor": ["grey", "grey"],
+          "gridPadding": [0, 0.25],
+          "yGridVal": 1
       },
       "axesPath":{},
       "axesQuestions":[
@@ -290,6 +320,7 @@
       ],
       "interact": {
         "withIcon": true,
+        "iconDim": [],
         "imagePath": [],
         "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099"]
       },
@@ -333,6 +364,7 @@
       ],
       "interact": {
         "withIcon": false,
+        "iconDim": [],
         "imagePath": [],
         "colorArray": []
       },
@@ -376,6 +408,7 @@
       ],
       "interact": {
         "withIcon": false,
+        "iconDim": [],
         "imagePath": [],
         "colorArray": []
       },
@@ -419,6 +452,7 @@
       ],
       "interact": {
         "withIcon": true,
+        "iconDim": [],
         "imagePath": [],
         "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#cc33c9"]
       },
@@ -439,8 +473,8 @@
       ]
     },
     {
-      "title": "Top Internet Browsers, 2011",
-      "key": "topBrowser",
+      "title": "Where Do Robberies Occur?",
+      "key": "robbery",
       "imagePath": [
         "modules/graphQuestions/graphImages/color/pie_embellished_topBrowser.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
@@ -448,22 +482,23 @@
       ],
       "questionBank": [
         {
-          "question": "Which browser accounted for 28.4% of the total?",
-          "choices": ["Other", "Google Chrome", "Mozilla Firefox", "Internet Explorer", "omit"],
-          "answer": "Hair",
+          "question": "Which location accounts for the least amount of robbery occurrences?",
+          "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks", "I don’t know."],
+          "answer": "Banks",
           "key": "identify"
         },
         {
-          "question": "What browser had a percentage right below Google Chrome?",
-          "choices": ["Other", "Mozilla Firefox", "Internet Explorer", "omit"],
-          "answer": "Other",
+          "question": "Which location has the closest percentage of robbery occurrences to Residences?",
+          "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks", "I don’t know."],
+          "answer": "Banks",
           "key": "compare"
         }
       ],
       "interact": {
         "withIcon": true,
+        "iconDim": [],
         "imagePath": [],
-        "colorArray": ["#373ce1", "#1fb257", "#c400eb", "#e2ed32"]
+        "colorArray": ["#19aae5", "#e9b800", "#f8ebc6", "#00db98", "#f886b7"]
       },
       "axesPath":{},
       "axesQuestions":[
@@ -505,6 +540,7 @@
       ],
       "interact": {
         "withIcon": true,
+        "iconDim": [],
         "imagePath": [],
         "colorArray": ["#36a8e1", "#ff9900", "#3d9e27", "#dc3912"]
       },
