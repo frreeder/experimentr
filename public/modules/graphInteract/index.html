@@ -183,6 +183,37 @@
       .style('width', perc[0]*100+"%")
   }
 
+  // function makeFunBar(){
+  //   imgDim = storyData.interact.imageDim
+  //   imgRat = imgDim[0]/imgDim[1]
+  //
+  //   // Make the SVG
+  //   chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
+  //   // Set the dimensions
+  //   chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
+  //   chart.arrowSize = bodyDim.w * (1-.8-.05)
+  //   chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*imgRat : chart.bodyDim.w;
+  //   chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/imgRat;
+  //   // Update the SVG to match dimensions
+  //   chart
+  //     .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
+  //     .attr("preserveAspectRatio", "xMinYMax meet")
+  //     .attr('height', perc[1]*100+"%")
+  //     .attr('width', perc[0]*100+"%")
+  //
+  //   chart.yScale = d3.scaleBand()
+	// 		.range([0, chart.bodyDim.h)
+	// 		.padding(.3)
+  //
+  //   chart.barHeight = chart.yScale.bandWidth()
+  //
+  //   chart.chartArea = chart.append("g").selectAll("image")
+  //     .data(storyDAta.interact)
+  //
+  //   // The step will need to add half the height to properly center
+  //
+  // }
+
   function makeBar(){
     // temp
     imgDim = storyData.interact.imageDim
@@ -400,10 +431,13 @@
           // .style("width", 100)
           // .style("height", 100)
           .attr("width", (d,i)=>{
-            var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
-            var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
-            // console.log("x", xChange, yChange)
-            d.width = clampThings(Math.sqrt(xChange+yChange)*raySize*.8, imgCon.min, imgCon.max)
+            // Check if the angle is greater than 180
+            if (pieInfo[i].endAngle-pieInfo[i].startAngle<Math.PI){
+              var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
+              var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
+              // console.log("x", xChange, yChange)
+              d.width = clampThings(Math.sqrt(xChange+yChange)*raySize*.8, imgCon.min, imgCon.max)
+            } else {d.width = imgCon.max}
             d.raySize = chart.pieArea.r - d.width*.65 -10
             // d.width = Math.min(Math.max(Math.sqrt(xChange+yChange)*raySize, imgCon.min), imgCon.max)
             // console.log("s", d.width, imgCon, Math.sqrt(xChange+yChange)*raySize, clampThings(Math.sqrt(xChange+yChange)*raySize, imgCon.min, imgCon.max))
@@ -446,18 +480,18 @@
             //     return d.width})
             // }
           }))
-        chart.plotArea.append("g")
-        .selectAll("circle")
-        .data(storyData.interact.imagePath)
-        .enter().append("circle").attr("cx", (d)=>{return d.xPos}).attr("cy", (d)=>{return d.yPos}).attr("r", 5)
-
-        chart.testCirc = chart.plotArea.append("g").attr("class","testCirc")
-          .selectAll("circle")
-          .data(storyData.interact.imagePath).enter().append("circle")
-          .attr("cx", (d)=>{return d.xPos+d.width/2})
-          .attr("cy", (d)=>{return d.yPos+d.width/2})
-          .attr("r", (d)=>{return d.width/2}).style("fill", "green")
-          .style("opacity", 0)
+        // chart.plotArea.append("g")
+        // .selectAll("circle")
+        // .data(storyData.interact.imagePath)
+        // .enter().append("circle").attr("cx", (d)=>{return d.xPos}).attr("cy", (d)=>{return d.yPos}).attr("r", 5)
+        //
+        // chart.testCirc = chart.plotArea.append("g").attr("class","testCirc")
+        //   .selectAll("circle")
+        //   .data(storyData.interact.imagePath).enter().append("circle")
+        //   .attr("cx", (d)=>{return d.xPos+d.width/2})
+        //   .attr("cy", (d)=>{return d.yPos+d.width/2})
+        //   .attr("r", (d)=>{return d.width/2}).style("fill", "green")
+        //   .style("opacity", 0)
     } else {
       // Draw the pie slices.
       chart.pieArea
@@ -604,10 +638,14 @@
       .selectAll("image")
       .attr("width", (d, i)=>{
         // if (i<3){
-          var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
-          var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
-          d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize*.8, chart.pieArea.imgCon.min, chart.pieArea.imgCon.max)
-          d.raySize = chart.pieArea.r - d.width*.65 -10
+          // Check if the angle is greater than 180
+          console.log("m", pieInfo[i].endAngle-pieInfo[i].startAngle, Math.PI*2, (pieInfo[i].endAngle-pieInfo[i].startAngle)/Math.PI*180)
+          if (pieInfo[i].endAngle-pieInfo[i].startAngle<Math.PI){
+            var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
+            var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
+            d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize*.8, chart.pieArea.imgCon.min, chart.pieArea.imgCon.max)
+            d.raySize = chart.pieArea.r - d.width*.65 -10
+          }
           // console.log("rd", d.width, d.raySize, chart.pieArea.r)
         // }
         return d.width
@@ -620,10 +658,10 @@
       })
       .attr("y", (d, i)=>{return d.yPos=Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+(chart.bodyDim.h/2-d.width/2)})
 
-    chart.testCirc
-      .attr("cx", (d)=>{return d.xPos+d.width/2})
-      .attr("cy", (d)=>{return d.yPos+d.width/2})
-      .attr("r", (d)=>{return d.width/2})
+    // chart.testCirc
+    //   .attr("cx", (d)=>{return d.xPos+d.width/2})
+    //   .attr("cy", (d)=>{return d.yPos+d.width/2})
+    //   .attr("r", (d)=>{return d.width/2})
 
   }
 
