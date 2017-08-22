@@ -152,3 +152,9 @@ tr:nth-child(even) {
 tr:nth-child(even) {
     background-color: #B0C4DE;
 }
+
+.barOutline {
+  stroke: black;
+  stroke-width: 3;
+  fill: none;
+}

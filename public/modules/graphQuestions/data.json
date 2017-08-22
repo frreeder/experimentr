@@ -165,7 +165,7 @@
                     0.2,
                     0
                 ],
-                "yGridVal": 0.1,
+                "yGridVal": 4.5,
                 "dataPath": "modules/graphInteract/csvFiles/line_data_climateChange.csv"
             },
             "axesPath": {},
@@ -540,12 +540,12 @@
                 ],
                 "imageDim": [
                     [
-                        1390,
-                        998
+                        1388,
+                        995
                     ],
                     [
-                        1390,
-                        998
+                        1388,
+                        995
                     ]
                 ],
                 "pointLoc": 4,
@@ -637,36 +637,36 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_beauty.png",
                         "iconDim": [
-                            264,
-                            232
+                            361,
+                            361
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_beauty.png",
                         "iconDim": [
-                            200,
-                            257
+                            261,
+                            261
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_beauty.png",
                         "iconDim": [
-                            201,
-                            266
+                            292,
+                            292
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_beauty.png",
                         "iconDim": [
-                            261,
-                            156
+                            294,
+                            294
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_beauty.png",
                         "iconDim": [
-                            223,
-                            186
+                            272,
+                            272
                         ]
                     }
                 ],
@@ -679,8 +679,8 @@
                 ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_beauty.csv",
                 "imageDim": [
-                    264,
-                    232
+                    361,
+                    361
                 ]
             },
             "axesPath": {},
@@ -974,36 +974,36 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_starWars.png",
                         "iconDim": [
-                            435,
-                            671
+                            696,
+                            696
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_starWars.png",
                         "iconDim": [
-                            242,
-                            179
+                            277,
+                            277
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_starWars.png",
                         "iconDim": [
-                            292,
-                            271
+                            353,
+                            353
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_starWars.png",
                         "iconDim": [
-                            202,
-                            273
+                            321,
+                            321
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_starWars.png",
                         "iconDim": [
-                            170,
-                            195
+                            237,
+                            237
                         ]
                     }
                 ],
@@ -1016,8 +1016,8 @@
                 ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_starWars.csv",
                 "imageDim": [
-                    435,
-                    671
+                    696,
+                    696
                 ]
             },
             "axesPath": {},
@@ -1091,36 +1091,36 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_robbery.png",
                         "iconDim": [
-                            758,
-                            750
+                            862,
+                            862
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_robbery.png",
                         "iconDim": [
-                            800,
-                            647
+                            910,
+                            910
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_robbery.png",
                         "iconDim": [
-                            775,
-                            669
+                            915,
+                            915
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_robbery.png",
                         "iconDim": [
-                            486,
-                            800
+                            807,
+                            807
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_robbery.png",
                         "iconDim": [
-                            241,
-                            217
+                            287,
+                            286
                         ]
                     }
                 ],
@@ -1133,8 +1133,8 @@
                 ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_robbery.csv",
                 "imageDim": [
-                    758,
-                    750
+                    862,
+                    862
                 ]
             },
             "axesPath": {},
@@ -1206,8 +1206,8 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_womenWork.png",
                         "iconDim": [
-                            2400,
-                            1919
+                            2955,
+                            2955
                         ]
                     },
                     {
@@ -1220,15 +1220,15 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_womenWork.png",
                         "iconDim": [
-                            2400,
-                            1472
+                            2646,
+                            2646
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_womenWork.png",
                         "iconDim": [
-                            2295,
-                            2400
+                            2916,
+                            2928
                         ]
                     }
                 ],
@@ -1240,8 +1240,8 @@
                 ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_womenWork.csv",
                 "imageDim": [
-                    2400,
-                    1919
+                    2955,
+                    2955
                 ]
             },
             "axesPath": {},
@@ -1312,15 +1312,34 @@
             ],
             "interact": {
                 "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_artwork.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_01_artwork.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_02_artwork.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_03_artwork.png"
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_artwork.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_artwork.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_artwork.png"
                 ],
                 "imageDim": [
-                    1611,
-                    896
+                    1607,
+                    893
                 ],
-                "dataPath": "modules/graphInteract/csvFiles/bar_data_artwork.csv"
+                "dataPath": "modules/graphInteract/csvFiles/bar_data_artwork.csv",
+                "numBars": 5,
+                "selBar": 4,
+                "xGridStep": 30,
+                "xGridMax": 135,
+                "xGrid": [
+                    4,
+                    0
+                ],
+                "xGridCol": [
+                    "black",
+                    "black"
+                ],
+                "barDim": [
+                    1604,
+                    141
+                ]
             },
             "axesPath": {},
             "axesQuestions": [
@@ -1388,15 +1407,34 @@
             ],
             "interact": {
                 "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_majorSalaries.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_01_majorSalaries.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_02_majorSalaries.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_03_majorSalaries.png"
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_majorSalaries.png"
                 ],
                 "imageDim": [
-                    1768,
-                    1189
+                    1762,
+                    1182
                 ],
-                "dataPath": "modules/graphInteract/csvFiles/bar_data_majorSalaries.csv"
+                "dataPath": "modules/graphInteract/csvFiles/bar_data_majorSalaries.csv",
+                "numBars": 5,
+                "selBar": 2,
+                "xGridStep": 27500,
+                "xGridMax": 174200,
+                "xGrid": [
+                    6,
+                    0
+                ],
+                "xGridCol": [
+                    "grey",
+                    "grey"
+                ],
+                "barDim": [
+                    1763,
+                    189
+                ]
             },
             "axesPath": {},
             "axesQuestions": [
@@ -1464,15 +1502,34 @@
             ],
             "interact": {
                 "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_developers.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_01_developers.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_02_developers.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_03_developers.png"
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_developers.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_developers.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_developers.png"
                 ],
                 "imageDim": [
-                    1525,
-                    936
+                    1526,
+                    938
                 ],
-                "dataPath": "modules/graphInteract/csvFiles/bar_data_developers.csv"
+                "dataPath": "modules/graphInteract/csvFiles/bar_data_developers.csv",
+                "numBars": 5,
+                "selBar": 5,
+                "xGridStep": 25,
+                "xGridMax": 100,
+                "xGrid": [
+                    3,
+                    0
+                ],
+                "xGridCol": [
+                    "black",
+                    "black"
+                ],
+                "barDim": [
+                    1525,
+                    157
+                ]
             },
             "axesPath": {},
             "axesQuestions": [
@@ -1540,15 +1597,35 @@
             ],
             "interact": {
                 "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_olympics.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_01_olympics.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_02_olympics.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_03_olympics.png"
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_olympics.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_olympics.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_olympics.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_olympics.png"
                 ],
                 "imageDim": [
-                    1706,
-                    1068
+                    1702,
+                    1062
                 ],
-                "dataPath": "modules/graphInteract/csvFiles/bar_data_olympics.csv"
+                "dataPath": "modules/graphInteract/csvFiles/bar_data_olympics.csv",
+                "numBars": 6,
+                "selBar": 3,
+                "xGridStep": 10,
+                "xGridMax": 40,
+                "xGrid": [
+                    3,
+                    0
+                ],
+                "xGridCol": [
+                    "black",
+                    "black"
+                ],
+                "barDim": [
+                    1287,
+                    110
+                ]
             },
             "axesPath": {},
             "axesQuestions": [
@@ -1616,15 +1693,35 @@
             ],
             "interact": {
                 "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_themePark.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_01_themePark.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_02_themePark.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_03_themePark.png"
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_themePark.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_themePark.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_themePark.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_themePark.png"
                 ],
                 "imageDim": [
-                    1506,
-                    925
+                    1504,
+                    924
                 ],
-                "dataPath": "modules/graphInteract/csvFiles/bar_data_themePark.csv"
+                "dataPath": "modules/graphInteract/csvFiles/bar_data_themePark.csv",
+                "numBars": 6,
+                "selBar": 5,
+                "xGridStep": 5,
+                "xGridMax": 20,
+                "xGrid": [
+                    3,
+                    2
+                ],
+                "xGridCol": [
+                    "black",
+                    "grey"
+                ],
+                "barDim": [
+                    1506,
+                    110
+                ]
             },
             "axesPath": {},
             "axesQuestions": [
@@ -1692,15 +1789,35 @@
             ],
             "interact": {
                 "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_unemploymentRate.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_01_unemploymentRate.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_02_unemploymentRate.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_03_unemploymentRate.png"
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_unemploymentRate.png"
                 ],
                 "imageDim": [
-                    1865,
-                    1158
+                    1878,
+                    1168
                 ],
-                "dataPath": "modules/graphInteract/csvFiles/bar_data_unemploymentRate.csv"
+                "dataPath": "modules/graphInteract/csvFiles/bar_data_unemploymentRate.csv",
+                "numBars": 6,
+                "selBar": 1,
+                "xGridStep": 7.5,
+                "xGridMax": 30,
+                "xGrid": [
+                    7.5,
+                    0
+                ],
+                "xGridCol": [
+                    "grey",
+                    "grey"
+                ],
+                "barDim": [
+                    1340,
+                    111
+                ]
             },
             "axesPath": {},
             "axesQuestions": [

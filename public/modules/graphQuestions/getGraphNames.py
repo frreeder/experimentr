@@ -153,7 +153,7 @@ for x in interactNames:
                 print("notCaught: ", j["key"], x)
 
 # Getting the interact image files for the bars
-inType = ("interact_01", "interact_02", "interact_03")
+inType = ("interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06")
 #  For line interact files.
 for x in interactNames:
     # for i in graphTypes:
@@ -168,10 +168,15 @@ for x in interactNames:
                             img = cv2.imread("./graphImages/interact/"+x,1)
                             # print ("img", x)
                             j["interact"]["imageDim"] = (img.shape[1], img.shape[0])
+                        if ind == 1:
+                            img = cv2.imread("./graphImages/interact/"+x,1)
+                            j["interact"]["barDim"] = (img.shape[1], img.shape[0])
                         j["interact"]["imagePath"].append("modules/graphQuestions/graphImages/interact/"+x)
                         allImages.append("modules/graphQuestions/graphImages/interact/"+x)
             else:
                 print("notCaught: ", j["key"], x)
+for j in data[graphTypes[2]]:
+    j["interact"]["numBars"] = len(j["interact"]["imagePath"])-1
 
 
 

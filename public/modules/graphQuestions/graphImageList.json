@@ -80,7 +80,7 @@
           "gridLines": [0, 6, 0],
           "gridColor": ["white", "white"],
           "gridPadding": [0.2, 0],
-          "yGridVal": 0.1
+          "yGridVal": 4.5
       },
       "axesPath":{},
       "axesQuestions":[
@@ -587,7 +587,14 @@
       "interact": {
         "imagePath": [],
         "imageDim": [],
-        "dataPath": ""
+        "dataPath": "",
+        "numBars":0,
+        "selBar": 4,
+        "xGridStep":30,
+        "xGridMax": 135,
+        "xGrid": [4, 0],
+        "xGridCol": ["black", "black"],
+        "barDim": []
       },
       "axesPath":{},
       "axesQuestions":[
@@ -630,7 +637,14 @@
       "interact": {
         "imagePath": [],
         "imageDim": [],
-        "dataPath": ""
+        "dataPath": "",
+        "numBars":0,
+        "selBar": 2,
+        "xGridStep":27500,
+        "xGridMax": 174200,
+        "xGrid": [6, 0],
+        "xGridCol": ["grey", "grey"],
+        "barDim": []
       },
       "axesPath":{},
       "axesQuestions":[
@@ -673,7 +687,14 @@
       "interact": {
         "imagePath": [],
         "imageDim": [],
-        "dataPath": ""
+        "dataPath": "",
+        "numBars":0,
+        "selBar": 5,
+        "xGridStep":25,
+        "xGridMax": 100,
+        "xGrid": [3, 0],
+        "xGridCol": ["black", "black"],
+        "barDim": []
       },
       "axesPath":{},
       "axesQuestions":[
@@ -716,7 +737,14 @@
       "interact": {
         "imagePath": [],
         "imageDim": [],
-        "dataPath": ""
+        "dataPath": "",
+        "numBars":0,
+        "selBar": 3,
+        "xGridStep":10,
+        "xGridMax": 40,
+        "xGrid": [3, 0],
+        "xGridCol": ["black", "black"],
+        "barDim": []
       },
       "axesPath":{},
       "axesQuestions":[
@@ -759,7 +787,14 @@
       "interact": {
         "imagePath": [],
         "imageDim": [],
-        "dataPath": ""
+        "dataPath": "",
+        "numBars":0,
+        "selBar": 5,
+        "xGridStep":5,
+        "xGridMax": 20,
+        "xGrid": [3, 2],
+        "xGridCol": ["black", "grey"],
+        "barDim": []
       },
       "axesPath":{},
       "axesQuestions":[
@@ -802,7 +837,14 @@
       "interact": {
         "imagePath": [],
         "imageDim": [],
-        "dataPath": ""
+        "dataPath": "",
+        "numBars":0,
+        "selBar": 1,
+        "xGridStep":7.5,
+        "xGridMax": 30,
+        "xGrid": [7.5, 0],
+        "xGridCol": ["grey", "grey"],
+        "barDim": []
       },
       "axesPath":{},
       "axesQuestions":[
