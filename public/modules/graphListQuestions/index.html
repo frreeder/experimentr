@@ -60,6 +60,7 @@
   }
   function loadQuestion() {
     d3.select('#graphQInstructions').selectAll("*").remove();
+    d3.select('#graphQTitle').selectAll("*").remove();
     d3.select('#graphQTitle').append("strong").text(storyData.title)
     d3.select('#graphQInstructions').append("strong").text("Please answer the following questions based on your recall of the graphs from the first session.")
     d3.select('#graphQText').selectAll("*").remove();

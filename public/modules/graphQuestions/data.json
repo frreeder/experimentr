@@ -12,24 +12,24 @@
             ],
             "questionBank": [
                 {
-                    "question": "What year had the greatest amount of crabs caught",
+                    "question": "In the U.S., what year had the highest number of crabs caught?",
                     "choices": [
-                        "2010",
-                        "2003",
                         "2000",
+                        "2003",
                         "2005",
+                        "2010",
                         "omit"
                     ],
                     "answer": "2010",
                     "key": "identify"
                 },
                 {
-                    "question": "What year had a comparable amount of crabs caught to 2006",
+                    "question": "In what year was the amount of crabs caught in the U.S. closest to 2006?",
                     "choices": [
-                        "2010",
+                        "2001",
                         "2007",
                         "2008",
-                        "2001",
+                        "2010",
                         "omit"
                     ],
                     "answer": "2008",
@@ -73,28 +73,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
-                        "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Crabs in the Sea",
+                        "Crabs Caught",
+                        "Amount of Snickers Eaten",
+                        "U.S. Precipitation",
+                        "Poaching Crabs"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -110,7 +98,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What year had the least C02 Emissions?",
+                    "question": "In the U.S, which of the following years had the lowest C02 Emissions?",
                     "choices": [
                         "2000",
                         "2003",
@@ -122,7 +110,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "What year had a similar amount of C02 Emissions to 2002?",
+                    "question": "Which year had a similar amount of C02 Emissions to the U.S. in 2002?",
                     "choices": [
                         "2000",
                         "2004",
@@ -171,28 +159,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
-                        "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Nuclear Power Plant Discharge",
+                        "C02 Emissions",
+                        "Texas Weather",
+                        "Factories in the U.S.",
+                        "Pancakes Sales at IHOP"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -208,7 +184,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What year sold the least amount of units?",
+                    "question": "In which of the following years was the least amount of Ford F-Series Trucks Sold?",
                     "choices": [
                         "2009",
                         "2011",
@@ -220,15 +196,15 @@
                     "key": "identify"
                 },
                 {
-                    "question": "What years had a similar slope to 2009-11?",
+                    "question": "What year sold a similar amount of Ford F-Series Trucks to 2001?",
                     "choices": [
-                        "2004-06",
-                        "2001-02",
-                        "2002-04",
-                        "2005-07",
+                        "2000",
+                        "2002",
+                        "2004",
+                        "2010",
                         "omit"
                     ],
-                    "answer": "2002-04",
+                    "answer": "2004",
                     "key": "compare"
                 }
             ],
@@ -274,28 +250,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
-                        "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Ford's Sales Revenue",
+                        "Sale of Ford Trucks",
+                        "Ford's Stocks",
+                        "Grapefruit Production",
+                        "Average College Attendance"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -311,24 +275,24 @@
             ],
             "questionBank": [
                 {
-                    "question": "What month range contained a peak in gasoline price?",
+                    "question": "Which of the following prices is closes to the peak average gasoline price in the U.S. from June 2010 to June 2012?",
                     "choices": [
-                        "Feb2011-June2011",
-                        "Oct2012-Feb2012",
-                        "June2010-Oct2011",
-                        "Oct2011-Feb2011",
+                        "2.20$",
+                        "2.60$",
+                        "3.20$",
+                        "4.00$",
                         "omit"
                     ],
                     "answer": "",
                     "key": "identify"
                 },
                 {
-                    "question": "What month range was similar to Oct2011-Feb2011?",
+                    "question": "What month and year had a similar average gasoline price to October 2012 in the U.S.",
                     "choices": [
-                        "Oct2012-Feb2012",
-                        "June2010-Oct2011",
-                        "Feb2011-June2011",
-                        "Feb2012-June2012",
+                        "October 2011",
+                        "February 2011",
+                        "February 2012",
+                        "June2012",
                         "omit"
                     ],
                     "answer": "Feb2011-June2011",
@@ -372,28 +336,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Georgia's Peach Revenue",
+                        "Average Gasoline Prices",
+                        "Average Amount of Gas Purchased",
+                        "Hybrid Car Fuel Efficiency"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -409,19 +361,19 @@
             ],
             "questionBank": [
                 {
-                    "question": "What was the approximate amount of employment for 2002?",
+                    "question": "What is the lowest number of manufacturing employing in the U.S. from 2000-2010?",
                     "choices": [
-                        "5",
-                        "10",
-                        "15",
-                        "20",
+                        "5 milllion",
+                        "10 milllion",
+                        "15 milllion",
+                        "20 milllion",
                         "omit"
                     ],
                     "answer": "15",
                     "key": "identify"
                 },
                 {
-                    "question": "What year had a similar employment to 2004?",
+                    "question": "What year had a similar number of U.S. manufacturing employment to 2004?",
                     "choices": [
                         "2002",
                         "2006",
@@ -470,28 +422,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
-                        "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "U.S. Manufacturing",
+                        "Potato Sales",
+                        "Average Tweets",
+                        "C02 Emissions",
+                        "Factory Workers"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -507,19 +447,19 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the closest number of hours to the peak amount of hours?",
+                    "question": "In 2011 what was the highest average number of hours spent in traffic in the U.S.?",
                     "choices": [
-                        "2",
-                        "3",
-                        "4",
-                        "5",
+                        "3.6 hours",
+                        "4.0 hours",
+                        "4.4 hours",
+                        "4.8 hours",
                         "omit"
                     ],
                     "answer": "5",
                     "key": "identify"
                 },
                 {
-                    "question": "What month had a similar number of hours to June?",
+                    "question": "In 2011 what month had a similar average amount of hours spent in traffic to June?",
                     "choices": [
                         "August",
                         "November",
@@ -568,28 +508,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
-                        "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Freeway Congestion",
+                        "Rush Hour",
+                        "Distance Traveled to Work",
+                        "Smokey Mountain Visitors",
+                        "McDonald's Sales Revenue"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         }
@@ -607,7 +535,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which beauty product has a value of 32%?",
+                    "question": "Which of the following beauty products is purchased the most?",
                     "choices": [
                         "Hair Care",
                         "Toiletries",
@@ -618,7 +546,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which beauty product has a value similar to Fragrances?",
+                    "question": "Which beauty product is purchased about as much as Fragrances?",
                     "choices": [
                         "Hair Care",
                         "Toiletries",
@@ -686,28 +614,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
-                        "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Candy Being Sold",
+                        "Time Spent Getting Ready",
+                        "Beauty Products Being Sold",
+                        "Beauty Youtube Channels",
+                        "Favorite Movie Genres"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -723,7 +639,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the percent of Caramel deLites bought?",
+                    "question": "What is the percent of the lowest bought girl scout cookie?",
                     "choices": [
                         "25%",
                         "11%",
@@ -734,7 +650,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which cookie was bought less than Peanut Butter Patties?",
+                    "question": "Which cookie is closest to Peanut Butter Patties' percent of purchases?",
                     "choices": [
                         "Thin Mints",
                         "Caramel deLites",
@@ -796,7 +712,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -805,19 +721,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -833,7 +737,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which renewable energy source makes up 4.9% of the total?",
+                    "question": "Which renewable energy source accounts for the least of the total amount of renewable energy?",
                     "choices": [
                         "Wind Power",
                         "Sewage and Waste Bio",
@@ -845,7 +749,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which renewable energy source is closest in percent to Plant and Animal Bio?",
+                    "question": "Which renewable energy source is closest in the percentage of the total renewable energy to Plant and Bio?",
                     "choices": [
                         "Wind Power",
                         "Sewage and Waste Bio",
@@ -907,7 +811,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -916,19 +820,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -944,7 +836,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What percent does Box Office count for?",
+                    "question": "What is the highest percent of a revenue source for the total Star Wars revenue?",
                     "choices": [
                         "10.0%",
                         "17.3%",
@@ -955,7 +847,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which type of revenue was less than Video?",
+                    "question": "Which revenue source is closest to Video's percent of the total Star Wars revenue?",
                     "choices": [
                         "Books and Other",
                         "Box Office",
@@ -963,7 +855,7 @@
                         "Toys",
                         "omit"
                     ],
-                    "answer": "Books and Other",
+                    "answer": "Video Games",
                     "key": "compare"
                 }
             ],
@@ -1023,7 +915,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1032,19 +924,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -1140,7 +1020,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1149,19 +1029,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -1177,7 +1045,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What percent of women working does Professional and Management industry account for?",
+                    "question": "What is the percent of the industry that the most women work in?",
                     "choices": [
                         "40.6%",
                         "31.3%",
@@ -1247,7 +1115,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1256,19 +1124,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         }
@@ -1286,7 +1142,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What artwork was sold for the second highest price?",
+                    "question": "Which of the following artworks was sold for the highest amount?",
                     "choices": [
                         "Garrcon a la pipe",
                         "Nude, Green Leaves",
@@ -1344,7 +1200,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1353,19 +1209,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -1381,7 +1225,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the closest salary amount to Petroleum Engineering?",
+                    "question": "What is the approximate salary amount of the college undergraduate major with the highest salary?",
                     "choices": [
                         "165,000$",
                         "82,500$",
@@ -1393,7 +1237,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which major has a salary higher than Electrical Engineering and lower than Aerospace Engineering?",
+                    "question": "Which college undergraduate major has a salary similar to Computer Science?",
                     "choices": [
                         "Petroleum Engineering",
                         "Computer Science",
@@ -1439,28 +1283,16 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
+                        "Amount of Jobs in Industry",
+                        "Major Salaries",
                         "Overalls Club",
-                        "omit"
+                        "College Admittance"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -1476,7 +1308,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the second least used development platform?",
+                    "question": "What is the least used development platform?",
                     "choices": [
                         "Blackberry",
                         "Android",
@@ -1484,11 +1316,11 @@
                         "Flash",
                         "omit"
                     ],
-                    "answer": "Blackberry",
+                    "answer": "Flash",
                     "key": "identify"
                 },
                 {
-                    "question": "Which development platform has a lesser percent than Android and is greater than Windows Phone?",
+                    "question": "Which development platform is similar to Windows Phone's percent of developers using the platform?",
                     "choices": [
                         "Blackberry",
                         "Linux",
@@ -1534,7 +1366,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1543,19 +1375,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -1571,7 +1391,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which of the following values is closest to the percent viewership for Barcelona 1992?",
+                    "question": "Which of the following values is closest to the highest percent viewership for a given summer olympic year?",
                     "choices": [
                         "10%",
                         "30%",
@@ -1583,7 +1403,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which summer olympics had a similar percent viewership to Sydney 2000?",
+                    "question": "Which of the following summer olympics had a percent TV viewership closest to Sydney 2000?",
                     "choices": [
                         "Seoul 1998",
                         "Barcelona 1992",
@@ -1630,7 +1450,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1639,19 +1459,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -1726,7 +1534,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1735,19 +1543,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         },
@@ -1822,7 +1618,7 @@
             "axesPath": {},
             "axesQuestions": [
                 {
-                    "question": "What was the y-axis value?",
+                    "question": "Select the best description of the graph shown.",
                     "choices": [
                         "Rangers United",
                         "Pancake Allegience",
@@ -1831,19 +1627,7 @@
                         "omit"
                     ],
                     "answer": "2010",
-                    "key": "identify"
-                },
-                {
-                    "question": "Do we need second question?",
-                    "choices": [
-                        "Fo Sho",
-                        "Nah",
-                        "Maybe",
-                        "I Dunno",
-                        "omit"
-                    ],
-                    "answer": "2008",
-                    "key": "compare"
+                    "key": "description"
                 }
             ]
         }
