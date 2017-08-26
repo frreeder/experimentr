@@ -11,13 +11,13 @@
       "questionBank": [
         {
           "question": "In the U.S., what year had the highest number of crabs caught?",
-          "choices": ["2000", "2003", "2005", "2010", "omit"],
+          "choices": ["2000", "2003", "2005", "2010"],
           "answer": "2010",
           "key": "identify"
         },
         {
           "question": "In what year was the amount of crabs caught in the U.S. closest to 2006?",
-          "choices": ["2001", "2007", "2008", "2010", "omit"],
+          "choices": ["2001", "2007", "2008", "2010"],
           "answer": "2008",
           "key": "compare"
         }
@@ -38,6 +38,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Crabs in the Sea", "Crabs Caught", "Amount of Snickers Eaten", "U.S. Precipitation", "Poaching Crabs"],
+          "sortedChoices": {
+            "related":["Crabs in the Sea", "Crabs Caught", "Poaching Crabs"],
+            "unrelated": ["Amount of Snickers Eaten", "U.S. Precipitation", "Harnessing Fuel"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -54,13 +58,13 @@
       "questionBank": [
         {
           "question": "In the U.S, which of the following years had the lowest C02 Emissions?",
-          "choices": ["2000", "2003", "2001", "2005", "omit"],
+          "choices": ["2000", "2003", "2001", "2005"],
           "answer": "2003",
           "key": "identify"
         },
         {
           "question": "Which year had a similar amount of C02 Emissions to the U.S. in 2002?",
-          "choices": ["2000", "2004", "2003", "2001", "omit"],
+          "choices": ["2000", "2004", "2003", "2001"],
           "answer": "2001",
           "key": "compare"
         }
@@ -81,6 +85,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Nuclear Power Plant Discharge", "C02 Emissions", "Texas Weather", "Factories in the U.S.", "Pancakes Sales at IHOP"],
+          "sortedChoices": {
+            "related":["Nuclear Power Plant Discharge", "C02 Emissions", "Factories in the U.S."],
+            "unrelated": ["Texas Weather", "Newspaper Revenue", "Pancakes Sales"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -97,19 +105,20 @@
       "questionBank": [
         {
           "question": "In which of the following years was the least amount of Ford F-Series Trucks Sold?",
-          "choices": ["2009", "2011", "2001", "2003", "omit"],
+          "choices": ["2009", "2011", "2001", "2003"],
           "answer": "2009",
           "key": "identify"
         },
         {
           "question": "What year sold a similar amount of Ford F-Series Trucks to 2001?",
-          "choices": ["2000", "2002", "2004", "2010", "omit"],
+          "choices": ["2000", "2002", "2004", "2010"],
           "answer": "2004",
           "key": "compare"
         }
       ],
       "interact": {
           "withIcon": false,
+          "iconLoc": 3,
           "iconDim": [],
           "imagePath": [],
           "imageDim": [],
@@ -124,6 +133,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Ford's Sales Revenue", "Sale of Ford Trucks", "Ford's Stocks", "Grapefruit Production", "Average College Attendance"],
+          "sortedChoices": {
+            "related":["Ford's Sales Revenue", "Sale of Ford Trucks", "Ford's Stocks"],
+            "unrelated": ["Grapefruit Production", "Average College Attendance", "Pest Control"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -140,13 +153,13 @@
       "questionBank": [
         {
           "question": "Which of the following prices is closes to the peak average gasoline price in the U.S. from June 2010 to June 2012?",
-          "choices": ["2.20$", "2.60$", "3.20$", "4.00$", "omit"],
+          "choices": ["2.20$", "2.60$", "3.20$", "4.00$"],
           "answer": "",
           "key": "identify"
         },
         {
           "question": "What month and year had a similar average gasoline price to October 2012 in the U.S.",
-          "choices": ["October 2011", "February 2011", "February 2012", "June2012", "omit"],
+          "choices": ["October 2011", "February 2011", "February 2012", "June2012"],
           "answer": "Feb2011-June2011",
           "key": "compare"
         }
@@ -167,6 +180,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Georgia's Peach Revenue", "Average Gasoline Prices", "Average Amount of Gas Purchased", "Hybrid Car Fuel Efficiency"],
+          "sortedChoices": {
+            "related":["Average Gasoline Prices", "Average Amount of Gas Purchased", "Hybrid Car Fuel Efficiency"],
+            "unrelated": ["Georgia's Peach Revenue", "Apple Pie Production", "Gluten Free Menus"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -183,13 +200,13 @@
       "questionBank": [
         {
           "question": "What is the lowest number of manufacturing employing in the U.S. from 2000-2010?",
-          "choices": ["5 milllion", "10 milllion", "15 milllion", "20 milllion", "omit"],
+          "choices": ["5 milllion", "10 milllion", "15 milllion", "20 milllion"],
           "answer": "15",
           "key": "identify"
         },
         {
           "question": "What year had a similar number of U.S. manufacturing employment to 2004?",
-          "choices": ["2002", "2006", "2000", "2010", "omit"],
+          "choices": ["2002", "2006", "2000", "2010"],
           "answer": "2006",
           "key": "compare"
         }
@@ -210,6 +227,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["U.S. Manufacturing", "Potato Sales", "Average Tweets", "C02 Emissions", "Factory Workers"],
+          "sortedChoices": {
+            "related":["Union Workers", "U.S. Manufacturing", "U.S. Factories"],
+            "unrelated": ["Cookie Consumption", "Potato Sales", "Apricot Production"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -226,13 +247,13 @@
       "questionBank": [
         {
           "question": "In 2011 what was the highest average number of hours spent in traffic in the U.S.?",
-          "choices": ["3.6 hours", "4.0 hours", "4.4 hours", "4.8 hours", "omit"],
+          "choices": ["3.6 hours", "4.0 hours", "4.4 hours", "4.8 hours"],
           "answer": "5",
           "key": "identify"
         },
         {
           "question": "In 2011 what month had a similar average amount of hours spent in traffic to June?",
-          "choices": ["August", "November", "March", "January", "omit"],
+          "choices": ["August", "November", "March", "January"],
           "answer": "August",
           "key": "compare"
         }
@@ -253,6 +274,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Freeway Congestion", "Rush Hour", "Distance Traveled to Work", "Smokey Mountain Visitors", "McDonald's Sales Revenue"],
+          "sortedChoices": {
+            "related":["Union Workers", "U.S. Manufacturing", "U.S. Factories"],
+            "unrelated": ["Cookie Consumption", "Potato Sales", "Apricot Production"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -277,7 +302,7 @@
         },
         {
           "question": "Which beauty product is purchased about as much as Fragrances?",
-          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup", "omit"],
+          "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
           "answer": "Toiletries",
           "key": "compare"
         }
@@ -315,7 +340,7 @@
         },
         {
           "question": "Which cookie is closest to Peanut Butter Patties' percent of purchases?",
-          "choices": ["Thin Mints", "Caramel deLites", "Peanut Butter Sandwiches", "Other", "omit"],
+          "choices": ["Thin Mints", "Caramel deLites", "Peanut Butter Sandwiches", "Other"],
           "answer": "Peanut Butter Sandwiches",
           "key": "compare"
         }
@@ -330,7 +355,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -347,13 +372,13 @@
       "questionBank": [
         {
           "question": "Which renewable energy source accounts for the least of the total amount of renewable energy?",
-          "choices": ["Wind Power", "Sewage and Waste Bio", "Solar and Other Sources", "Hydro Electric", "omit"],
+          "choices": ["Wind Power", "Sewage and Waste Bio", "Solar and Other Sources", "Hydro Electric"],
           "answer": "Hydro Electric",
           "key": "identify"
         },
         {
           "question": "Which renewable energy source is closest in the percentage of the total renewable energy to Plant and Bio?",
-          "choices": ["Wind Power", "Sewage and Waste Bio", "Solar and Other Sources", "Hydro Electric", "omit"],
+          "choices": ["Wind Power", "Sewage and Waste Bio", "Solar and Other Sources", "Hydro Electric"],
           "answer": "Wind Power",
           "key": "compare"
         }
@@ -368,7 +393,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -391,7 +416,7 @@
         },
         {
           "question": "Which revenue source is closest to Video's percent of the total Star Wars revenue?",
-          "choices": ["Books and Other", "Box Office", "Video Games", "Toys", "omit"],
+          "choices": ["Books and Other", "Box Office", "Video Games", "Toys"],
           "answer": "Video Games",
           "key": "compare"
         }
@@ -406,7 +431,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -444,7 +469,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -467,7 +492,7 @@
         },
         {
           "question": "Which industry is closest in percent to Transportation and Other?",
-          "choices": ["Professional and Management", "Sales and Office", "Service and Retail", "omit"],
+          "choices": ["Professional and Management", "Sales and Office", "Service and Retail"],
           "answer": "Service and Retail",
           "key": "compare"
         }
@@ -482,7 +507,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -501,13 +526,13 @@
       "questionBank": [
         {
           "question": "Which of the following artworks was sold for the highest amount?",
-          "choices": ["Garrcon a la pipe", "Nude, Green Leaves", "Dora Maar au Chat", "The Scream", "omit"],
+          "choices": ["Garrcon a la pipe", "Nude, Green Leaves", "Dora Maar au Chat", "The Scream"],
           "answer": "The Scream",
           "key": "identify"
         },
         {
           "question": "Which artwork was sold for less than L'Homme qui Marche, I?",
-          "choices": ["Garrcon a la pipe", "Nude, Green Leaves", "Dora Maar au Chat", "The Scream", "omit"],
+          "choices": ["Garrcon a la pipe", "Nude, Green Leaves", "Dora Maar au Chat", "The Scream"],
           "answer": "Dora Maar au Chat",
           "key": "compare"
         }
@@ -528,7 +553,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -545,13 +570,13 @@
       "questionBank": [
         {
           "question": "What is the approximate salary amount of the college undergraduate major with the highest salary?",
-          "choices": ["165,000$", "82,500$", "137,500$", "27,500$", "omit"],
+          "choices": ["165,000$", "82,500$", "137,500$", "27,500$"],
           "answer": "165,000$",
           "key": "identify"
         },
         {
           "question": "Which college undergraduate major has a salary similar to Computer Science?",
-          "choices": ["Petroleum Engineering", "Computer Science", "Chemical Engineering", "Civil Engineering", "omit"],
+          "choices": ["Petroleum Engineering", "Computer Science", "Chemical Engineering", "Civil Engineering"],
           "answer": "Chemical Engineering",
           "key": "compare"
         }
@@ -589,13 +614,13 @@
       "questionBank": [
         {
           "question": "What is the least used development platform?",
-          "choices": ["Blackberry", "Android", "iOS", "Flash", "omit"],
+          "choices": ["Blackberry", "Android", "iOS", "Flash"],
           "answer": "Flash",
           "key": "identify"
         },
         {
           "question": "Which development platform is similar to Windows Phone's percent of developers using the platform?",
-          "choices": ["Blackberry", "Linux", "iOS", "Flash", "omit"],
+          "choices": ["Blackberry", "Linux", "iOS", "Flash"],
           "answer": "iOS",
           "key": "compare"
         }
@@ -616,7 +641,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -633,13 +658,13 @@
       "questionBank": [
         {
           "question": "Which of the following values is closest to the highest percent viewership for a given summer olympic year?",
-          "choices": ["10%", "30%", "35%", "25%", "omit"],
+          "choices": ["10%", "30%", "35%", "25%"],
           "answer": "30%",
           "key": "identify"
         },
         {
           "question": "Which of the following summer olympics had a percent TV viewership closest to Sydney 2000?",
-          "choices": ["Seoul 1998", "Barcelona 1992", "Beijing 2008", "Athens 2004", "omit"],
+          "choices": ["Seoul 1998", "Barcelona 1992", "Beijing 2008", "Athens 2004"],
           "answer": "Athens 2004",
           "key": "compare"
         }
@@ -660,7 +685,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Dolphins in Captivity", "U.S. Rainfall", "Olymipic TV", "Favorite Olyymics", "Top Grossing Olympics", ""],
           "answer": "2010",
           "key": "description"
         }
@@ -677,13 +702,13 @@
       "questionBank": [
         {
           "question": "Which theme park had the least attendance?",
-          "choices": ["Disneyland", "Universal Studios", "Animal Kingdom", "Ocean Park", "omit"],
+          "choices": ["Disneyland", "Universal Studios", "Animal Kingdom", "Ocean Park"],
           "answer": "Universal Studios",
           "key": "identify"
         },
         {
           "question": "Which theme park had an attendance amount less than Tokyo Disney Sea and greater than Ocean Park?",
-          "choices": ["Disneyland", "Universal Studios", "Animal Kingdom", "Ocean Park", "omit"],
+          "choices": ["Disneyland", "Universal Studios", "Animal Kingdom", "Ocean Park"],
           "answer": "Animal Kingdom",
           "key": "compare"
         }
@@ -704,7 +729,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }
@@ -721,13 +746,13 @@
       "questionBank": [
         {
           "question": "Which country had the highest unemployment rate?",
-          "choices": ["France", "Spain", "Germany", "Italy", "omit"],
+          "choices": ["France", "Spain", "Germany", "Italy"],
           "answer": "Spain",
           "key": "identify"
         },
         {
           "question": "Which country had a similar unemployment rate to Italy?",
-          "choices": ["Spain", "France", "Italy", "Portugal", "omit"],
+          "choices": ["Spain", "France", "Italy", "Portugal"],
           "answer": "France",
           "key": "compare"
         }
@@ -748,7 +773,7 @@
       "axesQuestions":[
         {
           "question": "Select the best description of the graph shown.",
-          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club", "omit"],
+          "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "answer": "2010",
           "key": "description"
         }

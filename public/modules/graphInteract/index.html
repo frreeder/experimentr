@@ -97,6 +97,8 @@
   init();
 
   function init() {
+
+    // console.log(d3.select("#inImage"))
     // data.mod1=[]
     experimentr.hideNext();
     experimentr.startTimer('graphInteract');
@@ -198,13 +200,16 @@
     // Set the dimensions
     chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
     console.log("bef", chart.bodyDim.w, chart.bodyDim.h, imgRat)
+    // This isn't really used, there might make the viewBox larger than it should be
+    // Arrow size is based on the height of left/right arrow
     chart.arrowSize = bodyDim.w * (1-.8-.05)
     chart.bodyDim.w = imgRat>0 ? chart.bodyDim.w : chart.bodyDim.h*imgRat;
     chart.bodyDim.h = imgRat>0 ? chart.bodyDim.w/imgRat : chart.bodyDim.h;
     console.log("aft", chart.bodyDim.w, chart.bodyDim.h)
     // Update the SVG to match dimensions
     chart
-      .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
+      // .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
+      .attr("viewBox", "0 0 "+(chart.bodyDim.w+chart.arrowSize).toString()+" "+(chart.bodyDim.h).toString())
       .attr("preserveAspectRatio", "xMinYMax meet")
       .attr('height', perc[1]*100+"%")
       .attr('width', perc[0]*100+"%")
@@ -222,6 +227,8 @@
     chart.barHeight = chart.yScale.rangeBand()
     // chart.selbarWidth = chart.xScale.domain()[1]/2
     barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2
+
+
 
     // Add the arrow based on the ...
     chart.append("image")
@@ -793,6 +800,7 @@
     let labelArray = storyData.interact.data.map((d)=>{return d[storyData.interact.accessors[0]]})
     let accessors = storyData.interact.accessors
     let lineData = storyData.interact.data
+    let tPoint = storyData.interact.pointLoc
     let pointLoc = typeof(storyData.interact.pointLoc)==='number'? clampThings(storyData.interact.pointLoc, 1, lineData.length-1) : (2<lineData.length-1? 2 : 1)
     storyData.interact.pointLoc = pointLoc
 
@@ -805,6 +813,42 @@
     chart.bodyDim = {w: bodyDim.w, h: bodyDim.h}
     chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]) : chart.bodyDim.w;
     chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]);
+
+    // Getting object array of points and weights to be manipulated
+    // Might be a more automated way.
+    // chart.manip = [{point: pointLoc==0?0:pointLoc, weight: pointLoc==0?1:(pointLoc==lineData.length-1?1:)}]
+    if (pointLoc == 0){
+      chart.manip = [{point: pointLoc, weight: 1}, {point: pointLoc+1, weight: .6}, {point: pointLoc+2, weight: .3}]
+    } else if (pointLoc == lineData.length-1){
+      chart.manip = [{point: pointLoc-2, weight: .3}, {point: pointLoc-1, weight: .6}, {point: pointLoc, weight: 1}]
+    } else {
+      chart.manip = [{point: pointLoc-1, weight: .5}, {point: pointLoc, weight: 1}, {point: pointLoc+1, weight: .5}]
+    }
+
+    chart.manip=[]
+    let infPoints = lineData.length<3?1:((lineData.length)%2==1?Math.floor(lineData.length/2):lineData.length/2+1)
+    console.log("infPoints", infPoints)
+    let a=new Array(2)
+    a[1]=(lineData.length-1)-tPoint
+    a[0]=tPoint-0
+    console.log("a",a, tPoint)
+    let test = a[0]<a[1]?0:1
+    if (a[test]<Math.floor(infPoints/2)){
+      a[test>0?0:1]=infPoints-1-a[test>0?1:0]
+    } else {
+      a=[Math.floor(infPoints/2),Math.floor(infPoints/2)]
+    }
+    for (let i=0; i<2; i++){
+      for (let j=0;j<a[i];j++){
+        if (i==0){
+          chart.manip.push({point:tPoint-(a[0]-j), weight:Math.exp(-.5*(a[0]-j))})
+        } else {
+          chart.manip.push({point:tPoint+(1+j), weight:Math.exp(-.5*(1+j))})
+        }
+      }
+      if (i==0){chart.manip.push({point:tPoint, weight:1})}
+    }
+    console.log("chart.m", chart.manip)
 
     // Adding the chart svg
     chart
@@ -875,6 +919,13 @@
     storyData.interact.iconDim = chart.plotArea.width/13
     chart.iconDim = chart.plotArea.width/13
 
+    // Setting the start location to halfs
+    let downBy = lineData[pointLoc][accessors[1]]-chart.yScale.domain()[1]/2
+    console.log("downBy", downBy, lineData[pointLoc], chart.manip)
+    for (let i=0; i<=chart.manip.length-1;i++){
+      lineData[chart.manip[i].point][accessors[1]]-=downBy*chart.manip[i].weight
+    }
+
     // This is the background image / the top
     chart.plotArea.append("image")
         .attr("class", "clip-svg2")
@@ -895,7 +946,9 @@
       .attr("class", "lineOutline")
       .attr("d", chart.lineFunc)
 
+    // This is why pointLoc can't be = 0, clamps end but not beginning...
     chart.manipLines = storyData.interact.data.slice(pointLoc-1, pointLoc+2)
+    // console.log("cM", chart.man)
 
     chart.highLine = chart.plotArea.append("g").append("path")
       .datum(chart.manipLines)
@@ -926,6 +979,8 @@
       chart.iconD.w = iconR < 1 ? chart.iconDim * iconR :chart.iconDim
       chart.iconD.h = iconR < 1 ? chart.iconDim : chart.iconDim * (1/iconR)
       console.log("iD", chart.iconD)
+      pointLoc = storyData.interact.iconLoc >= 1?storyData.interact.iconLoc:1
+      storyData.interact.iconLoc = pointLoc
       // >storyData.interact.imageDim[3][1]?chart.iconDim/storyData.interact.imageDim[3][1]*storyData.interact.imageDim[3][0]:storyData.interact.imageDim[3][0]
       let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
       let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])-chart.iconD.w/2
@@ -1062,9 +1117,14 @@
     let accessors = storyData.interact.accessors
     let inc = storyData.interact.stepSize
     let pointLoc = storyData.interact.pointLoc
-    if (isInc){
-      lineData[pointLoc][accessors[1]]+=inc
-    } else {lineData[pointLoc][accessors[1]]-=inc}
+    // if (isInc){
+    //   lineData[pointLoc][accessors[1]]+=inc
+    // } else {lineData[pointLoc][accessors[1]]-=inc}
+    for (let i=0;i<=chart.manip.length-1; i++){
+      // console.log("p", chart.manip[i].point)
+      if (isInc){lineData[chart.manip[i].point][accessors[1]]+=inc*chart.manip[i].weight} else {
+        lineData[chart.manip[i].point][accessors[1]]-=inc*chart.manip[i].weight}
+    }
 
     // saving value
     mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
@@ -1092,6 +1152,7 @@
       .attr("d", chart.lineFunc);
 
     if (storyData.interact.withIcon){
+    pointLoc = storyData.interact.iconLoc
     let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
     let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])-chart.iconD.w/2
     let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-chart.iconD.h

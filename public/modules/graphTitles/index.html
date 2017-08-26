@@ -13,7 +13,7 @@ Please select the titles that were included in the previous study session.
 (function(){
   let graphArray = []
   let dropSel = []
-  let skip = true
+  let skip = false
   let numPages = 3;
   let pageInfo = [];
   let graphCounter = 0
@@ -34,6 +34,10 @@ Please select the titles that were included in the previous study session.
 
   init()
 
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   function init(){
     experimentr.startTimer('graphTitles');
     d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
@@ -46,6 +50,13 @@ Please select the titles that were included in the previous study session.
       }
       // Add the fake names
       Array.prototype.push.apply(graphArray, fakeNamesList)
+      for (let i=0; i<graphArray.length; i++){
+          let j = getRandomInt(i, graphArray.length)
+          let tempI = graphArray[i]
+          graphArray[i]=graphArray[j]
+          graphArray[j]=tempI
+      }
+      // n, calcNum, x%n
       pageInfo = getCountPerPage(graphArray.length, numPages)
       numPages = pageInfo[0]
       // console.log("num", getCountPerPage(107, numPages))
@@ -55,10 +66,10 @@ Please select the titles that were included in the previous study session.
       loadData()
       if (!skip){
         experimentr.hideNext()
-        experimentr.attachTimer('#graphTTimer', 20, function() {
-          // experimentr.showNext()
-          // validate();
-        });
+        // experimentr.attachTimer('#graphTTimer', 20, function() {
+        //   // experimentr.showNext()
+        //   // validate();
+        // });
       } else {
         validate()
       }

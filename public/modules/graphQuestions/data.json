@@ -17,8 +17,7 @@
                         "2000",
                         "2003",
                         "2005",
-                        "2010",
-                        "omit"
+                        "2010"
                     ],
                     "answer": "2010",
                     "key": "identify"
@@ -29,8 +28,7 @@
                         "2001",
                         "2007",
                         "2008",
-                        "2010",
-                        "omit"
+                        "2010"
                     ],
                     "answer": "2008",
                     "key": "compare"
@@ -81,6 +79,18 @@
                         "U.S. Precipitation",
                         "Poaching Crabs"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Crabs in the Sea",
+                            "Crabs Caught",
+                            "Poaching Crabs"
+                        ],
+                        "unrelated": [
+                            "Amount of Snickers Eaten",
+                            "U.S. Precipitation",
+                            "Harnessing Fuel"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -103,8 +113,7 @@
                         "2000",
                         "2003",
                         "2001",
-                        "2005",
-                        "omit"
+                        "2005"
                     ],
                     "answer": "2003",
                     "key": "identify"
@@ -115,8 +124,7 @@
                         "2000",
                         "2004",
                         "2003",
-                        "2001",
-                        "omit"
+                        "2001"
                     ],
                     "answer": "2001",
                     "key": "compare"
@@ -167,6 +175,18 @@
                         "Factories in the U.S.",
                         "Pancakes Sales at IHOP"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Nuclear Power Plant Discharge",
+                            "C02 Emissions",
+                            "Factories in the U.S."
+                        ],
+                        "unrelated": [
+                            "Texas Weather",
+                            "Newspaper Revenue",
+                            "Pancakes Sales"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -189,8 +209,7 @@
                         "2009",
                         "2011",
                         "2001",
-                        "2003",
-                        "omit"
+                        "2003"
                     ],
                     "answer": "2009",
                     "key": "identify"
@@ -201,8 +220,7 @@
                         "2000",
                         "2002",
                         "2004",
-                        "2010",
-                        "omit"
+                        "2010"
                     ],
                     "answer": "2004",
                     "key": "compare"
@@ -210,6 +228,7 @@
             ],
             "interact": {
                 "withIcon": true,
+                "iconLoc": 3,
                 "iconDim": [],
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_01_fordFSeries.png",
@@ -258,6 +277,18 @@
                         "Grapefruit Production",
                         "Average College Attendance"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Ford's Sales Revenue",
+                            "Sale of Ford Trucks",
+                            "Ford's Stocks"
+                        ],
+                        "unrelated": [
+                            "Grapefruit Production",
+                            "Average College Attendance",
+                            "Pest Control"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -280,8 +311,7 @@
                         "2.20$",
                         "2.60$",
                         "3.20$",
-                        "4.00$",
-                        "omit"
+                        "4.00$"
                     ],
                     "answer": "",
                     "key": "identify"
@@ -292,8 +322,7 @@
                         "October 2011",
                         "February 2011",
                         "February 2012",
-                        "June2012",
-                        "omit"
+                        "June2012"
                     ],
                     "answer": "Feb2011-June2011",
                     "key": "compare"
@@ -344,6 +373,18 @@
                         "Average Amount of Gas Purchased",
                         "Hybrid Car Fuel Efficiency"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Average Gasoline Prices",
+                            "Average Amount of Gas Purchased",
+                            "Hybrid Car Fuel Efficiency"
+                        ],
+                        "unrelated": [
+                            "Georgia's Peach Revenue",
+                            "Apple Pie Production",
+                            "Gluten Free Menus"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -366,8 +407,7 @@
                         "5 milllion",
                         "10 milllion",
                         "15 milllion",
-                        "20 milllion",
-                        "omit"
+                        "20 milllion"
                     ],
                     "answer": "15",
                     "key": "identify"
@@ -378,8 +418,7 @@
                         "2002",
                         "2006",
                         "2000",
-                        "2010",
-                        "omit"
+                        "2010"
                     ],
                     "answer": "2006",
                     "key": "compare"
@@ -430,6 +469,18 @@
                         "C02 Emissions",
                         "Factory Workers"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Union Workers",
+                            "U.S. Manufacturing",
+                            "U.S. Factories"
+                        ],
+                        "unrelated": [
+                            "Cookie Consumption",
+                            "Potato Sales",
+                            "Apricot Production"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -452,8 +503,7 @@
                         "3.6 hours",
                         "4.0 hours",
                         "4.4 hours",
-                        "4.8 hours",
-                        "omit"
+                        "4.8 hours"
                     ],
                     "answer": "5",
                     "key": "identify"
@@ -464,8 +514,7 @@
                         "August",
                         "November",
                         "March",
-                        "January",
-                        "omit"
+                        "January"
                     ],
                     "answer": "August",
                     "key": "compare"
@@ -516,6 +565,18 @@
                         "Smokey Mountain Visitors",
                         "McDonald's Sales Revenue"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Union Workers",
+                            "U.S. Manufacturing",
+                            "U.S. Factories"
+                        ],
+                        "unrelated": [
+                            "Cookie Consumption",
+                            "Potato Sales",
+                            "Apricot Production"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -551,8 +612,7 @@
                         "Hair Care",
                         "Toiletries",
                         "Skin Care",
-                        "Makeup",
-                        "omit"
+                        "Makeup"
                     ],
                     "answer": "Toiletries",
                     "key": "compare"
@@ -655,8 +715,7 @@
                         "Thin Mints",
                         "Caramel deLites",
                         "Peanut Butter Sandwiches",
-                        "Other",
-                        "omit"
+                        "Other"
                     ],
                     "answer": "Peanut Butter Sandwiches",
                     "key": "compare"
@@ -717,8 +776,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -742,8 +800,7 @@
                         "Wind Power",
                         "Sewage and Waste Bio",
                         "Solar and Other Sources",
-                        "Hydro Electric",
-                        "omit"
+                        "Hydro Electric"
                     ],
                     "answer": "Hydro Electric",
                     "key": "identify"
@@ -754,8 +811,7 @@
                         "Wind Power",
                         "Sewage and Waste Bio",
                         "Solar and Other Sources",
-                        "Hydro Electric",
-                        "omit"
+                        "Hydro Electric"
                     ],
                     "answer": "Wind Power",
                     "key": "compare"
@@ -816,8 +872,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -852,8 +907,7 @@
                         "Books and Other",
                         "Box Office",
                         "Video Games",
-                        "Toys",
-                        "omit"
+                        "Toys"
                     ],
                     "answer": "Video Games",
                     "key": "compare"
@@ -920,8 +974,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -1025,8 +1078,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -1060,8 +1112,7 @@
                     "choices": [
                         "Professional and Management",
                         "Sales and Office",
-                        "Service and Retail",
-                        "omit"
+                        "Service and Retail"
                     ],
                     "answer": "Service and Retail",
                     "key": "compare"
@@ -1120,8 +1171,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -1147,8 +1197,7 @@
                         "Garrcon a la pipe",
                         "Nude, Green Leaves",
                         "Dora Maar au Chat",
-                        "The Scream",
-                        "omit"
+                        "The Scream"
                     ],
                     "answer": "The Scream",
                     "key": "identify"
@@ -1159,8 +1208,7 @@
                         "Garrcon a la pipe",
                         "Nude, Green Leaves",
                         "Dora Maar au Chat",
-                        "The Scream",
-                        "omit"
+                        "The Scream"
                     ],
                     "answer": "Dora Maar au Chat",
                     "key": "compare"
@@ -1205,8 +1253,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -1230,8 +1277,7 @@
                         "165,000$",
                         "82,500$",
                         "137,500$",
-                        "27,500$",
-                        "omit"
+                        "27,500$"
                     ],
                     "answer": "165,000$",
                     "key": "identify"
@@ -1242,8 +1288,7 @@
                         "Petroleum Engineering",
                         "Computer Science",
                         "Chemical Engineering",
-                        "Civil Engineering",
-                        "omit"
+                        "Civil Engineering"
                     ],
                     "answer": "Chemical Engineering",
                     "key": "compare"
@@ -1313,8 +1358,7 @@
                         "Blackberry",
                         "Android",
                         "iOS",
-                        "Flash",
-                        "omit"
+                        "Flash"
                     ],
                     "answer": "Flash",
                     "key": "identify"
@@ -1325,8 +1369,7 @@
                         "Blackberry",
                         "Linux",
                         "iOS",
-                        "Flash",
-                        "omit"
+                        "Flash"
                     ],
                     "answer": "iOS",
                     "key": "compare"
@@ -1371,8 +1414,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -1396,8 +1438,7 @@
                         "10%",
                         "30%",
                         "35%",
-                        "25%",
-                        "omit"
+                        "25%"
                     ],
                     "answer": "30%",
                     "key": "identify"
@@ -1408,8 +1449,7 @@
                         "Seoul 1998",
                         "Barcelona 1992",
                         "Beijing 2008",
-                        "Athens 2004",
-                        "omit"
+                        "Athens 2004"
                     ],
                     "answer": "Athens 2004",
                     "key": "compare"
@@ -1452,11 +1492,12 @@
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
-                        "Rangers United",
-                        "Pancake Allegience",
-                        "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Dolphins in Captivity",
+                        "U.S. Rainfall",
+                        "Olymipic TV",
+                        "Favorite Olyymics",
+                        "Top Grossing Olympics",
+                        ""
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -1480,8 +1521,7 @@
                         "Disneyland",
                         "Universal Studios",
                         "Animal Kingdom",
-                        "Ocean Park",
-                        "omit"
+                        "Ocean Park"
                     ],
                     "answer": "Universal Studios",
                     "key": "identify"
@@ -1492,8 +1532,7 @@
                         "Disneyland",
                         "Universal Studios",
                         "Animal Kingdom",
-                        "Ocean Park",
-                        "omit"
+                        "Ocean Park"
                     ],
                     "answer": "Animal Kingdom",
                     "key": "compare"
@@ -1539,8 +1578,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
@@ -1564,8 +1602,7 @@
                         "France",
                         "Spain",
                         "Germany",
-                        "Italy",
-                        "omit"
+                        "Italy"
                     ],
                     "answer": "Spain",
                     "key": "identify"
@@ -1576,8 +1613,7 @@
                         "Spain",
                         "France",
                         "Italy",
-                        "Portugal",
-                        "omit"
+                        "Portugal"
                     ],
                     "answer": "France",
                     "key": "compare"
@@ -1623,8 +1659,7 @@
                         "Rangers United",
                         "Pancake Allegience",
                         "Real Answer",
-                        "Overalls Club",
-                        "omit"
+                        "Overalls Club"
                     ],
                     "answer": "2010",
                     "key": "description"
