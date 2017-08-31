@@ -275,8 +275,8 @@
           "question": "Select the best description of the graph shown.",
           "choices": ["Freeway Congestion", "Rush Hour", "Distance Traveled to Work", "Smokey Mountain Visitors", "McDonald's Sales Revenue"],
           "sortedChoices": {
-            "related":["Union Workers", "U.S. Manufacturing", "U.S. Factories"],
-            "unrelated": ["Cookie Consumption", "Potato Sales", "Apricot Production"]
+            "related":["Freeway Congestion", "Rush Hour", "Commute Time"],
+            "unrelated": ["Banana Pudding Sales", "Cable Viewership", "Heat Index"]
           },
           "answer": "2010",
           "key": "description"
@@ -318,6 +318,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Candy Being Sold", "Time Spent Getting Ready", "Beauty Products Being Sold", "Beauty Youtube Channels", "Favorite Movie Genres"],
+          "sortedChoices": {
+            "related":["Morning Routine", "Beauty Product Sales", "Youtube Beauty Channels"],
+            "unrelated": ["Candy Sales", "Mall Revenue", "Pokemon Favorites"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -356,6 +360,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Favorite Cookies", "Cookie Price", "Cookie Calories"],
+            "unrelated": ["Favorite Costumed Heroes", "Linkin Park Fans", "Ninja Turtle Ranking"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -394,6 +402,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Crabs in the Sea", "Crabs Caught", "Poaching Crabs"],
+            "unrelated": ["Amount of Snickers Eaten", "U.S. Precipitation", "Harnessing Fuel"]
+          },
           "answer": "2010",
           "key": "description"
         }

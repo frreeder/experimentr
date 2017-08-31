@@ -22,7 +22,7 @@ for i in data:
 # Adding an imagePath for the lines
 for j in data["line"]:
     j["interact"]["imagePath"]=["modules/graphQuestions/graphImages/color/rangerPoseGreen.png"] * 2
-    j["interact"]["imageDim"]=[tuple()]*2
+    # j["interact"]["imageDim"]=[tuple()]*2
     j["interact"]["withIcon"]= False
     j["interact"]["dataPath"]="modules/graphInteract/csvFiles/line_data_"+j["key"]+".csv"
 
@@ -111,9 +111,13 @@ for x in interactNames:
                 # https://stackoverflow.com/questions/15684605/python-for-loop-get-indexs
                 for ind, k in enumerate(inType):
                     if k in x:
+                        img = cv2.imread("./graphImages/interact/"+x,1)
+                        if ind == 0:
+                            j["interact"]["imageDim"]= (img.shape[1], img.shape[0])
                         if ind > 1:
                             j["interact"]["imagePath"].append("")
-                            j["interact"]["imageDim"].append(tuple())
+                            j["interact"]["iconDim"] = (img.shape[1], img.shape[0])
+                            # j["interact"]["imageDim"].append(tuple())
                             j["interact"]["withIcon"] = True
                             # img = cv2.imread("./graphImages")
                         # print ("iCaught a : ", j["key"])
@@ -122,7 +126,6 @@ for x in interactNames:
                         img = cv2.imread("./graphImages/interact/"+x,1)
                         print ("img", x)
                         # print (img)
-                        j["interact"]["imageDim"][ind] = (img.shape[1], img.shape[0])
                         # j["newPath"] = j["newPath"] + [x]
             else:
                 print("notCaught: ", j["key"], x)

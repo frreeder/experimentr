@@ -42,14 +42,8 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_02_americanCrabsCaught.png"
                 ],
                 "imageDim": [
-                    [
-                        1527,
-                        937
-                    ],
-                    [
-                        1527,
-                        937
-                    ]
+                    1527,
+                    937
                 ],
                 "pointLoc": 7,
                 "gridLines": [
@@ -138,14 +132,8 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_02_climateChange.png"
                 ],
                 "imageDim": [
-                    [
-                        1576,
-                        887
-                    ],
-                    [
-                        1576,
-                        887
-                    ]
+                    1576,
+                    887
                 ],
                 "pointLoc": 3,
                 "gridLines": [
@@ -229,25 +217,18 @@
             "interact": {
                 "withIcon": true,
                 "iconLoc": 3,
-                "iconDim": [],
+                "iconDim": [
+                    513,
+                    174
+                ],
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_01_fordFSeries.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_fordFSeries.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_03_fordFSeries.png"
                 ],
                 "imageDim": [
-                    [
-                        1502,
-                        923
-                    ],
-                    [
-                        1502,
-                        923
-                    ],
-                    [
-                        513,
-                        174
-                    ]
+                    1502,
+                    923
                 ],
                 "pointLoc": 10,
                 "gridLines": [
@@ -336,14 +317,8 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_02_gasolinePrices.png"
                 ],
                 "imageDim": [
-                    [
-                        1762,
-                        1077
-                    ],
-                    [
-                        1762,
-                        1077
-                    ]
+                    1762,
+                    1077
                 ],
                 "pointLoc": 11,
                 "gridLines": [
@@ -432,14 +407,8 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_02_manuEmployment.png"
                 ],
                 "imageDim": [
-                    [
-                        891,
-                        551
-                    ],
-                    [
-                        891,
-                        551
-                    ]
+                    891,
+                    551
                 ],
                 "pointLoc": 9,
                 "gridLines": [
@@ -528,14 +497,8 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_02_trafficCongestion.png"
                 ],
                 "imageDim": [
-                    [
-                        1388,
-                        995
-                    ],
-                    [
-                        1388,
-                        995
-                    ]
+                    1388,
+                    995
                 ],
                 "pointLoc": 4,
                 "gridLines": [
@@ -567,14 +530,14 @@
                     ],
                     "sortedChoices": {
                         "related": [
-                            "Union Workers",
-                            "U.S. Manufacturing",
-                            "U.S. Factories"
+                            "Freeway Congestion",
+                            "Rush Hour",
+                            "Commute Time"
                         ],
                         "unrelated": [
-                            "Cookie Consumption",
-                            "Potato Sales",
-                            "Apricot Production"
+                            "Banana Pudding Sales",
+                            "Cable Viewership",
+                            "Heat Index"
                         ]
                     },
                     "answer": "2010",
@@ -682,6 +645,18 @@
                         "Beauty Youtube Channels",
                         "Favorite Movie Genres"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Morning Routine",
+                            "Beauty Product Sales",
+                            "Youtube Beauty Channels"
+                        ],
+                        "unrelated": [
+                            "Candy Sales",
+                            "Mall Revenue",
+                            "Pokemon Favorites"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -778,6 +753,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Favorite Cookies",
+                            "Cookie Price",
+                            "Cookie Calories"
+                        ],
+                        "unrelated": [
+                            "Favorite Costumed Heroes",
+                            "Linkin Park Fans",
+                            "Ninja Turtle Ranking"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -874,6 +861,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Crabs in the Sea",
+                            "Crabs Caught",
+                            "Poaching Crabs"
+                        ],
+                        "unrelated": [
+                            "Amount of Snickers Eaten",
+                            "U.S. Precipitation",
+                            "Harnessing Fuel"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }

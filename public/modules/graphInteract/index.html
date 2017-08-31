@@ -5,7 +5,6 @@
 <div id="interactButtons"></div>
 <div id="graphIVerification"></div><br>
 <div id="graphIText"></div>
-</div>
 
 <style>
 </style>
@@ -96,12 +95,38 @@
 
   init();
 
+  // Getting information for line and bar charts.
+  // function setImg(embType, data, iDim){
+  //   // embellished, unrelated, normal
+  //   let outData = {}
+  //   let rat = data.interact.imageDim[0]/data.interact.imageDim[1]
+  //   let dim = new Array(2)
+  //   // Getting the largest (w,h) and setting to bodyDim and then setting smaller based on proportion
+  //   dim[0]=rat>1?bodyDim.w:rat*bodyDim.h
+  //   dim[1]=rat>1?1/rat*bodyDim.w:bodyDim.h
+  //   // PlotArea will be the plot area and could be the dimensions if embellished
+  //   data.interact.plotArea=dim
+  //   // Get the smallest dimension and set to either the width or height depending
+  //   // ImageDim will actually be the dimensions
+  //   if (embType == "embellished"){
+  //     data.interact.imageDim=dim
+  //   } else {
+  //     // Getting the smallest (w,h) and setting to bodyDim and then setting bigger based on proportion
+  //     data.interact.imageDim[0]=iDim[0]/iDim[1]<1?dim[0]:iDim[0]/iDim[1]*dim[1]
+  //     data.interact.imageDim[1]=iDim[0]/iDim[1]<1?iDim[1]/iDim[0]*dim[0]:dim[1]
+  //   }
+  //   return data
+  // }
+
   function init() {
 
     // console.log(d3.select("#inImage"))
     // data.mod1=[]
     experimentr.hideNext();
     experimentr.startTimer('graphInteract');
+
+    // need to do x3 1-graphquestions, 2-graphNormUnrel, 3-graphOrder
+    // take graph order fill graphArray accordingly
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       getRandomImageArray(d);
@@ -214,10 +239,15 @@
       .attr('height', perc[1]*100+"%")
       .attr('width', perc[0]*100+"%")
 
+    // Using the bar dimensions to find out how much padding is needed for the the rangeBands scale.
+    let barH = storyData.interact.barDim[1]/storyData.interact.barDim[0]*chart.bodyDim.w
+    let padding = 1 - (barH*barData.length)/chart.bodyDim.h
+    padding = padding > .05? padding:.05
+
     chart.yScale = d3.scale.ordinal()
       .domain(labelArray)
       // able to go from zero to h because images are ordered top down
-      .rangeBands([0, chart.bodyDim.h], 0.3)
+      .rangeBands([0, chart.bodyDim.h], padding)
 
     chart.xScale = d3.scale.linear()
       // .domain([0, 135])
@@ -328,90 +358,6 @@
 
   }
 
-  function makeBar(){
-    // temp
-    imgDim = storyData.interact.imageDim
-    imgRat = imgDim[0]/imgDim[1]
-
-    chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
-
-    chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
-    chart.arrowSize = bodyDim.w*.2
-    chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*imgRat : chart.bodyDim.w;
-    chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/imgRat;
-    console.log("img", chart.bodyDim, imgRat)
-    // Append the SVG setting the viewbox based on bodyDim and scaling based on window
-    chart
-      .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
-      .attr("preserveAspectRatio", "xMinYMax meet")
-      .attr('height', perc[1]*100+"%")
-      .attr('width', perc[0]*100+"%")
-
-    // Append the background image for all the bars except the one being modified.
-    chart.append('image')
-      .attr('class', 'picture')
-      .attr('href', function(d) { return storyData.interact.imagePath[0]; })
-      // .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_01_developers.png"; })
-      .attr('height', chart.bodyDim.h)
-      .attr('width', chart.bodyDim.w)
-
-    // Append the buttons for controlling the width of the bars.
-    for (let i =0; i<2; i++){
-      let buttonType = i==0? "up" : "down"
-      let isInc = i==0
-      d3.select('#interactButtons').append("button")
-        .attr("class", "button1 "+buttonType)
-        .on("click", ()=>{
-          incBar(isInc, .01)
-        })
-        .on("mousedown", ()=>{
-          clearTimeout(chart.timer)
-          chart.outline.style("opacity", 1)
-          chart.timer = setTimeout(()=>{chart.outline.style("opacity", .2)}, 500)
-        })
-    }
-
-    // Reminding you that bar width needs to be between 0 and 1.
-    chart.barWidth = clampThings(1, 0, 1)
-
-    // Adding a clipping path to clip the image with the bar that we want to manipulate.
-    chart.bar = chart
-      .append("defs")
-      .append("clipPath")
-      .attr("id", "clipper1")
-      .append("rect")
-      .attr('height',chart.bodyDim.h)
-      .attr('width', (chart.barWidth)*chart.bodyDim.w)
-
-    // This would be the outline
-    chart.outline=chart.append('image')
-      .attr('class', 'picture clip-svg1')
-      .attr('href', function(d) { return storyData.interact.imagePath[2]; })
-      // .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_03_developers.png"; })
-      .attr('height', chart.bodyDim.h)
-      .attr('width', (chart.barWidth)*chart.bodyDim.w)
-      .style("opacity", .2)
-
-    // Adding the image of the bar that we want to manipulate. The file must be the bar in the same space as background bar image.
-    chart.append('image')
-      .attr('class', 'picture clip-svg1')
-      .attr('href', function(d) { return storyData.interact.imagePath[1]; })
-      // .attr('href', function(d) { return "modules/graphQuestions/graphImages/interact/bar_interact_02_developers.png"; })
-      .attr('height', chart.bodyDim.h)
-      .attr('width', (chart.barWidth)*chart.bodyDim.w)
-
-    mod4[graphCounter].value = chart.barWidth
-
-    // Since the images are hardcoded ... no y position to place arrow....will need to add arrow to image file or just cave in an make fully interactive...
-    // chart.arrowPointer = chart.append('image')
-    //   .attr('class', 'pointerArrow')
-    //   .attr('href', 'modules/graphInteract/buttons/left.png')
-    //   .attr('height', chart.arrowSize)
-    //   .attr('width', chart.arrowSize)
-    //   .attr('x', )
-
-  }
-
   function incBar(isInc, step){
     // Making sure the bar does not exceed the 0 and 1.
     let bar = storyData.interact.data[chart.selBar]
@@ -423,18 +369,7 @@
     // .attr("id", (d,i)=>{return "clipper"+(i+1).toString()})
     // chart.chartBars.select(".bar_"+chart.selBar).attr("width", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
     mod4[graphCounter].value = bar
-    // glowBar
-    // chartBars
-    // bar_i
   }
-
-  // function incBar(isInc, step){
-  //   // Making sure the bar does not exceed the 0 and 1.
-  //   chart.barWidth= clampThings((isInc? chart.barWidth+step : chart.barWidth-step), 0, 1)
-  //   // Updating the clipping path.
-  //   chart.bar.attr('width', (chart.barWidth)*chart.bodyDim.w*perc[0])
-  //   mod4[graphCounter].value = chart.barWidth
-  // }
 
   function makePie() {
     let pieData = storyData.interact.data
@@ -796,8 +731,9 @@
   }
 
   function makeLine() {
-    // console.log("here", storyData.interact, storyData.interact.imageDim[0])
+    // Get the labels of the categories
     let labelArray = storyData.interact.data.map((d)=>{return d[storyData.interact.accessors[0]]})
+    // Accesors for accessing the categories and values
     let accessors = storyData.interact.accessors
     let lineData = storyData.interact.data
     let tPoint = storyData.interact.pointLoc
@@ -811,8 +747,8 @@
       .attr("preserveAspectRatio", "xMinYMax meet")
 
     chart.bodyDim = {w: bodyDim.w, h: bodyDim.h}
-    chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]) : chart.bodyDim.w;
-    chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]);
+    chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*(storyData.interact.imageDim[0]/storyData.interact.imageDim[1]) : chart.bodyDim.w;
+    chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/(storyData.interact.imageDim[0]/storyData.interact.imageDim[1]);
 
     // Getting object array of points and weights to be manipulated
     // Might be a more automated way.
@@ -831,7 +767,7 @@
     let a=new Array(2)
     a[1]=(lineData.length-1)-tPoint
     a[0]=tPoint-0
-    console.log("a",a, tPoint)
+    // console.log("a",a, tPoint)
     let test = a[0]<a[1]?0:1
     if (a[test]<Math.floor(infPoints/2)){
       a[test>0?0:1]=infPoints-1-a[test>0?1:0]
@@ -880,8 +816,8 @@
     chart.plotArea.height = chart.bodyDim.h - chart.margin.top - chart.margin.bottom;
     chart.plotArea.width = chart.bodyDim.w - chart.margin.left - chart.margin.right
     // Need to redo this step because allocating room for the margin messes up the ratio of the chart body
-    chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]
-    chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[0][1]/storyData.interact.imageDim[0][0] : chart.plotArea.height
+    chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0]/storyData.interact.imageDim[1]
+    chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[1]/storyData.interact.imageDim[0] : chart.plotArea.height
 
     // Setting the scales for the x and y coordinate system
     // chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(0, chart.plotArea.width, chart.plotArea.width/(labelArray.length)));
@@ -916,7 +852,7 @@
 
     // If there is an icon, setting it to a percent of the chart plot area
     // Needs to be fixed...
-    storyData.interact.iconDim = chart.plotArea.width/13
+    // storyData.interact.iconDim = chart.plotArea.width/13
     chart.iconDim = chart.plotArea.width/13
 
     // Setting the start location to halfs
@@ -946,6 +882,12 @@
       .attr("class", "lineOutline")
       .attr("d", chart.lineFunc)
 
+    // Testing to see what happens if set the height or width to something specific...
+    // chart.plotArea.append("image")
+    //     // .attr("width", chart.plotArea.width)
+    //     .attr("height", chart.plotArea.height)
+    //     .attr("href", "./modules/graphQuestions/graphImages/rollerCoaster.png")
+
     // This is why pointLoc can't be = 0, clamps end but not beginning...
     chart.manipLines = storyData.interact.data.slice(pointLoc-1, pointLoc+2)
     // console.log("cM", chart.man)
@@ -972,7 +914,7 @@
     // this is the icon attached to the line chart if used... a bit buggy but I suspect it has something to do with the rotation point.
     if (storyData.interact.withIcon){
       console.log("storyData.inte", storyData.interact)
-      let iconD = {w: storyData.interact.imageDim[2][0], h:storyData.interact.imageDim[2][1]}
+      let iconD = {w: storyData.interact.iconDim[0], h:storyData.interact.iconDim[1]}
       let iconR = iconD.w/iconD.h
       console.log("iD", iconD.w, iconD.h)
       chart.iconD = {}
