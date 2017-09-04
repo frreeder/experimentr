@@ -17,6 +17,8 @@
   let mod4 = []
   let changeAllSlices = true;
 
+  let dataLoaded = [false, false, false, false]
+
   // Specific to interact
   var chart;
   // let perc = [.8, 1]
@@ -35,7 +37,7 @@
     , graphCounter = 0
     , lastGraph = false
     , isValid = false
-    , graphArray
+    , graphArray = []
     , storyData;
 
   function clampThings(num, min, max){return Math.min(Math.max(num, min), max)}
@@ -96,27 +98,128 @@
   init();
 
   // Getting information for line and bar charts.
-  // function setImg(embType, data, iDim){
-  //   // embellished, unrelated, normal
-  //   let outData = {}
-  //   let rat = data.interact.imageDim[0]/data.interact.imageDim[1]
-  //   let dim = new Array(2)
-  //   // Getting the largest (w,h) and setting to bodyDim and then setting smaller based on proportion
-  //   dim[0]=rat>1?bodyDim.w:rat*bodyDim.h
-  //   dim[1]=rat>1?1/rat*bodyDim.w:bodyDim.h
-  //   // PlotArea will be the plot area and could be the dimensions if embellished
-  //   data.interact.plotArea=dim
-  //   // Get the smallest dimension and set to either the width or height depending
-  //   // ImageDim will actually be the dimensions
-  //   if (embType == "embellished"){
-  //     data.interact.imageDim=dim
-  //   } else {
-  //     // Getting the smallest (w,h) and setting to bodyDim and then setting bigger based on proportion
-  //     data.interact.imageDim[0]=iDim[0]/iDim[1]<1?dim[0]:iDim[0]/iDim[1]*dim[1]
-  //     data.interact.imageDim[1]=iDim[0]/iDim[1]<1?iDim[1]/iDim[0]*dim[0]:dim[1]
-  //   }
-  //   return data
-  // }
+  function setImg(embType, data, iDim){
+    // embellished, unrelated, normal
+    let outData = {}
+    let rat = data.interact.imageDim[0]/data.interact.imageDim[1]
+    let dim = new Array(2)
+    // Getting the largest (w,h) and setting to bodyDim and then setting smaller based on proportion
+    dim[0]=rat>1?bodyDim.w:rat*bodyDim.h
+    dim[1]=rat>1?1/rat*bodyDim.w:bodyDim.h
+    // PlotArea will be the plot area and could be the dimensions if embellished
+    data.interact.plotArea=dim
+    // console.log("dimIs", dim)
+    // Get the smallest dimension and set to either the width or height depending
+    // ImageDim will actually be the dimensions
+    if (embType == "embellished"){
+      data.interact.imageDim=dim
+    } else {
+      // Getting the smallest (w,h) and setting to bodyDim and then setting bigger based on proportion
+      let smallInd = iDim[0]/iDim[1]<1?0:1
+      let largeInd = smallInd==0?1:0
+      data.interact.imageDim[0]=iDim[0]/iDim[1]<1?dim[0]:iDim[0]/iDim[1]*dim[1]
+      data.interact.imageDim[1]=iDim[0]/iDim[1]<1?iDim[1]/iDim[0]*dim[0]:dim[1]
+      // Checking to see if the largest dimension is greater than the plotArea, if not adjust
+      if (data.interact.imageDim[largeInd]<dim[largeInd]) {
+        let perc = dim[largeInd]/data.interact.imageDim[largeInd]
+        data.interact.imageDim[largeInd]=data.interact.imageDim[largeInd]*perc
+        data.interact.imageDim[smallInd]=data.interact.imageDim[smallInd]*perc
+      }
+      // console.log("dim2IS", data.interact.imageDim)
+    }
+    // return data
+  }
+
+  function setBars(isBarDim, barDim, imageDim, numBars){
+    // Using the bar dimensions to find out how much padding is needed for the the rangeBands scale.
+    let padding = 0
+    if (isBarDim){
+      let barH = barDim[1]/barDim[0]*imageDim[0]
+      padding = 1 - (barH*numBars)/imageDim[1]
+      padding = padding > .05? padding:.05
+    } else {
+      padding = .4
+    }
+    return padding
+  }
+
+  function getGraphArray(d, gO, gArr) {
+    for (let i=0; i<gO.length; i++){
+      // Either this or for loop...
+      gArr.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
+    }
+  }
+
+  let embDict = {normal: "norm_01", normal2: "norm_02", unrelated: "unrelated_01", unrelated2: "unrelated_02", embellished: "embellished"}
+
+  function getData(gArr){
+    let graphO, graphA, graphI
+    d3.json('modules/graphQuestions/data.json', function(err, d) {graphA = d})
+    d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
+    d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
+    setTimeout(()=>{
+      // Set the graph array based on graph order
+      for (let i=0; i<graphO.length; i++){
+        gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
+        gArr[i].embType = graphO[i].embType
+        gArr[i].chartType = graphO[i].chartType
+      }
+      // Get the associated data based on CSV files
+      for (let i = 0; i < gArr.length; i++){
+        d3.csv(gArr[i].interact.dataPath, function(iData){
+          // Setting the accessors based on the column and row data
+          gArr[i].interact.accessors = [d3.keys(iData[0])[0], d3.keys(iData[0])[1]]
+          // Turning the strings into floats for the values
+          iData.map((d)=>{
+    				d[gArr[i].interact.accessors[1]]= parseFloat(d[gArr[i].interact.accessors[1]])
+    			})
+          // Adding data to the main graph array
+          gArr[i].interact.data = iData
+        })
+      }
+      // Set the unrelated and normal images
+      for (let i = 0; i < gArr.length; i++){
+        if (gArr[i].embType=="embellished") {
+          if (gArr[i].chartType!="pie")
+            setImg(gArr[i].embType, gArr[i], gArr[i].interact.imageDim)
+          if (gArr[i].chartType=="bar")
+            gArr[i].interact.padding=setBars(gArr[i].embType=="embellished", gArr[i].interact.barDim, gArr[i].interact.plotArea, gArr[i].interact.imagePath.length-1)
+          continue;}
+        let newData = graphI[gArr[i].chartType][embDict[gArr[i].embType]]
+        console.log("n0", newData)
+        // console.log("gArr[i]", gArr[i].chartType)
+        if (gArr[i].chartType=="line"){
+          newData=newData[0]
+          console.log("n1",newData)
+          gArr[i].interact.imagePath = newData.imagePath
+          gArr[i].interact.withIcon = newData.withIcon
+          if (newData.withIcon){
+            gArr[i].interact.iconDim=newData.iconDim
+            gArr[i].interact.iconLoc=newData.iconLoc
+          }
+          // Might have to go through and look at the keys of object and see if want to copy all, for now hardcoded...
+        } else {
+          newData=newData.filter((d2)=>{
+            return d2.imagePath.length==gArr[i].interact.imagePath.length})[0]
+          console.log("n1e",newData)
+          gArr[i].interact.imagePath = newData.imagePath
+          if (gArr[i].chartType=="bar"&&newData.useBG){gArr[i].interact.imageDim=newData.imageDim}
+          if (gArr[i].chartType=="pie"){
+            gArr[i].interact.withIcon=newData.withIcon
+            gArr[i].interact.colorArray=newData.colorArray
+          }
+        }
+        if (gArr[i].chartType!="pie")
+          setImg(gArr[i].embType, gArr[i], newData.imageDim)
+        if (gArr[i].chartType=="bar")
+          gArr[i].interact.padding=setBars(gArr[i].embType=="embellished", gArr[i].interact.barDim, gArr[i].interact.plotArea, gArr[i].interact.imagePath.length-1)
+      }
+      // Set mod4 for recording data
+      for (var i=0; i<graphArray.length; i++){
+          mod4.push({key: graphArray[i].chartType, inputData: []})
+      }
+    }, 500)
+  }
 
   function init() {
 
@@ -128,31 +231,44 @@
     // need to do x3 1-graphquestions, 2-graphNormUnrel, 3-graphOrder
     // take graph order fill graphArray accordingly
 
-    d3.json('modules/graphQuestions/data.json', function(err, d) {
-      getRandomImageArray(d);
-      for (var i=0; i<graphArray.length; i++){
-          mod4.push({key: graphArray[i].chartType, inputData: []})
-      }
-      // Getting the line interact data
-      for (let i = 0; i < graphArray.length; i++){
-        // if (graphArray[i].chartType!="line" && graphArray[i].chartType!="pie") continue;
-        // if (graphArray[i].chartType=="bar"){graphArray[i].interact.dataPath='modules/graphInteract/csvFiles/bar_data_artwork.csv'}
-        d3.csv(graphArray[i].interact.dataPath, function(iData){
-          // Setting the accessors based on the column and row data
-          graphArray[i].interact.accessors = [d3.keys(iData[0])[0], d3.keys(iData[0])[1]]
-          // Turning the strings into floats for the values
-          iData.map((d)=>{
-    				d[graphArray[i].interact.accessors[1]]= parseFloat(d[graphArray[i].interact.accessors[1]])
-    			})
-          // Adding data to the main graph array
-          graphArray[i].interact.data = iData
-        })
-      }
-      console.log("iData", graphArray)
-      // This is here to ensure the data gets loaded....
-      // Need to add text to let the participants know what they are looking at
-      d3.select('#graphIText').selectAll("*").remove()
-      d3.select('#graphIText').append('text').text("Use the up and down arrow buttons to change the value of the graph to match your memory of the graphs").append("br")
+    let graphArray2  = []
+    getData(graphArray)
+    console.log("gra", graphArray)
+    // getGraphArray()
+
+
+
+
+    // q.defer(d3.json)
+
+    // d3.json('modules/graphQuestions/data.json', function(err, d) {
+    //   getRandomImageArray(d);
+    //   for (var i=0; i<graphArray.length; i++){
+    //       mod4.push({key: graphArray[i].chartType, inputData: []})
+    //   }
+    //   // Getting the line interact data
+    //   for (let i = 0; i < graphArray.length; i++){
+    //     // if (graphArray[i].chartType!="line" && graphArray[i].chartType!="pie") continue;
+    //     // if (graphArray[i].chartType=="bar"){graphArray[i].interact.dataPath='modules/graphInteract/csvFiles/bar_data_artwork.csv'}
+    //     d3.csv(graphArray[i].interact.dataPath, function(iData){
+    //       // Setting the accessors based on the column and row data
+    //       graphArray[i].interact.accessors = [d3.keys(iData[0])[0], d3.keys(iData[0])[1]]
+    //       // Turning the strings into floats for the values
+    //       iData.map((d)=>{
+    // 				d[graphArray[i].interact.accessors[1]]= parseFloat(d[graphArray[i].interact.accessors[1]])
+    // 			})
+    //       // Adding data to the main graph array
+    //       graphArray[i].interact.data = iData
+    //     })
+    //   }
+    //   console.log("iData", graphArray)
+    //   // This is here to ensure the data gets loaded....
+    //   // Need to add text to let the participants know what they are looking at
+    //
+    // })
+    d3.select('#graphIText').selectAll("*").remove()
+    d3.select('#graphIText').append('text').text("Use the up and down arrow buttons to change the value of the graph to match your memory of the graphs").append("br")
+    setTimeout(function(){
       d3.select('#graphIText').append('button')
         .attr('type', 'button')
         .text('I have read the instructions.')
@@ -160,7 +276,8 @@
           function(d) {
             loadData();
           });
-    })
+    }, 1000)
+
   }
 
   function loadData() {
@@ -184,6 +301,8 @@
     // d3.select('#interactButtons').append('br')
     d3.select('#graphIImage').selectAll("*").remove()
     // If not line for now
+
+    console.log("loading", storyData.interact)
 
     switch (storyData.chartType) {
       case "line":
@@ -213,6 +332,7 @@
   }
 
   function makeFunBar(){
+    console.log("st", storyData)
     imgDim = storyData.interact.imageDim
     imgRat = imgDim[0]/imgDim[1]
     let barData = storyData.interact.data
@@ -221,7 +341,7 @@
     // Make the SVG
     chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
     chart.selBar = storyData.interact.selBar-1
-    console.log("labArray", labelArray, storyData.selBar-1)
+    console.log("labArray", labelArray, storyData.interact.selBar-1)
     // Set the dimensions
     chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
     console.log("bef", chart.bodyDim.w, chart.bodyDim.h, imgRat)
@@ -230,6 +350,9 @@
     chart.arrowSize = bodyDim.w * (1-.8-.05)
     chart.bodyDim.w = imgRat>0 ? chart.bodyDim.w : chart.bodyDim.h*imgRat;
     chart.bodyDim.h = imgRat>0 ? chart.bodyDim.w/imgRat : chart.bodyDim.h;
+    // might just need this from now on?
+    chart.bodyDim = {w: storyData.interact.plotArea[0]*.8, h: storyData.interact.plotArea[1]*.8}
+    chart.imageDim = {w: storyData.interact.imageDim[0]*.8, h: storyData.interact.imageDim[1]*.8}
     console.log("aft", chart.bodyDim.w, chart.bodyDim.h)
     // Update the SVG to match dimensions
     chart
@@ -243,6 +366,8 @@
     let barH = storyData.interact.barDim[1]/storyData.interact.barDim[0]*chart.bodyDim.w
     let padding = 1 - (barH*barData.length)/chart.bodyDim.h
     padding = padding > .05? padding:.05
+    padding = storyData.interact.padding
+    console.log("padding", padding)
 
     chart.yScale = d3.scale.ordinal()
       .domain(labelArray)
@@ -258,7 +383,14 @@
     // chart.selbarWidth = chart.xScale.domain()[1]/2
     barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2
 
-
+    // clipping path for chart area
+    // chart.barClip = chart.append("g").attr("class", chartOutline).append("defs").selectAll("clipPath")
+    //   .data(barData).enter().append("clipPath")
+    //   .attr("id", (d,i)=>{return "clipper"+(i+1).toString()})
+    //   .append("rect")
+    //   .attr("y", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
+    //   .attr('height',chart.barHeight)
+    //   .attr('width', (d,i)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
 
     // Add the arrow based on the ...
     chart.append("image")
@@ -285,10 +417,13 @@
         })
     }
 
+    // BG image
     chart.append("image")
+      .attr("class", "clip-chartArea")
       // .attr("href", 'modules/graphQuestions/graphImages/interactBars/bar_interact1_00_artwork.png')
       .attr("href", storyData.interact.imagePath[0])
-      .attr("height", chart.bodyDim.h)
+      // .attr("height", chart.bodyDim.h)
+      .attr("height", chart.imageDim.h)
 
     // Add vertical gridlines
     let vData = []
@@ -333,7 +468,7 @@
       // .attr("href", (d, i)=>{return 'modules/graphQuestions/graphImages/interactBars/bar_interact1_0'+(i+1)+'_artwork.png'})
       .attr("href", (d, i)=>{return storyData.interact.imagePath[i+1]})
       .attr("height", chart.barHeight)
-      .attr("width", (d)=>{return chart.xScale.range()[1]})
+      // .attr("width", (d)=>{return chart.xScale.range()[1]})
       .attr("y", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
       .attr("preserveAspectRatio", "none")
 
@@ -346,6 +481,15 @@
       .attr('height',chart.barHeight)
       .attr('width', (d,i)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
 
+    chart.append("g")
+      .append("clipPath")
+      .attr("id", "clipperChartArea")
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", chart.bodyDim.w)
+      .attr("height", chart.bodyDim.h)
+
     chart.chartOutline = chart.append("g")
       .attr("class", "barOutline")
       .append("rect")
@@ -353,6 +497,7 @@
       .attr("y", 0)
       .attr("width", chart.bodyDim.w)
       .attr("height", chart.bodyDim.h)
+
 
     mod4[graphCounter].value = barData[chart.selBar][storyData.interact.accessors[1]]
 
@@ -750,6 +895,10 @@
     chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*(storyData.interact.imageDim[0]/storyData.interact.imageDim[1]) : chart.bodyDim.w;
     chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/(storyData.interact.imageDim[0]/storyData.interact.imageDim[1]);
 
+
+    // might just need this going forward
+    chart.bodyDim={w:storyData.interact.plotArea[0], h:storyData.interact.plotArea[1]}
+
     // Getting object array of points and weights to be manipulated
     // Might be a more automated way.
     // chart.manip = [{point: pointLoc==0?0:pointLoc, weight: pointLoc==0?1:(pointLoc==lineData.length-1?1:)}]
@@ -819,6 +968,19 @@
     chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0]/storyData.interact.imageDim[1]
     chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[1]/storyData.interact.imageDim[0] : chart.plotArea.height
 
+
+
+    // clip the area
+    chart.append("g")
+      .append("clipPath")
+      .attr("id", "clipperChartArea")
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", chart.plotArea.width)
+      .attr("height", chart.plotArea.height)
+
+
     // Setting the scales for the x and y coordinate system
     // chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(0, chart.plotArea.width, chart.plotArea.width/(labelArray.length)));
     labelArray.push("end")
@@ -865,15 +1027,19 @@
     // This is the background image / the top
     chart.plotArea.append("image")
         .attr("class", "clip-svg2")
-        .attr("width", chart.plotArea.width)
-        .attr("height", chart.plotArea.height)
+        // .attr("width", chart.plotArea.width)
+        // .attr("height", chart.plotArea.height)
+        .attr("width", storyData.interact.imageDim[0])
+        .attr("height", storyData.interact.imageDim[1])
         .attr("href", storyData.interact.imagePath[1])
 
     // This is the foreground image / the bottom
     chart.plotArea.append("image")
       .attr("class", "clip-svg1")
-      .attr("width", chart.plotArea.width)
-      .attr("height", chart.plotArea.height)
+      // .attr("width", chart.plotArea.width)
+      // .attr("height", chart.plotArea.height)
+      .attr("width", storyData.interact.imageDim[0])
+      .attr("height", storyData.interact.imageDim[1])
       .attr("href", storyData.interact.imagePath[0])
 
     // This is the line outline

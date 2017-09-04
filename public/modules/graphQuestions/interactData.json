@@ -1,0 +1,564 @@
+{
+    "line": {
+        "unrelated_01": [
+            {
+                "key": "cheese",
+                "withIcon": true,
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_unrelated_cheese.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_unrelated_cheese.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_02_unrelated_cheese.png"
+                ],
+                "imageDim": [
+                    428,
+                    260
+                ],
+                "iconLoc": 3,
+                "iconDim": [
+                    208,
+                    201
+                ]
+            }
+        ],
+        "unrelated_02": [
+            {
+                "key": "recession",
+                "withIcon": false,
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_unrelated_recession.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_unrelated_recession.png"
+                ],
+                "imageDim": [
+                    1460,
+                    894
+                ]
+            }
+        ],
+        "norm_01": [
+            {
+                "key": "norm_01",
+                "withIcon": false,
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_norm_01.png"
+                ],
+                "imageDim": [
+                    2200,
+                    1500
+                ]
+            }
+        ],
+        "norm_02": [
+            {
+                "key": "norm_02",
+                "withIcon": false,
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_norm_02.png"
+                ],
+                "imageDim": [
+                    2200,
+                    1500
+                ]
+            }
+        ]
+    },
+    "pie": {
+        "unrelated_01": [
+            {
+                "key": "unrelated_01",
+                "withIcon": false,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_unrelated_01.png",
+                        "iconDim": [
+                            498,
+                            509
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_unrelated_01.png",
+                        "iconDim": [
+                            516,
+                            507
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_unrelated_01.png",
+                        "iconDim": [
+                            540,
+                            540
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_unrelated_01.png",
+                        "iconDim": [
+                            495,
+                            494
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "unrelated_01",
+                "withIcon": false,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_unrelated_01.png",
+                        "iconDim": [
+                            498,
+                            509
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_unrelated_01.png",
+                        "iconDim": [
+                            515,
+                            507
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_unrelated_01.png",
+                        "iconDim": [
+                            516,
+                            507
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_unrelated_01.png",
+                        "iconDim": [
+                            540,
+                            540
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_unrelated_01.png",
+                        "iconDim": [
+                            495,
+                            494
+                        ]
+                    }
+                ]
+            }
+        ],
+        "unrelated_02": [
+            {
+                "key": "unrelated_02",
+                "withIcon": true,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_unrelated_02.png",
+                        "iconDim": [
+                            569,
+                            421
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_unrelated_02.png",
+                        "iconDim": [
+                            803,
+                            803
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_unrelated_02.png",
+                        "iconDim": [
+                            769,
+                            769
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_unrelated_02.png",
+                        "iconDim": [
+                            526,
+                            526
+                        ]
+                    }
+                ],
+                "colorArray": [
+                    "#26bfff",
+                    "#fd186a",
+                    "#2fdb36",
+                    "#aa62c7"
+                ]
+            },
+            {
+                "key": "unrelated_02",
+                "withIcon": true,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_unrelated_02.png",
+                        "iconDim": [
+                            569,
+                            421
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_unrelated_02.png",
+                        "iconDim": [
+                            803,
+                            803
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_unrelated_02.png",
+                        "iconDim": [
+                            411,
+                            411
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_unrelated_02.png",
+                        "iconDim": [
+                            769,
+                            769
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_unrelated_02.png",
+                        "iconDim": [
+                            526,
+                            526
+                        ]
+                    }
+                ],
+                "colorArray": [
+                    "#26bfff",
+                    "#fd186a",
+                    "#ff9911",
+                    "#2fdb36",
+                    "#aa62c7"
+                ]
+            }
+        ],
+        "norm_01": [
+            {
+                "key": "norm_01",
+                "withIcon": false,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "norm_01",
+                "withIcon": false,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ]
+            }
+        ],
+        "norm_02": [
+            {
+                "key": "norm_02",
+                "withIcon": false,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "norm_02",
+                "withIcon": false,
+                "imagePath": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "bar": {
+        "unrelated_01": [
+            {
+                "key": "unrelated_01",
+                "imgDim": [],
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_unrelated_01.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    2592,
+                    135
+                ],
+                "useBG": false
+            },
+            {
+                "key": "unrelated_01",
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_02_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_unrelated_01.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    2592,
+                    135
+                ],
+                "useBG": false
+            }
+        ],
+        "unrelated_02": [
+            {
+                "key": "unrelated_02",
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_02_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_02.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    2592,
+                    125
+                ],
+                "useBG": false
+            },
+            {
+                "key": "unrelated_02",
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_02_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_unrelated_02.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    2592,
+                    125
+                ],
+                "useBG": false
+            }
+        ],
+        "norm_01": [
+            {
+                "key": "norm_01",
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_02_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_01.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    1462,
+                    45
+                ],
+                "useBG": false
+            },
+            {
+                "key": "norm_01",
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_02_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_norm_01.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    1462,
+                    45
+                ],
+                "useBG": false
+            }
+        ],
+        "norm_02": [
+            {
+                "key": "norm_02",
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_02_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_02.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    1480,
+                    48
+                ],
+                "useBG": false
+            },
+            {
+                "key": "norm_02",
+                "imagePath": [
+                    "modules/graphQuestions/graphImages/interact/bar_interact_00_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_01_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_02_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_03_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_norm_02.png"
+                ],
+                "imageDim": [
+                    1361,
+                    879
+                ],
+                "barDim": [
+                    1480,
+                    48
+                ],
+                "useBG": false
+            }
+        ]
+    }
+}

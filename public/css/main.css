@@ -124,6 +124,11 @@ svg.pie {
 	-webkit-clip-path: url(#clipper6);
 }
 
+.clip-chartArea {
+	clip-path: url(#clipperChartArea);
+	-webkit-clip-path: url(#clipperChartArea);
+}
+
 .lineOutline {
   stroke: black;
   stroke-width: 3px;

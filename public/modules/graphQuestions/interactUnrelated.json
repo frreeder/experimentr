@@ -5,7 +5,8 @@
         "key": "cheese",
         "withIcon": true,
         "imagePath": [],
-        "imageDim": []
+        "imageDim": [],
+        "iconLoc": 3
       }
     ],
     "unrelated_02": [
@@ -38,11 +39,13 @@
       {
         "key": "unrelated_01",
         "withIcon": false,
+        "imgPath": ["interact_00", "interact_02", "interact_03", "interact_04"],
         "imagePath": []
       },
       {
         "key": "unrelated_01",
         "withIcon": false,
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
         "imagePath": []
       }
     ],
@@ -50,25 +53,29 @@
       {
         "key": "unrelated_02",
         "withIcon": true,
+        "imgPath": ["interact_00", "interact_01", "interact_03", "interact_04"],
         "imagePath": [],
-        "colorArray": ["#26bfff", "#fd186a", "#ff9911", "#2fdb36", "#aa62c7"]
+        "colorArray": ["#26bfff", "#fd186a", "#2fdb36", "#aa62c7"]
       },
       {
         "key": "unrelated_02",
         "withIcon": true,
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
         "imagePath": [],
-        "colorArray": ["#26bfff", "#fd186a", "#2fdb36", "#aa62c7"]
+        "colorArray": ["#26bfff", "#fd186a", "#ff9911", "#2fdb36", "#aa62c7"]
       }
     ],
     "norm_01": [
       {
         "key": "norm_01",
         "withIcon": false,
+        "imgPath": ["interact_01", "interact_02", "interact_03", "interact_04"],
         "imagePath": []
       },
       {
         "key": "norm_01",
         "withIcon": false,
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
         "imagePath": []
       }
     ],
@@ -76,11 +83,13 @@
       {
         "key": "norm_02",
         "withIcon": false,
+        "imgPath": ["interact_00", "interact_01", "interact_03", "interact_04"],
         "imagePath": []
       },
       {
         "key": "norm_02",
         "withIcon": false,
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
         "imagePath": []
       }
     ]
@@ -88,16 +97,76 @@
   "bar": {
     "unrelated_01":[
       {
-        "key": "powerRangers",
+        "key": "unrelated_01",
+        "imgDim": [],
         "imagePath": [],
-        "imageDim": []
+        "imgPath": ["interact_00", "interact_01", "interact_06", "interact_03", "interact_04", "interact_05"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
       },
       {
-        "key": "fruitsBasket",
+        "key": "unrelated_01",
         "imagePath": [],
-        "imageDim": []
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
       }
     ],
-    "norm":[]
+    "unrelated_02": [
+      {
+        "key": "unrelated_02",
+        "imagePath": [],
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
+      },
+      {
+        "key": "unrelated_02",
+        "imagePath": [],
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
+      }
+    ],
+    "norm_01": [
+      {
+        "key": "norm_01",
+        "imagePath": [],
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
+      },
+      {
+        "key": "norm_01",
+        "imagePath": [],
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
+      }
+    ],
+    "norm_02": [
+      {
+        "key": "norm_02",
+        "imagePath": [],
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
+      },
+      {
+        "key": "norm_02",
+        "imagePath": [],
+        "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imageDim": [],
+        "barDim": [],
+        "useBG": false
+      }
+    ]
   }
 }
