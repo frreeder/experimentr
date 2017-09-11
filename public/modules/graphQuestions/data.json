@@ -10,6 +10,13 @@
                 "modules/graphQuestions/graphImages/color/line_unrelated_01_americanCrabsCaught.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_02_americanCrabsCaught.png"
             ],
+            "basePath": [
+                "modules/graphTheme/chartBase/line_base_embellished_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase/line_base_norm_01_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase/line_base_norm_02_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_01_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_02_americanCrabsCaught.png"
+            ],
             "questionBank": [
                 {
                     "question": "In the U.S., what year had the highest number of crabs caught?",
@@ -63,7 +70,7 @@
                 "dataPath": "modules/graphInteract/csvFiles/line_data_americanCrabsCaught.csv"
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -83,6 +90,11 @@
                             "Amount of Snickers Eaten",
                             "U.S. Precipitation",
                             "Harnessing Fuel"
+                        ],
+                        "mix": [
+                            "Crabs Caught",
+                            "Amount of Snickers Eaten",
+                            "U.S. Precipitation"
                         ]
                     },
                     "answer": "2010",
@@ -99,6 +111,13 @@
                 "modules/graphQuestions/graphImages/color/line_norm_02_climateChange.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_01_climateChange.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_02_climateChange.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/line_base_embellished_climateChange.png",
+                "modules/graphTheme/chartBase/line_base_norm_01_climateChange.png",
+                "modules/graphTheme/chartBase/line_base_norm_02_climateChange.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_01_climateChange.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_02_climateChange.png"
             ],
             "questionBank": [
                 {
@@ -153,7 +172,7 @@
                 "dataPath": "modules/graphInteract/csvFiles/line_data_climateChange.csv"
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -173,6 +192,11 @@
                             "Texas Weather",
                             "Newspaper Revenue",
                             "Pancakes Sales"
+                        ],
+                        "mix": [
+                            "C02 Emissionst",
+                            "Texas Weather",
+                            "Newspaper Revenue"
                         ]
                     },
                     "answer": "2010",
@@ -189,6 +213,13 @@
                 "modules/graphQuestions/graphImages/color/line_norm_02_fordFSeries.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_01_fordFSeries.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_02_fordFSeries.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/line_base_embellished_fordFSeries.png",
+                "modules/graphTheme/chartBase/line_base_norm_01_fordFSeries.png",
+                "modules/graphTheme/chartBase/line_base_norm_02_fordFSeries.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_01_fordFSeries.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_02_fordFSeries.png"
             ],
             "questionBank": [
                 {
@@ -244,7 +275,7 @@
                 "dataPath": "modules/graphInteract/csvFiles/line_data_fordFSeries.csv"
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -264,6 +295,11 @@
                             "Grapefruit Production",
                             "Average College Attendance",
                             "Pest Control"
+                        ],
+                        "mix": [
+                            "Sale of Ford Trucks",
+                            "Grapefruit Production",
+                            "Average College Attendance"
                         ]
                     },
                     "answer": "2010",
@@ -280,6 +316,13 @@
                 "modules/graphQuestions/graphImages/color/line_norm_02_gasolinePrices.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_01_gasolinePrices.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_02_gasolinePrices.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/line_base_embellished_gasolinePrices.png",
+                "modules/graphTheme/chartBase/line_base_norm_01_gasolinePrices.png",
+                "modules/graphTheme/chartBase/line_base_norm_02_gasolinePrices.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_01_gasolinePrices.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_02_gasolinePrices.png"
             ],
             "questionBank": [
                 {
@@ -334,7 +377,7 @@
                 "dataPath": "modules/graphInteract/csvFiles/line_data_gasolinePrices.csv"
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -354,6 +397,11 @@
                             "Georgia's Peach Revenue",
                             "Apple Pie Production",
                             "Gluten Free Menus"
+                        ],
+                        "mix": [
+                            "Average Gasoline Prices",
+                            "Georgia's Peach Revenue",
+                            "Apple Pie Production"
                         ]
                     },
                     "answer": "2010",
@@ -370,6 +418,13 @@
                 "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_01_manuEmployment.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_02_manuEmployment.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/line_base_embellished_manuEmployment.png",
+                "modules/graphTheme/chartBase/line_base_norm_01_manuEmployment.png",
+                "modules/graphTheme/chartBase/line_base_norm_02_manuEmployment.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_01_manuEmployment.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_02_manuEmployment.png"
             ],
             "questionBank": [
                 {
@@ -424,7 +479,7 @@
                 "dataPath": "modules/graphInteract/csvFiles/line_data_manuEmployment.csv"
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -444,6 +499,11 @@
                             "Cookie Consumption",
                             "Potato Sales",
                             "Apricot Production"
+                        ],
+                        "mix": [
+                            "U.S. Manufacturing",
+                            "Cookie Consumption",
+                            "Potato Sales"
                         ]
                     },
                     "answer": "2010",
@@ -460,6 +520,13 @@
                 "modules/graphQuestions/graphImages/color/line_norm_02_trafficCongestion.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_01_trafficCongestion.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_02_trafficCongestion.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/line_base_embellished_trafficCongestion.png",
+                "modules/graphTheme/chartBase/line_base_norm_01_trafficCongestion.png",
+                "modules/graphTheme/chartBase/line_base_norm_02_trafficCongestion.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_01_trafficCongestion.png",
+                "modules/graphTheme/chartBase/line_base_unrelated_02_trafficCongestion.png"
             ],
             "questionBank": [
                 {
@@ -514,7 +581,7 @@
                 "dataPath": "modules/graphInteract/csvFiles/line_data_trafficCongestion.csv"
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -534,6 +601,11 @@
                             "Banana Pudding Sales",
                             "Cable Viewership",
                             "Heat Index"
+                        ],
+                        "mix": [
+                            "Freeway Congestion",
+                            "Banana Pudding Sales",
+                            "Cable Viewership"
                         ]
                     },
                     "answer": "2010",
@@ -552,6 +624,13 @@
                 "modules/graphQuestions/graphImages/color/pie_norm_02_beauty.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_01_beauty.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_02_beauty.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/pie_base_embellished_beauty.png",
+                "modules/graphTheme/chartBase/pie_base_norm_01_beauty.png",
+                "modules/graphTheme/chartBase/pie_base_norm_02_beauty.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_01_beauty.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_02_beauty.png"
             ],
             "questionBank": [
                 {
@@ -631,7 +710,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -651,6 +730,11 @@
                             "Candy Sales",
                             "Mall Revenue",
                             "Pokemon Favorites"
+                        ],
+                        "mix": [
+                            "Beauty Products Purchased",
+                            "Candy Sales",
+                            "Mall Revenue"
                         ]
                     },
                     "answer": "2010",
@@ -667,6 +751,13 @@
                 "modules/graphQuestions/graphImages/color/pie_norm_02_girlScouts.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_01_girlScouts.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_02_girlScouts.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/pie_base_embellished_girlScouts.png",
+                "modules/graphTheme/chartBase/pie_base_norm_01_girlScouts.png",
+                "modules/graphTheme/chartBase/pie_base_norm_02_girlScouts.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_01_girlScouts.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_02_girlScouts.png"
             ],
             "questionBank": [
                 {
@@ -740,7 +831,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -757,8 +848,13 @@
                         ],
                         "unrelated": [
                             "Favorite Costumed Heroes",
-                            "Linkin Park Fans",
+                            "Popular Book Genres",
                             "Ninja Turtle Ranking"
+                        ],
+                        "mix": [
+                            "Favorite Cookies",
+                            "Favorite Costumed Heroes",
+                            "Popular Book Genres"
                         ]
                     },
                     "answer": "2010",
@@ -775,6 +871,13 @@
                 "modules/graphQuestions/graphImages/color/pie_norm_02_renewable.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_01_renewable.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_02_renewable.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/pie_base_embellished_renewable.png",
+                "modules/graphTheme/chartBase/pie_base_norm_01_renewable.png",
+                "modules/graphTheme/chartBase/pie_base_norm_02_renewable.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_01_renewable.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_02_renewable.png"
             ],
             "questionBank": [
                 {
@@ -854,7 +957,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -865,14 +968,19 @@
                     ],
                     "sortedChoices": {
                         "related": [
-                            "Crabs in the Sea",
-                            "Crabs Caught",
-                            "Poaching Crabs"
+                            "Global Renewable Energy",
+                            "U.S. Renewable Energy",
+                            "U.K Renewable Energy"
                         ],
                         "unrelated": [
-                            "Amount of Snickers Eaten",
-                            "U.S. Precipitation",
-                            "Harnessing Fuel"
+                            "Top Celebrities",
+                            "Popular Sports Drinks",
+                            "Best Breakfast"
+                        ],
+                        "mix": [
+                            "U.K Renewable Energy",
+                            "Top Celebrities",
+                            "Popular Sports Drinks"
                         ]
                     },
                     "answer": "2010",
@@ -889,6 +997,13 @@
                 "modules/graphQuestions/graphImages/color/pie_norm_02_starWars.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_01_starWars.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_02_starWars.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/pie_base_embellished_starWars.png",
+                "modules/graphTheme/chartBase/pie_base_norm_01_starWars.png",
+                "modules/graphTheme/chartBase/pie_base_norm_02_starWars.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_01_starWars.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_02_starWars.png"
             ],
             "questionBank": [
                 {
@@ -968,7 +1083,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -979,14 +1094,19 @@
                     ],
                     "sortedChoices": {
                         "related": [
-                            "Star Wars Profit",
-                            "Space Profit",
-                            "Child Activities"
+                            "Star Wars Revenue",
+                            "Star Wars Popularity",
+                            "Star Wars Media"
                         ],
                         "unrelated": [
                             "Favorite Zoo Animals",
                             "Social Media",
                             "Carnival Food"
+                        ],
+                        "mix": [
+                            "Star Wars Revenue",
+                            "Favorite Zoo Animals",
+                            "Social Media"
                         ]
                     },
                     "answer": "2010",
@@ -1003,6 +1123,13 @@
                 "modules/graphQuestions/graphImages/color/pie_norm_02_robbery.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_01_robbery.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_02_robbery.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/pie_base_embellished_robbery.png",
+                "modules/graphTheme/chartBase/pie_base_norm_01_robbery.png",
+                "modules/graphTheme/chartBase/pie_base_norm_02_robbery.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_01_robbery.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_02_robbery.png"
             ],
             "questionBank": [
                 {
@@ -1084,7 +1211,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1103,6 +1230,11 @@
                             "Top Smartphones",
                             "Favorite Seafood",
                             "Most Viewed Sports"
+                        ],
+                        "mix": [
+                            "Robbery Occurences",
+                            "Top Smartphones",
+                            "Favorite Seafood"
                         ]
                     },
                     "answer": "2010",
@@ -1119,6 +1251,13 @@
                 "modules/graphQuestions/graphImages/color/pie_norm_02_womenWork.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_01_womenWork.png",
                 "modules/graphQuestions/graphImages/color/pie_unrelated_02_womenWork.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/pie_base_embellished_womenWork.png",
+                "modules/graphTheme/chartBase/pie_base_norm_01_womenWork.png",
+                "modules/graphTheme/chartBase/pie_base_norm_02_womenWork.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_01_womenWork.png",
+                "modules/graphTheme/chartBase/pie_base_unrelated_02_womenWork.png"
             ],
             "questionBank": [
                 {
@@ -1189,7 +1328,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1200,7 +1339,7 @@
                     ],
                     "sortedChoices": {
                         "related": [
-                            "Working Women",
+                            "Women Careers",
                             "Jobs After Highschool",
                             "Public Service"
                         ],
@@ -1208,6 +1347,11 @@
                             "Pudding Flavors",
                             "Election Results",
                             "Favorite Pancake Toppings"
+                        ],
+                        "mix": [
+                            "Women Careers",
+                            "Pudding Flavors",
+                            "Election Results"
                         ]
                     },
                     "answer": "2010",
@@ -1226,6 +1370,13 @@
                 "modules/graphQuestions/graphImages/color/bar_norm_02_artwork.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_01_artwork.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_02_artwork.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/bar_base_embellished_artwork.png",
+                "modules/graphTheme/chartBase/bar_base_norm_01_artwork.png",
+                "modules/graphTheme/chartBase/bar_base_norm_02_artwork.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_01_artwork.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_02_artwork.png"
             ],
             "questionBank": [
                 {
@@ -1283,7 +1434,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1295,13 +1446,18 @@
                     "sortedChoices": {
                         "related": [
                             "Expensive Artwork",
-                            "Art Museum Spending",
-                            "Favorite Artwork"
+                            "Art Museum Expenses",
+                            "Popular Art"
                         ],
                         "unrelated": [
                             "Tallest Skyscrapes",
                             "Basketball Stats",
                             "Television Time"
+                        ],
+                        "mix": [
+                            "Expensive Artwork",
+                            "Tallest Skyscrapes",
+                            "Basketball Stats"
                         ]
                     },
                     "answer": "2010",
@@ -1318,6 +1474,13 @@
                 "modules/graphQuestions/graphImages/color/bar_norm_02_majorSalaries.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_01_majorSalaries.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_02_majorSalaries.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/bar_base_embellished_majorSalaries.png",
+                "modules/graphTheme/chartBase/bar_base_norm_01_majorSalaries.png",
+                "modules/graphTheme/chartBase/bar_base_norm_02_majorSalaries.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_01_majorSalaries.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_02_majorSalaries.png"
             ],
             "questionBank": [
                 {
@@ -1375,7 +1538,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1395,6 +1558,11 @@
                             "Expensive Cars",
                             "Grocery Spending",
                             "Top Selling Books"
+                        ],
+                        "mix": [
+                            "Degree Salaries",
+                            "Expensive Cars",
+                            "Grocery Spending"
                         ]
                     },
                     "answer": "2010",
@@ -1411,6 +1579,13 @@
                 "modules/graphQuestions/graphImages/color/bar_norm_02_developers.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_01_developers.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_02_developers.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/bar_base_embellished_developers.png",
+                "modules/graphTheme/chartBase/bar_base_norm_01_developers.png",
+                "modules/graphTheme/chartBase/bar_base_norm_02_developers.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_01_developers.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_02_developers.png"
             ],
             "questionBank": [
                 {
@@ -1468,7 +1643,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1487,6 +1662,11 @@
                             "Horror Films",
                             "Paint Brands",
                             "Halloween Candy"
+                        ],
+                        "mix": [
+                            "Development Platforms",
+                            "Horror Films",
+                            "Paint Brands"
                         ]
                     },
                     "answer": "2010",
@@ -1503,6 +1683,13 @@
                 "modules/graphQuestions/graphImages/color/bar_norm_02_olympics.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_01_olympics.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_02_olympics.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/bar_base_embellished_olympics.png",
+                "modules/graphTheme/chartBase/bar_base_norm_01_olympics.png",
+                "modules/graphTheme/chartBase/bar_base_norm_02_olympics.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_01_olympics.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_02_olympics.png"
             ],
             "questionBank": [
                 {
@@ -1561,7 +1748,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1582,6 +1769,11 @@
                             "Top Movie Stars",
                             "Snow Games",
                             "Favorite Condiments"
+                        ],
+                        "mix": [
+                            "Olympic Viewership",
+                            "Top Movie Stars",
+                            "Snow Games"
                         ]
                     },
                     "answer": "2010",
@@ -1598,6 +1790,13 @@
                 "modules/graphQuestions/graphImages/color/bar_norm_02_themePark.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_01_themePark.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_02_themePark.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/bar_base_embellished_themePark.png",
+                "modules/graphTheme/chartBase/bar_base_norm_01_themePark.png",
+                "modules/graphTheme/chartBase/bar_base_norm_02_themePark.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_01_themePark.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_02_themePark.png"
             ],
             "questionBank": [
                 {
@@ -1656,7 +1855,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1675,6 +1874,11 @@
                             "Animal Habitats",
                             "Favorite Meats",
                             "Breakfast Preferences"
+                        ],
+                        "mix": [
+                            "Theme Park Attendance",
+                            "Animal Habitats",
+                            "Favorite Meats"
                         ]
                     },
                     "answer": "2010",
@@ -1691,6 +1895,13 @@
                 "modules/graphQuestions/graphImages/color/bar_norm_02_unemploymentRate.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_01_unemploymentRate.png",
                 "modules/graphQuestions/graphImages/color/bar_unrelated_02_unemploymentRate.png"
+            ],
+            "basePath": [
+                "modules/graphTheme/chartBase/bar_base_embellished_unemploymentRate.png",
+                "modules/graphTheme/chartBase/bar_base_norm_01_unemploymentRate.png",
+                "modules/graphTheme/chartBase/bar_base_norm_02_unemploymentRate.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_01_unemploymentRate.png",
+                "modules/graphTheme/chartBase/bar_base_unrelated_02_unemploymentRate.png"
             ],
             "questionBank": [
                 {
@@ -1749,7 +1960,7 @@
                 ]
             },
             "axesPath": {},
-            "axesQuestions": [
+            "themeQuestions": [
                 {
                     "question": "Select the best description of the graph shown.",
                     "choices": [
@@ -1768,6 +1979,11 @@
                             "Types of Rabbit Meat",
                             "Household Pets",
                             "Favorite School Subjects"
+                        ],
+                        "mix": [
+                            "Countries' Unemployment",
+                            "Types of Rabbit Meat",
+                            "Household Pets"
                         ]
                     },
                     "answer": "2010",

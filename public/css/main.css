@@ -52,6 +52,10 @@ body {
   max-height: 500px;
 }
 
+.picture {
+  max-height: 350px;
+}
+
 svg {
   /*transform-origin: 0 0;*/
    /*margin-left: 10px;*/

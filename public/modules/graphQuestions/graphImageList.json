@@ -8,6 +8,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "In the U.S., what year had the highest number of crabs caught?",
@@ -34,13 +35,14 @@
           "yGridVal": 25
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Crabs in the Sea", "Crabs Caught", "Amount of Snickers Eaten", "U.S. Precipitation", "Poaching Crabs"],
           "sortedChoices": {
             "related":["Crabs in the Sea", "Crabs Caught", "Poaching Crabs"],
-            "unrelated": ["Amount of Snickers Eaten", "U.S. Precipitation", "Harnessing Fuel"]
+            "unrelated": ["Amount of Snickers Eaten", "U.S. Precipitation", "Harnessing Fuel"],
+            "mix": ["Crabs Caught", "Amount of Snickers Eaten", "U.S. Precipitation"]
           },
           "answer": "2010",
           "key": "description"
@@ -55,6 +57,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "In the U.S, which of the following years had the lowest C02 Emissions?",
@@ -81,13 +84,14 @@
           "yGridVal": 4.5
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Nuclear Power Plant Discharge", "C02 Emissions", "Texas Weather", "Factories in the U.S.", "Pancakes Sales at IHOP"],
           "sortedChoices": {
             "related":["Nuclear Power Plant Discharge", "C02 Emissions", "Factories in the U.S."],
-            "unrelated": ["Texas Weather", "Newspaper Revenue", "Pancakes Sales"]
+            "unrelated": ["Texas Weather", "Newspaper Revenue", "Pancakes Sales"],
+            "mix": ["C02 Emissionst", "Texas Weather", "Newspaper Revenue"]
           },
           "answer": "2010",
           "key": "description"
@@ -102,6 +106,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "In which of the following years was the least amount of Ford F-Series Trucks Sold?",
@@ -129,13 +134,14 @@
           "yGridVal": 250
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Ford's Sales Revenue", "Sale of Ford Trucks", "Ford's Stocks", "Grapefruit Production", "Average College Attendance"],
           "sortedChoices": {
             "related":["Ford's Sales Revenue", "Sale of Ford Trucks", "Ford's Stocks"],
-            "unrelated": ["Grapefruit Production", "Average College Attendance", "Pest Control"]
+            "unrelated": ["Grapefruit Production", "Average College Attendance", "Pest Control"],
+            "mix": ["Sale of Ford Trucks", "Grapefruit Production", "Average College Attendance"]
           },
           "answer": "2010",
           "key": "description"
@@ -150,6 +156,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which of the following prices is closes to the peak average gasoline price in the U.S. from June 2010 to June 2012?",
@@ -176,13 +183,14 @@
           "yGridVal": 1
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Georgia's Peach Revenue", "Average Gasoline Prices", "Average Amount of Gas Purchased", "Hybrid Car Fuel Efficiency"],
           "sortedChoices": {
             "related":["Average Gasoline Prices", "Average Amount of Gas Purchased", "Hybrid Car Fuel Efficiency"],
-            "unrelated": ["Georgia's Peach Revenue", "Apple Pie Production", "Gluten Free Menus"]
+            "unrelated": ["Georgia's Peach Revenue", "Apple Pie Production", "Gluten Free Menus"],
+            "mix": ["Average Gasoline Prices", "Georgia's Peach Revenue", "Apple Pie Production"]
           },
           "answer": "2010",
           "key": "description"
@@ -197,6 +205,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "What is the lowest number of manufacturing employing in the U.S. from 2000-2010?",
@@ -223,13 +232,14 @@
           "yGridVal": 5
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["U.S. Manufacturing", "Potato Sales", "Average Tweets", "C02 Emissions", "Factory Workers"],
           "sortedChoices": {
             "related":["Union Workers", "U.S. Manufacturing", "U.S. Factories"],
-            "unrelated": ["Cookie Consumption", "Potato Sales", "Apricot Production"]
+            "unrelated": ["Cookie Consumption", "Potato Sales", "Apricot Production"],
+            "mix": ["U.S. Manufacturing", "Cookie Consumption", "Potato Sales"]
           },
           "answer": "2010",
           "key": "description"
@@ -244,6 +254,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "In 2011 what was the highest average number of hours spent in traffic in the U.S.?",
@@ -270,13 +281,14 @@
           "yGridVal": 1
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Freeway Congestion", "Rush Hour", "Distance Traveled to Work", "Smokey Mountain Visitors", "McDonald's Sales Revenue"],
           "sortedChoices": {
             "related":["Freeway Congestion", "Rush Hour", "Commute Time"],
-            "unrelated": ["Banana Pudding Sales", "Cable Viewership", "Heat Index"]
+            "unrelated": ["Banana Pudding Sales", "Cable Viewership", "Heat Index"],
+            "mix": ["Freeway Congestion", "Banana Pudding Sales", "Cable Viewership"]
           },
           "answer": "2010",
           "key": "description"
@@ -293,6 +305,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which of the following beauty products is purchased the most?",
@@ -314,13 +327,14 @@
         "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099"]
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Candy Being Sold", "Time Spent Getting Ready", "Beauty Products Being Sold", "Beauty Youtube Channels", "Favorite Movie Genres"],
           "sortedChoices": {
             "related":["Morning Routine", "Beauty Products Purchased", "Youtube Beauty Channels"],
-            "unrelated": ["Candy Sales", "Mall Revenue", "Pokemon Favorites"]
+            "unrelated": ["Candy Sales", "Mall Revenue", "Pokemon Favorites"],
+            "mix": ["Beauty Products Purchased", "Candy Sales", "Mall Revenue"]
           },
           "answer": "2010",
           "key": "description"
@@ -335,6 +349,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "What is the percent of the lowest bought girl scout cookie?",
@@ -356,13 +371,14 @@
         "colorArray": []
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
             "related":["Favorite Cookies", "Cookie Price", "Cookie Calories"],
-            "unrelated": ["Favorite Costumed Heroes", "Linkin Park Fans", "Ninja Turtle Ranking"]
+            "unrelated": ["Favorite Costumed Heroes", "Popular Book Genres", "Ninja Turtle Ranking"],
+            "mix": ["Favorite Cookies", "Favorite Costumed Heroes", "Popular Book Genres"]
           },
           "answer": "2010",
           "key": "description"
@@ -377,6 +393,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which renewable energy source accounts for the least of the total amount of renewable energy?",
@@ -398,13 +415,14 @@
         "colorArray": ["#ff9a4c", "#4cb1ff", "#04770d", "#ffee24", "#d69bed"]
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
-            "related":["Crabs in the Sea", "Crabs Caught", "Poaching Crabs"],
-            "unrelated": ["Amount of Snickers Eaten", "U.S. Precipitation", "Harnessing Fuel"]
+            "related":["Global Renewable Energy", "U.S. Renewable Energy", "U.K Renewable Energy"],
+            "unrelated": ["Top Celebrities", "Popular Sports Drinks", "Best Breakfast"],
+            "mix": ["U.K Renewable Energy", "Top Celebrities", "Popular Sports Drinks"]
           },
           "answer": "2010",
           "key": "description"
@@ -419,6 +437,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "What is the highest percent of a revenue source for the total Star Wars revenue?",
@@ -440,13 +459,14 @@
         "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#cc33c9"]
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
-            "related":["Star Wars Profit", "Space Profit", "Child Activities"],
-            "unrelated": ["Favorite Zoo Animals", "Social Media", "Carnival Food"]
+            "related":["Star Wars Revenue", "Star Wars Popularity", "Star Wars Media"],
+            "unrelated": ["Favorite Zoo Animals", "Social Media", "Carnival Food"],
+            "mix": ["Star Wars Revenue", "Favorite Zoo Animals", "Social Media"]
           },
           "answer": "2010",
           "key": "description"
@@ -461,6 +481,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which location accounts for the least amount of robbery occurrences?",
@@ -482,13 +503,14 @@
         "colorArray": ["#19aae5", "#e9b800", "#f8ebc6", "#00db98", "#f886b7"]
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
             "related":["Blue Collar Jobs", "Robbery Occurences", "Government Spending"],
-            "unrelated": ["Top Smartphones", "Favorite Seafood", "Most Viewed Sports"]
+            "unrelated": ["Top Smartphones", "Favorite Seafood", "Most Viewed Sports"],
+            "mix": ["Robbery Occurences", "Top Smartphones", "Favorite Seafood"]
           },
           "answer": "2010",
           "key": "description"
@@ -503,6 +525,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "What is the percent of the industry that the most women work in?",
@@ -524,13 +547,14 @@
         "colorArray": ["#36a8e1", "#ff9900", "#3d9e27", "#dc3912"]
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
-            "related":["Working Women", "Jobs After Highschool", "Public Service"],
-            "unrelated": ["Pudding Flavors", "Election Results", "Favorite Pancake Toppings"]
+            "related":["Women Careers", "Jobs After Highschool", "Public Service"],
+            "unrelated": ["Pudding Flavors", "Election Results", "Favorite Pancake Toppings"],
+            "mix": ["Women Careers", "Pudding Flavors", "Election Results"]
           },
           "answer": "2010",
           "key": "description"
@@ -547,6 +571,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/bar_norm_artwork.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which of the following artworks was sold for the highest amount?",
@@ -574,13 +599,14 @@
         "barDim": []
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
-            "related":["Expensive Artwork", "Art Museum Spending", "Favorite Artwork"],
-            "unrelated": ["Tallest Skyscrapes", "Basketball Stats", "Television Time"]
+            "related":["Expensive Artwork", "Art Museum Expenses", "Popular Art"],
+            "unrelated": ["Tallest Skyscrapes", "Basketball Stats", "Television Time"],
+            "mix": ["Expensive Artwork", "Tallest Skyscrapes", "Basketball Stats"]
           },
           "answer": "2010",
           "key": "description"
@@ -595,6 +621,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/bar_norm_artwork.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "What is the approximate salary amount of the college undergraduate major with the highest salary?",
@@ -622,13 +649,14 @@
         "barDim": []
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Amount of Jobs in Industry", "Major Salaries", "Overalls Club", "College Admittance"],
           "sortedChoices": {
             "related":["Degree Salaries", "College Enrollment", "Highest Paying Jobs"],
-            "unrelated": ["Expensive Cars", "Grocery Spending", "Top Selling Books"]
+            "unrelated": ["Expensive Cars", "Grocery Spending", "Top Selling Books"],
+            "mix": ["Degree Salaries", "Expensive Cars", "Grocery Spending"]
           },
           "answer": "2010",
           "key": "description"
@@ -643,6 +671,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "What is the least used development platform?",
@@ -670,13 +699,14 @@
         "barDim": []
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
             "related":["Development Platforms", "Top Phones", "Tech Revenue"],
-            "unrelated": ["Horror Films", "Paint Brands", "Halloween Candy"]
+            "unrelated": ["Horror Films", "Paint Brands", "Halloween Candy"],
+            "mix": ["Development Platforms", "Horror Films", "Paint Brands"]
           },
           "answer": "2010",
           "key": "description"
@@ -691,6 +721,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which of the following values is closest to the highest percent viewership for a given summer olympic year?",
@@ -718,13 +749,14 @@
         "barDim": []
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Dolphins in Captivity", "U.S. Rainfall", "Olymipic TV", "Favorite Olyymics", "Top Grossing Olympics", ""],
           "sortedChoices": {
             "related":["Olympic Viewership", "Favorite Olympians", "Olympic Attendance"],
-            "unrelated": ["Top Movie Stars", "Snow Games", "Favorite Condiments"]
+            "unrelated": ["Top Movie Stars", "Snow Games", "Favorite Condiments"],
+            "mix": ["Olympic Viewership", "Top Movie Stars", "Snow Games"]
           },
           "answer": "2010",
           "key": "description"
@@ -739,6 +771,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which theme park had the least attendance?",
@@ -766,13 +799,14 @@
         "barDim": []
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
             "related":["Theme Park Attendance", "Rollercoaster Enthusiasm", "Carnival Games"],
-            "unrelated": ["Animal Habitats", "Favorite Meats", "Breakfast Preferences"]
+            "unrelated": ["Animal Habitats", "Favorite Meats", "Breakfast Preferences"],
+            "mix": ["Theme Park Attendance", "Animal Habitats", "Favorite Meats"]
           },
           "answer": "2010",
           "key": "description"
@@ -787,6 +821,7 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
+      "basePath": [],
       "questionBank": [
         {
           "question": "Which country had the highest unemployment rate?",
@@ -814,13 +849,14 @@
         "barDim": []
       },
       "axesPath":{},
-      "axesQuestions":[
+      "themeQuestions":[
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
           "sortedChoices": {
             "related":["Countries' Unemployment", "Countries' Population", "Vacation Destinations"],
-            "unrelated": ["Types of Rabbit Meat", "Household Pets", "Favorite School Subjects"]
+            "unrelated": ["Types of Rabbit Meat", "Household Pets", "Favorite School Subjects"],
+            "mix": ["Countries' Unemployment", "Types of Rabbit Meat", "Household Pets"]
           },
           "answer": "2010",
           "key": "description"

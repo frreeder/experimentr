@@ -28,7 +28,10 @@
         "key": "norm_01",
         "withIcon": false,
         "imagePath": [],
-        "imageDim": []
+        "imageDim": [],
+        "sortedChoices": {
+          "unrelated":["Pork Sales", "Stress Levels", "Facebook Likes"]
+        }
       }
     ],
     "norm_02": [
@@ -36,7 +39,10 @@
         "key": "norm_02",
         "withIcon": false,
         "imagePath": [],
-        "imageDim": []
+        "imageDim": [],
+        "sortedChoices": {
+          "unrelated":["Wildlife Population", "Stocks Sold", "Boy Scouts"]
+        }
       }
     ]
   },
@@ -88,13 +94,19 @@
         "key": "norm_01",
         "withIcon": false,
         "imgPath": ["interact_01", "interact_02", "interact_03", "interact_04"],
-        "imagePath": []
+        "imagePath": [],
+        "sortedChoices": {
+          "unrelated":["Favorite Movie Genres", "Student Grades", "Search Engines Used"]
+        }
       },
       {
         "key": "norm_01",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
-        "imagePath": []
+        "imagePath": [],
+        "sortedChoices": {
+          "unrelated":["Favorite Movie Genres", "Student Grades", "Search Engines Used"]
+        }
       }
     ],
     "norm_02": [
@@ -102,13 +114,19 @@
         "key": "norm_02",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_03", "interact_04"],
-        "imagePath": []
+        "imagePath": [],
+        "sortedChoices": {
+          "unrelated":["Favorite Sports", "Favorite Music Formats", "Water Usage"]
+        }
       },
       {
         "key": "norm_02",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
-        "imagePath": []
+        "imagePath": [],
+        "sortedChoices": {
+          "unrelated":["Favorite Sports", "Favorite Music Formats", "Water Usage"]
+        }
       }
     ]
   },
@@ -169,7 +187,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Oil Reserve", "Largest Cities Employment", "U.S Population"]
+        }
       },
       {
         "key": "norm_01",
@@ -177,7 +198,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Oil Reserve", "Largest Cities Employment", "U.S Population"]
+        }
       }
     ],
     "norm_02": [
@@ -187,7 +211,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Country Exports", "Traffic Violations", "Star Trek Revenue"]
+        }
       },
       {
         "key": "norm_02",
@@ -195,7 +222,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Country Exports", "Traffic Violations", "Star Trek Revenue"]
+        }
       }
     ]
   }

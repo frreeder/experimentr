@@ -55,9 +55,10 @@ print ("pot")
 
 # fileNames = filter(lambda x: x.endswith('.txt'), os.listdir('mydir'))
 fileNames = os.listdir("./graphImages/color")
-print("fileNames", fileNames)
+# print("fileNames", fileNames)
 
 interactNames = os.listdir("./graphImages/interact")
+baseNames = os.listdir("../graphTheme/chartBase")
 
 # A method using endswith to fileter out the png
 # txt_files = list(filter(lambda x: x.endswith('.png'), os.listdir('.')))
@@ -79,23 +80,33 @@ emType = ("embellished", "norm_01", "norm_02", "unrelated_01", "unrelated_02")
 # I need to get the key of each file and check the image list... should make a dictionary ...
 # If path includes line => go lines, if includes embellished => 0 or something like that
 # Cycle through all filenames and place as you go
-for x in fileNames:
-    print ("xNew", x)
-    print ("\n")
-    for i in graphTypes:
-        print ("g", i)
-        if i in x:
-            print ("iCaught: ", x)
-            # pprint (data[i])
-            for j in data[i]:
-                if j["key"] in x:
-                    # https://stackoverflow.com/questions/15684605/python-for-loop-get-indexs
-                    for ind, k in enumerate(emType):
-                        if k in x:
-                            print ("iCaught a : ", j["key"])
-                            j["imagePath"][ind] = "modules/graphQuestions/graphImages/color/"+x
-                            allImages.append("modules/graphQuestions/graphImages/color/"+x)
-                            # j["newPath"] = j["newPath"] + [x]
+for i in graphTypes:
+    print ("g", i)
+    for j in data[i]:
+        # https://stackoverflow.com/questions/15684605/python-for-loop-get-indexs
+        for ind, k in enumerate(emType):
+            for x in fileNames:
+                if i in x and j["key"] in x and k in x:
+                    print ("iCaught: ", x)
+                    print ("iCaught a : ", j["key"])
+                    j["imagePath"][ind] = "modules/graphQuestions/graphImages/color/"+x
+                    allImages.append("modules/graphQuestions/graphImages/color/"+x)
+                    # j["newPath"] = j["newPath"] + [x]
+                else:
+                    print("notCaught: ", j["key"], x)
+
+# Get base files
+# In future might be better to make naming convention rather than using the file name
+for i in graphTypes:
+    print ("g", i)
+    for j in data[i]:
+        # https://stackoverflow.com/questions/15684605/python-for-loop-get-indexs
+        for ind, k in enumerate(emType):
+            for x in baseNames:
+                if i in x and j["key"] in x and k in x:
+                    print ("iCaught: ", x)
+                    print ("iCaught a : ", j["key"])
+                    j["basePath"].append("modules/graphTheme/chartBase/"+x)
                 else:
                     print("notCaught: ", j["key"], x)
 

@@ -59,7 +59,14 @@
                 "imageDim": [
                     2200,
                     1500
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Pork Sales",
+                        "Stress Levels",
+                        "Facebook Likes"
+                    ]
+                }
             }
         ],
         "norm_02": [
@@ -73,7 +80,14 @@
                 "imageDim": [
                     2200,
                     1500
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Wildlife Population",
+                        "Stocks Sold",
+                        "Boy Scouts"
+                    ]
+                }
             }
         ]
     },
@@ -306,7 +320,14 @@
                             799
                         ]
                     }
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Movie Genres",
+                        "Student Grades",
+                        "Search Engines Used"
+                    ]
+                }
             },
             {
                 "key": "norm_01",
@@ -347,7 +368,14 @@
                             799
                         ]
                     }
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Movie Genres",
+                        "Student Grades",
+                        "Search Engines Used"
+                    ]
+                }
             }
         ],
         "norm_02": [
@@ -383,7 +411,14 @@
                             799
                         ]
                     }
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Sports",
+                        "Favorite Music Formats",
+                        "Water Usage"
+                    ]
+                }
             },
             {
                 "key": "norm_02",
@@ -424,7 +459,14 @@
                             799
                         ]
                     }
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Sports",
+                        "Favorite Music Formats",
+                        "Water Usage"
+                    ]
+                }
             }
         ]
     },
@@ -563,7 +605,14 @@
                     1462,
                     45
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Oil Reserve",
+                        "Largest Cities Employment",
+                        "U.S Population"
+                    ]
+                }
             },
             {
                 "key": "norm_01",
@@ -584,7 +633,14 @@
                     1462,
                     45
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Oil Reserve",
+                        "Largest Cities Employment",
+                        "U.S Population"
+                    ]
+                }
             }
         ],
         "norm_02": [
@@ -606,7 +662,14 @@
                     1480,
                     48
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Country Exports",
+                        "Traffic Violations",
+                        "Star Trek Revenue"
+                    ]
+                }
             },
             {
                 "key": "norm_02",
@@ -627,7 +690,14 @@
                     1480,
                     48
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Country Exports",
+                        "Traffic Violations",
+                        "Star Trek Revenue"
+                    ]
+                }
             }
         ]
     }

@@ -1,0 +1,975 @@
+<div id="graphInteract">
+<div id="graphITimer"></div>
+<p id="graphIInstructions"></p>
+<div id="graphIImage" class="graphIImage"></div>
+<div id="interactButtons"></div>
+<div id="graphIVerification"></div><br>
+<div id="graphIText"></div>
+</div>
+
+<style>
+</style>
+
+<script>
+(function() {
+  // for testing purposes
+  var skip = true;
+  var stepSize = .005
+  let mod4 = []
+  let changeAllSlices = true;
+
+  // Specific to interact
+  var chart;
+  // let perc = [.8, 1]
+  // var bodyDim = {h:parseInt(d3.select('#graphIImage').style('height'), 10)*perc[0] , w:parseInt(d3.select('#graphIImage').style('width'), 10)*perc[1]}
+  let perc = [1, .8]
+  // Might need to change this to hard coded numbers, but keeping for now.
+  var bodyDim = {w:parseInt(d3.select('#graphIImage').style('width'), 10)*perc[0], h:parseInt(d3.select('#graphIImage').style('height'), 10)*perc[1]}
+  bodyDim.h = 500*perc[1]
+  bodyDim.w = 850*perc[0]
+  console.log("bod", bodyDim)
+
+  let pieEdit = 0;
+
+  var data = {}
+    , rand = Math.floor(Math.random()*3) // 0, 1, 2
+    , graphCounter = 0
+    , lastGraph = false
+    , isValid = false
+    , graphArray
+    , storyData;
+
+  function clampThings(num, min, max){return Math.min(Math.max(num, min), max)}
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function getRandomImageArray(data){
+    graphArray = []
+    for (var i in data){
+      for (let j = 0; j < data[i].length; j++){
+        let k = getRandomInt(j, data[i].length)
+        let tempI = data[i][j]
+        data[i][j]=data[i][k]
+        data[i][j].embType=getEmbType(j)
+        // data[i][j].
+        data[i][j].chartType=i
+        data[i][k]=tempI
+      }
+      graphArray=graphArray.concat(data[i])
+      // console.log("dataI", data[i])
+    }
+    for (let i=0; i<graphArray.length; i++){
+        let j = getRandomInt(i, graphArray.length)
+        let tempI = graphArray[i]
+        graphArray[i]=graphArray[j]
+        graphArray[j]=tempI
+    }
+  }
+
+  var embellishType = ["embellished", "normal", "normal2", "unrelated", "unrelated2"]
+  function getEmbType(i){
+    let embType = ""
+    switch (i) {
+      case 0:
+      case 1:
+        embType=embellishType[0];
+        break;
+      case 2:
+        embType=embellishType[1];
+        break;
+      case 3:
+        embType=embellishType[2];
+        break;
+      case 4:
+        embType=embellishType[3];
+        break;
+      case 5:
+        embType=embellishType[4];
+        break;
+      default:
+        console.log("ack!!!");
+    }
+    return embType
+  }
+
+  init();
+
+  function init() {
+    // data.mod1=[]
+    experimentr.hideNext();
+    experimentr.startTimer('graphInteract');
+
+    d3.json('modules/graphQuestions/data.json', function(err, d) {
+      getRandomImageArray(d);
+      for (var i=0; i<graphArray.length; i++){
+          mod4.push({key: graphArray[i].chartType, inputData: []})
+      }
+      // Getting the line interact data
+      for (let i = 0; i < graphArray.length; i++){
+        // if (graphArray[i].chartType!="line" && graphArray[i].chartType!="pie") continue;
+        // if (graphArray[i].chartType=="bar"){graphArray[i].interact.dataPath='modules/graphInteract/csvFiles/bar_data_artwork.csv'}
+        d3.csv(graphArray[i].interact.dataPath, function(iData){
+          // Setting the accessors based on the column and row data
+          graphArray[i].interact.accessors = [d3.keys(iData[0])[0], d3.keys(iData[0])[1]]
+          // Turning the strings into floats for the values
+          iData.map((d)=>{
+    				d[graphArray[i].interact.accessors[1]]= parseFloat(d[graphArray[i].interact.accessors[1]])
+    			})
+          // Adding data to the main graph array
+          graphArray[i].interact.data = iData
+        })
+      }
+      console.log("iData", graphArray)
+      // This is here to ensure the data gets loaded....
+      // Need to add text to let the participants know what they are looking at
+      d3.select('#graphIText').selectAll("*").remove()
+      d3.select('#graphIText').append('text').text("In this section you will be asked to select the proper description of the graphs from session one.").append("br")
+      d3.select('#graphIText').append('button')
+        .attr('type', 'button')
+        .text('I have read the instructions.')
+        .on('click',
+          function(d) {
+            loadData();
+          });
+    })
+  }
+
+  function loadData() {
+    isValid = false
+
+    if (graphCounter == graphArray.length-1){
+        lastGraph = true;
+    }
+    storyData = graphArray[graphCounter];
+    loadImage();
+  }
+
+  function loadImage() {
+    d3.select('#graphIInstructions').selectAll("*").remove();
+    d3.select("#graphIInstructions").append("strong")
+      .text("Please use arrow keys to adjust the graph to memory.")
+    d3.select('#interactButtons').selectAll("*").remove();
+    // $('#interactButtons').html("<br><text>Use buttons to visually adjust the value of the chart.<text><br>")
+    d3.select('#interactButtons').html("<br><strong>Please answer the following based on your recall of the above graph.<strong><br>")
+    // d3.select('#interactButtons').append('text').text('Use buttons to visually adjust the value of the chart.')
+    // d3.select('#interactButtons').append('br')
+    d3.select('#graphIImage').selectAll("*").remove()
+
+    // Ask questions
+    for (let i=0; i<1; i++){
+      mod4[graphCounter].inputData.push({questionType: storyData.axesQuestions[i].key, userAnswer: ""})
+      var question = d3.select('#graphIVerification').append("g")
+      question.append('p')
+        .text(storyData.axesQuestions[i].question);
+      var choices = question.selectAll('.choice')
+        .data(storyData.axesQuestions[i].choices)
+        .enter().append('div')
+        .classed('choice', true);
+      choices.append('input')
+        .attr('type', 'radio')
+        .attr('name', 'graphOVerification'+i.toString())
+        .attr('value', function(d) { return d; });
+      choices.append('label')
+        .text(function(d) { return d; });
+      d3.selectAll('input')
+        .filter(function(d) {
+          // console.log("i", i)
+          return this.name === 'graphIVerification'+i.toString() ? this : null; })
+        .on('change', function() {
+          // console.log("i2", i)
+          // if (skip){isValid = true}
+          console.log(this.name, this.value, mod4[graphCounter].inputData[i], i)
+          mod4[graphCounter].inputData[i].userAnswer = this.value
+          // var validate = true;
+          if (!isValid){
+            // for (var inD in data.mod4[graphCounter].inputData){
+            // isValid = true;
+            for (let k=0; k<mod4[graphCounter].inputData.length; k++){
+              var inD = mod4[graphCounter].inputData[k]
+              // console.log("inData", inD, data.mod4[graphCounter].inputData)
+              if (inD.userAnswer==""){
+                isValid = false
+                break;
+              } else {
+                isValid = true;
+              }
+            }
+          }
+          if (isValid || skip){
+            // console.log("isValidated!!!")
+            diffGradeMeth();
+            if (lastGraph) validate();
+            // data.graphQVerification = this.value; validate();
+          }
+        });
+    }
+
+    switch (storyData.chartType) {
+      case "line":
+        makeLine();
+        break;
+      case "pie":
+        makePie();
+        break;
+      case "bar":
+        // makeBar();
+        makeFunBar();
+        break;
+      default:
+        makePower();
+        break;
+    }
+    loadQuestion();
+  }
+
+  function makePower() {
+    d3.select('#graphIImage').append('img')
+      .attr('class', 'picture')
+      .attr('src', function(d) { return "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"; })
+      // Doesn't keep the aspect ratio...but I'm okay with that...for now.
+      .style('height', perc[1]*100+"%")
+      .style('width', perc[0]*100+"%")
+  }
+
+
+  function makeFunBar(){
+    imgDim = storyData.interact.imageDim
+    imgRat = imgDim[0]/imgDim[1]
+    let barData = storyData.interact.data
+    let labelArray = barData.map((d)=>{return d[storyData.interact.accessors[0]]})
+
+    // Make the SVG
+    chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
+    chart.selBar = storyData.interact.selBar-1
+    console.log("labArray", labelArray, storyData.selBar-1)
+    // Set the dimensions
+    chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
+    console.log("bef", chart.bodyDim.w, chart.bodyDim.h, imgRat)
+    chart.arrowSize = bodyDim.w * (1-.8-.05)
+    chart.bodyDim.w = imgRat>0 ? chart.bodyDim.w : chart.bodyDim.h*imgRat;
+    chart.bodyDim.h = imgRat>0 ? chart.bodyDim.w/imgRat : chart.bodyDim.h;
+    console.log("aft", chart.bodyDim.w, chart.bodyDim.h)
+    // Update the SVG to match dimensions
+    chart
+      .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
+      .attr("preserveAspectRatio", "xMinYMax meet")
+      .attr('height', perc[1]*100+"%")
+      .attr('width', perc[0]*100+"%")
+
+    chart.yScale = d3.scale.ordinal()
+      .domain(labelArray)
+      // able to go from zero to h because images are ordered top down
+      .rangeBands([0, chart.bodyDim.h], 0.3)
+
+    chart.xScale = d3.scale.linear()
+      // .domain([0, 135])
+      .domain([0, storyData.interact.xGridMax])
+      .range([0, chart.bodyDim.w])
+
+    chart.barHeight = chart.yScale.rangeBand()
+    // chart.selbarWidth = chart.xScale.domain()[1]/2
+    // barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2
+
+    chart.append("image")
+      // .attr("href", 'modules/graphQuestions/graphImages/interactBars/bar_interact1_00_artwork.png')
+      .attr("href", storyData.interact.imagePath[0])
+      .attr("height", chart.bodyDim.h)
+
+    // Add vertical gridlines
+    let vData = []
+    // let vLine = 4
+    // let mLine = 2
+    let vLine = storyData.interact.xGrid[0]
+    let mLine = storyData.interact.xGrid[1]
+    for (let i = 0; i < vLine+1; i++){
+      if (((i+1)*chart.xScale(storyData.interact.xGridStep))>chart.xScale.range()[1]){continue;}
+      vData.push({col: "grey", xPos: (i+1)*chart.xScale(storyData.interact.xGridStep)})
+      for (let j = 0; j < mLine; j++){
+        if (((i)*chart.xScale(storyData.interact.xGridStep)+(chart.xScale(storyData.interact.xGridStep))/(mLine+1)*(j+1))>chart.xScale.range()[1]){continue;}
+        // hData.push({col: storyData.interact.gridColor[1], yPos: chart.yScale.range()[0]/(hLine+1)*(i)+chart.yScale.range()[0]/(hLine+1)/(mLine+1)*(j+1)})
+        vData.push({col: "lightgrey", xPos: (i)*chart.xScale(storyData.interact.xGridStep)+(chart.xScale(storyData.interact.xGridStep))/(mLine+1)*(j+1)})
+      }
+    }
+    chart.yGrid = chart.append("g").attr("class", "yGrid")
+      .selectAll("line")
+      .data(vData)
+      .enter().append("line")
+      .attr("x1", (d)=>{return d.xPos})
+      .attr("x2", (d)=>{return d.xPos})
+      .attr("y1", (d)=>{return chart.yScale.rangeExtent()[1]})
+      .attr("y2", (d)=>{return chart.yScale.rangeExtent()[0]})
+      .style("stroke", (d)=>{return d.col})
+
+    console.log("b", barData[chart.selBar])
+
+    // Add the outline bar
+    chart.glowBar = chart.append("rect")
+      .attr("y", chart.yScale(barData[chart.selBar][storyData.interact.accessors[0]])-6/2)
+      .attr("height", chart.barHeight+6)
+      .attr("width", chart.xScale(barData[chart.selBar][storyData.interact.accessors[1]])+3)
+      .attr("fill", "pink")
+      .style("opacity", .2)
+
+    chart.chartBars = chart.append("g").selectAll("image")
+      .data(barData).enter().append("image")
+      .attr("class", (d, i)=>{
+        return "bar_"+i+" "+"clip-svg"+(i+1).toString()
+      })
+      // .attr("href", (d, i)=>{return 'modules/graphQuestions/graphImages/interactBars/bar_interact1_0'+(i+1)+'_artwork.png'})
+      .attr("href", (d, i)=>{return storyData.interact.imagePath[i+1]})
+      .attr("height", chart.barHeight)
+      .attr("width", (d)=>{return chart.xScale.range()[1]})
+      .attr("y", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
+      .attr("preserveAspectRatio", "none")
+
+    // Add the clipping paths
+    chart.barClip = chart.append("defs").selectAll("clipPath")
+      .data(barData).enter().append("clipPath")
+      .attr("id", (d,i)=>{return "clipper"+(i+1).toString()})
+      .append("rect")
+      .attr("y", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
+      .attr('height',chart.barHeight)
+      .attr('width', (d,i)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
+
+    chart.chartOutline = chart.append("g")
+      .attr("class", "barOutline")
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", chart.bodyDim.w)
+      .attr("height", chart.bodyDim.h)
+
+  }
+
+  function incBar(isInc, step){
+    // Making sure the bar does not exceed the 0 and 1.
+    let bar = storyData.interact.data[chart.selBar]
+    bar[storyData.interact.accessors[1]] = clampThings((isInc? bar[storyData.interact.accessors[1]]+step : bar[storyData.interact.accessors[1]]-step), 0, chart.xScale.domain()[1])
+    console.log(bar[storyData.interact.accessors[1]], bar)
+    // Updating the clipping path.
+    chart.glowBar.attr('width', chart.xScale(bar[storyData.interact.accessors[1]]))
+    d3.select("#clipper"+(chart.selBar+1).toString()).select("rect").attr("width", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
+    // .attr("id", (d,i)=>{return "clipper"+(i+1).toString()})
+    // chart.chartBars.select(".bar_"+chart.selBar).attr("width", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
+    mod4[graphCounter].value = bar
+    // glowBar
+    // chartBars
+    // bar_i
+  }
+
+  // function incBar(isInc, step){
+  //   // Making sure the bar does not exceed the 0 and 1.
+  //   chart.barWidth= clampThings((isInc? chart.barWidth+step : chart.barWidth-step), 0, 1)
+  //   // Updating the clipping path.
+  //   chart.bar.attr('width', (chart.barWidth)*chart.bodyDim.w*perc[0])
+  //   mod4[graphCounter].value = chart.barWidth
+  // }
+
+  function makePie() {
+    let pieData = storyData.interact.data
+    let accessors = storyData.interact.accessors
+    let piePerc = 1
+
+    // save the pieSlice value, will be changed if chart changed
+    mod4[graphCounter].value = pieData[1][accessors[1]]
+
+    // Setting the chart
+    chart = d3.select('#graphIImage')
+    // Setting the width to almost 70 to give room for legend...though legend might not be necessary in future iterations...
+    chart.bodyDim = {w:bodyDim.w*.65, h: bodyDim.h}
+    console.log("pieTime", storyData, chart.bodyDim)
+
+    // Setting a color scale if not predefined.
+    chart.colorScale = d3.scale.category10()
+      // .attr("height", chart.bodyDim.h)
+
+    // Getting the minimum chart Dimensions and setting it as the diameter of the circle.
+    let dia  = Math.min(chart.bodyDim.w, chart.bodyDim.h)
+
+    // Create the SVG
+    chart.plotArea = chart.append("svg").attr("class", "pie")
+      .attr('width', perc[0]*100*piePerc+"%")
+      .attr('height', perc[1]*100+"%")
+      .attr("viewBox", ((chart.bodyDim.w-dia)/2).toString()+" "+((chart.bodyDim.h-dia)/2).toString()+" "+(dia).toString()+" "+(dia).toString())
+      .attr("preserveAspectRatio", "xMinYMax meet")
+      // .attr("viewBox", "0 0 "+(bodyDim.w).toString()+" "+(bodyDim.h).toString())
+
+    // Appending a group for random SVG elements and dimensions
+    chart.pieArea = chart.plotArea.append("g")
+
+    chart.pieArea.r = dia / 2 * 1
+    chart.arrowSize  = dia/2*.15
+
+    chart.pieArea.raySize = chart.pieArea.r*.7
+    let raySize = chart.pieArea.raySize
+    chart.legendArea = chart.append("table").attr('class','legend pie')
+      .attr('width', perc[0]*100*(1-piePerc)+"%")
+      // .style("margin-top", (chart.pieArea.r).toString()+"px").append("tbody")
+
+    // The arc function to specify the paths for the pie.
+    var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
+    // A function to specify the angles of the pie.
+    var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
+
+    // get the min pie slice
+    // chart.pieMin = 0;
+    let pieMin = 0
+    let pieTestRange = changeAllSlices? pieData.length : 3
+    for (let i = 0; i < pieTestRange; i++){
+    // for (let i = 0; i < 3; i++){
+      if (i==0){chart.pieMin = i; pieMin=pieData[i][accessors[1]]}
+      else if (i!=1&&pieMin>pieData[i][accessors[1]]){
+        pieMin = pieData[i][accessors[1]]
+        chart.pieMin=i
+        console.log("i", i)
+      }
+    }
+
+
+    // Creating pie slices
+    var pieInfo = pie(pieData)
+
+    // Add pie make here
+    if (storyData.interact.withIcon){
+      // The clipping paths for the icons.
+      chart.pieArea
+        .selectAll("path")
+        .data(pie(pieData)).enter()
+        .append("defs").append("clipPath")
+        .attr("id", function(d,i){
+          return "clipper"+(i+1).toString()
+          })
+        .append("path")
+        .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+          .attr("d", arc)
+          .style("fill", function(d, i) { return chart.colorScale(i); })
+          .each(function(d) { this._current = d; })
+      // console.log("pie", pieInfo)
+
+      // The base color
+      chart.plotArea.append("g")
+        .attr("class", "outline")
+        .selectAll("path")
+        // .remove().exit()
+        .data(pie(pieData)).enter()
+        .append("path")
+        .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+          .attr("d", arc)
+          .style("fill", (d,i)=>{return storyData.interact.colorArray[i]})
+          .style("stroke", "none")
+          // .style("stroke-width", 3)
+          .each(function(d) { this._current = d; })
+
+      // Creating icons
+      imgCon = {max: chart.pieArea.r*.6, min: 50}
+      chart.pieArea.imgCon = imgCon
+      chart.pieArea.icons=chart.plotArea.append("g")
+        .attr("class", "icons")
+        .selectAll("image")
+        .data(storyData.interact.imagePath)
+        .enter().append("image")
+          .attr("align", "center")
+          .attr("href", (d)=>{return d.path})
+          .attr("class", (d,i)=>{return "clip-svg"+(i+1).toString()})
+          .attr("width", (d,i)=>{
+            // Check if the angle is greater than 180
+            if (pieInfo[i].endAngle-pieInfo[i].startAngle<Math.PI){
+              var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
+              var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
+              d.width = clampThings(Math.sqrt(xChange+yChange)*raySize*.8, imgCon.min, imgCon.max)
+            } else {d.width = imgCon.max}
+            d.raySize = chart.pieArea.r - d.width*.65 -10
+            return d.width
+          })
+          .attr("height", (d, i)=>{return d.width})
+          .attr("x", (d, i)=>{
+            d.xPos = Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+chart.bodyDim.w/2-d.width/2
+            // return Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*raySize+chart.bodyDim.w/2-d.width/2
+            return d.xPos
+              // console.log("d", d, pieInfo[i])
+          })
+          .on("click", (d)=>{
+            pieEdit=pieEdit+1<3?pieEdit+1:0
+            console.log("de", pieEdit)
+          })
+          .attr("y", (d, i)=>{return d.yPos=Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+(chart.bodyDim.h/2-d.width/2)})
+          .call(d3.behavior.drag().on("drag", function(d){
+            console.log("dragging!", pieEdit)
+              d3.select(this).attr("x", (d)=>{return d3.event.x-d.width/2}).attr("y", (d)=>{return d3.event.y-d.width/2})
+          }))
+    } else {
+      // Draw the pie slices.
+      chart.pieArea
+        .selectAll("path")
+        // .remove().exit()
+        .data(pie(pieData)).enter()
+        .append("defs").append("clipPath")
+        .attr("id", function(d,i){
+          return "clipper"+(i+1).toString()
+          })
+        .append("path")
+        // I need to put transform here to have the group in the same coordinates as the clipping path.
+        .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+        // .transition().delay(100)
+          .attr("d", arc)
+          .style("fill", function(d, i) { return chart.colorScale(i); })
+          .each(function(d) { this._current = d; })
+
+      var imgD = chart.pieArea.r*2
+
+      var fileNames = ["potatoes", "pita", "fries", "rice", "tortillaBrown"]
+      for (let i = 0; i < storyData.interact.imagePath.length; i++){
+        if (i>pieData.length-1){continue;}
+        chart.plotArea.append("g")
+          .attr("class", "clip-svg"+(i+1).toString())
+          // .append("image").attr("href", "/data/land.png").style("width", "auto").style("height", "100%")
+          .append("image").attr("href", storyData.interact.imagePath[i].path)
+          .attr("width", imgD).attr("height", imgD)
+          .attr("x", chart.bodyDim.w/2-storyData.interact.imageDim[1]/storyData.interact.imageDim[0]*chart.pieArea.r)
+          .attr("y", chart.bodyDim.h/2-storyData.interact.imageDim[0]/storyData.interact.imageDim[1]*chart.pieArea.r)
+          .style("position", "absolute")
+      }
+    }
+    // This is responsible for the outline of the pie slices
+    chart.plotArea.append("g")
+      .attr("class", "outline")
+      .selectAll("path")
+      // .remove().exit()
+      .data(pie(pieData)).enter()
+      .append("path")
+      // I need to put transform here to have the group in the same coordinates as the clipping path.
+      .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+      // .transition().delay(100)
+        .attr("d", arc)
+        .style("fill", "none")
+        .style("stroke", "black")
+        .style("stroke-width", 3)
+        .each(function(d) { this._current = d; })
+
+    // Highlights the slice being changed
+    chart.highSlice = chart.plotArea.append("g")
+      .attr("class", "highlight")
+      .append("path").datum(pie(pieData)[1])
+      .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+        .attr("d", arc)
+        .style("fill", "none")
+        .style("stroke", "#FF1493")
+        .style("stroke-width", 3)
+        .style("opacity", .4)
+
+  }
+
+  function incSlice (isInc, inc){
+    let pieData = storyData.interact.data
+    let accessors = storyData.interact.accessors
+    if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(100-pieData[chart.pieMin][accessors[1]])){
+    // if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(pieData.length-1)){
+      editPie(true)
+    } else if (!isInc && pieData[1][accessors[1]]>inc) {
+      editPie(false)
+    } else {
+      return; }
+    // probably a prettier way to do this, but just increasing or decreasing pie slices
+    // Right now get the percentage each pie slice against the remaining pie slices and inc/dec by that.
+    function editPie(doInc){
+      let incBy = doInc? inc:-inc
+      let pieTestRange = changeAllSlices? pieData.length:3
+      let decBy = incBy/(pieTestRange-1)
+      for (let i = 0; i <pieTestRange; i++){
+        if (i == 1){pieData[i][accessors[1]]+=incBy} else {
+          decBy = pieData[i][accessors[1]]/(100 - pieData[0][accessors[1]])*incBy
+          pieData[i][accessors[1]]-=decBy
+          console.log("i", i, pieData[i][accessors[1]])
+        }
+      }
+    }
+
+    // save the pieSlice value
+    mod4[graphCounter].value = pieData[1][accessors[1]]
+
+    // create function to draw the arcs of the pie slices.
+    var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
+
+    // create a function to compute the pie slice angles.
+    var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
+    var pieInfo = pie(pieData)
+    console.log("newPi", pieInfo)
+
+
+    let pointerCoor = [Math.cos((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+chart.bodyDim.w/2-chart.arrowSize/2
+      , Math.sin((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
+    let pAngle = (pieInfo[1].endAngle-pieInfo[1].startAngle)/2 + pieInfo[1].startAngle
+    // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
+    chart.arrow
+      .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
+      .attr("x", (d, i)=>{
+        return pointerCoor[0]
+      })
+      .attr("y", (d, i)=>{return pointerCoor[1]})
+
+    chart.pieArea.selectAll("path")
+      .data(pie(pieData))
+      .attr("d", arc)
+
+    chart.highSlice
+      .datum(pie(pieData)[1])
+      .attr("d", arc)
+
+    chart.plotArea.selectAll(".outline").selectAll("path")
+      .data(pie(pieData))
+      .attr("d", arc)
+
+    // If icons
+    // console.log("char", chart.plotArea.select(".icons").selectAll("image"), chart.plotArea.select(".outline").selectAll("path"))
+    chart.plotArea.select(".icons")
+      .selectAll("image")
+      .attr("width", (d, i)=>{
+        // if (i<3){
+          // Check if the angle is greater than 180
+          console.log("m", pieInfo[i].endAngle-pieInfo[i].startAngle, Math.PI*2, (pieInfo[i].endAngle-pieInfo[i].startAngle)/Math.PI*180)
+          if (pieInfo[i].endAngle-pieInfo[i].startAngle<Math.PI){
+            var xChange = Math.pow(Math.cos(pieInfo[i].endAngle)-Math.cos(pieInfo[i].startAngle),2)
+            var yChange = Math.pow(Math.sin(pieInfo[i].endAngle)-Math.sin(pieInfo[i].startAngle),2)
+            d.width = clampThings(Math.sqrt(xChange+yChange)*chart.pieArea.raySize*.8, chart.pieArea.imgCon.min, chart.pieArea.imgCon.max)
+            d.raySize = chart.pieArea.r - d.width*.65 -10
+          }
+          // console.log("rd", d.width, d.raySize, chart.pieArea.r)
+        // }
+        return d.width
+      })
+      .attr("height", (d)=>{return d.width})
+      .attr("x", (d, i)=>{
+        // console.log("ray", chart.pieArea.raySize, Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize, d.width)
+        // return d.xPos = Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*chart.pieArea.raySize+chart.bodyDim.w/2-d.width/2
+        return d.xPos = Math.cos((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+chart.bodyDim.w/2-d.width/2
+      })
+      .attr("y", (d, i)=>{return d.yPos=Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+(chart.bodyDim.h/2-d.width/2)})
+
+    // chart.testCirc
+    //   .attr("cx", (d)=>{return d.xPos+d.width/2})
+    //   .attr("cy", (d)=>{return d.yPos+d.width/2})
+    //   .attr("r", (d)=>{return d.width/2})
+
+  }
+
+  function makeLine() {
+    // console.log("here", storyData.interact, storyData.interact.imageDim[0])
+    let labelArray = storyData.interact.data.map((d)=>{return d[storyData.interact.accessors[0]]})
+    let accessors = storyData.interact.accessors
+    let lineData = storyData.interact.data
+    let pointLoc = typeof(storyData.interact.pointLoc)==='number'? clampThings(storyData.interact.pointLoc, 1, lineData.length-1) : (2<lineData.length-1? 2 : 1)
+    storyData.interact.pointLoc = pointLoc
+
+    // saving value, will change if interacted with
+    mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+
+    chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
+      .attr("preserveAspectRatio", "xMinYMax meet")
+
+    chart.bodyDim = {w: bodyDim.w, h: bodyDim.h}
+    chart.bodyDim.w = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h*(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]) : chart.bodyDim.w;
+    chart.bodyDim.h = chart.bodyDim.w > chart.bodyDim.h ? chart.bodyDim.h : chart.bodyDim.w/(storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]);
+
+    // Adding the chart svg
+    chart
+      .attr("height", perc[1]*100+"%").attr("width", perc[0]*100+"%")
+      .attr("viewBox", "0 0 "+chart.bodyDim.w.toString()+" "+chart.bodyDim.h.toString())
+    // Setting the margin
+    chart.margin = {top: chart.bodyDim.h*.01, right: chart.bodyDim.w*.01, bottom: chart.bodyDim.h*.01, left: chart.bodyDim.w*.01}
+    // Adding buttons for changing the values
+    // Setting the plot area
+    chart.plotArea = chart.append("g")
+
+    // Setting the height and width of the chart based on the ratio of the image.
+    chart.plotArea.height = chart.bodyDim.h - chart.margin.top - chart.margin.bottom;
+    chart.plotArea.width = chart.bodyDim.w - chart.margin.left - chart.margin.right
+    // Need to redo this step because allocating room for the margin messes up the ratio of the chart body
+    chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0][0]/storyData.interact.imageDim[0][1]
+    chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[0][1]/storyData.interact.imageDim[0][0] : chart.plotArea.height
+
+    // Setting the scales for the x and y coordinate system
+    // chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(0, chart.plotArea.width, chart.plotArea.width/(labelArray.length)));
+    labelArray.push("end")
+    chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(labelArray.length).map((d)=>{
+      if (d==labelArray.length-1){
+        return chart.plotArea.width
+      } else {
+        return d / (labelArray.length-2) * (chart.plotArea.width-d / (labelArray.length-2)*storyData.interact.gridPadding[0]);
+      }
+    }));
+    // chart.xScale = d3.scale.ordinal().domain(labelArray).range(d3.range(labelArray.length).map((d)=>{ return d / (labelArray.length-1) * chart.plotArea.width; }));
+    // console.log("sc", chart.xScale.domain(), chart.xScale.range(), d3.range(labelArray.length).map((d)=>{ return d / labelArray.length * chart.plotArea.width; }))
+    chart.yScale = d3.scale.linear().range([chart.plotArea.height, 0])
+      // .domain([0, 1.1*d3.max(storyData.interact.data, function(d) { return d[storyData.interact.accessors[1]]; })])
+      .domain([0, (storyData.interact.gridLines[1]+storyData.interact.gridPadding[1])*storyData.interact.yGridVal])
+      .clamp(true)
+    console.log("do", chart.yScale.domain())
+    storyData.interact.stepSize = chart.yScale.domain()[1]*stepSize
+
+    // define the line function
+    chart.lineFunc = d3.svg.line()
+      .x(function(d) { return chart.xScale(d[storyData.interact.accessors[0]]); })
+      .y(function(d) { return chart.yScale(d[storyData.interact.accessors[1]]); });
+
+    // Setting the calculated width and height to the chart plot area and moving accordingly
+    chart.plotArea
+        .attr("width", chart.plotArea.width)
+        .attr("height", chart.plotArea.height)
+        .attr("transform",
+              "translate(" + chart.margin.left + "," + chart.margin.top + ")");
+
+    // If there is an icon, setting it to a percent of the chart plot area
+    // Needs to be fixed...
+    storyData.interact.iconDim = chart.plotArea.width/13
+    chart.iconDim = chart.plotArea.width/13
+
+    // This is the background image / the top
+    chart.plotArea.append("image")
+        .attr("class", "clip-svg2")
+        .attr("width", chart.plotArea.width)
+        .attr("height", chart.plotArea.height)
+        .attr("href", storyData.interact.imagePath[1])
+
+    // This is the foreground image / the bottom
+    chart.plotArea.append("image")
+      .attr("class", "clip-svg1")
+      .attr("width", chart.plotArea.width)
+      .attr("height", chart.plotArea.height)
+      .attr("href", storyData.interact.imagePath[0])
+
+    // This is the line outline
+    chart.plotArea.append("path")
+      .datum(storyData.interact.data)
+      .attr("class", "lineOutline")
+      .attr("d", chart.lineFunc)
+
+    chart.manipLines = storyData.interact.data.slice(pointLoc-1, pointLoc+2)
+
+    chart.highLine = chart.plotArea.append("g").append("path")
+      .datum(chart.manipLines)
+      .attr("d", chart.lineFunc)
+      .style("stroke", "#FF1493")
+      .style("stroke-width", 3)
+      .style("fill", "none")
+      .style("opacity", .5)
+
+
+    chart.lineDot = chart.plotArea.append("g").append("circle")
+      .datum(chart.manipLines[1])
+      .attr("cx", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("cy", (d)=>{return chart.yScale(d[accessors[1]])})
+      .attr("r", 10)
+      .attr("fill", "yellow")
+      .style("opacity", 0.1)
+
+
+    // NEED ICON DIM!!!
+    // this is the icon attached to the line chart if used... a bit buggy but I suspect it has something to do with the rotation point.
+    if (storyData.interact.withIcon){
+      console.log("storyData.inte", storyData.interact)
+      let iconD = {w: storyData.interact.imageDim[2][0], h:storyData.interact.imageDim[2][1]}
+      let iconR = iconD.w/iconD.h
+      console.log("iD", iconD.w, iconD.h)
+      chart.iconD = {}
+      chart.iconD.w = iconR < 1 ? chart.iconDim * iconR :chart.iconDim
+      chart.iconD.h = iconR < 1 ? chart.iconDim : chart.iconDim * (1/iconR)
+      console.log("iD", chart.iconD)
+      // >storyData.interact.imageDim[3][1]?chart.iconDim/storyData.interact.imageDim[3][1]*storyData.interact.imageDim[3][0]:storyData.interact.imageDim[3][0]
+      let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
+      let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])-chart.iconD.w/2
+      let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-chart.iconD.h
+      chart.plotArea.append("image")
+          .attr("class", "icon")
+          .attr("width", chart.iconD.w)
+          .attr("height", chart.iconD.h)
+          // .attr("position", "center")
+          .attr("href", storyData.interact.imagePath[2])
+          .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos+chart.iconD.w/2)+","+(yPos+chart.iconD.h)+")")
+          // .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
+          .attr("x", xPos)
+          .attr("y", yPos)
+    }
+
+    for (let i = 0; i <2; i++){
+      let y0 = i==0? chart.yScale(0) : chart.yScale.range()[1]
+      var area = d3.svg.area()
+        .x(function(d, i) { return chart.xScale(d[accessors[0]]); })
+        .y0(function(d) { return y0; })
+        .y1(function(d) { return chart.yScale(d[accessors[1]]); });
+      chart.plotArea
+        .append("defs").append("clipPath")
+        .attr("class", "c"+(i+1).toString())
+        .attr("id", "clipper"+(i+1).toString())
+        .append("path")
+        .datum(lineData)
+        .attr("class", "stackLine")
+        .attr("d", area)
+    }
+
+    // Add gridlines
+    // Need to add variable in information for these
+    // let wLine = 2
+    // let hLine = 3
+    // let mLine = 2
+    let wLine = storyData.interact.gridLines[0]
+    let hLine = storyData.interact.gridLines[1]
+    let mLine = storyData.interact.gridLines[2]
+    console.log(storyData.interact.gridLines)
+    // Get the data to filter out widths by 2
+    let wData = lineData.filter((d,i)=>{ return i%wLine == 0 })
+    // let wData = []
+    // for (let i=0; i<wLine+1; i++){
+    //   wData.push({col:storyData.interact.gridColor[0], xPos: chart.})
+    // }
+    // let hData = []
+    // for (let i = 0; i < hLine+1; i++){
+    //   hData.push({col: "black", yPos: chart.yScale.range()[0]/(hLine+1)*(i+1)})
+    //   for (let j = 0; j < mLine; j++){
+    //     hData.push({col: "grey", yPos: chart.yScale.range()[0]/(hLine+1)*(i)+chart.yScale.range()[0]/(hLine+1)/(mLine+1)*(j+1)})
+    //   }
+    // }
+    // let hData = lineData.filter((d,i)=>{ return i%hLine == 0 })
+    console.log(chart.yScale(storyData.interact.yGridVal))
+
+    let hData = []
+    for (let i = 0; i < hLine+1; i++){
+      // hData.push({col: storyData.interact.gridColor[0], yPos: chart.yScale.range()[0]/(hLine+1)*(i+1)})
+      hData.push({col: storyData.interact.gridColor[0], yPos: chart.plotArea.height-(i+1)*(chart.plotArea.height-chart.yScale(storyData.interact.yGridVal))})
+      for (let j = 0; j < mLine; j++){
+        // hData.push({col: storyData.interact.gridColor[1], yPos: chart.yScale.range()[0]/(hLine+1)*(i)+chart.yScale.range()[0]/(hLine+1)/(mLine+1)*(j+1)})
+        hData.push({col: storyData.interact.gridColor[1], yPos: chart.plotArea.height-(i)*(chart.plotArea.height-chart.yScale(storyData.interact.yGridVal))+(chart.plotArea.height-chart.yScale(storyData.interact.yGridVal))/(mLine+1)*(j+1)})
+      }
+    }
+    // let hData = new Array(hLine)
+    chart.xGrid = chart.plotArea.append("g").attr("class", "xGrid")
+      .selectAll("line")
+      .data(wData)
+      .enter().append("line")
+      .attr("x1", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("x2", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("y1", (d)=>{return chart.yScale.range()[1]})
+      .attr("y2", (d)=>{return chart.yScale.range()[0]})
+      .style("stroke", storyData.interact.gridColor[0])
+
+    chart.yGrid = chart.plotArea.append("g").attr("class", "yGrid")
+      .selectAll("line")
+      .data(hData)
+      .enter().append("line")
+      // .attr("x1", (d)=>{return chart.xScale.range()[0]})
+      // .attr("x2", (d)=>{return chart.xScale(lineData[lineData.length-1][accessors[0]])})
+      // .attr("y1", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
+      // .attr("y2", (d, i)=>{return chart.yScale.range()[0]/hData.length*i})
+      .attr("x1", (d)=>{return chart.xScale.range()[0]})
+      .attr("x2", (d)=>{return chart.xScale(lineData[lineData.length-1][accessors[0]])})
+      .attr("y1", (d, i)=>{return d.yPos})
+      .attr("y2", (d, i)=>{return d.yPos})
+      .style("stroke", (d)=>{return d.col})
+
+
+    // Adding rectangular border
+    chart.outline = chart.plotArea.append("g").attr("class", "lineOutline")
+      .append("rect")
+      .attr("x", chart.xScale.range()[0])
+      .attr("y", chart.yScale.range()[1])
+      // .attr("width", chart.plotArea.width)
+      .attr("height", chart.plotArea.height)
+      .attr("width", chart.xScale(lineData[lineData.length-1][accessors[0]])-chart.xScale(lineData[0][accessors[0]]))
+      // .attr("height", chart.yScale(lineData[0][accessors[0]])-chart.yScale(lineData[lineData.length-1][accessors[0]]))
+      .style("fill", "none")
+      .style("stroke", "black")
+      .style("stroke-width", 4)
+  }
+
+  function loadQuestion() {
+    d3.select('#graphIInstructions').selectAll("*").remove();
+    d3.select('#graphIInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
+    d3.select('#graphIText').selectAll("*").remove();
+    if (!lastGraph){
+      d3.select('#graphIText').append('button')
+        .attr('type', 'button')
+        .text('Next Graph')
+        .on('click',
+          function(d) {
+            if (isValid || skip){
+              d3.select('#graphIVerification').selectAll("*").remove()
+              graphCounter++;
+              loadData();
+            }
+          });
+    } else {
+      if (skip){
+        diffGradeMeth();
+        validate()
+      }
+      experimentr.showNext();
+    }
+  }
+
+  function incPoint (isInc){
+    let lineData = storyData.interact.data
+    let accessors = storyData.interact.accessors
+    let inc = storyData.interact.stepSize
+    let pointLoc = storyData.interact.pointLoc
+    if (isInc){
+      lineData[pointLoc][accessors[1]]+=inc
+    } else {lineData[pointLoc][accessors[1]]-=inc}
+
+    // saving value
+    mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+
+    for (let i = 0; i <2; i++){
+      let y0 = i==0? chart.yScale(0) : chart.yScale.range()[1]
+      var area = d3.svg.area()
+        .x(function(d, i) { return chart.xScale(d[accessors[0]]); })
+        .y0(function(d) { return y0; })
+        .y1(function(d) { return chart.yScale(d[accessors[1]]); });
+      chart.plotArea.selectAll(".c"+(i+1).toString()).select("path")
+        .datum(lineData)
+        .attr("d", area)
+    }
+
+    chart.highLine
+      .attr("d", chart.lineFunc)
+
+    chart.lineDot
+      .attr("cx", (d)=>{return chart.xScale(d[accessors[0]])})
+      .attr("cy", (d)=>{return chart.yScale(d[accessors[1]])})
+
+    chart.plotArea.selectAll(".lineOutline")
+      .datum(lineData)
+      .attr("d", chart.lineFunc);
+
+    if (storyData.interact.withIcon){
+    let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))
+    let xPos = (chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))/2+chart.xScale(lineData[pointLoc-1][accessors[0]])-chart.iconD.w/2
+    let yPos = (chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/2+chart.yScale(lineData[pointLoc-1][accessors[1]])-chart.iconD.h
+      chart.plotArea.selectAll(".icon")
+          .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos+chart.iconD.w/2)+","+(yPos+chart.iconD.h)+")")
+          .attr("y", yPos)
+          .attr("x", xPos)
+    }
+  }
+
+  // allow the participant to move on to the next
+  function validate() {
+    // console.log("validate")
+      experimentr.endTimer('graphInteract');
+      data.mod4=JSON.stringify(mod4)
+      console.log(JSON.parse(data.mod4))
+      experimentr.addData(data);
+      experimentr.release();
+    // }
+  }
+  // need to edit this
+  function diffGradeMeth(){
+    for (var i=0; i<mod4[graphCounter].inputData.length; i++){
+      if (mod4[graphCounter].inputData[i].userAnswer==storyData.axesQuestions[i].answer){
+        mod4[graphCounter].inputData[i].answerVerification = true
+      } else { mod4[graphCounter].inputData[i].answerVerification = false}
+      // console.log("apples", JSON.parse("apples"))
+    }
+  }
+}());
+</script>
