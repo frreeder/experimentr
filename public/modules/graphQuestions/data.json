@@ -215,20 +215,16 @@
                 }
             ],
             "interact": {
-                "withIcon": true,
+                "withIcon": false,
                 "iconLoc": 3,
-                "iconDim": [
-                    513,
-                    174
-                ],
+                "iconDim": [],
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_01_fordFSeries.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_02_fordFSeries.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_03_fordFSeries.png"
+                    "modules/graphQuestions/graphImages/interact/line_interact_02_fordFSeries.png"
                 ],
                 "imageDim": [
                     1502,
-                    923
+                    924
                 ],
                 "pointLoc": 10,
                 "gridLines": [
@@ -648,7 +644,7 @@
                     "sortedChoices": {
                         "related": [
                             "Morning Routine",
-                            "Beauty Product Sales",
+                            "Beauty Products Purchased",
                             "Youtube Beauty Channels"
                         ],
                         "unrelated": [
@@ -805,50 +801,56 @@
                 }
             ],
             "interact": {
-                "withIcon": false,
+                "withIcon": true,
                 "iconDim": [],
                 "imagePath": [
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_renewable.png",
                         "iconDim": [
-                            836,
-                            834
+                            334,
+                            334
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_renewable.png",
                         "iconDim": [
-                            836,
-                            834
+                            260,
+                            260
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_renewable.png",
                         "iconDim": [
-                            836,
-                            834
+                            349,
+                            349
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_renewable.png",
                         "iconDim": [
-                            836,
-                            834
+                            308,
+                            308
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_renewable.png",
                         "iconDim": [
-                            836,
-                            834
+                            287,
+                            287
                         ]
                     }
                 ],
-                "colorArray": [],
+                "colorArray": [
+                    "#ff9a4c",
+                    "#4cb1ff",
+                    "#04770d",
+                    "#ffee24",
+                    "#d69bed"
+                ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_renewable.csv",
                 "imageDim": [
-                    836,
-                    834
+                    334,
+                    334
                 ]
             },
             "axesPath": {},
@@ -975,6 +977,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Star Wars Profit",
+                            "Space Profit",
+                            "Child Activities"
+                        ],
+                        "unrelated": [
+                            "Favorite Zoo Animals",
+                            "Social Media",
+                            "Carnival Food"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1079,6 +1093,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Blue Collar Jobs",
+                            "Robbery Occurences",
+                            "Government Spending"
+                        ],
+                        "unrelated": [
+                            "Top Smartphones",
+                            "Favorite Seafood",
+                            "Most Viewed Sports"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1172,6 +1198,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Working Women",
+                            "Jobs After Highschool",
+                            "Public Service"
+                        ],
+                        "unrelated": [
+                            "Pudding Flavors",
+                            "Election Results",
+                            "Favorite Pancake Toppings"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1254,6 +1292,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Expensive Artwork",
+                            "Art Museum Spending",
+                            "Favorite Artwork"
+                        ],
+                        "unrelated": [
+                            "Tallest Skyscrapes",
+                            "Basketball Stats",
+                            "Television Time"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1335,6 +1385,18 @@
                         "Overalls Club",
                         "College Admittance"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Degree Salaries",
+                            "College Enrollment",
+                            "Highest Paying Jobs"
+                        ],
+                        "unrelated": [
+                            "Expensive Cars",
+                            "Grocery Spending",
+                            "Top Selling Books"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1415,6 +1477,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Development Platforms",
+                            "Top Phones",
+                            "Tech Revenue"
+                        ],
+                        "unrelated": [
+                            "Horror Films",
+                            "Paint Brands",
+                            "Halloween Candy"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1498,6 +1572,18 @@
                         "Top Grossing Olympics",
                         ""
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Olympic Viewership",
+                            "Favorite Olympians",
+                            "Olympic Attendance"
+                        ],
+                        "unrelated": [
+                            "Top Movie Stars",
+                            "Snow Games",
+                            "Favorite Condiments"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1579,6 +1665,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Theme Park Attendance",
+                            "Rollercoaster Enthusiasm",
+                            "Carnival Games"
+                        ],
+                        "unrelated": [
+                            "Animal Habitats",
+                            "Favorite Meats",
+                            "Breakfast Preferences"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }
@@ -1660,6 +1758,18 @@
                         "Real Answer",
                         "Overalls Club"
                     ],
+                    "sortedChoices": {
+                        "related": [
+                            "Countries' Unemployment",
+                            "Countries' Population",
+                            "Vacation Destinations"
+                        ],
+                        "unrelated": [
+                            "Types of Rabbit Meat",
+                            "Household Pets",
+                            "Favorite School Subjects"
+                        ]
+                    },
                     "answer": "2010",
                     "key": "description"
                 }

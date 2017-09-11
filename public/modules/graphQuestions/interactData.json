@@ -14,6 +14,13 @@
                     260
                 ],
                 "iconLoc": 3,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Cheese Purchases",
+                        "Tom and Jerry Ratings",
+                        "Mouse Infestation"
+                    ]
+                },
                 "iconDim": [
                     208,
                     201
@@ -31,7 +38,14 @@
                 "imageDim": [
                     1460,
                     894
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Poison in Water",
+                        "Food Poisening",
+                        "Exploitive News"
+                    ]
+                }
             }
         ],
         "norm_01": [
@@ -72,32 +86,39 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_unrelated_01.png",
                         "iconDim": [
-                            498,
-                            509
+                            648,
+                            648
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_unrelated_01.png",
                         "iconDim": [
-                            516,
-                            507
+                            648,
+                            648
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_unrelated_01.png",
                         "iconDim": [
-                            540,
-                            540
+                            648,
+                            648
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_unrelated_01.png",
                         "iconDim": [
-                            495,
-                            494
+                            648,
+                            648
                         ]
                     }
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Side Dishes",
+                        "Carb Nutrition",
+                        "Bread Substitutes"
+                    ]
+                }
             },
             {
                 "key": "unrelated_01",
@@ -106,39 +127,46 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_00_unrelated_01.png",
                         "iconDim": [
-                            498,
-                            509
+                            648,
+                            648
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_unrelated_01.png",
                         "iconDim": [
-                            515,
-                            507
+                            648,
+                            648
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_02_unrelated_01.png",
                         "iconDim": [
-                            516,
-                            507
+                            648,
+                            648
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_03_unrelated_01.png",
                         "iconDim": [
-                            540,
-                            540
+                            648,
+                            648
                         ]
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_unrelated_01.png",
                         "iconDim": [
-                            495,
-                            494
+                            648,
+                            648
                         ]
                     }
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Side Dishes",
+                        "Carb Nutrition",
+                        "Bread Substitutes"
+                    ]
+                }
             }
         ],
         "unrelated_02": [
@@ -180,7 +208,14 @@
                     "#fd186a",
                     "#2fdb36",
                     "#aa62c7"
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Sea Creatures",
+                        "Sea Creatures Studied",
+                        "Sea Creature Population"
+                    ]
+                }
             },
             {
                 "key": "unrelated_02",
@@ -228,7 +263,14 @@
                     "#ff9911",
                     "#2fdb36",
                     "#aa62c7"
-                ]
+                ],
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Sea Creatures",
+                        "Sea Creatures Studied",
+                        "Sea Creature Population"
+                    ]
+                }
             }
         ],
         "norm_01": [
@@ -394,10 +436,10 @@
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/bar_interact_00_unrelated_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_01_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact/bar_interact_06_unrelated_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_03_unrelated_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_01.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_01.png",
-                    "modules/graphQuestions/graphImages/interact/bar_interact_06_unrelated_01.png"
+                    "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_01.png"
                 ],
                 "imageDim": [
                     1361,
@@ -407,7 +449,14 @@
                     2592,
                     135
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Power Ranger Stats",
+                        "Power Ranger Viewership",
+                        "Power Ranger Sales"
+                    ]
+                }
             },
             {
                 "key": "unrelated_01",
@@ -428,7 +477,14 @@
                     2592,
                     135
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Power Ranger Stats",
+                        "Power Ranger Viewership",
+                        "Power Ranger Sales"
+                    ]
+                }
             }
         ],
         "unrelated_02": [
@@ -450,7 +506,14 @@
                     2592,
                     125
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Fruit",
+                        "Fruit Production",
+                        "Fruit Nutrition"
+                    ]
+                }
             },
             {
                 "key": "unrelated_02",
@@ -471,7 +534,14 @@
                     2592,
                     125
                 ],
-                "useBG": false
+                "useBG": false,
+                "sortedChoices": {
+                    "unrelated": [
+                        "Favorite Fruit",
+                        "Fruit Production",
+                        "Fruit Nutrition"
+                    ]
+                }
             }
         ],
         "norm_01": [

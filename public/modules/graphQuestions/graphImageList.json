@@ -319,7 +319,7 @@
           "question": "Select the best description of the graph shown.",
           "choices": ["Candy Being Sold", "Time Spent Getting Ready", "Beauty Products Being Sold", "Beauty Youtube Channels", "Favorite Movie Genres"],
           "sortedChoices": {
-            "related":["Morning Routine", "Beauty Product Sales", "Youtube Beauty Channels"],
+            "related":["Morning Routine", "Beauty Products Purchased", "Youtube Beauty Channels"],
             "unrelated": ["Candy Sales", "Mall Revenue", "Pokemon Favorites"]
           },
           "answer": "2010",
@@ -392,10 +392,10 @@
         }
       ],
       "interact": {
-        "withIcon": false,
+        "withIcon": true,
         "iconDim": [],
         "imagePath": [],
-        "colorArray": []
+        "colorArray": ["#ff9a4c", "#4cb1ff", "#04770d", "#ffee24", "#d69bed"]
       },
       "axesPath":{},
       "axesQuestions":[
@@ -444,6 +444,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Star Wars Profit", "Space Profit", "Child Activities"],
+            "unrelated": ["Favorite Zoo Animals", "Social Media", "Carnival Food"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -482,6 +486,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Blue Collar Jobs", "Robbery Occurences", "Government Spending"],
+            "unrelated": ["Top Smartphones", "Favorite Seafood", "Most Viewed Sports"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -520,6 +528,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Working Women", "Jobs After Highschool", "Public Service"],
+            "unrelated": ["Pudding Flavors", "Election Results", "Favorite Pancake Toppings"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -566,6 +578,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Expensive Artwork", "Art Museum Spending", "Favorite Artwork"],
+            "unrelated": ["Tallest Skyscrapes", "Basketball Stats", "Television Time"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -610,6 +626,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Amount of Jobs in Industry", "Major Salaries", "Overalls Club", "College Admittance"],
+          "sortedChoices": {
+            "related":["Degree Salaries", "College Enrollment", "Highest Paying Jobs"],
+            "unrelated": ["Expensive Cars", "Grocery Spending", "Top Selling Books"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -654,6 +674,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Development Platforms", "Top Phones", "Tech Revenue"],
+            "unrelated": ["Horror Films", "Paint Brands", "Halloween Candy"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -698,6 +722,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Dolphins in Captivity", "U.S. Rainfall", "Olymipic TV", "Favorite Olyymics", "Top Grossing Olympics", ""],
+          "sortedChoices": {
+            "related":["Olympic Viewership", "Favorite Olympians", "Olympic Attendance"],
+            "unrelated": ["Top Movie Stars", "Snow Games", "Favorite Condiments"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -742,6 +770,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Theme Park Attendance", "Rollercoaster Enthusiasm", "Carnival Games"],
+            "unrelated": ["Animal Habitats", "Favorite Meats", "Breakfast Preferences"]
+          },
           "answer": "2010",
           "key": "description"
         }
@@ -786,6 +818,10 @@
         {
           "question": "Select the best description of the graph shown.",
           "choices": ["Rangers United", "Pancake Allegience", "Real Answer", "Overalls Club"],
+          "sortedChoices": {
+            "related":["Countries' Unemployment", "Countries' Population", "Vacation Destinations"],
+            "unrelated": ["Types of Rabbit Meat", "Household Pets", "Favorite School Subjects"]
+          },
           "answer": "2010",
           "key": "description"
         }

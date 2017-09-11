@@ -163,3 +163,9 @@ tr:nth-child(even) {
   stroke-width: 3;
   fill: none;
 }
+
+.barEdge {
+  stroke: black;
+  stroke-width: 1;
+  fill: none;
+}

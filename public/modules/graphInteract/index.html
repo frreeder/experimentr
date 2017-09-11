@@ -16,8 +16,10 @@
   var stepSize = .005
   let mod4 = []
   let changeAllSlices = true;
+  let isInteract = true;
+  let emNum = 4; // 0-4, norm, norm2, un, un2, emb
 
-  let dataLoaded = [false, false, false, false]
+  // let dataLoaded = [false, false, false, false]
 
   // Specific to interact
   var chart;
@@ -46,56 +48,21 @@
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  function getRandomImageArray(data){
-    graphArray = []
-    for (var i in data){
-      for (let j = 0; j < data[i].length; j++){
-        let k = getRandomInt(j, data[i].length)
-        let tempI = data[i][j]
-        data[i][j]=data[i][k]
-        data[i][j].embType=getEmbType(j)
-        // data[i][j].
-        data[i][j].chartType=i
-        data[i][k]=tempI
-      }
-      graphArray=graphArray.concat(data[i])
-      // console.log("dataI", data[i])
-    }
-    for (let i=0; i<graphArray.length; i++){
-        let j = getRandomInt(i, graphArray.length)
-        let tempI = graphArray[i]
-        graphArray[i]=graphArray[j]
-        graphArray[j]=tempI
-    }
-  }
-
-  var embellishType = ["embellished", "normal", "normal2", "unrelated", "unrelated2"]
-  function getEmbType(i){
-    let embType = ""
-    switch (i) {
-      case 0:
-      case 1:
-        embType=embellishType[0];
-        break;
-      case 2:
-        embType=embellishType[1];
-        break;
-      case 3:
-        embType=embellishType[2];
-        break;
-      case 4:
-        embType=embellishType[3];
-        break;
-      case 5:
-        embType=embellishType[4];
-        break;
-      default:
-        console.log("ack!!!");
-    }
-    return embType
-  }
-
   init();
+
+  let embT = ["normal", "normal2", "unrelated", "unrelated2", "embellished"]
+  function notInteract(gO, gArr){
+    for (var i in gO){
+      for (let j=0; j<gO[i].length; j++){
+        for (let k=0; k<embT.length; k++){
+          gArr.push(gO[i][j])
+          gArr[gArr.length-1].embType=embT[k]
+          gArr[gArr.length-1].chartType=i
+        }
+      }
+    }
+    console.log(gArr)
+  }
 
   // Getting information for line and bar charts.
   function setImg(embType, data, iDim){
@@ -143,15 +110,14 @@
     return padding
   }
 
-  function getGraphArray(d, gO, gArr) {
-    for (let i=0; i<gO.length; i++){
-      // Either this or for loop...
-      gArr.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
-    }
-  }
+  // function getGraphArray(d, gO, gArr) {
+  //   for (let i=0; i<gO.length; i++){
+  //     // Either this or for loop...
+  //     gArr.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
+  //   }
+  // }
 
   let embDict = {normal: "norm_01", normal2: "norm_02", unrelated: "unrelated_01", unrelated2: "unrelated_02", embellished: "embellished"}
-
   function getData(gArr){
     let graphO, graphA, graphI
     d3.json('modules/graphQuestions/data.json', function(err, d) {graphA = d})
@@ -159,10 +125,28 @@
     d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
     setTimeout(()=>{
       // Set the graph array based on graph order
-      for (let i=0; i<graphO.length; i++){
-        gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
-        gArr[i].embType = graphO[i].embType
-        gArr[i].chartType = graphO[i].chartType
+      if (isInteract){
+        for (let i=0; i<graphO.length; i++){
+          gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
+          gArr[i].embType = graphO[i].embType
+          gArr[i].chartType = graphO[i].chartType
+        }
+      } else {
+          for (var i in graphA){
+            for (let j=0; j<graphA[i].length; j++){
+              // manually set the embellishment type
+              gArr.push(Object.assign({}, graphA[i][j], {embType:embT[emNum], chartType:i}))
+              // for (let k=0; k<embT.length; k++){
+              //   gArr.push(Object.assign({}, graphA[i][j]))
+              //   // , {embType:embT[k]}))
+              //   gArr[gArr.length-1].interact=(Object.assign({}, graphA[i][j].interact))
+              //   gArr[gArr.length-1].embType=embT[k]
+              //   gArr[gArr.length-1].chartType=i
+              //   console.log("em", embT[k], gArr[gArr.length-1].embType)
+              // }
+            }
+            // console.log("em2", gArr)
+          }
       }
       // Get the associated data based on CSV files
       for (let i = 0; i < gArr.length; i++){
@@ -179,6 +163,7 @@
       }
       // Set the unrelated and normal images
       for (let i = 0; i < gArr.length; i++){
+        console.log("ga", gArr[i].embType)
         if (gArr[i].embType=="embellished") {
           if (gArr[i].chartType!="pie")
             setImg(gArr[i].embType, gArr[i], gArr[i].interact.imageDim)
@@ -189,6 +174,7 @@
         console.log("n0", newData)
         // console.log("gArr[i]", gArr[i].chartType)
         if (gArr[i].chartType=="line"){
+          gArr[i].interact.gridColor=["black", "#2a2d33"]
           newData=newData[0]
           console.log("n1",newData)
           gArr[i].interact.imagePath = newData.imagePath
@@ -199,6 +185,7 @@
           }
           // Might have to go through and look at the keys of object and see if want to copy all, for now hardcoded...
         } else {
+          gArr[i].interact.xGridCol=["black", "#2a2d33"]
           newData=newData.filter((d2)=>{
             return d2.imagePath.length==gArr[i].interact.imagePath.length})[0]
           console.log("n1e",newData)
@@ -313,6 +300,7 @@
         break;
       case "bar":
         // makeBar();
+        // console.log("bar")
         makeFunBar();
         break;
       default:
@@ -381,7 +369,9 @@
 
     chart.barHeight = chart.yScale.rangeBand()
     // chart.selbarWidth = chart.xScale.domain()[1]/2
-    barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2
+    if (isInteract){
+      console.log("inhere!")
+      barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2}
 
     // clipping path for chart area
     // chart.barClip = chart.append("g").attr("class", chartOutline).append("defs").selectAll("clipPath")
@@ -424,6 +414,8 @@
       .attr("href", storyData.interact.imagePath[0])
       // .attr("height", chart.bodyDim.h)
       .attr("height", chart.imageDim.h)
+      // makes sure the chart is positioned from the top of the image
+      .attr("y", chart.bodyDim.h-chart.imageDim.h)
 
     // Add vertical gridlines
     let vData = []
@@ -453,15 +445,21 @@
     console.log("b", barData[chart.selBar])
 
     // Add the outline bar
-    chart.glowBar = chart.append("rect")
-      .attr("y", chart.yScale(barData[chart.selBar][storyData.interact.accessors[0]])-8/2)
-      .attr("height", chart.barHeight+8)
-      .attr("width", chart.xScale(barData[chart.selBar][storyData.interact.accessors[1]]))
-      .attr("fill", "fuchsia")
-      .style("opacity", .2)
+    if (isInteract){
+      chart.glowBar = chart.append("rect")
+        .attr("y", chart.yScale(barData[chart.selBar][storyData.interact.accessors[0]])-8/2)
+        .attr("height", chart.barHeight+8)
+        .attr("width", chart.xScale(barData[chart.selBar][storyData.interact.accessors[1]]))
+        .attr("fill", "fuchsia")
+        .style("opacity", .2)
+    }
 
+    let barGrp =chart.append("g").selectAll("image")
+      .data(barData).enter()
     chart.chartBars = chart.append("g").selectAll("image")
-      .data(barData).enter().append("image")
+      .data(barData).enter()
+    chart.chartBars = barGrp
+      .append("image")
       .attr("class", (d, i)=>{
         return "bar_"+i+" "+"clip-svg"+(i+1).toString()
       })
@@ -498,6 +496,14 @@
       .attr("width", chart.bodyDim.w)
       .attr("height", chart.bodyDim.h)
 
+    chart.chartVertical = barGrp
+      .insert("line")
+      .attr("class", "barEdge")
+      .attr("x1", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
+      .attr("x2", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
+      .attr("y1", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
+      .attr("y2", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])+chart.barHeight} )
+      // .attr("stroke", "black")
 
     mod4[graphCounter].value = barData[chart.selBar][storyData.interact.accessors[1]]
 
@@ -513,6 +519,9 @@
     d3.select("#clipper"+(chart.selBar+1).toString()).select("rect").attr("width", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
     // .attr("id", (d,i)=>{return "clipper"+(i+1).toString()})
     // chart.chartBars.select(".bar_"+chart.selBar).attr("width", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
+    // console.log("cha", chart.chartVertical)
+    chart.chartVertical.attr("x1", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])}).attr("x2", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
+
     mod4[graphCounter].value = bar
   }
 
@@ -590,7 +599,6 @@
         console.log("i", i)
       }
     }
-
 
     // Creating pie slices
     var pieInfo = pie(pieData)
@@ -752,34 +760,37 @@
         .each(function(d) { this._current = d; })
 
     // Highlights the slice being changed
-    chart.highSlice = chart.plotArea.append("g")
-      .attr("class", "highlight")
-      .append("path").datum(pie(pieData)[1])
-      .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
-        .attr("d", arc)
-        .style("fill", "none")
-        .style("stroke", "#FF1493")
-        .style("stroke-width", 3)
-        .style("opacity", .4)
+    if (isInteract){
+      chart.highSlice = chart.plotArea.append("g")
+        .attr("class", "highlight")
+        .append("path").datum(pie(pieData)[1])
+        .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
+          .attr("d", arc)
+          .style("fill", "none")
+          .style("stroke", "#FF1493")
+          .style("stroke-width", 3)
+          .style("opacity", .4)
 
-    // Sets and arrow image pointing at pie slice being changed.
-    let pointerCoor = [Math.cos((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*(1)+chart.bodyDim.w/2-chart.arrowSize/2
-      , Math.sin((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
-    let pAngle = (pieInfo[1].endAngle-pieInfo[1].startAngle)/2 + pieInfo[1].startAngle
-    // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
-    chart.arrow = chart.plotArea.append("g")
-      .attr("class", "arrowPointer")
-      .append("image").attr("href", "modules/graphInteract/buttons/up.png")
-      .attr("width", chart.arrowSize).attr("height", chart.ArrowSize)
-        .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
-      .attr("x", (d, i)=>{
-        return pointerCoor[0]
-          // console.log("d", d, pieInfo[i])
-      })
-      .attr("y", (d, i)=>{return pointerCoor[1]})
-      // .attr("x", chart.bodyDim.w/2-storyData.interact.imageDim[1]/storyData.interact.imageDim[0]*chart.pieArea.r)
-      // .attr("y", chart.bodyDim.h/2-storyData.interact.imageDim[0]/storyData.interact.imageDim[1]*chart.pieArea.r)
 
+
+      // Sets and arrow image pointing at pie slice being changed.
+      let pointerCoor = [Math.cos((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*(1)+chart.bodyDim.w/2-chart.arrowSize/2
+        , Math.sin((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
+      let pAngle = (pieInfo[1].endAngle-pieInfo[1].startAngle)/2 + pieInfo[1].startAngle
+      // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
+      chart.arrow = chart.plotArea.append("g")
+        .attr("class", "arrowPointer")
+        .append("image").attr("href", "modules/graphInteract/buttons/up.png")
+        .attr("width", chart.arrowSize).attr("height", chart.ArrowSize)
+          .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
+        .attr("x", (d, i)=>{
+          return pointerCoor[0]
+            // console.log("d", d, pieInfo[i])
+        })
+        .attr("y", (d, i)=>{return pointerCoor[1]})
+        // .attr("x", chart.bodyDim.w/2-storyData.interact.imageDim[1]/storyData.interact.imageDim[0]*chart.pieArea.r)
+        // .attr("y", chart.bodyDim.h/2-storyData.interact.imageDim[0]/storyData.interact.imageDim[1]*chart.pieArea.r)
+    }
   }
 
   function incSlice (isInc, inc){
@@ -934,6 +945,8 @@
       if (i==0){chart.manip.push({point:tPoint, weight:1})}
     }
     console.log("chart.m", chart.manip)
+    // if (!isInteract){pointLoc=test>0?1:lineData.length-1}
+    if (!isInteract){clampThings(pointLoc=test>0?tPoint-a[0]-1:tPoint+a[1]+1, 0, lineData.length-1)}
 
     // Adding the chart svg
     chart
@@ -959,14 +972,19 @@
           }, 500)})
     }
     // Setting the plot area
-    chart.plotArea = chart.append("g")
+    chart.plotArea = chart.append("g").attr("class", "clip-chartArea")
+    chart.plotArea.width = storyData.interact.plotArea[0]*.95
+    chart.plotArea.height = storyData.interact.plotArea[1]*.95
+    storyData.interact.imageDim[0]*=.95
+    storyData.interact.imageDim[1]*=.95
+    // chart.bodyDm
 
     // Setting the height and width of the chart based on the ratio of the image.
-    chart.plotArea.height = chart.bodyDim.h - chart.margin.top - chart.margin.bottom;
-    chart.plotArea.width = chart.bodyDim.w - chart.margin.left - chart.margin.right
-    // Need to redo this step because allocating room for the margin messes up the ratio of the chart body
-    chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0]/storyData.interact.imageDim[1]
-    chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[1]/storyData.interact.imageDim[0] : chart.plotArea.height
+    // chart.plotArea.height = chart.bodyDim.h - chart.margin.top - chart.margin.bottom;
+    // chart.plotArea.width = chart.bodyDim.w - chart.margin.left - chart.margin.right
+    // // Need to redo this step because allocating room for the margin messes up the ratio of the chart body
+    // chart.plotArea.width = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width : chart.plotArea.height * storyData.interact.imageDim[0]/storyData.interact.imageDim[1]
+    // chart.plotArea.height = chart.plotArea.height>chart.plotArea.width? chart.plotArea.width * storyData.interact.imageDim[1]/storyData.interact.imageDim[0] : chart.plotArea.height
 
 
 
@@ -1018,10 +1036,12 @@
     chart.iconDim = chart.plotArea.width/13
 
     // Setting the start location to halfs
-    let downBy = lineData[pointLoc][accessors[1]]-chart.yScale.domain()[1]/2
-    console.log("downBy", downBy, lineData[pointLoc], chart.manip)
-    for (let i=0; i<=chart.manip.length-1;i++){
-      lineData[chart.manip[i].point][accessors[1]]-=downBy*chart.manip[i].weight
+    if (isInteract){
+      let downBy = lineData[pointLoc][accessors[1]]-chart.yScale.domain()[1]/2
+      console.log("downBy", downBy, lineData[pointLoc], chart.manip)
+      for (let i=0; i<=chart.manip.length-1;i++){
+        lineData[chart.manip[i].point][accessors[1]]-=downBy*chart.manip[i].weight
+      }
     }
 
     // This is the background image / the top
@@ -1055,25 +1075,27 @@
     //     .attr("href", "./modules/graphQuestions/graphImages/rollerCoaster.png")
 
     // This is why pointLoc can't be = 0, clamps end but not beginning...
-    chart.manipLines = storyData.interact.data.slice(pointLoc-1, pointLoc+2)
+    chart.manipLines = storyData.interact.data.slice(tPoint-1, tPoint+2)
     // console.log("cM", chart.man)
 
-    chart.highLine = chart.plotArea.append("g").append("path")
-      .datum(chart.manipLines)
-      .attr("d", chart.lineFunc)
-      .style("stroke", "#FF1493")
-      .style("stroke-width", 3)
-      .style("fill", "none")
-      .style("opacity", .5)
+    if (isInteract){
+      chart.highLine = chart.plotArea.append("g").append("path")
+        .datum(chart.manipLines)
+        .attr("d", chart.lineFunc)
+        .style("stroke", "#FF1493")
+        .style("stroke-width", 3)
+        .style("fill", "none")
+        .style("opacity", .5)
 
 
-    chart.lineDot = chart.plotArea.append("g").append("circle")
-      .datum(chart.manipLines[1])
-      .attr("cx", (d)=>{return chart.xScale(d[accessors[0]])})
-      .attr("cy", (d)=>{return chart.yScale(d[accessors[1]])})
-      .attr("r", 10)
-      .attr("fill", "yellow")
-      .style("opacity", 0.1)
+      chart.lineDot = chart.plotArea.append("g").append("circle")
+        .datum(chart.manipLines[1])
+        .attr("cx", (d)=>{return chart.xScale(d[accessors[0]])})
+        .attr("cy", (d)=>{return chart.yScale(d[accessors[1]])})
+        .attr("r", 10)
+        .attr("fill", "yellow")
+        .style("opacity", 0.1)
+    }
 
 
     // NEED ICON DIM!!!
@@ -1087,7 +1109,7 @@
       chart.iconD.w = iconR < 1 ? chart.iconDim * iconR :chart.iconDim
       chart.iconD.h = iconR < 1 ? chart.iconDim : chart.iconDim * (1/iconR)
       console.log("iD", chart.iconD)
-      pointLoc = storyData.interact.iconLoc >= 1?storyData.interact.iconLoc:1
+      if (isInteract){pointLoc = storyData.interact.iconLoc >= 1?storyData.interact.iconLoc:1}
       storyData.interact.iconLoc = pointLoc
       // >storyData.interact.imageDim[3][1]?chart.iconDim/storyData.interact.imageDim[3][1]*storyData.interact.imageDim[3][0]:storyData.interact.imageDim[3][0]
       let m = -(chart.yScale(lineData[pointLoc][accessors[1]])-chart.yScale(lineData[pointLoc-1][accessors[1]]))/(chart.xScale(lineData[pointLoc][accessors[0]])-chart.xScale(lineData[pointLoc-1][accessors[0]]))

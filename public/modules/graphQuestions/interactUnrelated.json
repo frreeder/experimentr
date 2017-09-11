@@ -6,7 +6,10 @@
         "withIcon": true,
         "imagePath": [],
         "imageDim": [],
-        "iconLoc": 3
+        "iconLoc": 3,
+        "sortedChoices": {
+          "unrelated":["Cheese Purchases", "Tom and Jerry Ratings", "Mouse Infestation"]
+        }
       }
     ],
     "unrelated_02": [
@@ -14,7 +17,10 @@
         "key": "recession",
         "withIcon": false,
         "imagePath": [],
-        "imageDim": []
+        "imageDim": [],
+        "sortedChoices": {
+          "unrelated":["Poison in Water", "Food Poisening", "Exploitive News"]
+        }
       }
     ],
     "norm_01": [
@@ -40,13 +46,19 @@
         "key": "unrelated_01",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_02", "interact_03", "interact_04"],
-        "imagePath": []
+        "imagePath": [],
+        "sortedChoices": {
+          "unrelated":["Favorite Side Dishes", "Carb Nutrition", "Bread Substitutes"]
+        }
       },
       {
         "key": "unrelated_01",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
-        "imagePath": []
+        "imagePath": [],
+        "sortedChoices": {
+          "unrelated":["Favorite Side Dishes", "Carb Nutrition", "Bread Substitutes"]
+        }
       }
     ],
     "unrelated_02":[
@@ -55,14 +67,20 @@
         "withIcon": true,
         "imgPath": ["interact_00", "interact_01", "interact_03", "interact_04"],
         "imagePath": [],
-        "colorArray": ["#26bfff", "#fd186a", "#2fdb36", "#aa62c7"]
+        "colorArray": ["#26bfff", "#fd186a", "#2fdb36", "#aa62c7"],
+        "sortedChoices": {
+          "unrelated":["Favorite Sea Creatures", "Sea Creatures Studied", "Sea Creature Population"]
+        }
       },
       {
         "key": "unrelated_02",
         "withIcon": true,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
         "imagePath": [],
-        "colorArray": ["#26bfff", "#fd186a", "#ff9911", "#2fdb36", "#aa62c7"]
+        "colorArray": ["#26bfff", "#fd186a", "#ff9911", "#2fdb36", "#aa62c7"],
+        "sortedChoices": {
+          "unrelated":["Favorite Sea Creatures", "Sea Creatures Studied", "Sea Creature Population"]
+        }
       }
     ],
     "norm_01": [
@@ -103,7 +121,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_06", "interact_03", "interact_04", "interact_05"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Power Ranger Stats", "Power Ranger Viewership", "Power Ranger Sales"]
+        }
       },
       {
         "key": "unrelated_01",
@@ -111,7 +132,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Power Ranger Stats", "Power Ranger Viewership", "Power Ranger Sales"]
+        }
       }
     ],
     "unrelated_02": [
@@ -121,7 +145,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Favorite Fruit", "Fruit Production", "Fruit Nutrition"]
+        }
       },
       {
         "key": "unrelated_02",
@@ -129,7 +156,10 @@
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
         "imageDim": [],
         "barDim": [],
-        "useBG": false
+        "useBG": false,
+        "sortedChoices": {
+          "unrelated":["Favorite Fruit", "Fruit Production", "Fruit Nutrition"]
+        }
       }
     ],
     "norm_01": [
