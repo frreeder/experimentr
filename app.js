@@ -13,7 +13,6 @@ var express     = require('express')
   , path        = require('path')
   , fs          = require('fs')
   , pid
-  , d3_queue = require('d3-queue')
 
 // Database setup
 redisClient = redis.createClient(rport)
