@@ -114,6 +114,7 @@ Please select the titles that were included in the previous study session.
     let rows = tableBody.selectAll("tr")
       .data(storyData)
       .enter().append("tr")
+        .attr("class", graphCounter%2==0?"evenPage":"oddPage")
       // .append("td").text(function (d) { return d.title; });
     // need to make three things per row; radio button, text, dropdown
     let rowRadio = rows.append('input')
@@ -135,7 +136,7 @@ Please select the titles that were included in the previous study session.
     if (!lastGraph){
       d3.select('#graphTText').append('button')
         .attr('type', 'button')
-        .text('Next Graph')
+        .text('Confirm Answer')
         .on('click',
           function(d) {
             diffGradeMeth();

@@ -62,4 +62,4 @@ for k in keys:
 
 with open('./results/data2.json', 'w') as f:
     # make json legible here
-     json.dump(data, f)
+     json.dump(data, f, indent=4)

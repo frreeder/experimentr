@@ -154,12 +154,12 @@ svg.pie {
     background-image: url( '../modules/graphInteract/buttons/down.png' );
 }
 
-tr:nth-child(even) {
-    background-color: #F0F8FF;
+tr.evenPage:nth-child(even) {
+    background-color: #d6e0f5;
 }
 
-tr:nth-child(even) {
-    background-color: #B0C4DE;
+tr.oddPage:nth-child(odd) {
+    background-color: #d6e0f5;
 }
 
 .barOutline {

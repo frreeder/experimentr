@@ -70,7 +70,7 @@
           d3.select('#graphQTimer').selectAll("*").remove();
           d3.select('#graphQText').append('button')
             .attr('type', 'button')
-            .text('Next Page')
+            .text('Confirm Answer')
             .on('click',
               function(d) {
                 if (isValid || skip){
@@ -83,7 +83,7 @@
       } else {
         d3.select('#graphQText').append('button')
           .attr('type', 'button')
-          .text('Next Page')
+          .text('Confirm Answer')
           .on('click',
             function(d) {
               if (isValid || skip){

@@ -160,7 +160,7 @@
     if (!lastGraph){
       d3.select('#graphQText').append('button')
         .attr('type', 'button')
-        .text('Next Graph')
+        .text('Confirm Answer')
         .on('click',
           function(d) {
             if (isValid || skip){
@@ -176,7 +176,7 @@
       }
       experimentr.showNext();
     }
-    
+
     for (let i=0; i<storyData.questionBank.length; i++){
       mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key, userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")

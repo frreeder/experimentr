@@ -201,6 +201,7 @@
           setImg(gArr[i].embType, gArr[i], newData.imageDim)
         if (gArr[i].chartType=="bar")
           gArr[i].interact.padding=setBars(gArr[i].embType=="embellished", gArr[i].interact.barDim, gArr[i].interact.plotArea, gArr[i].interact.imagePath.length-1)
+          gArr[i].interact.barDim=newData.barDim
       }
       // Set mod4 for recording data
       for (var i=0; i<graphArray.length; i++){
@@ -389,6 +390,9 @@
       .attr("href", 'modules/graphInteract/buttons/left.png')
       // .attr("width", chart.arrowSize)
       .attr("height", chart.barHeight)
+      // needs to be here because of firefox
+      .attr("width", chart.barHeight)
+      // .attr("align", "xMinYMin")
       .attr("x", chart.bodyDim.w+5)
       .attr("y", chart.yScale(barData[chart.selBar][storyData.interact.accessors[0]]))
 
@@ -415,6 +419,7 @@
       .attr("href", storyData.interact.imagePath[0])
       // .attr("height", chart.bodyDim.h)
       .attr("height", chart.imageDim.h)
+      .attr("width", chart.imageDim.w)
       // makes sure the chart is positioned from the top of the image
       .attr("y", chart.bodyDim.h-chart.imageDim.h)
 
@@ -467,7 +472,7 @@
       // .attr("href", (d, i)=>{return 'modules/graphQuestions/graphImages/interactBars/bar_interact1_0'+(i+1)+'_artwork.png'})
       .attr("href", (d, i)=>{return storyData.interact.imagePath[i+1]})
       .attr("height", chart.barHeight)
-      // .attr("width", (d)=>{return chart.xScale.range()[1]})
+      .attr("width", chart.barHeight*storyData.interact.barDim[0]/storyData.interact.barDim[1])
       .attr("y", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
       .attr("preserveAspectRatio", "none")
 
@@ -782,7 +787,7 @@
       chart.arrow = chart.plotArea.append("g")
         .attr("class", "arrowPointer")
         .append("image").attr("href", "modules/graphInteract/buttons/up.png")
-        .attr("width", chart.arrowSize).attr("height", chart.ArrowSize)
+        .attr("width", chart.arrowSize).attr("height", chart.arrowSize)
           .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
         .attr("x", (d, i)=>{
           return pointerCoor[0]
@@ -1245,7 +1250,7 @@
     if (!lastGraph){
       d3.select('#graphIText').append('button')
         .attr('type', 'button')
-        .text('Next Graph')
+        .text('Confirm Answer')
         .on('click',
           function(d) {
             if (isValid || skip){
