@@ -1,7 +1,7 @@
 {
   "line": [
     {
-      "title": "Global Catch of American Lobsters",
+      "title": "Global Catch of American Crabs",
       "key": "americanCrabsCaught",
       "imagePath": [
         "modules/graphQuestions/graphImages/color/line_embellished_americanCrabsCaught.png",
@@ -32,7 +32,8 @@
           "gridLines": [2, 5, 0],
           "gridColor": ["grey", "grey"],
           "gridPadding": [0,0],
-          "yGridVal": 25
+          "yGridVal": 25,
+          "lineCol": "#ff3333"
       },
       "axesPath":{},
       "themeQuestions":[
@@ -78,10 +79,11 @@
           "imagePath": [],
           "imageDim": [],
           "pointLoc": 3,
-          "gridLines": [0, 6, 0],
+          "gridLines": [2, 6, 0],
           "gridColor": ["white", "white"],
           "gridPadding": [0.2, 0],
-          "yGridVal": 4.5
+          "yGridVal": 4.5,
+          "lineCol": "yellow"
       },
       "axesPath":{},
       "themeQuestions":[

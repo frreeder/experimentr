@@ -16,7 +16,7 @@
   var stepSize = .005
   let mod4 = []
   let changeAllSlices = true;
-  let isInteract = true;
+  let isInteract = false;
   let emNum = 4; // 0-4, norm, norm2, un, un2, emb
 
   // let dataLoaded = [false, false, false, false]
@@ -175,6 +175,7 @@
         // console.log("gArr[i]", gArr[i].chartType)
         if (gArr[i].chartType=="line"){
           gArr[i].interact.gridColor=["black", "#2a2d33"]
+          gArr[i].interact.lineCol = "black"
           newData=newData[0]
           console.log("n1",newData)
           gArr[i].interact.imagePath = newData.imagePath
@@ -913,13 +914,13 @@
     // Getting object array of points and weights to be manipulated
     // Might be a more automated way.
     // chart.manip = [{point: pointLoc==0?0:pointLoc, weight: pointLoc==0?1:(pointLoc==lineData.length-1?1:)}]
-    if (pointLoc == 0){
-      chart.manip = [{point: pointLoc, weight: 1}, {point: pointLoc+1, weight: .6}, {point: pointLoc+2, weight: .3}]
-    } else if (pointLoc == lineData.length-1){
-      chart.manip = [{point: pointLoc-2, weight: .3}, {point: pointLoc-1, weight: .6}, {point: pointLoc, weight: 1}]
-    } else {
-      chart.manip = [{point: pointLoc-1, weight: .5}, {point: pointLoc, weight: 1}, {point: pointLoc+1, weight: .5}]
-    }
+    // if (pointLoc == 0){
+    //   chart.manip = [{point: pointLoc, weight: 1}, {point: pointLoc+1, weight: .6}, {point: pointLoc+2, weight: .3}]
+    // } else if (pointLoc == lineData.length-1){
+    //   chart.manip = [{point: pointLoc-2, weight: .3}, {point: pointLoc-1, weight: .6}, {point: pointLoc, weight: 1}]
+    // } else {
+    //   chart.manip = [{point: pointLoc-1, weight: .5}, {point: pointLoc, weight: 1}, {point: pointLoc+1, weight: .5}]
+    // }
 
     chart.manip=[]
     let infPoints = lineData.length<3?1:((lineData.length)%2==1?Math.floor(lineData.length/2):lineData.length/2+1)
@@ -1067,6 +1068,7 @@
       .datum(storyData.interact.data)
       .attr("class", "lineOutline")
       .attr("d", chart.lineFunc)
+      .style("stroke", typeof storyData.interact.lineCol==="string"?storyData.interact.lineCol:"black")
 
     // Testing to see what happens if set the height or width to something specific...
     // chart.plotArea.append("image")

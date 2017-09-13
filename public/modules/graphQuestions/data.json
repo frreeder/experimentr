@@ -1,7 +1,7 @@
 {
     "line": [
         {
-            "title": "Global Catch of American Lobsters",
+            "title": "Global Catch of American Crabs",
             "key": "americanCrabsCaught",
             "imagePath": [
                 "modules/graphQuestions/graphImages/color/line_embellished_americanCrabsCaught.png",
@@ -67,6 +67,7 @@
                     0
                 ],
                 "yGridVal": 25,
+                "lineCol": "#ff3333",
                 "dataPath": "modules/graphInteract/csvFiles/line_data_americanCrabsCaught.csv"
             },
             "axesPath": {},
@@ -156,7 +157,7 @@
                 ],
                 "pointLoc": 3,
                 "gridLines": [
-                    0,
+                    2,
                     6,
                     0
                 ],
@@ -169,6 +170,7 @@
                     0
                 ],
                 "yGridVal": 4.5,
+                "lineCol": "yellow",
                 "dataPath": "modules/graphInteract/csvFiles/line_data_climateChange.csv"
             },
             "axesPath": {},
@@ -415,7 +417,7 @@
             "imagePath": [
                 "modules/graphQuestions/graphImages/color/line_embellished_manuEmployment.png",
                 "modules/graphQuestions/graphImages/color/line_norm_01_manuEmployment.png",
-                "modules/graphQuestions/graphImages/color/rangerPoseGreen.png",
+                "modules/graphQuestions/graphImages/color/line_norm_02_manuEmployment.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_01_manuEmployment.png",
                 "modules/graphQuestions/graphImages/color/line_unrelated_02_manuEmployment.png"
             ],
