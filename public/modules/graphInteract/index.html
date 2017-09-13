@@ -16,7 +16,7 @@
   var stepSize = .005
   let mod4 = []
   let changeAllSlices = true;
-  let isInteract = false;
+  let isInteract = true;
   let emNum = 4; // 0-4, norm, norm2, un, un2, emb
 
   // let dataLoaded = [false, false, false, false]
@@ -973,11 +973,12 @@
           }, 500)})
     }
     // Setting the plot area
+    let chartRat = isInteract?.9:1
     chart.plotArea = chart.append("g").attr("class", "clip-chartArea")
-    chart.plotArea.width = storyData.interact.plotArea[0]*.95
-    chart.plotArea.height = storyData.interact.plotArea[1]*.95
-    storyData.interact.imageDim[0]*=.95
-    storyData.interact.imageDim[1]*=.95
+    chart.plotArea.width = storyData.interact.plotArea[0]*chartRat
+    chart.plotArea.height = storyData.interact.plotArea[1]*chartRat
+    storyData.interact.imageDim[0]*=chartRat
+    storyData.interact.imageDim[1]*=chartRat
     // chart.bodyDm
 
     // Setting the height and width of the chart based on the ratio of the image.
@@ -1029,7 +1030,7 @@
         .attr("width", chart.plotArea.width)
         .attr("height", chart.plotArea.height)
         .attr("transform",
-              "translate(" + chart.margin.left + "," + chart.margin.top + ")");
+              "translate(" + 0 + "," + chart.bodyDim.h*(1-chartRat) + ")");
 
     // If there is an icon, setting it to a percent of the chart plot area
     // Needs to be fixed...
@@ -1098,6 +1099,21 @@
         .attr("fill", "yellow")
         .style("opacity", 0.1)
     }
+    // Add arrow....
+    // chart.plotArea.append("g")
+    chart.append("g")
+      // .datum(chart.manipLines[1])
+      .attr("class", "arrowDown")
+      .append("image")
+      .attr("href", "modules/graphInteract/buttons/down.png")
+      .attr("height", chart.bodyDim.h*(1-.005-chartRat))
+      .attr("width", chart.bodyDim.h*(1-.005-chartRat))
+      // .attr("width", chart.bodyDim.h*.095*102/149)
+      // .attr("x", (d)=>{return chart.xScale(d[accessors[0]])})
+      // .attr("y", (d)=>{return chart.yScale(d[accessors[1]])})
+      // .attr("x", chart.xScale(storyData.interact.data[tPoint][accessors[0]])-chart.bodyDim.h*.095*102/149/2)
+      .attr("x", chart.xScale(storyData.interact.data[tPoint][accessors[0]])-chart.bodyDim.h*(1-.005-chartRat)/2)
+      // .attr("y", chart.yScale(storyData.interact.data[tPoint][accessors[1]])-40)
 
 
     // NEED ICON DIM!!!
@@ -1217,6 +1233,9 @@
       .style("fill", "none")
       .style("stroke", "black")
       .style("stroke-width", 4)
+
+
+
   }
 
   function loadQuestion() {
