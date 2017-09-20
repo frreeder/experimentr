@@ -42,7 +42,24 @@
         for (var i=0; i<graphArray.length; i++){
             mod3.push({key: graphArray[i].chartType, inputData: []})
         }
-        loadData();
+        d3.select('#graphQInstructions').selectAll("*").remove()
+        d3.select('#graphQInstructions').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
+        d3.select('#graphQInstructions').append('text').text('You will be presented a couple of questions about that data associated to the chart from the previous study without the referenced chart. There are 18 question sets in total.').append('br')
+        d3.select('#graphQInstructions').append('img')
+          .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod2.png"; })
+          .attr('height', 400)
+          .attr('width', 'auto')
+          .style('display', 'block').style('padding-bottom', "20px")
+        setTimeout(function(){
+          d3.select('#graphQInstructions').append('button')
+            .attr('type', 'button')
+            .text('I have read the instructions.')
+            .on('click',
+              function(d) {
+                loadData();
+              });
+        }, 1000)
+        // loadData();
       })
     })
   }
@@ -74,6 +91,7 @@
             .on('click',
               function(d) {
                 if (isValid || skip){
+                  mod3[graphCounter].timeQEnd=new Date().getTime()
                   d3.select('#graphQVerification').selectAll("*").remove()
                   graphCounter++;
                   loadData();
@@ -88,6 +106,7 @@
             function(d) {
               if (isValid || skip){
                 d3.select('#graphQVerification').selectAll("*").remove()
+                mod3[graphCounter].timeQEnd=new Date().getTime()
                 graphCounter++;
                 loadData();
               }
@@ -100,11 +119,14 @@
       }
       experimentr.showNext();
     }
+
+    mod3[graphCounter].timeQStart=new Date().getTime()
     // only looking at one thing for now
     for (let i=0; i<storyData.questionBank.length; i++){
       mod3[graphCounter].inputData.push({questionType: storyData.questionBank[i].key, userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
+        .attr("class", "questionP")
         .text(storyData.questionBank[i].question);
       var choices = question.selectAll('.choice')
         .data(storyData.questionBank[i].choices)
@@ -113,9 +135,11 @@
       choices.append('input')
         .attr('type', 'radio')
         .attr('name', 'graphQVerification'+i.toString())
+        .attr("id", (d,j)=>{return "radio"+i+"_"+j})
         .attr('value', function(d) { return d; });
       choices.append('label')
-        .text(function(d) { return d; });
+        .text(function(d) { return d; })
+        .attr("for", (d,j)=>{return "radio"+i+"_"+j})
       d3.selectAll('input')
         .filter(function(d) {
           // console.log("i", i)

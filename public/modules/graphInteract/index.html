@@ -132,7 +132,7 @@
           gArr[i].chartType = graphO[i].chartType
         }
       } else {
-          for (var i in graphA){
+          for (let i in graphA){
             for (let j=0; j<graphA[i].length; j++){
               // manually set the embellishment type
               gArr.push(Object.assign({}, graphA[i][j], {embType:embT[emNum], chartType:i}))
@@ -204,7 +204,7 @@
           gArr[i].interact.barDim=newData.barDim
       }
       // Set mod4 for recording data
-      for (var i=0; i<graphArray.length; i++){
+      for (let i=0; i<graphArray.length; i++){
           mod4.push({key: graphArray[i].chartType, inputData: []})
       }
     }, 500)
@@ -256,17 +256,17 @@
     //
     // })
     d3.select('#graphIText').selectAll("*").remove()
+    d3.select('#graphIText').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
     d3.select('#graphIText').append('text').text("Use the up and down arrow buttons to change the value of the graph to match your memory of the graphs").append("br")
     setTimeout(function(){
       d3.select('#graphIText').append('button')
-        .attr('type', 'button')
+        .attr('type', 'button').style("margin-top", '20px')
         .text('I have read the instructions.')
         .on('click',
           function(d) {
             loadData();
           });
     }, 1000)
-
   }
 
   function loadData() {
@@ -309,6 +309,7 @@
         makePower();
         break;
     }
+    mod4[graphCounter].timeQStart=new Date().getTime()
     loadQuestion();
   }
 
@@ -387,7 +388,7 @@
     // Add the arrow based on the ...
     chart.append("image")
       // .attr("href", 'modules/graphQuestions/graphImages/interactBars/bar_interact1_00_artwork.png')
-      .attr("href", 'modules/graphInteract/buttons/left.png')
+      .attr("xlink:href", 'modules/graphInteract/buttons/left.png')
       // .attr("width", chart.arrowSize)
       .attr("height", chart.barHeight)
       // needs to be here because of firefox
@@ -416,7 +417,7 @@
     chart.append("image")
       .attr("class", "clip-chartArea")
       // .attr("href", 'modules/graphQuestions/graphImages/interactBars/bar_interact1_00_artwork.png')
-      .attr("href", storyData.interact.imagePath[0])
+      .attr("xlink:href", storyData.interact.imagePath[0])
       // .attr("height", chart.bodyDim.h)
       .attr("height", chart.imageDim.h)
       .attr("width", chart.imageDim.w)
@@ -470,7 +471,7 @@
         return "bar_"+i+" "+"clip-svg"+(i+1).toString()
       })
       // .attr("href", (d, i)=>{return 'modules/graphQuestions/graphImages/interactBars/bar_interact1_0'+(i+1)+'_artwork.png'})
-      .attr("href", (d, i)=>{return storyData.interact.imagePath[i+1]})
+      .attr("xlink:href", (d, i)=>{return storyData.interact.imagePath[i+1]})
       .attr("height", chart.barHeight)
       .attr("width", chart.barHeight*storyData.interact.barDim[0]/storyData.interact.barDim[1])
       .attr("y", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
@@ -650,7 +651,7 @@
         .data(storyData.interact.imagePath)
         .enter().append("image")
           .attr("align", "center")
-          .attr("href", (d)=>{return d.path})
+          .attr("xlink:href", (d)=>{return d.path})
           .attr("class", (d,i)=>{return "clip-svg"+(i+1).toString()})
           // .style("width", 100)
           // .style("height", 100)
@@ -742,7 +743,7 @@
         chart.plotArea.append("g")
           .attr("class", "clip-svg"+(i+1).toString())
           // .append("image").attr("href", "/data/land.png").style("width", "auto").style("height", "100%")
-          .append("image").attr("href", storyData.interact.imagePath[i].path)
+          .append("image").attr("xlink:href", storyData.interact.imagePath[i].path)
           .attr("width", imgD).attr("height", imgD)
           .attr("x", chart.bodyDim.w/2-storyData.interact.imageDim[1]/storyData.interact.imageDim[0]*chart.pieArea.r)
           .attr("y", chart.bodyDim.h/2-storyData.interact.imageDim[0]/storyData.interact.imageDim[1]*chart.pieArea.r)
@@ -786,7 +787,7 @@
       // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
       chart.arrow = chart.plotArea.append("g")
         .attr("class", "arrowPointer")
-        .append("image").attr("href", "modules/graphInteract/buttons/up.png")
+        .append("image").attr("xlink:href", "modules/graphInteract/buttons/up.png")
         .attr("width", chart.arrowSize).attr("height", chart.arrowSize)
           .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
         .attr("x", (d, i)=>{
@@ -1058,7 +1059,7 @@
         // .attr("height", chart.plotArea.height)
         .attr("width", storyData.interact.imageDim[0])
         .attr("height", storyData.interact.imageDim[1])
-        .attr("href", storyData.interact.imagePath[1])
+        .attr("xlink:href", storyData.interact.imagePath[1])
 
     // This is the foreground image / the bottom
     chart.plotArea.append("image")
@@ -1067,7 +1068,7 @@
       // .attr("height", chart.plotArea.height)
       .attr("width", storyData.interact.imageDim[0])
       .attr("height", storyData.interact.imageDim[1])
-      .attr("href", storyData.interact.imagePath[0])
+      .attr("xlink:href", storyData.interact.imagePath[0])
 
     // This is the line outline
     chart.plotArea.append("path")
@@ -1110,7 +1111,7 @@
       // .datum(chart.manipLines[1])
       .attr("class", "arrowDown")
       .append("image")
-      .attr("href", "modules/graphInteract/buttons/down.png")
+      .attr("xlink:href", "modules/graphInteract/buttons/down.png")
       .attr("height", chart.bodyDim.h*(1-.005-chartRat))
       .attr("width", chart.bodyDim.h*(1-.005-chartRat))
       // .attr("width", chart.bodyDim.h*.095*102/149)
@@ -1143,7 +1144,7 @@
           .attr("width", chart.iconD.w)
           .attr("height", chart.iconD.h)
           // .attr("position", "center")
-          .attr("href", storyData.interact.imagePath[2])
+          .attr("xlink:href", storyData.interact.imagePath[2])
           .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos+chart.iconD.w/2)+","+(yPos+chart.iconD.h)+")")
           // .attr("transform", "rotate("+(-Math.atan(m)*180/Math.PI)+","+(xPos)+","+(yPos)+")")
           .attr("x", xPos)
@@ -1254,6 +1255,7 @@
         .on('click',
           function(d) {
             if (isValid || skip){
+              mod4[graphCounter].timeQEnd=new Date().getTime()
               d3.select('#graphIVerification').selectAll("*").remove()
               graphCounter++;
               loadData();

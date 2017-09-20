@@ -71,6 +71,11 @@ app.post('/', function handlePost(req, res) {
 })
 
 app.get('/', function(req, res){
+  // fs.readFile('public/modules/agent.txt', 'utf8', function(err, data){
+  //   fs.writeFile('public/modules/agent.txt', data+'\n'+req.headers['user-agent'], function(err){
+  //     if(err) console.log(err);
+  //   })
+  // })
   // Query the string, takes the pid to identify participant and only uses version if testing
   // ?pid=j4bn8lpy&v=1
   // console.log("q: " + req.query.pid + " s: " + req.query.s)

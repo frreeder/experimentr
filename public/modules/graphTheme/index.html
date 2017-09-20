@@ -13,7 +13,7 @@
 (function() {
   // for testing purposes
   var skip = true;
-  let mod4 = []
+  let mod5 = []
   let graphOrder = []
 
   var data = {}
@@ -82,7 +82,7 @@
         }
       }
       for (var i=0; i<graphArray.length; i++){
-          mod4.push({key: graphArray[i].chartType, inputData: []})
+          mod5.push({key: graphArray[i].chartType, inputData: []})
       }
     }, 100)
   }
@@ -90,17 +90,18 @@
   init();
 
   function init() {
-    // data.mod4=[]
+    // data.mod5=[]
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
 
     setGraphArray(graphArray)
 
     d3.select('#graphQText').selectAll("*").remove()
+    d3.select('#graphQText').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
     d3.select('#graphQText').append('text').text("In the following section you will be asked to pick the best description of the graphs from session one.").append("br")
     setTimeout(function(){
       d3.select('#graphQText').append('button')
-        .attr('type', 'button')
+        .attr('type', 'button').style("margin-top", '20px')
         .text('I have read the instructions.')
         .on('click',
           function(d) {
@@ -124,6 +125,7 @@
     if (graphCounter == graphArray.length-1){
         lastGraph = true;
     }
+    mod5[graphCounter].timeQStart=new Date().getTime()
     storyData = graphArray[graphCounter];
     loadImage();
   }
@@ -152,6 +154,7 @@
         .on('click',
           function(d) {
             if (isValid || skip){
+              mod5[graphCounter].timeQEnd=new Date().getTime()
               d3.select('#graphQVerification').selectAll("*").remove()
               graphCounter++;
               loadData();
@@ -167,9 +170,10 @@
 
     // length should be one
     for (let i=0; i<storyData.themeQuestions.length; i++){
-      mod4[graphCounter].inputData.push({questionType: storyData.themeQuestions[i].key, userAnswer: ""})
+      mod5[graphCounter].inputData.push({questionType: storyData.themeQuestions[i].key, userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
+        .attr("class", "questionP")
         .text(storyData.themeQuestions[i].question);
       var choices = question.selectAll('.choice')
         .data(storyData.themeQuestions[i].choices)
@@ -177,25 +181,27 @@
         .classed('choice', true);
       choices.append('input')
         .attr('type', 'radio')
+        .attr("id", (d,j)=>{return "radio"+i+"_"+j})
         .attr('name', 'graphQVerification'+i.toString())
         .attr('value', function(d) { return d; });
       choices.append('label')
-        .text(function(d) { return d; });
+        .text(function(d) { return d; })
+        .attr("for", (d,j)=>{return "radio"+i+"_"+j})
       d3.selectAll('input')
         .filter(function(d) {
           // console.log("i", i)
           return this.name === 'graphQVerification'+i.toString() ? this : null; })
         .on('change', function() {
           // console.log("i2", i)
-          console.log(this.name, this.value, mod4[graphCounter].inputData[i], i)
-          mod4[graphCounter].inputData[i].userAnswer = this.value
+          console.log(this.name, this.value, mod5[graphCounter].inputData[i], i)
+          mod5[graphCounter].inputData[i].userAnswer = this.value
           // var validate = true;
           if (!isValid){
-            // for (var inD in data.mod4[graphCounter].inputData){
+            // for (var inD in data.mod5[graphCounter].inputData){
             // isValid = true;
-            for (let k=0; k<mod4[graphCounter].inputData.length; k++){
-              var inD = mod4[graphCounter].inputData[k]
-              // console.log("inData", inD, data.mod4[graphCounter].inputData)
+            for (let k=0; k<mod5[graphCounter].inputData.length; k++){
+              var inD = mod5[graphCounter].inputData[k]
+              // console.log("inData", inD, data.mod5[graphCounter].inputData)
               if (inD.userAnswer==""){
                 isValid = false
                 break;
@@ -206,6 +212,7 @@
           }
           if (isValid || skip){
             // console.log("isValidated!!!")
+            // mod5[graphCounter].timeQEnd=new Date().getTime()
             diffGradeMeth();
             if (lastGraph) validate();
             // data.graphQVerification = this.value; validate();
@@ -217,18 +224,18 @@
   function validate() {
     // console.log("validate")
       experimentr.endTimer('graphQuestions');
-      data.mod4=JSON.stringify(mod4)
+      data.mod5=JSON.stringify(mod5)
       experimentr.addData(data);
       experimentr.release();
     // }
   }
   function diffGradeMeth(){
-    // console.log("sadalkjd", mod4)
-    for (var i=0; i<mod4[graphCounter].inputData.length; i++){
-      if (mod4[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        mod4[graphCounter].inputData[i].answerVerification = true
-      } else { mod4[graphCounter].inputData[i].answerVerification = false}
-      // console.log(JSON.parse(data.mod4))
+    // console.log("sadalkjd", mod5)
+    for (var i=0; i<mod5[graphCounter].inputData.length; i++){
+      if (mod5[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+        mod5[graphCounter].inputData[i].answerVerification = true
+      } else { mod5[graphCounter].inputData[i].answerVerification = false}
+      // console.log(JSON.parse(data.mod5))
       // console.log("apples", JSON.parse("apples"))
     }
   }

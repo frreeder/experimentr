@@ -1,8 +1,6 @@
 <div id="graphTitles">
 <div id="graphTTimer"></div>
-<p>
-Please select the titles that were included in the previous study session.
-</p>
+<div id="graphInstructions"></div>
 <table id="graphTitlesTable"></table><br>
 <div id="graphTText"></div>
 </div>
@@ -58,12 +56,25 @@ Please select the titles that were included in the previous study session.
       }
       // n, calcNum, x%n
       pageInfo = getCountPerPage(graphArray.length, numPages)
+      for(let i=0; i<pageInfo.length;i++){mod2.push({values:[]})}
       numPages = pageInfo[0]
       // console.log("num", getCountPerPage(107, numPages))
 
       console.log("graphArray", graphArray, dropSel)
       // makeTable()
-      loadData()
+      d3.select('#graphInstructions').selectAll("*").remove()
+      d3.select('#graphInstructions').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
+      d3.select('#graphInstructions').append('text').text("In the following section you will be asked to pick the best description of the graphs from session one.").append("br")
+      setTimeout(function(){
+        d3.select('#graphInstructions').append('button')
+          .attr('type', 'button').style("margin-top", '20px')
+          .text('I have read the instructions.')
+          .on('click',
+            function(d) {
+              loadData();
+            });
+      }, 100)
+      // loadData()
       if (!skip){
         experimentr.hideNext()
         // experimentr.attachTimer('#graphTTimer', 20, function() {
@@ -97,6 +108,8 @@ Please select the titles that were included in the previous study session.
   }
 
   function loadData(){
+    d3.select('#graphInstructions').selectAll("*").remove()
+    d3.select('#graphInstructions').append('p').text('Please select the titles that were included in the previous study session.')
     if (graphCounter == numPages-1){
         lastGraph = true;
     }
@@ -105,6 +118,7 @@ Please select the titles that were included in the previous study session.
     } else {
       storyData = graphArray.slice(Math.ceil(pageInfo[1])*graphCounter, Math.ceil(pageInfo[1])*(graphCounter+1)-1);
     }
+    mod2[graphCounter].timeQStart=new Date().getTime()
     makeTable();
   }
 
@@ -120,7 +134,7 @@ Please select the titles that were included in the previous study session.
     let rowRadio = rows.append('input')
       .attr('type', 'checkbox')
       .attr('value', (d)=>{return d.title})
-      .attr("class", "checkBox")
+      .attr("class", (d,i)=>{return "checkbox"+i})
       // .property("checked", true)
       // .each(function(){console.log(this.checked)})
       // .on("change", ()=>{
@@ -129,6 +143,9 @@ Please select the titles that were included in the previous study session.
       // })
     let rowText = rows
       .append("td").text(function(d){return d.title})
+      .on("click", (d,i)=>{
+        rows.select(".checkbox"+i).node().checked=!rows.select(".checkbox"+i).node().checked})
+        // console.log("clickityclick!", rows.select(".checkbox"+i).node().checked)})
     // Was going to add an option selector for choosing what type of chart.
     // let rowDrop = rows.append("select").selectAll("option")
     //   .data(dropSel).enter().append("option").text(function(d){return d})
@@ -141,6 +158,7 @@ Please select the titles that were included in the previous study session.
           function(d) {
             diffGradeMeth();
             if (isValid || skip){
+              mod2[graphCounter].timeQEnd=new Date().getTime()
               graphCounter++;
               loadData();
             }
@@ -161,7 +179,7 @@ Please select the titles that were included in the previous study session.
   function diffGradeMeth(){
     d3.selectAll(".checkBox").each(function(d){
       if (this.checked)
-        mod2.push(this.value)
+        mod2[graphCounter].values.push(this.value)
     })
   }
 

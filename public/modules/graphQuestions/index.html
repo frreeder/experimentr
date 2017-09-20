@@ -30,7 +30,7 @@
 
   function getRandomImageArray(data){
     graphArray = []
-    for (var i in data){
+    for (let i in data){
       for (let j = 0; j < data[i].length; j++){
         let k = getRandomInt(j, data[i].length)
         let tempI = data[i][j]
@@ -95,7 +95,24 @@
       for (var i=0; i<graphArray.length; i++){
           mod1.push({key: graphArray[i].chartType, inputData: []})
       }
-      loadData();
+      d3.select('#graphQInstructions').selectAll("*").remove()
+      d3.select('#graphQInstructions').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
+      d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions about that data associated to the chart (see below example). There are 18 charts in total.').append('br')
+      d3.select('#graphQInstructions').append('img')
+        .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod1.png"; })
+        .attr('height', 500)
+        .attr('width', 'auto')
+        .style('display', 'block').style('padding-bottom', "20px")
+      setTimeout(function(){
+        d3.select('#graphQInstructions').append('button')
+          .attr('type', 'button')
+          .text('I have read the instructions.')
+          .on('click',
+            function(d) {
+              loadData();
+            });
+      }, 1000)
+      // loadData();
     })
   }
 
@@ -114,9 +131,10 @@
   }
 
   function loadImage() {
-    experimentr.attachTimer('#graphQTimer', 5, function() {
-      loadQuestion();
-    });
+    let timer = setTimeout(loadQuestion, 5000)
+    // experimentr.attachTimer('#graphQTimer', 5, function() {
+    //   loadQuestion();
+    // });
     d3.select('#graphQInstructions').selectAll("*").remove();
     d3.select("#graphQInstructions").append("strong")
       .text("Please play close attention to the graph.")
@@ -136,6 +154,7 @@
         .text('I have finished looking at the graph and am ready for the questions.')
         .on('click',
           function(d) {
+            clearTimeout(timer)
             loadQuestion();
             // d3.select("#graphQTimer").selectAll("*").remove()
             // d3.select('#graphQTimer').text("")
@@ -177,10 +196,12 @@
       experimentr.showNext();
     }
 
+    mod1[graphCounter].timeQStart=new Date().getTime()
     for (let i=0; i<storyData.questionBank.length; i++){
       mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key, userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
+        .attr("class", "questionP")
         .text(storyData.questionBank[i].question);
       var choices = question.selectAll('.choice')
         .data(storyData.questionBank[i].choices)
@@ -188,9 +209,15 @@
         .classed('choice', true);
       choices.append('input')
         .attr('type', 'radio')
+        .attr("class", (d,i)=>{return "radio"+i})
+        .attr("id", (d,j)=>{return "radio"+i+"_"+j})
         .attr('name', 'graphQVerification'+i.toString())
         .attr('value', function(d) { return d; });
       choices.append('label')
+        .attr("for", (d,j)=>{return "radio"+i+"_"+j})
+        // .on("click", (d,i)=>{
+        //   console.log("clickityclick")
+          // choices.selectAll('input').node().value=d3.select(".radio"+i).node().value})
         .text(function(d) { return d; });
       d3.selectAll('input')
         .filter(function(d) {
@@ -217,6 +244,7 @@
           }
           if (isValid || skip){
             // console.log("isValidated!!!")
+            mod1[graphCounter].timeQEnd=new Date().getTime()
             diffGradeMeth();
             if (lastGraph) validate();
             // data.graphQVerification = this.value; validate();
