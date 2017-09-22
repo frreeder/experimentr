@@ -61,7 +61,7 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "In the U.S, which of the following years had the lowest C02 Emissions?",
+          "question": "Which of the following years had the lowest C02 Emissions in the U.S.?",
           "choices": ["2000", "2003", "2001", "2005"],
           "answer": "2003",
           "key": "identify"
@@ -323,6 +323,7 @@
         }
       ],
       "interact": {
+        "pointLoc": 1,
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
@@ -367,6 +368,7 @@
         }
       ],
       "interact": {
+        "pointLoc": 2,
         "withIcon": false,
         "iconDim": [],
         "imagePath": [],
@@ -411,6 +413,7 @@
         }
       ],
       "interact": {
+        "pointLoc": 2,
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
@@ -443,7 +446,7 @@
       "questionBank": [
         {
           "question": "What is the highest percent of a revenue source for the total Star Wars revenue?",
-          "choices": ["10.0%", "17.3%", "45.5%", "14.2%"],
+          "choices": ["10.0%", "47.3%", "45.5%", "14.2%"],
           "answer": "17.3%",
           "key": "identify"
         },
@@ -455,6 +458,7 @@
         }
       ],
       "interact": {
+        "pointLoc": 0,
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
@@ -487,18 +491,19 @@
       "questionBank": [
         {
           "question": "Which location accounts for the least amount of robbery occurrences?",
-          "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks", "I don’t know."],
+          "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks"],
           "answer": "Banks",
           "key": "identify"
         },
         {
           "question": "Which location has the closest percentage of robbery occurrences to Residences?",
-          "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks", "I don’t know."],
+          "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks"],
           "answer": "Banks",
           "key": "compare"
         }
       ],
       "interact": {
+        "pointLoc": 1,
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
@@ -537,12 +542,13 @@
         },
         {
           "question": "Which industry is closest in percent to Transportation and Other?",
-          "choices": ["Professional and Management", "Sales and Office", "Service and Retail"],
+          "choices": ["Professional and Management", "Sales and Office", "Service and Retail", "Health and Wellness"],
           "answer": "Service and Retail",
           "key": "compare"
         }
       ],
       "interact": {
+        "pointLoc": 1,
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],

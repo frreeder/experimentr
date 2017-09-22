@@ -96,8 +96,9 @@
           mod1.push({key: graphArray[i].chartType, inputData: []})
       }
       d3.select('#graphQInstructions').selectAll("*").remove()
-      d3.select('#graphQInstructions').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
-      d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions about that data associated to the chart (see below example). There are 18 charts in total.').append('br')
+      d3.select('#graphQInstructions').append('strong').text("Please read the following instructions.").append("br")
+      d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions. There are 18 charts in total.').append('br')
+      // d3.select('#graphQInstructions').append('text').html('</br><text>Example Question</text></br>')
       d3.select('#graphQInstructions').append('img')
         .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod1.png"; })
         .attr('height', 500)
@@ -106,7 +107,8 @@
       setTimeout(function(){
         d3.select('#graphQInstructions').append('button')
           .attr('type', 'button')
-          .text('I have read the instructions.')
+          // .text('I have read the instructions.')
+          .text('Proceed')
           .on('click',
             function(d) {
               loadData();

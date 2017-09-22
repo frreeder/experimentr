@@ -19,7 +19,36 @@
   let isInteract = true;
   let emNum = 4; // 0-4, norm, norm2, un, un2, emb
 
-  // let dataLoaded = [false, false, false, false]
+  let buttonTime =false
+  // Example Data
+  exAccessors=['year','cornSales']
+  exData=[
+    {'year': 2002, 'cornSales': 1.7052}, {'year': 2003, 'cornSales': .618}, {'year': 2004, 'cornSales': .492}, {'year': 2005, 'cornSales': .3144},
+    {'year': 2006, 'cornSales': .3048}, {'year': 2007, 'cornSales': .2736}, {'year': 2008, 'cornSales': .936}, {'year': 2009, 'cornSales': 4.4436},
+    {'year': 2010, 'cornSales': 2.4456}, {'year': 2011, 'cornSales': 1.3356}, {'year': 2012, 'cornSales': 1.7472}
+  ]
+  // Add a clump from the main JSON
+  exImage={'interact':{
+            "key": "recession",
+            "withIcon": false,
+            "imagePath": [
+                "modules/graphQuestions/examples/line_interact_01_ex.png",
+                "modules/graphQuestions/examples/line_interact_00_ex.png"
+            ],
+            'accessors': exAccessors,
+            "imageDim": [ 552, 339 ],
+            'baseDim': [2200, 1500],
+            "sortedChoices": { "unrelated": [ "Poison in Water", "Food Poisening", "Exploitive News" ] },
+            'pointLoc': 7,
+            'gridLines': [2, 4, 0],
+            'gridColor': ['black', 'black'],
+            'gridPadding': [0, 0],
+            'yGridVal': 1.2,
+            'lineCol': 'black',
+            'data': exData
+  }
+          }
+
 
   // Specific to interact
   var chart;
@@ -204,6 +233,7 @@
           gArr[i].interact.barDim=newData.barDim
       }
       // Set mod4 for recording data
+      // mod4=[]
       for (let i=0; i<graphArray.length; i++){
           mod4.push({key: graphArray[i].chartType, inputData: []})
       }
@@ -223,45 +253,22 @@
     let graphArray2  = []
     getData(graphArray)
     console.log("gra", graphArray)
-    // getGraphArray()
-
-
-
-
-    // q.defer(d3.json)
-
-    // d3.json('modules/graphQuestions/data.json', function(err, d) {
-    //   getRandomImageArray(d);
-    //   for (var i=0; i<graphArray.length; i++){
-    //       mod4.push({key: graphArray[i].chartType, inputData: []})
-    //   }
-    //   // Getting the line interact data
-    //   for (let i = 0; i < graphArray.length; i++){
-    //     // if (graphArray[i].chartType!="line" && graphArray[i].chartType!="pie") continue;
-    //     // if (graphArray[i].chartType=="bar"){graphArray[i].interact.dataPath='modules/graphInteract/csvFiles/bar_data_artwork.csv'}
-    //     d3.csv(graphArray[i].interact.dataPath, function(iData){
-    //       // Setting the accessors based on the column and row data
-    //       graphArray[i].interact.accessors = [d3.keys(iData[0])[0], d3.keys(iData[0])[1]]
-    //       // Turning the strings into floats for the values
-    //       iData.map((d)=>{
-    // 				d[graphArray[i].interact.accessors[1]]= parseFloat(d[graphArray[i].interact.accessors[1]])
-    // 			})
-    //       // Adding data to the main graph array
-    //       graphArray[i].interact.data = iData
-    //     })
-    //   }
-    //   console.log("iData", graphArray)
-    //   // This is here to ensure the data gets loaded....
-    //   // Need to add text to let the participants know what they are looking at
-    //
-    // })
-    d3.select('#graphIText').selectAll("*").remove()
-    d3.select('#graphIText').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
-    d3.select('#graphIText').append('text').text("Use the up and down arrow buttons to change the value of the graph to match your memory of the graphs").append("br")
+    storyData = exImage
+    setImg('ex', exImage, exImage.interact.baseDim)
+    // 400 is coming from the max height of the svg containing interact image
+    d3.select('#graphIImage').append('img').attr('src', 'modules/graphQuestions/examples/example_mod4.png')
+      .attr("height", perc[1]*100*.7+"%")
+      .attr("width", perc[1]*100*.7*exImage.interact.plotArea[0]/exImage.interact.plotArea[1]+'%').style('object-fit', 'contain')
+      .attr('class', 'lineGraph').style('max-height', 400*(isInteract? .9:1)+'px').style('object-position', '0 0')
+    makeLine();
+    d3.select('#graphIInstructions').selectAll("*").remove()
+    d3.select('#graphIInstructions').append('strong').text("Please read the following instructions.").append("br")
+    d3.select('#graphIInstructions').append('text').text("Use the up and down arrow buttons to change the value of the graph to match your memory of the graphs").append("br")
     setTimeout(function(){
       d3.select('#graphIText').append('button')
         .attr('type', 'button').style("margin-top", '20px')
-        .text('I have read the instructions.')
+        // .text('I have read the instructions.')
+        .text('Proceed')
         .on('click',
           function(d) {
             loadData();
@@ -276,6 +283,7 @@
         lastGraph = true;
     }
     storyData = graphArray[graphCounter];
+    clearTimeout(chart.timer);
     loadImage();
   }
 
@@ -284,12 +292,8 @@
     d3.select("#graphIInstructions").append("strong")
       .text("Please use arrow keys to adjust the graph to memory.")
     d3.select('#interactButtons').selectAll("*").remove();
-    // $('#interactButtons').html("<br><text>Use buttons to visually adjust the value of the chart.<text><br>")
     d3.select('#interactButtons').html("<br><text>Use buttons to visually adjust the value of the chart.<text><br>")
-    // d3.select('#interactButtons').append('text').text('Use buttons to visually adjust the value of the chart.')
-    // d3.select('#interactButtons').append('br')
     d3.select('#graphIImage').selectAll("*").remove()
-    // If not line for now
 
     console.log("loading", storyData.interact)
 
@@ -301,8 +305,6 @@
         makePie();
         break;
       case "bar":
-        // makeBar();
-        // console.log("bar")
         makeFunBar();
         break;
       default:
@@ -317,9 +319,8 @@
     d3.select('#graphIImage').append('img')
       .attr('class', 'picture')
       .attr('src', function(d) { return "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"; })
-      // Doesn't keep the aspect ratio...but I'm okay with that...for now.
       .style('height', perc[1]*100+"%")
-      .style('width', perc[0]*100+"%")
+      .style('width', 'auto')
   }
 
   function makeFunBar(){
@@ -342,8 +343,10 @@
     chart.bodyDim.w = imgRat>0 ? chart.bodyDim.w : chart.bodyDim.h*imgRat;
     chart.bodyDim.h = imgRat>0 ? chart.bodyDim.w/imgRat : chart.bodyDim.h;
     // might just need this from now on?
-    chart.bodyDim = {w: storyData.interact.plotArea[0]*.8, h: storyData.interact.plotArea[1]*.8}
-    chart.imageDim = {w: storyData.interact.imageDim[0]*.8, h: storyData.interact.imageDim[1]*.8}
+    // chart.bodyDim = {w: storyData.interact.plotArea[0]*.8, h: storyData.interact.plotArea[1]*.8}
+    // chart.imageDim = {w: storyData.interact.imageDim[0]*.8, h: storyData.interact.imageDim[1]*.8}
+    chart.bodyDim = {w: storyData.interact.plotArea[0]*1, h: storyData.interact.plotArea[1]*1}
+    chart.imageDim = {w: storyData.interact.imageDim[0]*1, h: storyData.interact.imageDim[1]*1}
     console.log("aft", chart.bodyDim.w, chart.bodyDim.h)
     // Update the SVG to match dimensions
     chart
@@ -376,15 +379,6 @@
       console.log("inhere!")
       barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2}
 
-    // clipping path for chart area
-    // chart.barClip = chart.append("g").attr("class", chartOutline).append("defs").selectAll("clipPath")
-    //   .data(barData).enter().append("clipPath")
-    //   .attr("id", (d,i)=>{return "clipper"+(i+1).toString()})
-    //   .append("rect")
-    //   .attr("y", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])})
-    //   .attr('height',chart.barHeight)
-    //   .attr('width', (d,i)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
-
     // Add the arrow based on the ...
     chart.append("image")
       // .attr("href", 'modules/graphQuestions/graphImages/interactBars/bar_interact1_00_artwork.png')
@@ -403,14 +397,31 @@
       let isInc = i==0
       d3.select('#interactButtons').append("button")
         .attr("class", "button1 "+buttonType)
-        .on("click", ()=>{
-          incBar(isInc, .01*chart.xScale.domain()[1])
-        })
         .on("mousedown", ()=>{
-          clearTimeout(chart.timer)
           chart.glowBar.style("opacity", 1)
-          chart.timer = setTimeout(()=>{chart.glowBar.style("opacity", .2)}, 500)
+          chart.inc=setInterval(function(){ incBar(isInc, .001*chart.xScale.domain()[1]) }, 25)
+          clearTimeout(chart.timer);
         })
+        .on('mouseup', ()=>{
+          clearInterval(chart.inc)
+          chart.timer=setTimeout(()=>{
+            chart.glowBar.style("opacity", .2)
+          }, 500)
+        })
+        .on('mouseout', ()=>{
+          clearInterval(chart.inc)
+          chart.timer=setTimeout(()=>{
+            chart.glowBar.style("opacity", .2)
+          }, 500)
+        })
+        // .on("click", ()=>{
+        //   incBar(isInc, .01*chart.xScale.domain()[1])
+        // })
+        // .on("mousedown", ()=>{
+        //   clearTimeout(chart.timer)
+        //   chart.glowBar.style("opacity", 1)
+        //   chart.timer = setTimeout(()=>{chart.glowBar.style("opacity", .2)}, 500)
+        // })
     }
 
     // BG image
@@ -538,7 +549,7 @@
     let piePerc = 1
 
     // save the pieSlice value, will be changed if chart changed
-    mod4[graphCounter].value = pieData[1][accessors[1]]
+    mod4[graphCounter].value = pieData[storyData.interact.pointLoc][accessors[1]]
 
     // Setting the chart
     chart = d3.select('#graphIImage')
@@ -554,12 +565,29 @@
       d3.select('#interactButtons').append("button")
         // .style("height", (100*(1-perc[1])).toString()+"%")
         .attr("class", "button1 "+buttonType)
-        .on("click", ()=>{
-          incSlice(isInc, 1)
-          clearTimeout(chart.timer)
+        .on("mousedown", ()=>{
           chart.highSlice.style("opacity", 1)
-          chart.timer = setTimeout(()=>{chart.highSlice.style("opacity", .4)}, 500)
+          chart.inc=setInterval(function(){ incSlice(isInc, .15) }, 25)
+          clearTimeout(chart.timer);
         })
+        .on('mouseout', ()=>{
+          clearInterval(chart.inc)
+          chart.timer=setTimeout(()=>{
+            chart.highSlice.style("opacity", .4)
+          }, 500)
+        })
+        .on('mouseup', ()=>{
+          clearInterval(chart.inc)
+          chart.timer=setTimeout(()=>{
+            chart.highSlice.style("opacity", .4)
+          }, 500)
+        })
+        // .on("click", ()=>{
+        //   incSlice(isInc, 1)
+        //   clearTimeout(chart.timer)
+        //   chart.highSlice.style("opacity", 1)
+        //   chart.timer = setTimeout(()=>{chart.highSlice.style("opacity", .4)}, 500)
+        // })
     }
     // Setting a color scale if not predefined.
     chart.colorScale = d3.scale.category10()
@@ -579,7 +607,7 @@
     // Appending a group for random SVG elements and dimensions
     chart.pieArea = chart.plotArea.append("g")
 
-    chart.pieArea.r = dia / 2 * .8
+    chart.pieArea.r = dia / 2 * .85
     chart.arrowSize  = dia/2*.15
 
     chart.pieArea.raySize = chart.pieArea.r*.7
@@ -592,6 +620,9 @@
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
     // A function to specify the angles of the pie.
     var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
+    /// need to add a func here to do the 180 thing...
+    // to do this will need to get the total values and then get the value needed for 50%
+    // once value desired calculated, find the difference and then adjust others by that difference divided by n-1
 
     // get the min pie slice
     // chart.pieMin = 0;
@@ -768,9 +799,11 @@
 
     // Highlights the slice being changed
     if (isInteract){
+      console.log('sto',storyData.interact.pointLoc)
       chart.highSlice = chart.plotArea.append("g")
         .attr("class", "highlight")
-        .append("path").datum(pie(pieData)[1])
+        .append("path").datum(pie(pieData)[storyData.interact.pointLoc])
+        // .append("path").datum(pie(pieData)[1])
         .attr("transform", "translate("+chart.bodyDim.w/2+","+chart.bodyDim.h/2+")")
           .attr("d", arc)
           .style("fill", "none")
@@ -781,9 +814,11 @@
 
 
       // Sets and arrow image pointing at pie slice being changed.
-      let pointerCoor = [Math.cos((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*(1)+chart.bodyDim.w/2-chart.arrowSize/2
-        , Math.sin((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
-      let pAngle = (pieInfo[1].endAngle-pieInfo[1].startAngle)/2 + pieInfo[1].startAngle
+      // let p = 1
+      let p = storyData.interact.pointLoc
+      let pointerCoor = [Math.cos((pieInfo[p].endAngle-pieInfo[p].startAngle)/2+pieInfo[p].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*(1)+chart.bodyDim.w/2-chart.arrowSize/2
+        , Math.sin((pieInfo[p].endAngle-pieInfo[p].startAngle)/2+pieInfo[p].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
+      let pAngle = (pieInfo[p].endAngle-pieInfo[p].startAngle)/2 + pieInfo[p].startAngle
       // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
       chart.arrow = chart.plotArea.append("g")
         .attr("class", "arrowPointer")
@@ -806,7 +841,7 @@
     if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(100-pieData[chart.pieMin][accessors[1]])){
     // if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(pieData.length-1)){
       editPie(true)
-    } else if (!isInc && pieData[1][accessors[1]]>inc) {
+    } else if (!isInc && pieData[storyData.interact.pointLoc][accessors[1]]>inc) {
       editPie(false)
     } else {
       return; }
@@ -817,16 +852,16 @@
       let pieTestRange = changeAllSlices? pieData.length:3
       let decBy = incBy/(pieTestRange-1)
       for (let i = 0; i <pieTestRange; i++){
-        if (i == 1){pieData[i][accessors[1]]+=incBy} else {
+        if (i == storyData.interact.pointLoc){pieData[i][accessors[1]]+=incBy} else {
           decBy = pieData[i][accessors[1]]/(100 - pieData[0][accessors[1]])*incBy
           pieData[i][accessors[1]]-=decBy
-          console.log("i", i, pieData[i][accessors[1]])
+          // console.log("i", i, pieData[i][accessors[1]])
         }
       }
     }
-
+    let p = storyData.interact.pointLoc
     // save the pieSlice value
-    mod4[graphCounter].value = pieData[1][accessors[1]]
+    mod4[graphCounter].value = pieData[p][accessors[1]]
 
     // create function to draw the arcs of the pie slices.
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
@@ -834,12 +869,12 @@
     // create a function to compute the pie slice angles.
     var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
     var pieInfo = pie(pieData)
-    console.log("newPi", pieInfo)
+    // console.log("newPi", pieInfo)
 
 
-    let pointerCoor = [Math.cos((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+chart.bodyDim.w/2-chart.arrowSize/2
-      , Math.sin((pieInfo[1].endAngle-pieInfo[1].startAngle)/2+pieInfo[1].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
-    let pAngle = (pieInfo[1].endAngle-pieInfo[1].startAngle)/2 + pieInfo[1].startAngle
+    let pointerCoor = [Math.cos((pieInfo[p].endAngle-pieInfo[p].startAngle)/2+pieInfo[p].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+chart.bodyDim.w/2-chart.arrowSize/2
+      , Math.sin((pieInfo[p].endAngle-pieInfo[p].startAngle)/2+pieInfo[p].startAngle-1.57)*(chart.pieArea.r+chart.arrowSize/4)*1+(chart.bodyDim.h/2-chart.arrowSize/2)]
+    let pAngle = (pieInfo[p].endAngle-pieInfo[p].startAngle)/2 + pieInfo[p].startAngle
     // console.log(pAngle*180/Math.PI, pieInfo[1].startAngle*180/Math.PI, pieInfo[1].endAngle*180/Math.PI)
     chart.arrow
       .attr("transform", "rotate("+(pAngle*1*180/Math.PI+180).toString()+" "+(pointerCoor[0]+chart.arrowSize/2)+" "+(pointerCoor[1]+chart.arrowSize/2)+")")
@@ -853,7 +888,7 @@
       .attr("d", arc)
 
     chart.highSlice
-      .datum(pie(pieData)[1])
+      .datum(pie(pieData)[p])
       .attr("d", arc)
 
     chart.plotArea.selectAll(".outline").selectAll("path")
@@ -899,12 +934,14 @@
     // Accesors for accessing the categories and values
     let accessors = storyData.interact.accessors
     let lineData = storyData.interact.data
+    console.log('l', lineData)
     let tPoint = storyData.interact.pointLoc
     let pointLoc = typeof(storyData.interact.pointLoc)==='number'? clampThings(storyData.interact.pointLoc, 1, lineData.length-1) : (2<lineData.length-1? 2 : 1)
     storyData.interact.pointLoc = pointLoc
 
-    // saving value, will change if interacted with
-    mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+    // saving value, will change if interacted withs
+    if (mod4.length>0)
+      mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
 
     chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
       .attr("preserveAspectRatio", "xMinYMax meet")
@@ -953,7 +990,9 @@
     }
     console.log("chart.m", chart.manip)
     // if (!isInteract){pointLoc=test>0?1:lineData.length-1}
-    if (!isInteract){clampThings(pointLoc=test>0?tPoint-a[0]-1:tPoint+a[1]+1, 0, lineData.length-1)}
+    if (!isInteract){
+      clampThings(pointLoc=test>0?tPoint-a[0]-1:tPoint+a[1]+1, 0, lineData.length-1)
+    }
 
     // Adding the chart svg
     chart
@@ -968,18 +1007,37 @@
       d3.select('#interactButtons').append("button")
         // .style("height", "20%")
         .attr("class", "button1 "+buttonType)
-        .on("click", ()=>{
-          incPoint(isInc)
-          clearTimeout(chart.timer);
+        .on("mousedown", ()=>{
           chart.highLine.style("opacity", "1")
           chart.lineDot.style("opacity", ".6")
-          chart.timer = setTimeout(()=>{
+          chart.inc=setInterval(function(){ incPoint(isInc) }, 50)
+          // incPoint(isInc)
+          clearTimeout(chart.timer);
+          // chart.highLine.style("opacity", "1")
+          // chart.lineDot.style("opacity", ".6")
+          // chart.timer = setTimeout(()=>{
+          //   chart.highLine.style("opacity", ".5")
+          //   chart.lineDot.style("opacity", ".1")
+          // }, 500)
+        })
+        .on('mouseout', ()=>{
+          clearInterval(chart.inc)
+          chart.timer=setTimeout(()=>{
             chart.highLine.style("opacity", ".5")
             chart.lineDot.style("opacity", ".1")
-          }, 500)})
+          }, 500)
+        })
+        .on('mouseup', ()=>{
+          clearInterval(chart.inc)
+          chart.timer=setTimeout(()=>{
+            chart.highLine.style("opacity", ".5")
+            chart.lineDot.style("opacity", ".1")
+          }, 500)
+        })
+
     }
     // Setting the plot area
-    let chartRat = isInteract?.9:1
+    let chartRat = isInteract?.9:1.0
     chart.plotArea = chart.append("g").attr("class", "clip-chartArea")
     chart.plotArea.width = storyData.interact.plotArea[0]*chartRat
     chart.plotArea.height = storyData.interact.plotArea[1]*chartRat
@@ -1070,6 +1128,8 @@
       .attr("height", storyData.interact.imageDim[1])
       .attr("xlink:href", storyData.interact.imagePath[0])
 
+      console.log('imgDDDDDD', storyData.interact.imageDim[0], storyData.interact.imageDim[1])
+
     // This is the line outline
     chart.plotArea.append("path")
       .datum(storyData.interact.data)
@@ -1107,19 +1167,22 @@
     }
     // Add arrow....
     // chart.plotArea.append("g")
-    chart.append("g")
-      // .datum(chart.manipLines[1])
-      .attr("class", "arrowDown")
-      .append("image")
-      .attr("xlink:href", "modules/graphInteract/buttons/down.png")
-      .attr("height", chart.bodyDim.h*(1-.005-chartRat))
-      .attr("width", chart.bodyDim.h*(1-.005-chartRat))
-      // .attr("width", chart.bodyDim.h*.095*102/149)
-      // .attr("x", (d)=>{return chart.xScale(d[accessors[0]])})
-      // .attr("y", (d)=>{return chart.yScale(d[accessors[1]])})
-      // .attr("x", chart.xScale(storyData.interact.data[tPoint][accessors[0]])-chart.bodyDim.h*.095*102/149/2)
-      .attr("x", chart.xScale(storyData.interact.data[tPoint][accessors[0]])-chart.bodyDim.h*(1-.005-chartRat)/2)
-      // .attr("y", chart.yScale(storyData.interact.data[tPoint][accessors[1]])-40)
+    if (isInteract){
+      chart.append("g")
+        // .datum(chart.manipLines[1])
+        .attr("class", "arrowDown")
+        .append("image")
+        .attr("xlink:href", "modules/graphInteract/buttons/down.png")
+        .attr("height", chart.bodyDim.h*(1-.005-chartRat))
+        .attr("width", chart.bodyDim.h*(1-.005-chartRat))
+        // .attr("width", chart.bodyDim.h*.095*102/149)
+        // .attr("x", (d)=>{return chart.xScale(d[accessors[0]])})
+        // .attr("y", (d)=>{return chart.yScale(d[accessors[1]])})
+        // .attr("x", chart.xScale(storyData.interact.data[tPoint][accessors[0]])-chart.bodyDim.h*.095*102/149/2)
+        .attr("x", chart.xScale(storyData.interact.data[tPoint][accessors[0]])-chart.bodyDim.h*(1-.005-chartRat)/2)
+        // .attr("y", chart.yScale(storyData.interact.data[tPoint][accessors[1]])-40)
+    }
+
 
 
     // NEED ICON DIM!!!

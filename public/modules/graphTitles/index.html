@@ -23,7 +23,7 @@
   let chartType = ["line", "pie", "bar"]
 
   let fakeNames = ["Super Hero Abilities", "Fruit Popularity", "Roadtrip Popularity Throughout the Year", "Favorite Side Dishes",
-      "Top Browsers", "Grooming Time", "Halloween Candy Favorites", "Most Purchased Books", "Average University Enrollment at Texas A&M",
+      "Top Browsers", "Grooming Time", "Halloween Candy Favorites", "Most Purchased Books", "U.S. Vacation States",
       "Peak Marathon Season", "Minimum Wage Throughout the Years"]
   let fakeNamesList = []
   for (let i=0; i<fakeNames.length; i++){
@@ -61,10 +61,15 @@
       // console.log("num", getCountPerPage(107, numPages))
 
       console.log("graphArray", graphArray, dropSel)
-      // makeTable()
       d3.select('#graphInstructions').selectAll("*").remove()
-      d3.select('#graphInstructions').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
-      d3.select('#graphInstructions').append('text').text("In the following section you will be asked to pick the best description of the graphs from session one.").append("br")
+      // makeTable()
+      d3.select('#graphInstructions').append('strong').text("Please read the following instructions.").append("br")
+      d3.select('#graphInstructions').append('text').text("In the following section you will be asked to select the titles of the charts viewed in Session 1.")
+      d3.select('#graphInstructions').append('img')
+        .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod2.png"; })
+        .attr('height', '100%').style('max-height', '200px')
+        .attr('width', '100%')
+        .style('display', 'block').style('object-position', '0 0').style('object-fit', 'contain').style("margin-top", '20px')
       setTimeout(function(){
         d3.select('#graphInstructions').append('button')
           .attr('type', 'button').style("margin-top", '20px')
@@ -73,7 +78,7 @@
             function(d) {
               loadData();
             });
-      }, 100)
+      }, 500)
       // loadData()
       if (!skip){
         experimentr.hideNext()
