@@ -12,7 +12,7 @@
 <script>
 (function() {
   // for testing purposes
-  var skip = true;
+  var skip = false;
   let mod1 = []
   let graphOrder = []
 
@@ -150,7 +150,7 @@
       // .attr('width', "100%");
     // Adds the option for the participant to skip past waiting....might include for testing purposes and remove later. s
     d3.select('#graphQText').selectAll("*").remove()
-    if (skip){
+    // if (skip){s
       d3.select('#graphQText').append('button')
         .attr('type', 'button')
         .text('I have finished looking at the graph and am ready for the questions.')
@@ -162,7 +162,7 @@
             // d3.select('#graphQTimer').text("")
             experimentr.attachTimerEnd('#graphQTimer')
           });
-    }
+    // }
 
   }
   function loadQuestion() {
@@ -176,7 +176,8 @@
     // //   loadData();
     // });
     d3.select('#graphQInstructions').selectAll("*").remove();
-    d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
+    if (skip)
+      d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
     d3.select('#graphQText').selectAll("*").remove();
     if (!lastGraph){
       d3.select('#graphQText').append('button')

@@ -9,6 +9,11 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_01_unrelated_cheese.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_unrelated_cheese.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_unrelated_cheese.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_unrelated_cheese.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_unrelated_cheese.png"
+                ],
                 "imageDim": [
                     428,
                     260
@@ -35,6 +40,10 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_00_unrelated_recession.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_01_unrelated_recession.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_unrelated_recession.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_unrelated_recession.png"
+                ],
                 "imageDim": [
                     1460,
                     894
@@ -56,6 +65,10 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_00_norm_01.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_01_norm_01.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_norm_01.png"
+                ],
                 "imageDim": [
                     2200,
                     1500
@@ -76,6 +89,10 @@
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_00_norm_02.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_01_norm_02.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_norm_02.png"
                 ],
                 "imageDim": [
                     2200,
@@ -120,6 +137,36 @@
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    }
+                ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_unrelated_01.png",
                         "iconDim": [
                             648,
                             648
@@ -174,6 +221,43 @@
                         ]
                     }
                 ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_unrelated_01.png",
+                        "iconDim": [
+                            648,
+                            648
+                        ]
+                    }
+                ],
                 "sortedChoices": {
                     "unrelated": [
                         "Favorite Side Dishes",
@@ -217,11 +301,47 @@
                         ]
                     }
                 ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_unrelated_02.png",
+                        "iconDim": [
+                            569,
+                            421
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_unrelated_02.png",
+                        "iconDim": [
+                            803,
+                            803
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_unrelated_02.png",
+                        "iconDim": [
+                            769,
+                            769
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_unrelated_02.png",
+                        "iconDim": [
+                            526,
+                            526
+                        ]
+                    }
+                ],
                 "colorArray": [
                     "#26bfff",
                     "#fd186a",
                     "#2fdb36",
                     "#aa62c7"
+                ],
+                "bwArray": [
+                    "#666666",
+                    "#ffffff",
+                    "#3f3f3f",
+                    "#d0d0d0"
                 ],
                 "sortedChoices": {
                     "unrelated": [
@@ -271,12 +391,49 @@
                         ]
                     }
                 ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_unrelated_02.png",
+                        "iconDim": [
+                            569,
+                            421
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_unrelated_02.png",
+                        "iconDim": [
+                            803,
+                            803
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_unrelated_02.png",
+                        "iconDim": [
+                            411,
+                            411
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_unrelated_02.png",
+                        "iconDim": [
+                            769,
+                            769
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_unrelated_02.png",
+                        "iconDim": [
+                            526,
+                            526
+                        ]
+                    }
+                ],
                 "colorArray": [
-                    "#26bfff",
-                    "#fd186a",
-                    "#ff9911",
-                    "#2fdb36",
-                    "#aa62c7"
+                    "#666666",
+                    "#ffffff",
+                    "#aeaeae",
+                    "#3f3f3f",
+                    "#d0d0d0"
                 ],
                 "sortedChoices": {
                     "unrelated": [
@@ -315,6 +472,36 @@
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_norm_01.png",
                         "iconDim": [
                             799,
                             799
@@ -369,6 +556,43 @@
                         ]
                     }
                 ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_norm_01.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ],
                 "sortedChoices": {
                     "unrelated": [
                         "Favorite Movie Genres",
@@ -406,6 +630,36 @@
                     },
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_04_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_norm_02.png",
                         "iconDim": [
                             799,
                             799
@@ -460,6 +714,43 @@
                         ]
                     }
                 ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_norm_02.png",
+                        "iconDim": [
+                            799,
+                            799
+                        ]
+                    }
+                ],
                 "sortedChoices": {
                     "unrelated": [
                         "Favorite Sports",
@@ -482,6 +773,14 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_03_unrelated_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_01.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_unrelated_01.png"
                 ],
                 "imageDim": [
                     1361,
@@ -510,6 +809,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_06_unrelated_01.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_unrelated_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_unrelated_01.png"
                 ],
                 "imageDim": [
                     1361,
@@ -540,6 +848,14 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_02.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_02.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_unrelated_02.png"
+                ],
                 "imageDim": [
                     1361,
                     879
@@ -567,6 +883,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_unrelated_02.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_unrelated_02.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_06_unrelated_02.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_unrelated_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_unrelated_02.png"
                 ],
                 "imageDim": [
                     1361,
@@ -597,6 +922,14 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_01.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_norm_01.png"
+                ],
                 "imageDim": [
                     1361,
                     879
@@ -624,6 +957,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_01.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_06_norm_01.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_norm_01.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_norm_01.png"
                 ],
                 "imageDim": [
                     1361,
@@ -654,6 +996,14 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_02.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_02.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_norm_02.png"
+                ],
                 "imageDim": [
                     1361,
                     879
@@ -681,6 +1031,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_norm_02.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_norm_02.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_06_norm_02.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_norm_02.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_norm_02.png"
                 ],
                 "imageDim": [
                     1361,

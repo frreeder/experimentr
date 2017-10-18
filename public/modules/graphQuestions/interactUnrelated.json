@@ -5,6 +5,7 @@
         "key": "cheese",
         "withIcon": true,
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "iconLoc": 3,
         "sortedChoices": {
@@ -17,6 +18,7 @@
         "key": "recession",
         "withIcon": false,
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "sortedChoices": {
           "unrelated":["Poison in Water", "Food Poisening", "Exploitive News"]
@@ -28,6 +30,7 @@
         "key": "norm_01",
         "withIcon": false,
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "sortedChoices": {
           "unrelated":["Pork Sales", "Stress Levels", "Facebook Likes"]
@@ -39,6 +42,7 @@
         "key": "norm_02",
         "withIcon": false,
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "sortedChoices": {
           "unrelated":["Wildlife Population", "Stocks Sold", "Boy Scouts"]
@@ -52,7 +56,9 @@
         "key": "unrelated_01",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_02", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_02", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
+        "imagePathBW": [],
         "sortedChoices": {
           "unrelated":["Favorite Side Dishes", "Carb Nutrition", "Bread Substitutes"]
         }
@@ -61,7 +67,9 @@
         "key": "unrelated_01",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
+        "imagePathBW": [],
         "sortedChoices": {
           "unrelated":["Favorite Side Dishes", "Carb Nutrition", "Bread Substitutes"]
         }
@@ -72,8 +80,11 @@
         "key": "unrelated_02",
         "withIcon": true,
         "imgPath": ["interact_00", "interact_01", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
+        "imagePathBW": [],
         "colorArray": ["#26bfff", "#fd186a", "#2fdb36", "#aa62c7"],
+        "bwArray": ["#666666", "#ffffff", "#3f3f3f", "#d0d0d0"],
         "sortedChoices": {
           "unrelated":["Favorite Sea Creatures", "Sea Creatures Studied", "Sea Creature Population"]
         }
@@ -82,8 +93,10 @@
         "key": "unrelated_02",
         "withIcon": true,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
-        "colorArray": ["#26bfff", "#fd186a", "#ff9911", "#2fdb36", "#aa62c7"],
+        "imagePathBW": [],
+        "colorArray": ["#666666", "#ffffff", "#aeaeae", "#3f3f3f", "#d0d0d0"],
         "sortedChoices": {
           "unrelated":["Favorite Sea Creatures", "Sea Creatures Studied", "Sea Creature Population"]
         }
@@ -94,7 +107,9 @@
         "key": "norm_01",
         "withIcon": false,
         "imgPath": ["interact_01", "interact_02", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
+        "imagePathBW": [],
         "sortedChoices": {
           "unrelated":["Favorite Movie Genres", "Student Grades", "Search Engines Used"]
         }
@@ -103,7 +118,9 @@
         "key": "norm_01",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
+        "imagePathBW": [],
         "sortedChoices": {
           "unrelated":["Favorite Movie Genres", "Student Grades", "Search Engines Used"]
         }
@@ -114,7 +131,9 @@
         "key": "norm_02",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
+        "imagePathBW": [],
         "sortedChoices": {
           "unrelated":["Favorite Sports", "Favorite Music Formats", "Water Usage"]
         }
@@ -123,7 +142,9 @@
         "key": "norm_02",
         "withIcon": false,
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
+        "imagePathBW": [],
         "sortedChoices": {
           "unrelated":["Favorite Sports", "Favorite Music Formats", "Water Usage"]
         }
@@ -136,7 +157,9 @@
         "key": "unrelated_01",
         "imgDim": [],
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_06", "interact_03", "interact_04", "interact_05"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_06", "interact_bw_03", "interact_bw_04", "interact_bw_05"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,
@@ -147,7 +170,9 @@
       {
         "key": "unrelated_01",
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05", "interact_bw_06"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,
@@ -160,7 +185,9 @@
       {
         "key": "unrelated_02",
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,
@@ -171,7 +198,9 @@
       {
         "key": "unrelated_02",
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05", "interact_bw_06"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,
@@ -184,7 +213,9 @@
       {
         "key": "norm_01",
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,
@@ -195,7 +226,9 @@
       {
         "key": "norm_01",
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05", "interact_bw_06"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,
@@ -208,7 +241,9 @@
       {
         "key": "norm_02",
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,
@@ -219,7 +254,9 @@
       {
         "key": "norm_02",
         "imagePath": [],
+        "imagePathBW": [],
         "imgPath": ["interact_00", "interact_01", "interact_02", "interact_03", "interact_04", "interact_05", "interact_06"],
+        "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05", "interact_bw_06"],
         "imageDim": [],
         "barDim": [],
         "useBG": false,

@@ -1,0 +1,78 @@
+<div id="graphNoChartQuestions">
+<p id="graphQTitle"></p>
+<p id="graphQInstructions"></p>
+<div id="graphQVerification"></div><br>
+<div id="graphQText"></div>
+<div id="graphQTimer"></div>
+</div>
+
+<style>
+</style>
+
+<script>
+(function() {
+  let pResponse = []
+  let corrCount = 0
+  let graphArray = []
+
+  let embType = ['embellished', 'normal', 'normal2', 'unrelated', 'unrelated2']
+
+  function getGraphArray(d, gO) {
+    for (let i=0; i<gO.length; i++){
+      graphArray.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
+    }
+  }
+
+  init();
+
+  function init() {
+    experimentr.hideNext();
+    experimentr.startTimer('graphNoChartQuestions');
+
+    d3.json('modules/graphAnalysis/dummyData_mod1.json', function(err, d2){
+      d3.json('modules/graphQuestions/data.json', function(err, d) {
+        pResponse = d2[0]
+        gO = d2[0].graphOrder
+        console.log(pResponse)
+        getGraphArray(d, gO);
+      })
+    })
+    setTimeout(makeReport, 100)
+  }
+
+  function makeReport() {
+    d3.select('#graphQTitle').append('strong').text("Information for "+pResponse.pid+": ").append("br")
+    d3.select('#graphQInstructions').append('text').text("Total Time: "+((pResponse.time_end_experiment-pResponse.time_start_experiment)/1000/60).toFixed(2).toString()+" minutes").append("br")
+
+    for (let i=0; i<graphArray.length; i++){
+      let chart = d3.select('#graphQVerification').append('div')
+      chart.append('img')
+        // .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod3.png"; })
+        .attr('src', graphArray[i].imagePath[embType.indexOf(pResponse.graphOrder[i].embType)])
+        .attr('height', 150)
+        .attr('width', 'auto')
+        .style('display', 'block').style('padding-top', "20px")
+      // chart.append('text')
+      //   .text('chartType: '+graphArray[i].key).append('br')
+      chart.append('text')
+        .text('Time: '+((pResponse.mod1[i].timeQEnd-pResponse.mod1[i].timeQStart)/1000).toFixed(2).toString()+" seconds").append('br')
+      for (let j=0; j<graphArray[i].questionBank.length; j++){
+        let q = chart.append('g')
+        let corr = pResponse.mod1[i].inputData[j].userAnswer==graphArray[i].questionBank[j].answer
+        if (corr) {corrCount++}
+        q.append('text')
+          .text('Question: '+graphArray[i].questionBank[j].question).append('br')
+        q.append('text')
+          .text('User Answer: '+pResponse.mod1[i].inputData[j].userAnswer)
+          .style('color', ()=>{return pResponse.mod1[i].inputData[j].userAnswer==graphArray[i].questionBank[j].answer?'green':'red'})
+          .append('br')
+        q.append('text')
+          .text('Correct Answer: '+graphArray[i].questionBank[j].answer)
+          .append('br')
+      }
+    }
+
+    d3.select('#graphQInstructions').append('text').text("Percent Correct: "+(corrCount/(graphArray[0].questionBank.length*graphArray.length)*100).toFixed(2).toString()+"%").append("br")
+  }
+}());
+</script>

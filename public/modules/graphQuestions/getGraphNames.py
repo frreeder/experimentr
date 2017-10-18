@@ -50,7 +50,7 @@ pprint(data["line"][0])
 # I can a list of the directory image files.
 
 F = open("./graphImageList.json", "r")
-print ("pot")
+# print ("pot")
 # print (F.read())
 
 # fileNames = filter(lambda x: x.endswith('.txt'), os.listdir('mydir'))
@@ -58,6 +58,8 @@ fileNames = os.listdir("./graphImages/color")
 # print("fileNames", fileNames)
 
 interactNames = os.listdir("./graphImages/interact")
+interactBWNames = os.listdir("./graphImages/interact_bw")
+# fileNamesBW = os.listdir("../graphImages/bw")
 baseNames = os.listdir("../graphTheme/chartBase")
 
 # A method using endswith to fileter out the png
@@ -193,6 +195,51 @@ for j in data[graphTypes[2]]:
     j["interact"]["numBars"] = len(j["interact"]["imagePath"])-1
 
 
+#--------------------BW Interact-------------------#
+# BW INTERACT FOR LINES!
+inType = ("interact_bw_01", "interact_bw_02", "interact_bw_03")
+for x in interactBWNames:
+    if graphTypes[0] in x:
+        for j in data[graphTypes[0]]:
+            if j["key"] in x:
+                for ind, k in enumerate(inType):
+                    if k in x:
+                        # if ind > 1:
+                        j["interact"]["imagePathBW"].append("")
+                        j["interact"]["imagePathBW"][ind] = "modules/graphQuestions/graphImages/interact_bw/"+x
+                        allImages.append("modules/graphQuestions/graphImages/interact_bw/"+x)
+            # else:
+            #     print("notCaught: ", j["key"], x)
+
+# BW INTERACT FOR PIES!
+inType = ("interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04")
+for x in interactBWNames:
+    if graphTypes[1] in x:
+        for j in data[graphTypes[1]]:
+            if j["key"] in x:
+                for ind, k in enumerate(inType):
+                    if k in x:
+                        img = cv2.imread("./graphImages/interact_bw/"+x, 1)
+                        print ('xPIE-', x)
+                        j["interact"]["imagePathBW"].append({"path":"modules/graphQuestions/graphImages/interact_bw/"+x, "iconDim":(img.shape[1], img.shape[0])})
+                        allImages.append("modules/graphQuestions/graphImages/interact_bw/"+x)
+            # else:
+            #     print("notCaught: ", j["key"], x)
+
+# BW INTERACT FOR BARS
+inType = ("interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04", "interact_bw_05", "interact_bw_06")
+for x in interactBWNames:
+    if graphTypes[2] in x:
+        for j in data[graphTypes[2]]:
+            if j["key"] in x:
+                for ind, k in enumerate(inType):
+                    if k in x:
+                        j["interact"]["imagePathBW"].append("modules/graphQuestions/graphImages/interact_bw/"+x)
+                        allImages.append("modules/graphQuestions/graphImages/interact_bw/"+x)
+            # else:
+            #     print("notCaught: ", j["key"], x)
+
+# -----SAVING THE DATA!!!------#
 
 
 # Print the new object

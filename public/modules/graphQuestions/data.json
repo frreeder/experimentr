@@ -48,9 +48,13 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_01_americanCrabsCaught.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_americanCrabsCaught.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_americanCrabsCaught.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_americanCrabsCaught.png"
+                ],
                 "imageDim": [
-                    1527,
-                    937
+                    1528,
+                    939
                 ],
                 "pointLoc": 7,
                 "gridLines": [
@@ -125,22 +129,22 @@
                     "question": "Which of the following years had the lowest C02 Emissions in the U.S.?",
                     "choices": [
                         "2000",
-                        "2003",
-                        "2001",
-                        "2005"
+                        "2004",
+                        "2006",
+                        "2008"
                     ],
-                    "answer": "2003",
+                    "answer": "2008",
                     "key": "identify"
                 },
                 {
                     "question": "Which year had a similar amount of C02 Emissions to the U.S. in 2002?",
                     "choices": [
-                        "2000",
                         "2004",
-                        "2003",
-                        "2001"
+                        "2006",
+                        "2008",
+                        "2009"
                     ],
-                    "answer": "2001",
+                    "answer": "2004",
                     "key": "compare"
                 }
             ],
@@ -150,6 +154,10 @@
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_01_climateChange.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_climateChange.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_climateChange.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_climateChange.png"
                 ],
                 "imageDim": [
                     1576,
@@ -255,6 +263,10 @@
                     "modules/graphQuestions/graphImages/interact/line_interact_01_fordFSeries.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_fordFSeries.png"
                 ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_fordFSeries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_fordFSeries.png"
+                ],
                 "imageDim": [
                     1502,
                     924
@@ -330,23 +342,23 @@
                 {
                     "question": "Which of the following prices is closes to the peak average gasoline price in the U.S. from June 2010 to June 2012?",
                     "choices": [
-                        "2.20$",
-                        "2.60$",
-                        "3.20$",
-                        "4.00$"
+                        "$2.20",
+                        "$2.60",
+                        "$3.20",
+                        "$4.00"
                     ],
-                    "answer": "",
+                    "answer": "$4.00",
                     "key": "identify"
                 },
                 {
-                    "question": "What month and year had a similar average gasoline price to October 2012 in the U.S.",
+                    "question": "What month and year had a similar average gasoline price to October 2012 in the U.S.?",
                     "choices": [
                         "October 2011",
                         "February 2011",
                         "February 2012",
                         "June2012"
                     ],
-                    "answer": "Feb2011-June2011",
+                    "answer": "February 2012",
                     "key": "compare"
                 }
             ],
@@ -356,6 +368,10 @@
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_01_gasolinePrices.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_gasolinePrices.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_gasolinePrices.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_gasolinePrices.png"
                 ],
                 "imageDim": [
                     1762,
@@ -430,14 +446,14 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the lowest number of manufacturing employing in the U.S. from 2000-2010?",
+                    "question": "Which of the following is closest to the lowest number of manufacturing employment in the U.S. from 2000-2010?",
                     "choices": [
-                        "5 milllion",
-                        "10 milllion",
-                        "15 milllion",
-                        "20 milllion"
+                        "5 million",
+                        "10 million",
+                        "15 million",
+                        "20 million"
                     ],
-                    "answer": "15",
+                    "answer": "10 million",
                     "key": "identify"
                 },
                 {
@@ -458,6 +474,10 @@
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_01_manuEmployment.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_manuEmployment.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_manuEmployment.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_manuEmployment.png"
                 ],
                 "imageDim": [
                     891,
@@ -539,7 +559,7 @@
                         "4.4 hours",
                         "4.8 hours"
                     ],
-                    "answer": "5",
+                    "answer": "4.8 hours",
                     "key": "identify"
                 },
                 {
@@ -560,6 +580,10 @@
                 "imagePath": [
                     "modules/graphQuestions/graphImages/interact/line_interact_01_trafficCongestion.png",
                     "modules/graphQuestions/graphImages/interact/line_interact_02_trafficCongestion.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_trafficCongestion.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_trafficCongestion.png"
                 ],
                 "imageDim": [
                     1388,
@@ -634,9 +658,10 @@
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_beauty.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_beauty.png"
             ],
+            "imagePathBW": [],
             "questionBank": [
                 {
-                    "question": "Which of the following beauty products is purchased the most?",
+                    "question": "In 2008, which of the following beauty products was being purchased the most?",
                     "choices": [
                         "Hair Care",
                         "Toiletries",
@@ -647,7 +672,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which beauty product is purchased about as much as Fragrances?",
+                    "question": "Which beauty product was purchased about as much as Fragrances in 2012?",
                     "choices": [
                         "Hair Care",
                         "Toiletries",
@@ -705,6 +730,50 @@
                     "#ff9900",
                     "#109618",
                     "#990099"
+                ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_beauty.png",
+                        "iconDim": [
+                            361,
+                            361
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_beauty.png",
+                        "iconDim": [
+                            261,
+                            261
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_beauty.png",
+                        "iconDim": [
+                            292,
+                            292
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_beauty.png",
+                        "iconDim": [
+                            294,
+                            294
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_beauty.png",
+                        "iconDim": [
+                            272,
+                            272
+                        ]
+                    }
+                ],
+                "bwArray": [
+                    "#b7b7b7",
+                    "#444444",
+                    "#949494",
+                    "#282828",
+                    "#616161"
                 ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_beauty.csv",
                 "imageDim": [
@@ -764,18 +833,18 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the percent of the lowest bought girl scout cookie?",
+                    "question": "What is the lowest percent of total sales for a Girl Scout Cookie?",
                     "choices": [
                         "25%",
                         "11%",
                         "13%",
                         "19%"
                     ],
-                    "answer": "19%",
+                    "answer": "11%",
                     "key": "identify"
                 },
                 {
-                    "question": "Which cookie is closest to Peanut Butter Patties' percent of purchases?",
+                    "question": "Which cookie has the closest percent to Peanut Butter Patties' percent of total sales?",
                     "choices": [
                         "Thin Mints",
                         "Caramel deLites",
@@ -828,6 +897,44 @@
                     }
                 ],
                 "colorArray": [],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_girlScouts.png",
+                        "iconDim": [
+                            471,
+                            470
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_girlScouts.png",
+                        "iconDim": [
+                            471,
+                            470
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_girlScouts.png",
+                        "iconDim": [
+                            471,
+                            470
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_girlScouts.png",
+                        "iconDim": [
+                            471,
+                            470
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_girlScouts.png",
+                        "iconDim": [
+                            471,
+                            470
+                        ]
+                    }
+                ],
+                "bwArray": [],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_girlScouts.csv",
                 "imageDim": [
                     471,
@@ -885,7 +992,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which renewable energy source accounts for the least of the total amount of renewable energy?",
+                    "question": "In 2012, which of U.K.'s Renewable Energy sources was produced the least?",
                     "choices": [
                         "Wind Power",
                         "Sewage and Waste Bio",
@@ -896,7 +1003,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which renewable energy source is closest in the percentage of the total renewable energy to Plant and Bio?",
+                    "question": "In 2012, which of U.K.'s Renewable Energy source was produced a similar amount to Plant and Bio?",
                     "choices": [
                         "Wind Power",
                         "Sewage and Waste Bio",
@@ -955,6 +1062,50 @@
                     "#ffee24",
                     "#d69bed"
                 ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_renewable.png",
+                        "iconDim": [
+                            334,
+                            334
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_renewable.png",
+                        "iconDim": [
+                            260,
+                            260
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_renewable.png",
+                        "iconDim": [
+                            349,
+                            349
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_renewable.png",
+                        "iconDim": [
+                            308,
+                            308
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_renewable.png",
+                        "iconDim": [
+                            287,
+                            287
+                        ]
+                    }
+                ],
+                "bwArray": [
+                    "#f8f8f8i",
+                    "#a3a3a3",
+                    "#303030",
+                    "#e6e6e6",
+                    "#636363"
+                ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_renewable.csv",
                 "imageDim": [
                     334,
@@ -1012,18 +1163,18 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the highest percent of a revenue source for the total Star Wars revenue?",
+                    "question": "What is the percent of the Star Wars revenue source with the most of the total sales?",
                     "choices": [
                         "10.0%",
                         "47.3%",
                         "45.5%",
                         "14.2%"
                     ],
-                    "answer": "17.3%",
+                    "answer": "45.5%",
                     "key": "identify"
                 },
                 {
-                    "question": "Which revenue source is closest to Video's percent of the total Star Wars revenue?",
+                    "question": "Which of Star Wars revenue source has a similar amount of sales to Blu-ray and DVD?",
                     "choices": [
                         "Books and Other",
                         "Box Office",
@@ -1082,6 +1233,50 @@
                     "#109618",
                     "#cc33c9"
                 ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_starWars.png",
+                        "iconDim": [
+                            696,
+                            696
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_starWars.png",
+                        "iconDim": [
+                            277,
+                            277
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_starWars.png",
+                        "iconDim": [
+                            353,
+                            353
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_starWars.png",
+                        "iconDim": [
+                            321,
+                            321
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_starWars.png",
+                        "iconDim": [
+                            237,
+                            237
+                        ]
+                    }
+                ],
+                "bwArray": [
+                    "#dfdfdf",
+                    "#696969",
+                    "#888888",
+                    "#424242",
+                    "#ffffff"
+                ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_starWars.csv",
                 "imageDim": [
                     696,
@@ -1139,7 +1334,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which location accounts for the least amount of robbery occurrences?",
+                    "question": "Which location had the least amount of robbery occurrences in the U.S, 2012?",
                     "choices": [
                         "Commercial Buildings",
                         "Gas Stations and Convenience Stores",
@@ -1150,14 +1345,14 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which location has the closest percentage of robbery occurrences to Residences?",
+                    "question": "In the U.S., 2012 which location had the closest percentage of robbery occurrences to Residences?",
                     "choices": [
                         "Commercial Buildings",
                         "Gas Stations and Convenience Stores",
                         "Streets and Highways",
                         "Banks"
                     ],
-                    "answer": "Banks",
+                    "answer": "Commercial Buildings",
                     "key": "compare"
                 }
             ],
@@ -1208,6 +1403,50 @@
                     "#f8ebc6",
                     "#00db98",
                     "#f886b7"
+                ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_robbery.png",
+                        "iconDim": [
+                            862,
+                            862
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_robbery.png",
+                        "iconDim": [
+                            910,
+                            910
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_robbery.png",
+                        "iconDim": [
+                            915,
+                            915
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_robbery.png",
+                        "iconDim": [
+                            807,
+                            807
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_04_robbery.png",
+                        "iconDim": [
+                            287,
+                            286
+                        ]
+                    }
+                ],
+                "bwArray": [
+                    "#5d5d5d",
+                    "#9d9d9d",
+                    "#f2f2f2",
+                    "#343434",
+                    "#d9d9d9"
                 ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_robbery.csv",
                 "imageDim": [
@@ -1266,7 +1505,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the percent of the industry that the most women work in?",
+                    "question": "In the U.S, 2010 what was the percent of the industry that the most women worked in?",
                     "choices": [
                         "40.6%",
                         "31.3%",
@@ -1277,7 +1516,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which industry is closest in percent to Transportation and Other?",
+                    "question": "Which industry is closest in percent of women working to Transportation and Other in the U.S, 2012?",
                     "choices": [
                         "Professional and Management",
                         "Sales and Office",
@@ -1303,8 +1542,8 @@
                     {
                         "path": "modules/graphQuestions/graphImages/interact/pie_interact_01_womenWork.png",
                         "iconDim": [
-                            661,
-                            806
+                            864,
+                            864
                         ]
                     },
                     {
@@ -1327,6 +1566,42 @@
                     "#ff9900",
                     "#3d9e27",
                     "#dc3912"
+                ],
+                "imagePathBW": [
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_00_womenWork.png",
+                        "iconDim": [
+                            2955,
+                            2955
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_01_womenWork.png",
+                        "iconDim": [
+                            864,
+                            864
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_02_womenWork.png",
+                        "iconDim": [
+                            2646,
+                            2646
+                        ]
+                    },
+                    {
+                        "path": "modules/graphQuestions/graphImages/interact_bw/pie_interact_bw_03_womenWork.png",
+                        "iconDim": [
+                            2916,
+                            2928
+                        ]
+                    }
+                ],
+                "bwArray": [
+                    "#555555",
+                    "#bebebe",
+                    "#8a8a8a",
+                    "#efefef"
                 ],
                 "dataPath": "modules/graphInteract/csvFiles/pie_data_womenWork.csv",
                 "imageDim": [
@@ -1387,18 +1662,18 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which of the following artworks was sold for the highest amount?",
+                    "question": "Which of the following artworks was sold for the highest amount of 2012 U.S.currency?",
                     "choices": [
                         "Garrcon a la pipe",
                         "Nude, Green Leaves",
                         "Dora Maar au Chat",
                         "The Scream"
                     ],
-                    "answer": "The Scream",
+                    "answer": "Garrcon a la pipe",
                     "key": "identify"
                 },
                 {
-                    "question": "Which artwork was sold for less than L'Homme qui Marche, I?",
+                    "question": "Which artwork was sold at auction for a smaller amount of 2012 U.S. currency than L'Homme qui Marche, I?",
                     "choices": [
                         "Garrcon a la pipe",
                         "Nude, Green Leaves",
@@ -1417,6 +1692,14 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_03_artwork.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_artwork.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_artwork.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_artwork.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_artwork.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_artwork.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_artwork.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_artwork.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_artwork.png"
                 ],
                 "imageDim": [
                     1607,
@@ -1502,7 +1785,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which college undergraduate major has a salary similar to Computer Science?",
+                    "question": "Which college undergraduate major has a salary similar to Aerospace Engineering?",
                     "choices": [
                         "Petroleum Engineering",
                         "Computer Science",
@@ -1521,6 +1804,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_03_majorSalaries.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_majorSalaries.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_majorSalaries.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_majorSalaries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_majorSalaries.png"
                 ],
                 "imageDim": [
                     1762,
@@ -1596,7 +1888,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What is the least used development platform?",
+                    "question": "What was the least used development platform in 2012?",
                     "choices": [
                         "Blackberry",
                         "Android",
@@ -1607,14 +1899,14 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which development platform is similar to Windows Phone's percent of developers using the platform?",
+                    "question": "In 2012, which development platform had a percent similar to Windows Phone's percent of developers using the platform?",
                     "choices": [
                         "Blackberry",
                         "Linux",
                         "iOS",
                         "Flash"
                     ],
-                    "answer": "iOS",
+                    "answer": "Blackberry",
                     "key": "compare"
                 }
             ],
@@ -1626,6 +1918,14 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_03_developers.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_developers.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_developers.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_developers.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_developers.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_developers.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_developers.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_developers.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_developers.png"
                 ],
                 "imageDim": [
                     1526,
@@ -1700,14 +2000,14 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which of the following values is closest to the highest percent viewership for a given summer olympic year?",
+                    "question": "Which of the following values is closest to the highest percent viewership for a Summer Olympic year?",
                     "choices": [
                         "10%",
                         "30%",
-                        "35%",
+                        "40%",
                         "25%"
                     ],
-                    "answer": "30%",
+                    "answer": "40%",
                     "key": "identify"
                 },
                 {
@@ -1731,6 +2031,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_olympics.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_olympics.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_06_olympics.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_olympics.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_olympics.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_olympics.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_olympics.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_olympics.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_olympics.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_olympics.png"
                 ],
                 "imageDim": [
                     1702,
@@ -1807,7 +2116,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which theme park had the least attendance?",
+                    "question": "Which theme park had the least attendance in 2011?",
                     "choices": [
                         "Disneyland",
                         "Universal Studios",
@@ -1818,7 +2127,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which theme park had an attendance amount less than Tokyo Disney Sea and greater than Ocean Park?",
+                    "question": "In 2011, which theme park had an attendance amount less than Tokyo Disney Sea and greater than Ocean Park?",
                     "choices": [
                         "Disneyland",
                         "Universal Studios",
@@ -1838,6 +2147,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_themePark.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_themePark.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_06_themePark.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_themePark.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_themePark.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_themePark.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_themePark.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_themePark.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_themePark.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_themePark.png"
                 ],
                 "imageDim": [
                     1504,
@@ -1912,7 +2230,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "Which country had the highest unemployment rate?",
+                    "question": "In 2011, which country had the highest unemployment rate?",
                     "choices": [
                         "France",
                         "Spain",
@@ -1923,7 +2241,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which country had a similar unemployment rate to Italy?",
+                    "question": "Which country had a similar unemployment rate to Italy in 2011?",
                     "choices": [
                         "Spain",
                         "France",
@@ -1943,6 +2261,15 @@
                     "modules/graphQuestions/graphImages/interact/bar_interact_04_unemploymentRate.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_05_unemploymentRate.png",
                     "modules/graphQuestions/graphImages/interact/bar_interact_06_unemploymentRate.png"
+                ],
+                "imagePathBW": [
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_00_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_01_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_unemploymentRate.png",
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_unemploymentRate.png"
                 ],
                 "imageDim": [
                     1878,

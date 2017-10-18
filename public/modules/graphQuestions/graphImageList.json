@@ -27,6 +27,7 @@
           "withIcon": false,
           "iconDim": [],
           "imagePath": [],
+          "imagePathBW": [],
           "imageDim": [],
           "pointLoc": 7,
           "gridLines": [2, 5, 0],
@@ -62,14 +63,14 @@
       "questionBank": [
         {
           "question": "Which of the following years had the lowest C02 Emissions in the U.S.?",
-          "choices": ["2000", "2003", "2001", "2005"],
-          "answer": "2003",
+          "choices": ["2000", "2004", "2006", "2008"],
+          "answer": "2008",
           "key": "identify"
         },
         {
           "question": "Which year had a similar amount of C02 Emissions to the U.S. in 2002?",
-          "choices": ["2000", "2004", "2003", "2001"],
-          "answer": "2001",
+          "choices": ["2004", "2006", "2008", "2009"],
+          "answer": "2004",
           "key": "compare"
         }
       ],
@@ -77,6 +78,7 @@
           "withIcon": false,
           "iconDim": [],
           "imagePath": [],
+          "imagePathBW": [],
           "imageDim": [],
           "pointLoc": 3,
           "gridLines": [2, 6, 0],
@@ -128,6 +130,7 @@
           "iconLoc": 3,
           "iconDim": [],
           "imagePath": [],
+          "imagePathBW": [],
           "imageDim": [],
           "pointLoc": 10,
           "gridLines": [2, 4, 2],
@@ -162,14 +165,14 @@
       "questionBank": [
         {
           "question": "Which of the following prices is closes to the peak average gasoline price in the U.S. from June 2010 to June 2012?",
-          "choices": ["2.20$", "2.60$", "3.20$", "4.00$"],
-          "answer": "",
+          "choices": ["$2.20", "$2.60", "$3.20", "$4.00"],
+          "answer": "$4.00",
           "key": "identify"
         },
         {
-          "question": "What month and year had a similar average gasoline price to October 2012 in the U.S.",
+          "question": "What month and year had a similar average gasoline price to October 2012 in the U.S.?",
           "choices": ["October 2011", "February 2011", "February 2012", "June2012"],
-          "answer": "Feb2011-June2011",
+          "answer": "February 2012",
           "key": "compare"
         }
       ],
@@ -177,6 +180,7 @@
           "withIcon": false,
           "iconDim": [],
           "imagePath": [],
+          "imagePathBW": [],
           "imageDim": [],
           "pointLoc": 11,
           "gridLines": [4, 4, 1],
@@ -210,9 +214,9 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "What is the lowest number of manufacturing employing in the U.S. from 2000-2010?",
-          "choices": ["5 milllion", "10 milllion", "15 milllion", "20 milllion"],
-          "answer": "15",
+          "question": "Which of the following is closest to the lowest number of manufacturing employment in the U.S. from 2000-2010?",
+          "choices": ["5 million", "10 million", "15 million", "20 million"],
+          "answer": "10 million",
           "key": "identify"
         },
         {
@@ -226,6 +230,7 @@
           "withIcon": false,
           "iconDim": [],
           "imagePath": [],
+          "imagePathBW": [],
           "imageDim": [],
           "pointLoc": 9,
           "gridLines": [2, 4, 0],
@@ -261,7 +266,7 @@
         {
           "question": "In 2011 what was the highest average number of hours spent in traffic in the U.S.?",
           "choices": ["3.6 hours", "4.0 hours", "4.4 hours", "4.8 hours"],
-          "answer": "5",
+          "answer": "4.8 hours",
           "key": "identify"
         },
         {
@@ -275,6 +280,7 @@
           "withIcon": false,
           "iconDim": [],
           "imagePath": [],
+          "imagePathBW": [],
           "imageDim": [],
           "pointLoc": 4,
           "gridLines": [2, 5, 0],
@@ -308,15 +314,16 @@
         "modules/graphQuestions/graphImages/color/rangerPoseGreen.png"
       ],
       "basePath": [],
+      "imagePathBW": [],
       "questionBank": [
         {
-          "question": "Which of the following beauty products is purchased the most?",
+          "question": "In 2008, which of the following beauty products was being purchased the most?",
           "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
           "answer": "Skin Care",
           "key": "identify"
         },
         {
-          "question": "Which beauty product is purchased about as much as Fragrances?",
+          "question": "Which beauty product was purchased about as much as Fragrances in 2012?",
           "choices": ["Hair Care", "Toiletries", "Skin Care", "Makeup"],
           "answer": "Toiletries",
           "key": "compare"
@@ -327,7 +334,9 @@
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
-        "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099"]
+        "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099"],
+        "imagePathBW": [],
+        "bwArray": ["#b7b7b7", "#444444", "#949494", "#282828", "#616161"]
       },
       "axesPath":{},
       "themeQuestions":[
@@ -355,13 +364,13 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "What is the percent of the lowest bought girl scout cookie?",
+          "question": "What is the lowest percent of total sales for a Girl Scout Cookie?",
           "choices": ["25%", "11%", "13%", "19%"],
-          "answer": "19%",
+          "answer": "11%",
           "key": "identify"
         },
         {
-          "question": "Which cookie is closest to Peanut Butter Patties' percent of purchases?",
+          "question": "Which cookie has the closest percent to Peanut Butter Patties' percent of total sales?",
           "choices": ["Thin Mints", "Caramel deLites", "Peanut Butter Sandwiches", "Other"],
           "answer": "Peanut Butter Sandwiches",
           "key": "compare"
@@ -372,7 +381,9 @@
         "withIcon": false,
         "iconDim": [],
         "imagePath": [],
-        "colorArray": []
+        "colorArray": [],
+        "imagePathBW": [],
+        "bwArray": []
       },
       "axesPath":{},
       "themeQuestions":[
@@ -400,13 +411,13 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "Which renewable energy source accounts for the least of the total amount of renewable energy?",
+          "question": "In 2012, which of U.K.'s Renewable Energy sources was produced the least?",
           "choices": ["Wind Power", "Sewage and Waste Bio", "Solar and Other Sources", "Hydro Electric"],
           "answer": "Hydro Electric",
           "key": "identify"
         },
         {
-          "question": "Which renewable energy source is closest in the percentage of the total renewable energy to Plant and Bio?",
+          "question": "In 2012, which of U.K.'s Renewable Energy source was produced a similar amount to Plant and Bio?",
           "choices": ["Wind Power", "Sewage and Waste Bio", "Solar and Other Sources", "Hydro Electric"],
           "answer": "Wind Power",
           "key": "compare"
@@ -417,7 +428,9 @@
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
-        "colorArray": ["#ff9a4c", "#4cb1ff", "#04770d", "#ffee24", "#d69bed"]
+        "colorArray": ["#ff9a4c", "#4cb1ff", "#04770d", "#ffee24", "#d69bed"],
+        "imagePathBW": [],
+        "bwArray": ["#f8f8f8i", "#a3a3a3", "#303030", "#e6e6e6", "#636363"]
       },
       "axesPath":{},
       "themeQuestions":[
@@ -445,13 +458,13 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "What is the highest percent of a revenue source for the total Star Wars revenue?",
+          "question": "What is the percent of the Star Wars revenue source with the most of the total sales?",
           "choices": ["10.0%", "47.3%", "45.5%", "14.2%"],
-          "answer": "17.3%",
+          "answer": "45.5%",
           "key": "identify"
         },
         {
-          "question": "Which revenue source is closest to Video's percent of the total Star Wars revenue?",
+          "question": "Which of Star Wars revenue source has a similar amount of sales to Blu-ray and DVD?",
           "choices": ["Books and Other", "Box Office", "Video Games", "Toys"],
           "answer": "Video Games",
           "key": "compare"
@@ -462,7 +475,9 @@
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
-        "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#cc33c9"]
+        "colorArray": ["#3366cc", "#dc3912", "#ff9900", "#109618", "#cc33c9"],
+        "imagePathBW": [],
+        "bwArray": ["#dfdfdf", "#696969", "#888888", "#424242", "#ffffff"]
       },
       "axesPath":{},
       "themeQuestions":[
@@ -490,15 +505,15 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "Which location accounts for the least amount of robbery occurrences?",
+          "question": "Which location had the least amount of robbery occurrences in the U.S, 2012?",
           "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks"],
           "answer": "Banks",
           "key": "identify"
         },
         {
-          "question": "Which location has the closest percentage of robbery occurrences to Residences?",
+          "question": "In the U.S., 2012 which location had the closest percentage of robbery occurrences to Residences?",
           "choices": ["Commercial Buildings", "Gas Stations and Convenience Stores", "Streets and Highways", "Banks"],
-          "answer": "Banks",
+          "answer": "Commercial Buildings",
           "key": "compare"
         }
       ],
@@ -507,7 +522,9 @@
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
-        "colorArray": ["#19aae5", "#e9b800", "#f8ebc6", "#00db98", "#f886b7"]
+        "colorArray": ["#19aae5", "#e9b800", "#f8ebc6", "#00db98", "#f886b7"],
+        "imagePathBW": [],
+        "bwArray": ["#5d5d5d", "#9d9d9d", "#f2f2f2", "#343434", "#d9d9d9"]
       },
       "axesPath":{},
       "themeQuestions":[
@@ -535,13 +552,13 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "What is the percent of the industry that the most women work in?",
+          "question": "In the U.S, 2010 what was the percent of the industry that the most women worked in?",
           "choices": ["40.6%", "31.3%", "6.1%", "32.0%"],
           "answer": "40.6%",
           "key": "identify"
         },
         {
-          "question": "Which industry is closest in percent to Transportation and Other?",
+          "question": "Which industry is closest in percent of women working to Transportation and Other in the U.S, 2012?",
           "choices": ["Professional and Management", "Sales and Office", "Service and Retail", "Health and Wellness"],
           "answer": "Service and Retail",
           "key": "compare"
@@ -552,7 +569,9 @@
         "withIcon": true,
         "iconDim": [],
         "imagePath": [],
-        "colorArray": ["#36a8e1", "#ff9900", "#3d9e27", "#dc3912"]
+        "colorArray": ["#36a8e1", "#ff9900", "#3d9e27", "#dc3912"],
+        "imagePathBW": [],
+        "bwArray": ["#555555", "#bebebe", "#8a8a8a", "#efefef"]
       },
       "axesPath":{},
       "themeQuestions":[
@@ -582,13 +601,13 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "Which of the following artworks was sold for the highest amount?",
+          "question": "Which of the following artworks was sold for the highest amount of 2012 U.S.currency?",
           "choices": ["Garrcon a la pipe", "Nude, Green Leaves", "Dora Maar au Chat", "The Scream"],
-          "answer": "The Scream",
+          "answer": "Garrcon a la pipe",
           "key": "identify"
         },
         {
-          "question": "Which artwork was sold for less than L'Homme qui Marche, I?",
+          "question": "Which artwork was sold at auction for a smaller amount of 2012 U.S. currency than L'Homme qui Marche, I?",
           "choices": ["Garrcon a la pipe", "Nude, Green Leaves", "Dora Maar au Chat", "The Scream"],
           "answer": "Dora Maar au Chat",
           "key": "compare"
@@ -596,6 +615,7 @@
       ],
       "interact": {
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "dataPath": "",
         "numBars":0,
@@ -638,7 +658,7 @@
           "key": "identify"
         },
         {
-          "question": "Which college undergraduate major has a salary similar to Computer Science?",
+          "question": "Which college undergraduate major has a salary similar to Aerospace Engineering?",
           "choices": ["Petroleum Engineering", "Computer Science", "Chemical Engineering", "Civil Engineering"],
           "answer": "Chemical Engineering",
           "key": "compare"
@@ -646,6 +666,7 @@
       ],
       "interact": {
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "dataPath": "",
         "numBars":0,
@@ -682,20 +703,21 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "What is the least used development platform?",
+          "question": "What was the least used development platform in 2012?",
           "choices": ["Blackberry", "Android", "iOS", "Flash"],
           "answer": "Flash",
           "key": "identify"
         },
         {
-          "question": "Which development platform is similar to Windows Phone's percent of developers using the platform?",
+          "question": "In 2012, which development platform had a percent similar to Windows Phone's percent of developers using the platform?",
           "choices": ["Blackberry", "Linux", "iOS", "Flash"],
-          "answer": "iOS",
+          "answer": "Blackberry",
           "key": "compare"
         }
       ],
       "interact": {
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "dataPath": "",
         "numBars":0,
@@ -732,9 +754,9 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "Which of the following values is closest to the highest percent viewership for a given summer olympic year?",
-          "choices": ["10%", "30%", "35%", "25%"],
-          "answer": "30%",
+          "question": "Which of the following values is closest to the highest percent viewership for a Summer Olympic year?",
+          "choices": ["10%", "30%", "40%", "25%"],
+          "answer": "40%",
           "key": "identify"
         },
         {
@@ -746,6 +768,7 @@
       ],
       "interact": {
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "dataPath": "",
         "numBars":0,
@@ -782,13 +805,13 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "Which theme park had the least attendance?",
+          "question": "Which theme park had the least attendance in 2011?",
           "choices": ["Disneyland", "Universal Studios", "Animal Kingdom", "Ocean Park"],
           "answer": "Universal Studios",
           "key": "identify"
         },
         {
-          "question": "Which theme park had an attendance amount less than Tokyo Disney Sea and greater than Ocean Park?",
+          "question": "In 2011, which theme park had an attendance amount less than Tokyo Disney Sea and greater than Ocean Park?",
           "choices": ["Disneyland", "Universal Studios", "Animal Kingdom", "Ocean Park"],
           "answer": "Animal Kingdom",
           "key": "compare"
@@ -796,6 +819,7 @@
       ],
       "interact": {
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "dataPath": "",
         "numBars":0,
@@ -832,13 +856,13 @@
       "basePath": [],
       "questionBank": [
         {
-          "question": "Which country had the highest unemployment rate?",
+          "question": "In 2011, which country had the highest unemployment rate?",
           "choices": ["France", "Spain", "Germany", "Italy"],
           "answer": "Spain",
           "key": "identify"
         },
         {
-          "question": "Which country had a similar unemployment rate to Italy?",
+          "question": "Which country had a similar unemployment rate to Italy in 2011?",
           "choices": ["Spain", "France", "Italy", "Portugal"],
           "answer": "France",
           "key": "compare"
@@ -846,6 +870,7 @@
       ],
       "interact": {
         "imagePath": [],
+        "imagePathBW": [],
         "imageDim": [],
         "dataPath": "",
         "numBars":0,

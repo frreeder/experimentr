@@ -18,6 +18,7 @@
   let changeAllSlices = true;
   let isInteract = true;
   let emNum = 4; // 0-4, norm, norm2, un, un2, emb
+  let isBW = true;
 
   let buttonTime =false
   // Example Data
@@ -179,6 +180,12 @@
       }
       // Get the associated data based on CSV files
       for (let i = 0; i < gArr.length; i++){
+        if (isBW) {
+          gArr[i].interact.imagePath = gArr[i].interact.imagePathBW
+          if (gArr[i].interact.imagePathBW==null)
+            console.log('garr', gArr[i].key, gArr[i].title)
+          gArr[i].interact.colorArray = gArr[i].interact.bwArray
+        }
         d3.csv(gArr[i].interact.dataPath, function(iData){
           // Setting the accessors based on the column and row data
           gArr[i].interact.accessors = [d3.keys(iData[0])[0], d3.keys(iData[0])[1]]
@@ -198,7 +205,15 @@
             setImg(gArr[i].embType, gArr[i], gArr[i].interact.imageDim)
           if (gArr[i].chartType=="bar")
             gArr[i].interact.padding=setBars(gArr[i].embType=="embellished", gArr[i].interact.barDim, gArr[i].interact.plotArea, gArr[i].interact.imagePath.length-1)
-          continue;}
+          if (isBW){
+            if (gArr[i].chartType=="line"){
+                gArr[i].interact.gridColor=["black", "#2a2d33"]
+                gArr[i].interact.lineCol = "black"
+            } else if (gArr[i].chartType=="bar") {
+              gArr[i].interact.xGridCol=["black", "#2a2d33"]}
+          }
+          continue;
+        }
         let newData = graphI[gArr[i].chartType][embDict[gArr[i].embType]]
         console.log("n0", newData)
         // console.log("gArr[i]", gArr[i].chartType)
@@ -207,7 +222,9 @@
           gArr[i].interact.lineCol = "black"
           newData=newData[0]
           console.log("n1",newData)
-          gArr[i].interact.imagePath = newData.imagePath
+          if (isBW){
+            gArr[i].interact.imagePath = newData.imagePathBW
+          } else {gArr[i].interact.imagePath = newData.imagePath}
           gArr[i].interact.withIcon = newData.withIcon
           if (newData.withIcon){
             gArr[i].interact.iconDim=newData.iconDim
@@ -219,7 +236,9 @@
           newData=newData.filter((d2)=>{
             return d2.imagePath.length==gArr[i].interact.imagePath.length})[0]
           console.log("n1e",newData)
-          gArr[i].interact.imagePath = newData.imagePath
+          if (isBW){
+            gArr[i].interact.imagePath = newData.imagePathBW
+          } else {gArr[i].interact.imagePath = newData.imagePath}
           if (gArr[i].chartType=="bar"&&newData.useBG){gArr[i].interact.imageDim=newData.imageDim}
           if (gArr[i].chartType=="pie"){
             gArr[i].interact.withIcon=newData.withIcon
