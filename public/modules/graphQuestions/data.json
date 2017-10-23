@@ -45,12 +45,12 @@
                 "withIcon": false,
                 "iconDim": [],
                 "imagePath": [
-                    "modules/graphQuestions/graphImages/interact/line_interact_01_americanCrabsCaught.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_02_americanCrabsCaught.png"
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_americanCrabsCaught.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_americanCrabsCaught.png"
                 ],
                 "imagePathBW": [
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_americanCrabsCaught.png",
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_americanCrabsCaught.png"
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_americanCrabsCaught.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_americanCrabsCaught.png"
                 ],
                 "imageDim": [
                     1528,
@@ -152,12 +152,12 @@
                 "withIcon": false,
                 "iconDim": [],
                 "imagePath": [
-                    "modules/graphQuestions/graphImages/interact/line_interact_01_climateChange.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_02_climateChange.png"
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_climateChange.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_climateChange.png"
                 ],
                 "imagePathBW": [
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_climateChange.png",
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_climateChange.png"
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_climateChange.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_climateChange.png"
                 ],
                 "imageDim": [
                     1576,
@@ -260,12 +260,12 @@
                 "iconLoc": 3,
                 "iconDim": [],
                 "imagePath": [
-                    "modules/graphQuestions/graphImages/interact/line_interact_01_fordFSeries.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_02_fordFSeries.png"
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_fordFSeries.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_fordFSeries.png"
                 ],
                 "imagePathBW": [
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_fordFSeries.png",
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_fordFSeries.png"
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_fordFSeries.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_fordFSeries.png"
                 ],
                 "imageDim": [
                     1502,
@@ -366,12 +366,12 @@
                 "withIcon": false,
                 "iconDim": [],
                 "imagePath": [
-                    "modules/graphQuestions/graphImages/interact/line_interact_01_gasolinePrices.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_02_gasolinePrices.png"
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_gasolinePrices.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_gasolinePrices.png"
                 ],
                 "imagePathBW": [
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_gasolinePrices.png",
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_gasolinePrices.png"
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_gasolinePrices.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_gasolinePrices.png"
                 ],
                 "imageDim": [
                     1762,
@@ -472,12 +472,12 @@
                 "withIcon": false,
                 "iconDim": [],
                 "imagePath": [
-                    "modules/graphQuestions/graphImages/interact/line_interact_01_manuEmployment.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_02_manuEmployment.png"
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_manuEmployment.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_manuEmployment.png"
                 ],
                 "imagePathBW": [
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_manuEmployment.png",
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_manuEmployment.png"
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_manuEmployment.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_manuEmployment.png"
                 ],
                 "imageDim": [
                     891,
@@ -578,12 +578,12 @@
                 "withIcon": false,
                 "iconDim": [],
                 "imagePath": [
-                    "modules/graphQuestions/graphImages/interact/line_interact_01_trafficCongestion.png",
-                    "modules/graphQuestions/graphImages/interact/line_interact_02_trafficCongestion.png"
+                    "modules/graphQuestions/graphImages/interact/line_interact_00_trafficCongestion.png",
+                    "modules/graphQuestions/graphImages/interact/line_interact_01_trafficCongestion.png"
                 ],
                 "imagePathBW": [
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_trafficCongestion.png",
-                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_02_trafficCongestion.png"
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_00_trafficCongestion.png",
+                    "modules/graphQuestions/graphImages/interact_bw/line_interact_bw_01_trafficCongestion.png"
                 ],
                 "imageDim": [
                     1388,
@@ -1811,8 +1811,7 @@
                     "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_02_majorSalaries.png",
                     "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_03_majorSalaries.png",
                     "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_04_majorSalaries.png",
-                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_majorSalaries.png",
-                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_06_majorSalaries.png"
+                    "modules/graphQuestions/graphImages/interact_bw/bar_interact_bw_05_majorSalaries.png"
                 ],
                 "imageDim": [
                     1762,

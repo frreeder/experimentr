@@ -11,24 +11,25 @@
 
 <script>
 (function() {
-  // for testing purposes
-  var skip = true;
-  var stepSize = .005
-  let mod4 = []
-  let changeAllSlices = true;
-  let isInteract = true;
-  let emNum = 4; // 0-4, norm, norm2, un, un2, emb
-  let isBW = true;
+  var skip = true; // Whether or not can click proceed without completing the module
+  let mod4 = [] // The data being saved for the module
 
-  let buttonTime =false
-  // Example Data
+  var stepSize = .005 // The steps for increasing/decreasing selected data values
+  let changeAllSlices = true; // true: manipulate all pie slices, false: manipulate selected slice and adjacent ones
+
+  // What charts are being shown
+  let isBW = false; // true: use black and white images, false: use color images
+  let isInteract = true; // true: can manipulate data, false: produces all chart variations
+  let emNum = 3; // 0-4, create charts that are 0:norm, 1:norm2, 2:un, 3:un2, 4:emb
+
+  // ----------------- BEGIN: Example Data ----------------------------//
   exAccessors=['year','cornSales']
   exData=[
     {'year': 2002, 'cornSales': 1.7052}, {'year': 2003, 'cornSales': .618}, {'year': 2004, 'cornSales': .492}, {'year': 2005, 'cornSales': .3144},
     {'year': 2006, 'cornSales': .3048}, {'year': 2007, 'cornSales': .2736}, {'year': 2008, 'cornSales': .936}, {'year': 2009, 'cornSales': 4.4436},
     {'year': 2010, 'cornSales': 2.4456}, {'year': 2011, 'cornSales': 1.3356}, {'year': 2012, 'cornSales': 1.7472}
   ]
-  // Add a clump from the main JSON
+  // Example of how the JSON file being read is formatted.
   exImage={'interact':{
             "key": "recession",
             "withIcon": false,
@@ -47,39 +48,46 @@
             'yGridVal': 1.2,
             'lineCol': 'black',
             'data': exData
+    }
   }
-          }
+  // ----------------- END: Example Data ----------------------------//
 
-
-  // Specific to interact
+  // ----------------- BEGIN: Chart Variables ----------------------------//
   var chart;
-  // let perc = [.8, 1]
-  // var bodyDim = {h:parseInt(d3.select('#graphIImage').style('height'), 10)*perc[0] , w:parseInt(d3.select('#graphIImage').style('width'), 10)*perc[1]}
+
+  // Not sure what this does? Guess it sets the ratio of width to height?
   let perc = [1, .8]
-  // Might need to change this to hard coded numbers, but keeping for now.
+
+  // If I remove the inital line of declaration, the style is thrown off.
   var bodyDim = {w:parseInt(d3.select('#graphIImage').style('width'), 10)*perc[0], h:parseInt(d3.select('#graphIImage').style('height'), 10)*perc[1]}
   bodyDim.h = 500*perc[1]
   bodyDim.w = 850*perc[0]
-  console.log("bod", bodyDim)
+  // console.log("bod", bodyDim)
 
+  // For when I wanted to edit the icon locations on the pie.
+  // I do not think this is needed. s
   let pieEdit = 0;
 
   var data = {}
-    , rand = Math.floor(Math.random()*3) // 0, 1, 2
-    , graphCounter = 0
-    , lastGraph = false
-    , isValid = false
-    , graphArray = []
-    , storyData;
+    , graphCounter = 0 // Count of the current chart
+    , lastGraph = false // boolean for whether or not the last chart
+    , isValid = false // Will not be able to PROCEED if !skip and !isValid
+    , graphArray = [] // The array of all the chart data to create the charts.
+    , storyData; // The current chart data
 
+  // ----------------- END: Chart Variables ----------------------------//
+
+  // ----------------- BEGIN: Helper Functions ----------------------------//
   function clampThings(num, min, max){return Math.min(Math.max(num, min), max)}
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
+  // ----------------- END: Helper Functions ----------------------------//
 
-  init();
+  init(); // Initialize everything!!!!
 
+  // ----------------- BEGIN: Setup Data Functions ----------------------------//
   let embT = ["normal", "normal2", "unrelated", "unrelated2", "embellished"]
   function notInteract(gO, gArr){
     for (var i in gO){
@@ -258,18 +266,12 @@
       }
     }, 500)
   }
+  // ----------------- END: Setup Data Functions ----------------------------//
 
   function init() {
+    experimentr.hideNext(); // Hides the next button
+    experimentr.startTimer('graphInteract'); // Starts the timer for the entire module.
 
-    // console.log(d3.select("#inImage"))
-    // data.mod1=[]
-    experimentr.hideNext();
-    experimentr.startTimer('graphInteract');
-
-    // need to do x3 1-graphquestions, 2-graphNormUnrel, 3-graphOrder
-    // take graph order fill graphArray accordingly
-
-    let graphArray2  = []
     getData(graphArray)
     console.log("gra", graphArray)
     storyData = exImage
@@ -567,9 +569,6 @@
     let accessors = storyData.interact.accessors
     let piePerc = 1
 
-    // save the pieSlice value, will be changed if chart changed
-    mod4[graphCounter].value = pieData[storyData.interact.pointLoc][accessors[1]]
-
     // Setting the chart
     chart = d3.select('#graphIImage')
     // Setting the width to almost 70 to give room for legend...though legend might not be necessary in future iterations...
@@ -601,12 +600,6 @@
             chart.highSlice.style("opacity", .4)
           }, 500)
         })
-        // .on("click", ()=>{
-        //   incSlice(isInc, 1)
-        //   clearTimeout(chart.timer)
-        //   chart.highSlice.style("opacity", 1)
-        //   chart.timer = setTimeout(()=>{chart.highSlice.style("opacity", .4)}, 500)
-        // })
     }
     // Setting a color scale if not predefined.
     chart.colorScale = d3.scale.category10()
@@ -637,14 +630,32 @@
 
     // The arc function to specify the paths for the pie.
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
+
+    // Modifying the pie slices so that the main slice starts at 180
+    if (isInteract){
+      let oValue = pieData[storyData.interact.pointLoc][accessors[1]]
+      let halfSum = pieData.reduce((sum, value)=>{
+        return sum+value[accessors[1]]}, 0).toFixed(2)/2
+      console.log('halfSum', halfSum)
+      for (let i = 0; i <pieData.length; i++){
+        if (i == storyData.interact.pointLoc){
+            pieData[i][accessors[1]]=halfSum
+            console.log('main', i,'-',pieData[i][accessors[1]])
+        } else {
+          // pieData[i][accessors[1]]=pieData[i][accessors[1]]+(oValue - halfSum)/(pieData.length-1)
+          pieData[i][accessors[1]]=pieData[i][accessors[1]]+(oValue - halfSum)*pieData[i][accessors[1]]/(100-oValue)
+          console.log('each', i, '-', pieData[i][accessors[1]])
+        }
+      }
+    }
+
+    // Saving the pieSlice value, which should be 1/2 of the sum
+    mod4[graphCounter].value = pieData[storyData.interact.pointLoc][accessors[1]]
+
     // A function to specify the angles of the pie.
     var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
-    /// need to add a func here to do the 180 thing...
-    // to do this will need to get the total values and then get the value needed for 50%
-    // once value desired calculated, find the difference and then adjust others by that difference divided by n-1
 
     // get the min pie slice
-    // chart.pieMin = 0;
     let pieMin = 0
     let pieTestRange = changeAllSlices? pieData.length : 3
     for (let i = 0; i < pieTestRange; i++){
@@ -731,42 +742,8 @@
           })
           .attr("y", (d, i)=>{return d.yPos=Math.sin((pieInfo[i].endAngle-pieInfo[i].startAngle)/2+pieInfo[i].startAngle-1.57)*d.raySize+(chart.bodyDim.h/2-d.width/2)})
           .call(d3.behavior.drag().on("drag", function(d){
-            console.log("dragging!", pieEdit)
               d3.select(this).attr("x", (d)=>{return d3.event.x-d.width/2}).attr("y", (d)=>{return d3.event.y-d.width/2})
-            // if (pieEdit=0){
-            //   d3.select(this).attr("x", (d)=>{return d3.event.x-d.width/2}).attr("y", (d)=>{return d3.event.y-d.width/2})
-            // } else if (pieEdit=1){
-            //   d3.select(this)
-            //   .attr("width", (d)=>{
-            //     d.width-=.5
-            //     return d.width
-            //   })
-            //   .attr("height", (d)=>{
-            //     d.width-=.5
-            //     return d.width})
-            // } else {
-            //   d3.select(this)
-            //   .attr("width", (d)=>{
-            //     d.width+=.5
-            //     return d.width
-            //   })
-            //   .attr("height", (d)=>{
-            //     d.width+=.5
-            //     return d.width})
-            // }
           }))
-        // chart.plotArea.append("g")
-        // .selectAll("circle")
-        // .data(storyData.interact.imagePath)
-        // .enter().append("circle").attr("cx", (d)=>{return d.xPos}).attr("cy", (d)=>{return d.yPos}).attr("r", 5)
-        //
-        // chart.testCirc = chart.plotArea.append("g").attr("class","testCirc")
-        //   .selectAll("circle")
-        //   .data(storyData.interact.imagePath).enter().append("circle")
-        //   .attr("cx", (d)=>{return d.xPos+d.width/2})
-        //   .attr("cy", (d)=>{return d.yPos+d.width/2})
-        //   .attr("r", (d)=>{return d.width/2}).style("fill", "green")
-        //   .style("opacity", 0)
     } else {
       // Draw the pie slices.
       chart.pieArea
@@ -857,29 +834,34 @@
   function incSlice (isInc, inc){
     let pieData = storyData.interact.data
     let accessors = storyData.interact.accessors
+    // If increasing the slice and if other slices are not being zeroed out
     if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(100-pieData[chart.pieMin][accessors[1]])){
     // if (isInc && pieData[chart.pieMin][accessors[1]]>inc/(pieData.length-1)){
       editPie(true)
     } else if (!isInc && pieData[storyData.interact.pointLoc][accessors[1]]>inc) {
+      // If decreasing the slice and the slice is not being zeroed out
       editPie(false)
     } else {
       return; }
-    // probably a prettier way to do this, but just increasing or decreasing pie slices
-    // Right now get the percentage each pie slice against the remaining pie slices and inc/dec by that.
+    // Increasing or decreasing pie slices --- can be prettier
+    // Get the percentage each pie slice against the remaining pie slices and inc/dec by that.
     function editPie(doInc){
       let incBy = doInc? inc:-inc
+      // Variable deciding whether or not to modify all slices or just three
       let pieTestRange = changeAllSlices? pieData.length:3
       let decBy = incBy/(pieTestRange-1)
+      let oVal = pieData[storyData.interact.pointLoc][accessors[1]]
       for (let i = 0; i <pieTestRange; i++){
         if (i == storyData.interact.pointLoc){pieData[i][accessors[1]]+=incBy} else {
-          decBy = pieData[i][accessors[1]]/(100 - pieData[0][accessors[1]])*incBy
+          decBy = pieData[i][accessors[1]]/(100 - oVal)*incBy
+          // decBy = pieData[i][accessors[1]]/(100 - pieData[0][accessors[1]])*incBy
+          // This should be mutating storyData.interact.data
           pieData[i][accessors[1]]-=decBy
-          // console.log("i", i, pieData[i][accessors[1]])
         }
       }
     }
     let p = storyData.interact.pointLoc
-    // save the pieSlice value
+    // Save the pieSlice value
     mod4[graphCounter].value = pieData[p][accessors[1]]
 
     // create function to draw the arcs of the pie slices.

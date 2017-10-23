@@ -113,7 +113,7 @@ for i in graphTypes:
                     print("notCaught: ", j["key"], x)
 
 # Getting interact files for lines
-inType = ("interact_01", "interact_02", "interact_03")
+inType = ("interact_00", "interact_01", "interact_02")
 #  For line interact files.
 for x in interactNames:
     # for i in graphTypes:
@@ -197,7 +197,7 @@ for j in data[graphTypes[2]]:
 
 #--------------------BW Interact-------------------#
 # BW INTERACT FOR LINES!
-inType = ("interact_bw_01", "interact_bw_02", "interact_bw_03")
+inType = ("interact_bw_00", "interact_bw_01", "interact_bw_02")
 for x in interactBWNames:
     if graphTypes[0] in x:
         for j in data[graphTypes[0]]:
