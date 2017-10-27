@@ -13,53 +13,38 @@ graphTypes = ("line", "pie", "bar")
 for i in data:
     print ("i", i)
     for j in data[i]:
-        # j["newPath"]=[]
         # https://stackoverflow.com/questions/521674/initializing-a-list-to-a-known-number-of-elements-in-python
-        j["imagePath"]=["modules/graphQuestions/graphImages/color/rangerPoseGreen.png"] * 5
+        j["imagePath"]=["modules/graphQuestions/graphImages/final_color/rangerPoseGreen.png"] * 5
         pprint(j)
         print(j["title"])
 
-# Adding an imagePath for the lines
+# Adding data path and other to line
 for j in data["line"]:
-    j["interact"]["imagePath"]=["modules/graphQuestions/graphImages/color/rangerPoseGreen.png"] * 2
-    # j["interact"]["imageDim"]=[tuple()]*2
+    j["interact"]["imagePath"]=["modules/graphQuestions/graphImages/final_color/rangerPoseGreen.png"] * 2
     j["interact"]["withIcon"]= False
     j["interact"]["dataPath"]="modules/graphInteract/csvFiles/line_data_"+j["key"]+".csv"
 
-# Adding an imagePath for the lines
+# Adding an data path and other to pie
 for j in data["pie"]:
-    # j["interact"]["imagePath"]=["modules/graphQuestions/graphImages/color/rangerPoseGreen.png"] * 2
-    # j["interact"]["imageDim"]=tuple()
     j["interact"]["withIcon"]= False
     j["interact"]["dataPath"]="modules/graphInteract/csvFiles/pie_data_"+j["key"]+".csv"
 
-# Adding an imagePath for the lines
+# Adding data path to bar
 for j in data["bar"]:
     j["interact"]["dataPath"]="modules/graphInteract/csvFiles/bar_data_"+j["key"]+".csv"
 
 # for all the images!
 allImages = []
 
-# for i in data:
-#     for j in data[i]:
-#         apple=2
-
-# pprint(data)
 pprint(data["line"][0])
 
-# I can a list of the directory image files.
-
-F = open("./graphImageList.json", "r")
-# print ("pot")
-# print (F.read())
-
 # fileNames = filter(lambda x: x.endswith('.txt'), os.listdir('mydir'))
-fileNames = os.listdir("./graphImages/color")
-# print("fileNames", fileNames)
+fileNames = os.listdir("./graphImages/final_color")
+fileNamesBW = os.listdir("./graphImages/final_bw")
 
 interactNames = os.listdir("./graphImages/interact")
 interactBWNames = os.listdir("./graphImages/interact_bw")
-# fileNamesBW = os.listdir("../graphImages/bw")
+
 baseNames = os.listdir("../graphTheme/chartBase")
 
 # A method using endswith to fileter out the png
@@ -79,8 +64,6 @@ print("using splittext and .json", txt_files2)
 # print ("using for in and if and .json", list(something))
 
 emType = ("embellished", "norm_01", "norm_02", "unrelated_01", "unrelated_02")
-# I need to get the key of each file and check the image list... should make a dictionary ...
-# If path includes line => go lines, if includes embellished => 0 or something like that
 # Cycle through all filenames and place as you go
 for i in graphTypes:
     print ("g", i)
@@ -91,8 +74,9 @@ for i in graphTypes:
                 if i in x and j["key"] in x and k in x:
                     print ("iCaught: ", x)
                     print ("iCaught a : ", j["key"])
-                    j["imagePath"][ind] = "modules/graphQuestions/graphImages/color/"+x
-                    allImages.append("modules/graphQuestions/graphImages/color/"+x)
+                    j["imagePath"][ind] = "modules/graphQuestions/graphImages/final_color/"+x
+                    j["imagePathBW"].append("modules/graphQuestions/graphImages/final_bw/"+x)
+                    allImages.append("modules/graphQuestions/graphImages/final_color/"+x)
                     # j["newPath"] = j["newPath"] + [x]
                 else:
                     print("notCaught: ", j["key"], x)

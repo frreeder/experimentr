@@ -39,7 +39,7 @@ app.use(express.static(__dirname + '/public'))
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 // If the study has finished, write the data to file
-// This isn't called anywhere...
+// Alyssa Note: This isn't called anywhere.
 app.post('/finish', function(req, res) {
   // console.log("finished!!!")
   fs.readFile('public/modules/blocked-workers.json', 'utf8', function(err,data) {
@@ -51,16 +51,14 @@ app.post('/finish', function(req, res) {
       if(err) console.log(err);
     });
   });
-
   res.send(200)
 })
 
 // Handle POSTs from frontend
 app.post('/', function handlePost(req, res) {
-  // console.log("posting")
   // Get experiment data from request body
   var d = req.body
-  // If a postId doesn't exist, add one (it's random, based on date)
+  // If a postId doesn't exist, add one (Random number based on date)
   if (!d.postId) d.postId = (+new Date()).toString(36)
   // Add a timestamp
   d.timestamp = (new Date()).getTime()
@@ -71,30 +69,28 @@ app.post('/', function handlePost(req, res) {
 })
 
 app.get('/', function(req, res){
-  // fs.readFile('public/modules/agent.txt', 'utf8', function(err, data){
-  //   fs.writeFile('public/modules/agent.txt', data+'\n'+req.headers['user-agent'], function(err){
-  //     if(err) console.log(err);
-  //   })
-  // })
-  // Query the string, takes the pid to identify participant and only uses version if testing
-  // ?pid=j4bn8lpy&v=1
-  // console.log("q: " + req.query.pid + " s: " + req.query.s)
+  function checkColor(){
+    return Math.floor(Math.random()*2)==1?true:false
+  }
+  // Query the string, if null -> error, test -> make stuff up, pid -> check if first time
   if (req.query.pid==null){
-    // telling participant link is invalid, not sure if I want to do other stuff here
+    // Link is invalid
     res.send(404)
     return;
   } else if (req.query.pid=="test"){
     pid = "qTest:"+(req.query.name!=null?req.query.name:(+new Date()).toString(36))
-    // checks to see if session specified, if not using a default index file
+    // If first session asked for -> use session one index
     if (req.query.s==1){
-      res.sendfile(__dirname+"/public/indexSess1.html")
+      fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+        res.sendfile(__dirname+"/public/indexSess1.html")
+      })
     } else {
-      // so gross but will read contents of test and paste into graph order
+      // Copying a dummy chart order JSON into the chart order JSON read client side.
       fs.readFile('public/modules/graphOrderTest.json', 'utf8', function(err,data) {
         if (err) console.log(err);
         fs.writeFile('public/modules/graphOrder.json', data, function(err) {
           if(err) console.log(err);
-          // if session 2 or default index file
+          // Sending corresponding index file.
           if (req.query.s == 2){
             res.sendfile(__dirname+"/public/indexSess2.html")
           } else {
@@ -104,46 +100,50 @@ app.get('/', function(req, res){
       })
     }
   } else {
-    pid = "p:"+req.query.pid
-    // Lookup if user in database, ex: pid = j60wtjs8
+    // If the first four characters in string are data then it will be used for testing
+    if (req.query.pid.substring(0, 6) == 'iSigns'){
+      let parID = (+new Date()).toString(36)
+      if (req.query.pid.substring(7)!=''){parID = req.query.pid.substring(7)}
+      pid = "p:"+parID
+    } else {
+      pid = "data:"+req.query.pid
+    }
+    // Do something if exist
+    function direct(suff){
+      // Grab the chart order from the database and copy into JSON that will be read client side
+      redisClient.hget(suff+":"+req.query.pid, "graphOrder", function(err, gO){
+        // Could also use a template like jade or something to inject into html or make things dynamic using socket.io.
+        if (gO==null){
+          // Somehow the chart order was not in database, redirecting to session one.
+          // console.log("graphOrderDNE")
+          fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+            res.sendfile(__dirname+"/public/indexSess1.html")
+          })
+          return;
+        }
+        fs.writeFile('public/modules/graphOrder.json', gO, function(err) {
+          if(err) console.log(err);
+          res.sendfile(__dirname+"/public/indexSess2.html")
+        });
+      })
+    }
+    // Lookup if user in database, ex: pid = p:j60wtjs8
     redisClient.exists("p:"+req.query.pid, function (err, exist){
       // If the participant exists pull up session 2.
       if (exist){
-        // graph order is added in session and is the randomization of the graphs
-        redisClient.hget("p:"+req.query.pid, "graphOrder", function(err, gO){
-          // Adding the graph order to a json file to be accessed on client side
-          // Could also use a template like jade or something to inject into html
-          // or make things dynamic using socket.io ...
-          if (gO==null){
-            console.log("graphOrderDNE")
-            res.sendfile(__dirname+"/public/indexSess1.html")
-            return;
-          }
-          fs.writeFile('public/modules/graphOrder.json', gO, function(err) {
-            if(err) console.log(err);
-            res.sendfile(__dirname+"/public/indexSess2.html")
-          });
-        })
+        direct('p')
       } else {
         // The entry doesn't exist. Pull up session 1
-        res.sendfile(__dirname+"/public/indexSess1.html")
+        redisClient.exists("data:"+req.query.pid, function (err, exist){
+          if (exist){direct('data')} else{
+            fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+              res.sendfile(__dirname+"/public/indexSess1.html")
+            })
+          }
+        })
       }
     })
   }
-
-
-
-
-  // res.sendFile(path.join(__dirname + '/public/indexw.html'))
-  // console.log(__dirname+"/public/indexw.html")
-  // res.send('apple: ' + "pot");
-  // redisClient
-  // fs.writeFile('public/modules/graphOrder.json', 'utf8', function(err,data) {
-  //
-  // // }, res.sendfile(__dirname+"/public/indexw.html"))
-  // res.sendfile(__dirname+"/public/indexw.html")
-  // console.log(req.query.id)
-  // res.write({apple: "pot"})
 });
 
 // Create the server and tell which port to listen to

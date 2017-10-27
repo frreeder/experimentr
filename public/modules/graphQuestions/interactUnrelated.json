@@ -96,7 +96,8 @@
         "imgPathBW": ["interact_bw_00", "interact_bw_01", "interact_bw_02", "interact_bw_03", "interact_bw_04"],
         "imagePath": [],
         "imagePathBW": [],
-        "colorArray": ["#666666", "#ffffff", "#aeaeae", "#3f3f3f", "#d0d0d0"],
+        "colorArray": ["#26bfff", "#fd186a", "#ff9900", "#2fdb36", "#aa62c7"],
+        "bwArray": ["#666666", "#ffffff", "#aeaeae", "#3f3f3f", "#d0d0d0"],
         "sortedChoices": {
           "unrelated":["Favorite Sea Creatures", "Sea Creatures Studied", "Sea Creature Population"]
         }

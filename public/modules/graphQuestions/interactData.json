@@ -429,6 +429,13 @@
                     }
                 ],
                 "colorArray": [
+                    "#26bfff",
+                    "#fd186a",
+                    "#ff9900",
+                    "#2fdb36",
+                    "#aa62c7"
+                ],
+                "bwArray": [
                     "#666666",
                     "#ffffff",
                     "#aeaeae",

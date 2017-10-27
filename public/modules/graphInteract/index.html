@@ -20,9 +20,10 @@
   // What charts are being shown
   let isBW = false; // true: use black and white images, false: use color images
   let isInteract = true; // true: can manipulate data, false: produces all chart variations
-  let emNum = 3; // 0-4, create charts that are 0:norm, 1:norm2, 2:un, 3:un2, 4:emb
+  let emNum = 4; // 0-4, create charts that are 0:norm, 1:norm2, 2:un, 3:un2, 4:emb
 
   // ----------------- BEGIN: Example Data ----------------------------//
+
   exAccessors=['year','cornSales']
   exData=[
     {'year': 2002, 'cornSales': 1.7052}, {'year': 2003, 'cornSales': .618}, {'year': 2004, 'cornSales': .492}, {'year': 2005, 'cornSales': .3144},
@@ -50,9 +51,10 @@
             'data': exData
     }
   }
-  // ----------------- END: Example Data ----------------------------//
 
+  // ----------------- END: Example Data ----------------------------//
   // ----------------- BEGIN: Chart Variables ----------------------------//
+
   var chart;
 
   // Not sure what this does? Guess it sets the ratio of width to height?
@@ -76,18 +78,16 @@
     , storyData; // The current chart data
 
   // ----------------- END: Chart Variables ----------------------------//
-
   // ----------------- BEGIN: Helper Functions ----------------------------//
+
   function clampThings(num, min, max){return Math.min(Math.max(num, min), max)}
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
   // ----------------- END: Helper Functions ----------------------------//
-
-  init(); // Initialize everything!!!!
-
   // ----------------- BEGIN: Setup Data Functions ----------------------------//
+
   let embT = ["normal", "normal2", "unrelated", "unrelated2", "embellished"]
   function notInteract(gO, gArr){
     for (var i in gO){
@@ -130,9 +130,7 @@
         data.interact.imageDim[largeInd]=data.interact.imageDim[largeInd]*perc
         data.interact.imageDim[smallInd]=data.interact.imageDim[smallInd]*perc
       }
-      // console.log("dim2IS", data.interact.imageDim)
     }
-    // return data
   }
 
   function setBars(isBarDim, barDim, imageDim, numBars){
@@ -148,42 +146,34 @@
     return padding
   }
 
-  // function getGraphArray(d, gO, gArr) {
-  //   for (let i=0; i<gO.length; i++){
-  //     // Either this or for loop...
-  //     gArr.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
-  //   }
-  // }
-
+  // A dictionary for relating how the user chart(graph) order and information was saved to how it is labeled in the files.
   let embDict = {normal: "norm_01", normal2: "norm_02", unrelated: "unrelated_01", unrelated2: "unrelated_02", embellished: "embellished"}
+
   function getData(gArr){
+    // Loading the files
     let graphO, graphA, graphI
     d3.json('modules/graphQuestions/data.json', function(err, d) {graphA = d})
     d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
     d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
+    // Do something after a few seconds / the data is loaded.
     setTimeout(()=>{
-      // Set the graph array based on graph order
+      if (graphO[0].isBW!=null)
+        isBW = graphO[0].isBW
+      else {isBW = isBW}
       if (isInteract){
+        // Set the graph array based on chart(graph) order saved from the first session.
         for (let i=0; i<graphO.length; i++){
           gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
+          // Set the chart and embellishment type to that of the first session.
           gArr[i].embType = graphO[i].embType
           gArr[i].chartType = graphO[i].chartType
         }
       } else {
+          // Set the graph array to include each dataset for the selected embellishment type (emNum)
           for (let i in graphA){
             for (let j=0; j<graphA[i].length; j++){
-              // manually set the embellishment type
               gArr.push(Object.assign({}, graphA[i][j], {embType:embT[emNum], chartType:i}))
-              // for (let k=0; k<embT.length; k++){
-              //   gArr.push(Object.assign({}, graphA[i][j]))
-              //   // , {embType:embT[k]}))
-              //   gArr[gArr.length-1].interact=(Object.assign({}, graphA[i][j].interact))
-              //   gArr[gArr.length-1].embType=embT[k]
-              //   gArr[gArr.length-1].chartType=i
-              //   console.log("em", embT[k], gArr[gArr.length-1].embType)
-              // }
             }
-            // console.log("em2", gArr)
           }
       }
       // Get the associated data based on CSV files
@@ -205,9 +195,8 @@
           gArr[i].interact.data = iData
         })
       }
-      // Set the unrelated and normal images
       for (let i = 0; i < gArr.length; i++){
-        console.log("ga", gArr[i].embType)
+        // Set the embellished charts
         if (gArr[i].embType=="embellished") {
           if (gArr[i].chartType!="pie")
             setImg(gArr[i].embType, gArr[i], gArr[i].interact.imageDim)
@@ -222,14 +211,12 @@
           }
           continue;
         }
+        // Set the unrelated and normal images
         let newData = graphI[gArr[i].chartType][embDict[gArr[i].embType]]
-        console.log("n0", newData)
-        // console.log("gArr[i]", gArr[i].chartType)
         if (gArr[i].chartType=="line"){
           gArr[i].interact.gridColor=["black", "#2a2d33"]
           gArr[i].interact.lineCol = "black"
           newData=newData[0]
-          console.log("n1",newData)
           if (isBW){
             gArr[i].interact.imagePath = newData.imagePathBW
           } else {gArr[i].interact.imagePath = newData.imagePath}
@@ -238,7 +225,7 @@
             gArr[i].interact.iconDim=newData.iconDim
             gArr[i].interact.iconLoc=newData.iconLoc
           }
-          // Might have to go through and look at the keys of object and see if want to copy all, for now hardcoded...
+          // Note: Might have to go through and look at the keys of object and see if want to copy all, for now hardcoded...
         } else {
           gArr[i].interact.xGridCol=["black", "#2a2d33"]
           newData=newData.filter((d2)=>{
@@ -250,7 +237,7 @@
           if (gArr[i].chartType=="bar"&&newData.useBG){gArr[i].interact.imageDim=newData.imageDim}
           if (gArr[i].chartType=="pie"){
             gArr[i].interact.withIcon=newData.withIcon
-            gArr[i].interact.colorArray=newData.colorArray
+            gArr[i].interact.colorArray= isBW? newData.bwArray:newData.colorArray
           }
         }
         if (gArr[i].chartType!="pie")
@@ -259,36 +246,43 @@
           gArr[i].interact.padding=setBars(gArr[i].embType=="embellished", gArr[i].interact.barDim, gArr[i].interact.plotArea, gArr[i].interact.imagePath.length-1)
           gArr[i].interact.barDim=newData.barDim
       }
-      // Set mod4 for recording data
-      // mod4=[]
+      // Pushing an object for each dataset to collect data.
       for (let i=0; i<graphArray.length; i++){
           mod4.push({key: graphArray[i].chartType, inputData: []})
       }
     }, 500)
   }
   // ----------------- END: Setup Data Functions ----------------------------//
+  // ----------------- BEGIN: INITIALIZE SCRIPT ----------------------------//
+
+  init(); // Initialize everything!!!!
 
   function init() {
     experimentr.hideNext(); // Hides the next button
     experimentr.startTimer('graphInteract'); // Starts the timer for the entire module.
 
-    getData(graphArray)
-    console.log("gra", graphArray)
+    getData(graphArray) // Get the data for all of the charts.
+    console.log("GRAPH ARRAY", graphArray)
+
+    // Starting the module with an example as part of the instructions.
     storyData = exImage
     setImg('ex', exImage, exImage.interact.baseDim)
-    // 400 is coming from the max height of the svg containing interact image
+    // Note: 400 is coming from the max height of the svg containing interact image
     d3.select('#graphIImage').append('img').attr('src', 'modules/graphQuestions/examples/example_mod4.png')
       .attr("height", perc[1]*100*.7+"%")
       .attr("width", perc[1]*100*.7*exImage.interact.plotArea[0]/exImage.interact.plotArea[1]+'%').style('object-fit', 'contain')
       .attr('class', 'lineGraph').style('max-height', 400*(isInteract? .9:1)+'px').style('object-position', '0 0')
     makeLine();
+
+    // Text instructions
     d3.select('#graphIInstructions').selectAll("*").remove()
     d3.select('#graphIInstructions').append('strong').text("Please read the following instructions.").append("br")
     d3.select('#graphIInstructions').append('text').text("Use the up and down arrow buttons to change the value of the graph to match your memory of the graphs").append("br")
+
+    // A button for the participant to proceed after a certain amount of time (seconds)
     setTimeout(function(){
       d3.select('#graphIText').append('button')
         .attr('type', 'button').style("margin-top", '20px')
-        // .text('I have read the instructions.')
         .text('Proceed')
         .on('click',
           function(d) {
@@ -296,6 +290,8 @@
           });
     }, 1000)
   }
+  // ----------------- END: INITIALIZE SCRIPT ----------------------------//
+  // ----------------- BEGIN: LOAD CHART INFORMATION ----------------------------//
 
   function loadData() {
     isValid = false
@@ -332,10 +328,11 @@
         makePower();
         break;
     }
-    mod4[graphCounter].timeQStart=new Date().getTime()
+    mod4[graphCounter].timeQStart=new Date().getTime() // Recording the start time of the chart
     loadQuestion();
   }
 
+  // In the case that chartType was not correct, show power ranger
   function makePower() {
     d3.select('#graphIImage').append('img')
       .attr('class', 'picture')
@@ -344,8 +341,37 @@
       .style('width', 'auto')
   }
 
+  function loadQuestion() {
+    d3.select('#graphIInstructions').selectAll("*").remove();
+    d3.select('#graphIInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
+    d3.select('#graphIText').selectAll("*").remove();
+    if (!lastGraph){
+      d3.select('#graphIText').append('button')
+        .attr('type', 'button')
+        .text('Confirm Answer')
+        .on('click',
+          function(d) {
+            if (isValid || skip){
+              mod4[graphCounter].timeQEnd=new Date().getTime()
+              d3.select('#graphIVerification').selectAll("*").remove()
+              graphCounter++;
+              loadData();
+            }
+          });
+    } else {
+      // This is the last chart, rather than confirm answer, the next module button will appear.
+      if (skip){
+        diffGradeMeth();
+        validate()
+      }
+      experimentr.showNext();
+    }
+  }
+
+  // ----------------- END: LOAD CHART INFORMATION ----------------------------//
+  // ----------------- BEGIN: MAKE BAR CHARTS ----------------------------//
+
   function makeFunBar(){
-    console.log("st", storyData)
     imgDim = storyData.interact.imageDim
     imgRat = imgDim[0]/imgDim[1]
     let barData = storyData.interact.data
@@ -354,10 +380,10 @@
     // Make the SVG
     chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
     chart.selBar = storyData.interact.selBar-1
-    console.log("labArray", labelArray, storyData.interact.selBar-1)
+    // console.log("labArray", labelArray, storyData.interact.selBar-1)
     // Set the dimensions
     chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
-    console.log("bef", chart.bodyDim.w, chart.bodyDim.h, imgRat)
+    // console.log("bef", chart.bodyDim.w, chart.bodyDim.h, imgRat)
     // This isn't really used, there might make the viewBox larger than it should be
     // Arrow size is based on the height of left/right arrow
     chart.arrowSize = bodyDim.w * (1-.8-.05)
@@ -563,6 +589,8 @@
 
     mod4[graphCounter].value = bar
   }
+
+    // ----------------- END: MAKE BAR CHARTS ----------------------------//
 
   function makePie() {
     let pieData = storyData.interact.data
@@ -1303,36 +1331,8 @@
       .style("fill", "none")
       .style("stroke", "black")
       .style("stroke-width", 4)
-
-
-
   }
 
-  function loadQuestion() {
-    d3.select('#graphIInstructions').selectAll("*").remove();
-    d3.select('#graphIInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
-    d3.select('#graphIText').selectAll("*").remove();
-    if (!lastGraph){
-      d3.select('#graphIText').append('button')
-        .attr('type', 'button')
-        .text('Confirm Answer')
-        .on('click',
-          function(d) {
-            if (isValid || skip){
-              mod4[graphCounter].timeQEnd=new Date().getTime()
-              d3.select('#graphIVerification').selectAll("*").remove()
-              graphCounter++;
-              loadData();
-            }
-          });
-    } else {
-      if (skip){
-        diffGradeMeth();
-        validate()
-      }
-      experimentr.showNext();
-    }
-  }
 
   function incPoint (isInc){
     let lineData = storyData.interact.data

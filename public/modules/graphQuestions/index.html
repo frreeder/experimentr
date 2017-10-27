@@ -11,22 +11,27 @@
 
 <script>
 (function() {
-  // for testing purposes
-  var skip = false;
-  let mod1 = []
-  let graphOrder = []
+  var skip = false; // Whether or not can click proceed without completing the module
+  let mod1 = [] // array for data to be recorded
+  let graphOrder = [] // the order of the charts
 
-  var data = {}
-    , rand = Math.floor(Math.random()*3) // 0, 1, 2
-    , graphCounter = 0
-    , lastGraph = false
-    , isValid = false
-    , graphArray
-    , storyData;
+  var data = {} // What will be sent to the database
+    , graphCounter = 0 // The current chart counter
+    , lastGraph = false // If the current chart is the last
+    , isValid = false // true->all questions have been answered
+    , graphArray // The information for the charts, including order
+    , storyData; // Current chart information
+
+  let isBW = false // 0->color, 1->blackandwhite
+
+  // ----------------- BEGIN: Helper Functions ----------------------------//
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
+
+  // ----------------- END: Helper Functions ----------------------------//
+  // ----------------- BEGIN: Setup Data Functions ----------------------------//
 
   function getRandomImageArray(data){
     graphArray = []
@@ -49,12 +54,10 @@
         let tempI = graphArray[i]
         graphArray[i]=graphArray[j]
         graphArray[j]=tempI
-        graphOrder.push({chartType: graphArray[i].chartType, embType: graphArray[i].embType, key: graphArray[i].key, index: graphArray[i].index})
+        graphOrder.push({chartType: graphArray[i].chartType, embType: graphArray[i].embType, key: graphArray[i].key, index: graphArray[i].index, isBW: isBW})
     }
-    // freq[arrList.indexOf(3)]++
-    console.log("gArray", graphArray, graphOrder)
-    console.log("asd", data)
-    // return graphArray;
+    console.log("graphArray: ", graphArray, ", graphOrder: ",graphOrder)
+    // console.log("data", data)
   }
 
   var embellishType = ["embellished", "normal", "normal2", "unrelated", "unrelated2"]
@@ -83,99 +86,91 @@
     return embType
   }
 
+  // ----------------- END: Setup Data Functions ----------------------------//
+  // ----------------- BEGIN: Initialize Script ----------------------------//
+
   init();
 
   function init() {
-    // data.mod1=[]
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
-
-    d3.json('modules/graphQuestions/data.json', function(err, d) {
-      getRandomImageArray(d);
-      for (var i=0; i<graphArray.length; i++){
-          mod1.push({key: graphArray[i].chartType, inputData: []})
-      }
-      d3.select('#graphQInstructions').selectAll("*").remove()
-      d3.select('#graphQInstructions').append('strong').text("Please read the following instructions.").append("br")
-      d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions. There are 18 charts in total.').append('br')
-      // d3.select('#graphQInstructions').append('text').html('</br><text>Example Question</text></br>')
-      d3.select('#graphQInstructions').append('img')
-        .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod1.png"; })
-        .attr('height', 500)
-        .attr('width', 'auto')
-        .style('display', 'block').style('padding-bottom', "20px")
-      setTimeout(function(){
-        d3.select('#graphQInstructions').append('button')
-          .attr('type', 'button')
-          // .text('I have read the instructions.')
-          .text('Proceed')
-          .on('click',
-            function(d) {
-              loadData();
-            });
-      }, 1000)
-      // loadData();
+    d3.json('modules/graphOrder.json', function(err, d){
+      if (d.length==1){isBW = d[0]} else {isBW = isBW}
+      d3.json('modules/graphQuestions/data.json', function(err, d) {
+        console.log('isBW?', isBW) // Needs to be here to make sure has been initialized.
+        getRandomImageArray(d);
+        for (var i=0; i<graphArray.length; i++){
+            mod1.push({key: graphArray[i].chartType, inputData: []})
+        }
+        d3.select('#graphQInstructions').selectAll("*").remove()
+        // Instructions to the current module.
+        // TODO: Add something to check whether or not should be black and white.
+        d3.select('#graphQInstructions').append('strong').text("Please read the following instructions.").append("br")
+        d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions. There are 18 charts in total.').append('br')
+        d3.select('#graphQInstructions').append('img')
+          .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod1.png"; })
+          .attr('height', 500)
+          .attr('width', 'auto')
+          .style('display', 'block').style('padding-bottom', "20px")
+        // Show the proceed button after one second.
+        setTimeout(function(){
+          d3.select('#graphQInstructions').append('button')
+            .attr('type', 'button')
+            .text('Proceed')
+            .on('click',
+              function(d) {
+                loadData();
+              });
+        }, 1000)
+      })
     })
   }
 
   function loadData() {
-    isValid = false
-    // Why is this up here? Shoudln't it be in load image? Might be why I'm getting issues...
-    // experimentr.attachTimer('#graphQTimer', 5, function() {
-    //   loadQuestion();
-    // });
-
+    isValid = false // cannot proceed to next set of questions
+    // Check if the last chart.
     if (graphCounter == graphArray.length-1){
         lastGraph = true;
     }
+    // Set the chart as story data based on the counter.
     storyData = graphArray[graphCounter];
     loadImage();
   }
 
   function loadImage() {
+    // Don't load the question till at least five seconds have passed or button
     let timer = setTimeout(loadQuestion, 5000)
-    // experimentr.attachTimer('#graphQTimer', 5, function() {
-    //   loadQuestion();
-    // });
+    // Clearing instructions for new ones.
     d3.select('#graphQInstructions').selectAll("*").remove();
     d3.select("#graphQInstructions").append("strong")
       .text("Please play close attention to the graph.")
+    // Clearing and appending new images
     d3.select('#graphQImage').selectAll("*").remove()
     d3.select('#graphQImage').append('img')
       .attr('class', 'picture')
       .style('max-height', "inherit")
       .style("height", "100%")
-      // .attr('src', function(d) { return storyData.imagePath[0]; })
-      .attr('src', function(d) { return storyData.imagePath[embellishType.indexOf(storyData.embType)]; })
-      // .attr('width', "100%");
-    // Adds the option for the participant to skip past waiting....might include for testing purposes and remove later. s
+      .attr('src', function(d) {
+        if(isBW){
+          return storyData.imagePathBW[embellishType.indexOf(storyData.embType)];
+        } else {
+          return storyData.imagePath[embellishType.indexOf(storyData.embType)];
+        }
+      })
+    // A button overriding the five second wait for questions
     d3.select('#graphQText').selectAll("*").remove()
-    // if (skip){s
-      d3.select('#graphQText').append('button')
-        .attr('type', 'button')
-        .text('I have finished looking at the graph and am ready for the questions.')
-        .on('click',
-          function(d) {
-            clearTimeout(timer)
-            loadQuestion();
-            // d3.select("#graphQTimer").selectAll("*").remove()
-            // d3.select('#graphQTimer').text("")
-            experimentr.attachTimerEnd('#graphQTimer')
-          });
-    // }
-
+    d3.select('#graphQText').append('button')
+      .attr('type', 'button')
+      .text('I have finished looking at the graph and am ready for the questions.')
+      .on('click', function(d) {
+          clearTimeout(timer)
+          loadQuestion();
+          experimentr.attachTimerEnd('#graphQTimer')
+        });
   }
   function loadQuestion() {
-    // two options....one force user to go to next question after x time or place timer below to have user spend x time before proceeding. IF doing that I would probably need to make a new div to have it where the next graph button is.
-    // nvm....glitching again
-    // experimentr.attachTimer('#graphQTimer', 20, function() {
-    // //   d3.select('#graphQVerification').selectAll("*").remove()
-    // //   graphCounter++;
-    // //   diffGradeMeth();
-    // //   if (lastGraph) validate();
-    // //   loadData();
-    // });
     d3.select('#graphQInstructions').selectAll("*").remove();
+    // For prototyping/testing, shows the text for the image that should be shown
     if (skip)
       d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
     d3.select('#graphQText').selectAll("*").remove();
@@ -185,55 +180,58 @@
         .text('Confirm Answer')
         .on('click',
           function(d) {
+            // If all questions answered or allowed to skip
             if (isValid || skip){
+              mod1[graphCounter].timeQEnd=new Date().getTime()
+              validate() // Submit to database, when new question
               d3.select('#graphQVerification').selectAll("*").remove()
               graphCounter++;
               loadData();
             }
           });
     } else {
+      // This is the last chart, rather than confirm answer, the next module button will appear.
       if (skip){
-        diffGradeMeth();
-        validate()
+        experimentr.endTimer('graphQuestions');
+        validate() // Submit to database.
       }
-      experimentr.showNext();
+      experimentr.showNext(); // Go to next module if one exists.
     }
-
+    // Start timer for the question being answered.
     mod1[graphCounter].timeQStart=new Date().getTime()
+    // Attaching the questions
     for (let i=0; i<storyData.questionBank.length; i++){
       mod1[graphCounter].inputData.push({questionType: storyData.questionBank[i].key, userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .attr("class", "questionP")
         .text(storyData.questionBank[i].question);
+      // Added the choices div, removing class choice (?)
       var choices = question.selectAll('.choice')
         .data(storyData.questionBank[i].choices)
         .enter().append('div')
         .classed('choice', true);
+      // Attaching the input buttons
       choices.append('input')
         .attr('type', 'radio')
         .attr("class", (d,i)=>{return "radio"+i})
         .attr("id", (d,j)=>{return "radio"+i+"_"+j})
         .attr('name', 'graphQVerification'+i.toString())
         .attr('value', function(d) { return d; });
+      // Attaching the labels for radio buttons using 'for' and class
       choices.append('label')
         .attr("for", (d,j)=>{return "radio"+i+"_"+j})
-        // .on("click", (d,i)=>{
-        //   console.log("clickityclick")
-          // choices.selectAll('input').node().value=d3.select(".radio"+i).node().value})
         .text(function(d) { return d; });
+      // Check inputs associated to the question
       d3.selectAll('input')
         .filter(function(d) {
-          // console.log("i", i)
           return this.name === 'graphQVerification'+i.toString() ? this : null; })
         .on('change', function() {
-          // console.log("i2", i)
-          console.log(this.name, this.value, mod1[graphCounter].inputData[i], i)
+          // If input changes change the data that will be sent to database
+          // console.log(this.name, this.value, mod1[graphCounter].inputData[i], i)
           mod1[graphCounter].inputData[i].userAnswer = this.value
-          // var validate = true;
+          // If all the questions haven't already been answered, check.
           if (!isValid){
-            // for (var inD in data.mod1[graphCounter].inputData){
-            // isValid = true;
             for (let k=0; k<mod1[graphCounter].inputData.length; k++){
               var inD = mod1[graphCounter].inputData[k]
               // console.log("inData", inD, data.mod1[graphCounter].inputData)
@@ -245,35 +243,15 @@
               }
             }
           }
-          if (isValid || skip){
-            // console.log("isValidated!!!")
-            mod1[graphCounter].timeQEnd=new Date().getTime()
-            diffGradeMeth();
-            if (lastGraph) validate();
-            // data.graphQVerification = this.value; validate();
-          }
         });
     }
   }
-  // allow the participant to move on to the next
+  // Format data and submit to database
   function validate() {
-    // console.log("validate")
-      experimentr.endTimer('graphQuestions');
       data.mod1=JSON.stringify(mod1)
       data.graphOrder=JSON.stringify(graphOrder)
       experimentr.addData(data);
       experimentr.release();
-    // }
-  }
-  function diffGradeMeth(){
-    // console.log("sadalkjd", mod1)
-    for (var i=0; i<mod1[graphCounter].inputData.length; i++){
-      if (mod1[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        mod1[graphCounter].inputData[i].answerVerification = true
-      } else { mod1[graphCounter].inputData[i].answerVerification = false}
-      // console.log(JSON.parse(data.mod1))
-      // console.log("apples", JSON.parse("apples"))
-    }
   }
 }());
 </script>

@@ -4,11 +4,18 @@
             "title": "Global Catch of American Crabs",
             "key": "americanCrabsCaught",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/line_embellished_americanCrabsCaught.png",
-                "modules/graphQuestions/graphImages/color/line_norm_01_americanCrabsCaught.png",
-                "modules/graphQuestions/graphImages/color/line_norm_02_americanCrabsCaught.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_01_americanCrabsCaught.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_02_americanCrabsCaught.png"
+                "modules/graphQuestions/graphImages/final_color/line_embellished_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_01_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_02_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_01_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_02_americanCrabsCaught.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/line_embellished_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_01_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_02_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_01_americanCrabsCaught.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_02_americanCrabsCaught.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/line_base_embellished_americanCrabsCaught.png",
@@ -111,11 +118,18 @@
             "title": "Climate Changes",
             "key": "climateChange",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/line_embellished_climateChange.png",
-                "modules/graphQuestions/graphImages/color/line_norm_01_climateChange.png",
-                "modules/graphQuestions/graphImages/color/line_norm_02_climateChange.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_01_climateChange.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_02_climateChange.png"
+                "modules/graphQuestions/graphImages/final_color/line_embellished_climateChange.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_01_climateChange.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_02_climateChange.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_01_climateChange.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_02_climateChange.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/line_embellished_climateChange.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_01_climateChange.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_02_climateChange.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_01_climateChange.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_02_climateChange.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/line_base_embellished_climateChange.png",
@@ -218,11 +232,18 @@
             "title": "Sales of Ford's F-Series",
             "key": "fordFSeries",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/line_embellished_fordFSeries.png",
-                "modules/graphQuestions/graphImages/color/line_norm_01_fordFSeries.png",
-                "modules/graphQuestions/graphImages/color/line_norm_02_fordFSeries.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_01_fordFSeries.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_02_fordFSeries.png"
+                "modules/graphQuestions/graphImages/final_color/line_embellished_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_01_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_02_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_01_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_02_fordFSeries.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/line_embellished_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_01_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_02_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_01_fordFSeries.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_02_fordFSeries.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/line_base_embellished_fordFSeries.png",
@@ -325,11 +346,18 @@
             "title": "Average U.S. Prices for Gasoline",
             "key": "gasolinePrices",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/line_embellished_gasolinePrices.png",
-                "modules/graphQuestions/graphImages/color/line_norm_01_gasolinePrices.png",
-                "modules/graphQuestions/graphImages/color/line_norm_02_gasolinePrices.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_01_gasolinePrices.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_02_gasolinePrices.png"
+                "modules/graphQuestions/graphImages/final_color/line_embellished_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_01_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_02_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_01_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_02_gasolinePrices.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/line_embellished_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_01_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_02_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_01_gasolinePrices.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_02_gasolinePrices.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/line_base_embellished_gasolinePrices.png",
@@ -431,11 +459,18 @@
             "title": "The Future of U.S. Manufacturing",
             "key": "manuEmployment",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/line_embellished_manuEmployment.png",
-                "modules/graphQuestions/graphImages/color/line_norm_01_manuEmployment.png",
-                "modules/graphQuestions/graphImages/color/line_norm_02_manuEmployment.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_01_manuEmployment.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_02_manuEmployment.png"
+                "modules/graphQuestions/graphImages/final_color/line_embellished_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_01_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_02_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_01_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_02_manuEmployment.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/line_embellished_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_01_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_02_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_01_manuEmployment.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_02_manuEmployment.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/line_base_embellished_manuEmployment.png",
@@ -537,11 +572,18 @@
             "title": "Average Hours of Freeway Congestion",
             "key": "trafficCongestion",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/line_embellished_trafficCongestion.png",
-                "modules/graphQuestions/graphImages/color/line_norm_01_trafficCongestion.png",
-                "modules/graphQuestions/graphImages/color/line_norm_02_trafficCongestion.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_01_trafficCongestion.png",
-                "modules/graphQuestions/graphImages/color/line_unrelated_02_trafficCongestion.png"
+                "modules/graphQuestions/graphImages/final_color/line_embellished_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_01_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_color/line_norm_02_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_01_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_color/line_unrelated_02_trafficCongestion.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/line_embellished_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_01_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_bw/line_norm_02_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_01_trafficCongestion.png",
+                "modules/graphQuestions/graphImages/final_bw/line_unrelated_02_trafficCongestion.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/line_base_embellished_trafficCongestion.png",
@@ -645,11 +687,18 @@
             "title": "Beauty Products Being Purchased",
             "key": "beauty",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/pie_embellished_beauty.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_01_beauty.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_02_beauty.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_01_beauty.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_02_beauty.png"
+                "modules/graphQuestions/graphImages/final_color/pie_embellished_beauty.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_01_beauty.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_02_beauty.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_01_beauty.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_02_beauty.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/pie_embellished_beauty.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_01_beauty.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_02_beauty.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_01_beauty.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_02_beauty.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/pie_base_embellished_beauty.png",
@@ -658,7 +707,6 @@
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_beauty.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_beauty.png"
             ],
-            "imagePathBW": [],
             "questionBank": [
                 {
                     "question": "In 2008, which of the following beauty products was being purchased the most?",
@@ -818,11 +866,18 @@
             "title": "Most Bought Girl Scout Cookies",
             "key": "girlScouts",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/pie_embellished_girlScouts.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_01_girlScouts.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_02_girlScouts.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_01_girlScouts.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_02_girlScouts.png"
+                "modules/graphQuestions/graphImages/final_color/pie_embellished_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_01_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_02_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_01_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_02_girlScouts.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/pie_embellished_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_01_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_02_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_01_girlScouts.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_02_girlScouts.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/pie_base_embellished_girlScouts.png",
@@ -977,11 +1032,18 @@
             "title": "Renewable Energy in the U.K.",
             "key": "renewable",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/pie_embellished_renewable.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_01_renewable.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_02_renewable.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_01_renewable.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_02_renewable.png"
+                "modules/graphQuestions/graphImages/final_color/pie_embellished_renewable.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_01_renewable.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_02_renewable.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_01_renewable.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_02_renewable.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/pie_embellished_renewable.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_01_renewable.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_02_renewable.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_01_renewable.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_02_renewable.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/pie_base_embellished_renewable.png",
@@ -1148,11 +1210,18 @@
             "title": "Star Wars Revenue Throughout the Galaxy",
             "key": "starWars",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/pie_embellished_starWars.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_01_starWars.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_02_starWars.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_01_starWars.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_02_starWars.png"
+                "modules/graphQuestions/graphImages/final_color/pie_embellished_starWars.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_01_starWars.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_02_starWars.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_01_starWars.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_02_starWars.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/pie_embellished_starWars.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_01_starWars.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_02_starWars.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_01_starWars.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_02_starWars.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/pie_base_embellished_starWars.png",
@@ -1319,11 +1388,18 @@
             "title": "Where Do Robberies Occur?",
             "key": "robbery",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/pie_embellished_robbery.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_01_robbery.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_02_robbery.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_01_robbery.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_02_robbery.png"
+                "modules/graphQuestions/graphImages/final_color/pie_embellished_robbery.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_01_robbery.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_02_robbery.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_01_robbery.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_02_robbery.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/pie_embellished_robbery.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_01_robbery.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_02_robbery.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_01_robbery.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_02_robbery.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/pie_base_embellished_robbery.png",
@@ -1490,11 +1566,18 @@
             "title": "Women at Work",
             "key": "womenWork",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/pie_embellished_womenWork.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_01_womenWork.png",
-                "modules/graphQuestions/graphImages/color/pie_norm_02_womenWork.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_01_womenWork.png",
-                "modules/graphQuestions/graphImages/color/pie_unrelated_02_womenWork.png"
+                "modules/graphQuestions/graphImages/final_color/pie_embellished_womenWork.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_01_womenWork.png",
+                "modules/graphQuestions/graphImages/final_color/pie_norm_02_womenWork.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_01_womenWork.png",
+                "modules/graphQuestions/graphImages/final_color/pie_unrelated_02_womenWork.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/pie_embellished_womenWork.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_01_womenWork.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_norm_02_womenWork.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_01_womenWork.png",
+                "modules/graphQuestions/graphImages/final_bw/pie_unrelated_02_womenWork.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/pie_base_embellished_womenWork.png",
@@ -1647,11 +1730,18 @@
             "title": "Most Expensive Artwork Sold At Auction",
             "key": "artwork",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/bar_embellished_artwork.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_01_artwork.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_02_artwork.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_01_artwork.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_02_artwork.png"
+                "modules/graphQuestions/graphImages/final_color/bar_embellished_artwork.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_01_artwork.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_02_artwork.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_01_artwork.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_02_artwork.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/bar_embellished_artwork.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_01_artwork.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_02_artwork.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_01_artwork.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_02_artwork.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/bar_base_embellished_artwork.png",
@@ -1759,11 +1849,18 @@
             "title": "Salaries By College Undergraduate Major",
             "key": "majorSalaries",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/bar_embellished_majorSalaries.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_01_majorSalaries.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_02_majorSalaries.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_01_majorSalaries.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_02_majorSalaries.png"
+                "modules/graphQuestions/graphImages/final_color/bar_embellished_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_01_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_02_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_01_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_02_majorSalaries.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/bar_embellished_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_01_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_02_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_01_majorSalaries.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_02_majorSalaries.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/bar_base_embellished_majorSalaries.png",
@@ -1872,11 +1969,18 @@
             "title": "Top Platforms Being Used By Developers",
             "key": "developers",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/bar_embellished_developers.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_01_developers.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_02_developers.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_01_developers.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_02_developers.png"
+                "modules/graphQuestions/graphImages/final_color/bar_embellished_developers.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_01_developers.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_02_developers.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_01_developers.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_02_developers.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/bar_embellished_developers.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_01_developers.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_02_developers.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_01_developers.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_02_developers.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/bar_base_embellished_developers.png",
@@ -1984,11 +2088,18 @@
             "title": "Summer Olympics' Share of TV Viewership",
             "key": "olympics",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/bar_embellished_olympics.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_01_olympics.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_02_olympics.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_01_olympics.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_02_olympics.png"
+                "modules/graphQuestions/graphImages/final_color/bar_embellished_olympics.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_01_olympics.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_02_olympics.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_01_olympics.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_02_olympics.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/bar_embellished_olympics.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_01_olympics.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_02_olympics.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_01_olympics.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_02_olympics.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/bar_base_embellished_olympics.png",
@@ -2100,11 +2211,18 @@
             "title": "Most Visited Theme Parks",
             "key": "themePark",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/bar_embellished_themePark.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_01_themePark.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_02_themePark.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_01_themePark.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_02_themePark.png"
+                "modules/graphQuestions/graphImages/final_color/bar_embellished_themePark.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_01_themePark.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_02_themePark.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_01_themePark.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_02_themePark.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/bar_embellished_themePark.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_01_themePark.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_02_themePark.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_01_themePark.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_02_themePark.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/bar_base_embellished_themePark.png",
@@ -2214,11 +2332,18 @@
             "title": "Countries' Unemployment Rates",
             "key": "unemploymentRate",
             "imagePath": [
-                "modules/graphQuestions/graphImages/color/bar_embellished_unemploymentRate.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_01_unemploymentRate.png",
-                "modules/graphQuestions/graphImages/color/bar_norm_02_unemploymentRate.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_01_unemploymentRate.png",
-                "modules/graphQuestions/graphImages/color/bar_unrelated_02_unemploymentRate.png"
+                "modules/graphQuestions/graphImages/final_color/bar_embellished_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_01_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_color/bar_norm_02_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_01_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_color/bar_unrelated_02_unemploymentRate.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/graphImages/final_bw/bar_embellished_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_01_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_norm_02_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_01_unemploymentRate.png",
+                "modules/graphQuestions/graphImages/final_bw/bar_unrelated_02_unemploymentRate.png"
             ],
             "basePath": [
                 "modules/graphTheme/chartBase/bar_base_embellished_unemploymentRate.png",
