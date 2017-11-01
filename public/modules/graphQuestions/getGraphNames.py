@@ -79,6 +79,7 @@ for i in graphTypes:
                     allImages.append("modules/graphQuestions/graphImages/final_color/"+x)
                     # j["newPath"] = j["newPath"] + [x]
                 else:
+
                     print("notCaught: ", j["key"], x)
 
 # Get base files
@@ -93,8 +94,10 @@ for i in graphTypes:
                     print ("iCaught: ", x)
                     print ("iCaught a : ", j["key"])
                     j["basePath"].append("modules/graphTheme/chartBase/"+x)
+                    j["basePathBW"].append("modules/graphTheme/chartBase_bw/"+x)
                 else:
                     print("notCaught: ", j["key"], x)
+
 
 # Getting interact files for lines
 inType = ("interact_00", "interact_01", "interact_02")

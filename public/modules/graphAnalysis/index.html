@@ -14,6 +14,7 @@
   let pResponse = []
   let corrCount = 0
   let graphArray = []
+  let isBW = false
 
   let embType = ['embellished', 'normal', 'normal2', 'unrelated', 'unrelated2']
 
@@ -37,6 +38,9 @@
         getGraphArray(d, gO);
       })
     })
+    setTimeout(()=>{
+      if (gO[0].isBW!=null) {isBW = gO[0].isBW} else {isBW = isBW}
+    }, 100)
     setTimeout(makeReport, 100)
   }
 
@@ -48,7 +52,11 @@
       let chart = d3.select('#graphQVerification').append('div')
       chart.append('img')
         // .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod3.png"; })
-        .attr('src', graphArray[i].imagePath[embType.indexOf(pResponse.graphOrder[i].embType)])
+        .attr('src', ()=>{
+          if(isBW){return graphArray[i].imagePathBW[embType.indexOf(pResponse.graphOrder[i].embType)]} else {
+            return graphArray[i].imagePath[embType.indexOf(pResponse.graphOrder[i].embType)]
+          }
+        })
         .attr('height', 150)
         .attr('width', 'auto')
         .style('display', 'block').style('padding-top', "20px")

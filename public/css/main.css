@@ -188,6 +188,14 @@ tr.oddPage:nth-child(odd) {
     background-color: #d6e0f5;
 }
 
+tr.bw.evenPage:nth-child(even) {
+    background-color: #e0e0e0;
+}
+
+tr.bw.oddPage:nth-child(odd) {
+    background-color: #e0e0e0;
+}
+
 .barOutline {
   stroke: black;
   stroke-width: 3;

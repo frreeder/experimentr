@@ -30,6 +30,11 @@
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  function sortChoices(inChoices){
+    allChoices = inChoices.sort()
+    return allChoices
+  }
+
   // ----------------- END: Helper Functions ----------------------------//
   // ----------------- BEGIN: Setup Data Functions ----------------------------//
 
@@ -108,8 +113,12 @@
         d3.select('#graphQInstructions').append('strong').text("Please read the following instructions.").append("br")
         d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions. There are 18 charts in total.').append('br')
         d3.select('#graphQInstructions').append('img')
-          .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod1.png"; })
-          .attr('height', 500)
+          .attr('src', function(d) {
+            if(isBW) {return "modules/graphQuestions/examples/example_bw_mod1.png";} else{
+              return "modules/graphQuestions/examples/example_mod1.png";
+            }
+          })
+          .attr('height', '100%').style('max-height', '500px')
           .attr('width', 'auto')
           .style('display', 'block').style('padding-bottom', "20px")
         // Show the proceed button after one second.
@@ -125,6 +134,9 @@
       })
     })
   }
+
+  // ----------------- END: Initialize Script ----------------------------//
+  // ----------------- BEGIN: Load Data and Questions ----------------------------//
 
   function loadData() {
     isValid = false // cannot proceed to next set of questions
@@ -148,7 +160,7 @@
     d3.select('#graphQImage').selectAll("*").remove()
     d3.select('#graphQImage').append('img')
       .attr('class', 'picture')
-      .style('max-height', "inherit")
+      // .style('max-height', "inherit")
       .style("height", "100%")
       .attr('src', function(d) {
         if(isBW){
@@ -191,7 +203,9 @@
           });
     } else {
       // This is the last chart, rather than confirm answer, the next module button will appear.
+      experimentr.hold(); // adding a hold to the next button that is cleared by release in validate
       if (skip){
+        mod1[graphCounter].timeQEnd=new Date().getTime()
         experimentr.endTimer('graphQuestions');
         validate() // Submit to database.
       }
@@ -206,6 +220,8 @@
       question.append('p')
         .attr("class", "questionP")
         .text(storyData.questionBank[i].question);
+      // Sort choices
+      sortChoices(storyData.questionBank[i].choices)
       // Added the choices div, removing class choice (?)
       var choices = question.selectAll('.choice')
         .data(storyData.questionBank[i].choices)
@@ -240,18 +256,36 @@
                 break;
               } else {
                 isValid = true;
+                // if (lastGraph && !skip){
+                if (lastGraph){
+                  mod1[graphCounter].timeQEnd=new Date().getTime()
+                  addGraphOrder()
+                  validate()
+                  experimentr.endTimer('graphQuestions');
+                }
               }
             }
           }
         });
     }
   }
+
+  // ----------------- END: Load Data and Questions ----------------------------//
+  // ----------------- BEGIN: Prepare and Send Data ----------------------------//
+
+  function addGraphOrder(){
+    data.complete_s1 = true
+    data.graphOrder=JSON.stringify(graphOrder)
+  }
+
   // Format data and submit to database
   function validate() {
       data.mod1=JSON.stringify(mod1)
-      data.graphOrder=JSON.stringify(graphOrder)
       experimentr.addData(data);
       experimentr.release();
   }
+
+  // ----------------- END: Prepare and Send Data ----------------------------//
+
 }());
 </script>

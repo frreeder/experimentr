@@ -11,23 +11,34 @@
 
 <script>
 (function() {
-  // for testing purposes
-  var skip = true;
-  let mod3 = []
+  var skip = false; // Whether or not can click proceed without completing the module
+  let mod3 = [] // array for data to be recorded
 
-  var data = {}
-    , graphCounter = 0
-    , lastGraph = false
-    , isValid = false
-    , graphArray = []
-    , storyData;
+  var data = {} // What will be sent to the database
+    , graphCounter = 0 // The current chart counter
+    , lastGraph = false // If the current chart is the last
+    , isValid = false // true->all questions have been answered
+    , graphArray = [] // The information for the charts, including order
+    , storyData; // Current chart information
 
+  let isBW = false
+
+  // ----------------- BEGIN: Setup Data Functions ----------------------------//
+
+  // Using graph order to get the graph array with questions
   function getGraphArray(d, gO) {
     for (let i=0; i<gO.length; i++){
-      // Either this or for loop...
       graphArray.push(d[gO[i].chartType].filter((d2)=>{return d2.key==gO[i].key})[0])
     }
   }
+
+  function sortChoices(inChoices){
+    allChoices = inChoices.sort()
+    return allChoices
+  }
+
+  // ----------------- END: Setup Data Functions ----------------------------//
+  // ----------------- BEGIN: Initialize Script ----------------------------//
 
   init();
 
@@ -37,7 +48,8 @@
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       d3.json('modules/graphOrder.json', function(err2,gO){
-      console.log("go", graphArray)
+        if(gO[0].isBW!=null){isBW = gO[0].isBW} else {isBW = isBW}
+        console.log("go", graphArray)
         getGraphArray(d, gO);
         for (var i=0; i<graphArray.length; i++){
             mod3.push({key: graphArray[i].chartType, inputData: []})
@@ -46,7 +58,11 @@
         d3.select('#graphQInstructions').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
         d3.select('#graphQInstructions').append('text').text('You will be presented a couple of questions about that data associated to the chart from the previous study without the referenced chart. There are 18 question sets in total.').append('br')
         d3.select('#graphQInstructions').append('img')
-          .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod3.png"; })
+          .attr('src', function(d) {
+            if(isBW){return "modules/graphQuestions/examples/example_bw_mod3.png";} else{
+              return "modules/graphQuestions/examples/example_mod3.png";
+            }
+           })
           .attr('height', 400)
           .attr('width', 'auto')
           .style('display', 'block').style('padding-bottom', "20px")
@@ -59,100 +75,93 @@
                 loadData();
               });
         }, 1000)
-        // loadData();
       })
     })
   }
 
-  function loadData() {
-    isValid = false
+  // ----------------- END: Initialize Script ----------------------------//
+  // ----------------- BEGIN: Load Data and Questions ----------------------------//
 
+  function loadData() {
+    isValid = false // cannot proceed to next set of questions
+    // Check if the last chart
     if (graphCounter == graphArray.length-1){
-      // console.log("lastGraph")
       lastGraph = true;
     }
+    // Set the chart as story data based on counter
     storyData = graphArray[graphCounter];
-    // loadImage();
     loadQuestion()
   }
   function loadQuestion() {
+    // Clearing instructions for new ones.
     d3.select('#graphQInstructions').selectAll("*").remove();
     d3.select('#graphQTitle').selectAll("*").remove();
     d3.select('#graphQTitle').append("strong").text(storyData.title)
     d3.select('#graphQInstructions').append("strong").text("Please answer the following questions based on your recall of the graphs from the first session.")
     d3.select('#graphQText').selectAll("*").remove();
+
+    // Adding confirm answer or proceed to next module buttons
     if (!lastGraph){
-      if (!skip){
-        experimentr.attachTimer('#graphQTimer', 5, function() {
-          d3.select('#graphQTimer').selectAll("*").remove();
-          d3.select('#graphQText').append('button')
-            .attr('type', 'button')
-            .text('Confirm Answer')
-            .on('click',
-              function(d) {
-                if (isValid || skip){
-                  mod3[graphCounter].timeQEnd=new Date().getTime()
-                  d3.select('#graphQVerification').selectAll("*").remove()
-                  graphCounter++;
-                  loadData();
-                }
-              });
-        });
-      } else {
-        d3.select('#graphQText').append('button')
-          .attr('type', 'button')
-          .text('Confirm Answer')
-          .on('click',
-            function(d) {
-              if (isValid || skip){
-                d3.select('#graphQVerification').selectAll("*").remove()
-                mod3[graphCounter].timeQEnd=new Date().getTime()
-                graphCounter++;
-                loadData();
-              }
-            });
-      }
+      d3.select('#graphQText').append('button')
+        .attr('type', 'button')
+        .text('Confirm Answer')
+        .on('click',
+          function(d) {
+            if (isValid || skip){
+              d3.select('#graphQVerification').selectAll("*").remove()
+              mod3[graphCounter].timeQEnd=new Date().getTime()
+              graphCounter++;
+              loadData();
+            }
+          });
     } else {
+      // This is the last chart, rather than confirm answer, the next module button will appear.
+      experimentr.hold(); // adding a hold to the next button that is cleared by release in validate
       if (skip){
-        diffGradeMeth();
-        validate()
+        mod3[graphCounter].timeQEnd=new Date().getTime()
+        experimentr.endTimer('graphQuestions');
+        validate() // Submit to database.
       }
-      experimentr.showNext();
+      experimentr.showNext(); // Go to next module if one exists.
     }
 
+    // Starting the timer for the chart
     mod3[graphCounter].timeQStart=new Date().getTime()
-    // only looking at one thing for now
+    // Attaching the questions
     for (let i=0; i<storyData.questionBank.length; i++){
+      // Prepping object array to be sent to database
       mod3[graphCounter].inputData.push({questionType: storyData.questionBank[i].key, userAnswer: ""})
       var question = d3.select('#graphQVerification').append("g")
       question.append('p')
         .attr("class", "questionP")
         .text(storyData.questionBank[i].question);
+      // Sorting the choices
+        sortChoices(storyData.questionBank[i].choices)
+      // Adding the choices div, removing class 'choice'(?)
       var choices = question.selectAll('.choice')
         .data(storyData.questionBank[i].choices)
         .enter().append('div')
         .classed('choice', true);
+      // Attaching the input buttons
       choices.append('input')
         .attr('type', 'radio')
         .attr('name', 'graphQVerification'+i.toString())
         .attr("id", (d,j)=>{return "radio"+i+"_"+j})
         .attr('value', function(d) { return d; });
+      // Attaching the labels for radio buttons using 'for' and class
       choices.append('label')
         .text(function(d) { return d; })
         .attr("for", (d,j)=>{return "radio"+i+"_"+j})
+      // Check inputs associated to the question
       d3.selectAll('input')
         .filter(function(d) {
-          // console.log("i", i)
           return this.name === 'graphQVerification'+i.toString() ? this : null; })
         .on('change', function() {
-          // console.log("i2", i)
-          // if (skip){isValid = true}
-          console.log(this.name, this.value, mod3[graphCounter].inputData[i], i)
+          // If input changes change the data that will be sent to database
+          // console.log(this.name, this.value, mod3[graphCounter].inputData[i], i)
           mod3[graphCounter].inputData[i].userAnswer = this.value
-          // var validate = true;
+          // If all the questions haven't already been answered, check.
           if (!isValid){
-            // for (var inD in data.mod3[graphCounter].inputData){
-            // isValid = true;
             for (let k=0; k<mod3[graphCounter].inputData.length; k++){
               var inD = mod3[graphCounter].inputData[k]
               // console.log("inData", inD, data.mod3[graphCounter].inputData)
@@ -161,37 +170,41 @@
                 break;
               } else {
                 isValid = true;
+                if (lastGraph){
+                  mod3[graphCounter].timeQEnd=new Date().getTime()
+                  validate()
+                  experimentr.endTimer('graphQuestions');
+                }
               }
             }
-          }
-          if (isValid || skip){
-            // console.log("isValidated!!!")
-            diffGradeMeth();
-            if (lastGraph) validate();
-            // data.graphQVerification = this.value; validate();
           }
         });
     }
   }
+
+  // ----------------- END: Load Data and Questions ----------------------------//
+  // ----------------- BEGIN: Prepare and Send Data ----------------------------//
+
   // allow the participant to move on to the next
   function validate() {
-    // console.log("validate")
-    // if(data.graphQVerification) {
-      // grade();
-      experimentr.endTimer('graphNoChartQuestions');
+      // experimentr.endTimer('graphNoChartQuestions');
       data.mod3=JSON.stringify(mod3)
       console.log(JSON.parse(data.mod3))
       experimentr.addData(data);
       experimentr.release();
     // }
   }
-  function diffGradeMeth(){
-    for (var i=0; i<mod3[graphCounter].inputData.length; i++){
-      if (mod3[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        mod3[graphCounter].inputData[i].answerVerification = true
-      } else { mod3[graphCounter].inputData[i].answerVerification = false}
-      // console.log("apples", JSON.parse("apples"))
-    }
-  }
+
+  // REMOVE!!!
+  // function diffGradeMeth(){
+  //   for (var i=0; i<mod3[graphCounter].inputData.length; i++){
+  //     if (mod3[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
+  //       mod3[graphCounter].inputData[i].answerVerification = true
+  //     } else { mod3[graphCounter].inputData[i].answerVerification = false}
+  //   }
+  // }
+
+  // ----------------- END: Prepare and Send Data ----------------------------//
+
 }());
 </script>

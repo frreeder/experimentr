@@ -18,7 +18,7 @@
   let changeAllSlices = true; // true: manipulate all pie slices, false: manipulate selected slice and adjacent ones
 
   // What charts are being shown
-  let isBW = false; // true: use black and white images, false: use color images
+  let isBW = true; // true: use black and white images, false: use color images
   let isInteract = true; // true: can manipulate data, false: produces all chart variations
   let emNum = 4; // 0-4, create charts that are 0:norm, 1:norm2, 2:un, 3:un2, 4:emb
 
@@ -37,6 +37,10 @@
             "imagePath": [
                 "modules/graphQuestions/examples/line_interact_01_ex.png",
                 "modules/graphQuestions/examples/line_interact_00_ex.png"
+            ],
+            "imagePathBW": [
+                "modules/graphQuestions/examples/line_bw_interact_01_ex.png",
+                "modules/graphQuestions/examples/line_bw_interact_00_ex.png"
             ],
             'accessors': exAccessors,
             "imageDim": [ 552, 339 ],
@@ -266,9 +270,16 @@
 
     // Starting the module with an example as part of the instructions.
     storyData = exImage
+    if (isBW){
+      storyData.interact.imagePath = storyData.interact.imagePathBW
+    }
     setImg('ex', exImage, exImage.interact.baseDim)
     // Note: 400 is coming from the max height of the svg containing interact image
-    d3.select('#graphIImage').append('img').attr('src', 'modules/graphQuestions/examples/example_mod4.png')
+    d3.select('#graphIImage').append('img').attr('src', ()=>{
+      if (isBW){return 'modules/graphQuestions/examples/example_bw_mod4.png'} else {
+        return 'modules/graphQuestions/examples/example_mod4.png'
+      }
+    })
       .attr("height", perc[1]*100*.7+"%")
       .attr("width", perc[1]*100*.7*exImage.interact.plotArea[0]/exImage.interact.plotArea[1]+'%').style('object-fit', 'contain')
       .attr('class', 'lineGraph').style('max-height', 400*(isInteract? .9:1)+'px').style('object-position', '0 0')
@@ -361,7 +372,7 @@
     } else {
       // This is the last chart, rather than confirm answer, the next module button will appear.
       if (skip){
-        diffGradeMeth();
+        mod4[graphCounter].timeQEnd=new Date().getTime()
         validate()
       }
       experimentr.showNext();
@@ -372,120 +383,99 @@
   // ----------------- BEGIN: MAKE BAR CHARTS ----------------------------//
 
   function makeFunBar(){
-    imgDim = storyData.interact.imageDim
-    imgRat = imgDim[0]/imgDim[1]
     let barData = storyData.interact.data
     let labelArray = barData.map((d)=>{return d[storyData.interact.accessors[0]]})
 
+    // --- Set up chart ---//
     // Make the SVG
     chart = d3.select('#graphIImage').append("svg").attr("class", "bar")
+
+    // The bar being manipulated
     chart.selBar = storyData.interact.selBar-1
     // console.log("labArray", labelArray, storyData.interact.selBar-1)
-    // Set the dimensions
-    chart.bodyDim = {w: bodyDim.w * .8, h: bodyDim.h}
-    // console.log("bef", chart.bodyDim.w, chart.bodyDim.h, imgRat)
-    // This isn't really used, there might make the viewBox larger than it should be
-    // Arrow size is based on the height of left/right arrow
-    chart.arrowSize = bodyDim.w * (1-.8-.05)
-    chart.bodyDim.w = imgRat>0 ? chart.bodyDim.w : chart.bodyDim.h*imgRat;
-    chart.bodyDim.h = imgRat>0 ? chart.bodyDim.w/imgRat : chart.bodyDim.h;
-    // might just need this from now on?
-    // chart.bodyDim = {w: storyData.interact.plotArea[0]*.8, h: storyData.interact.plotArea[1]*.8}
-    // chart.imageDim = {w: storyData.interact.imageDim[0]*.8, h: storyData.interact.imageDim[1]*.8}
+
+    // bodyDim-> the dimensions of the chart
     chart.bodyDim = {w: storyData.interact.plotArea[0]*1, h: storyData.interact.plotArea[1]*1}
+    // imageDim-> the dimensions of the images, that will be cropped by the body dimensions
     chart.imageDim = {w: storyData.interact.imageDim[0]*1, h: storyData.interact.imageDim[1]*1}
-    console.log("aft", chart.bodyDim.w, chart.bodyDim.h)
+    console.log('bar-bodyDim, bar-imageDim', chart.bodyDim, chart.imageDim)
+    // Other than attributing to the SVG viewbox, no use.
+    chart.arrowSize = bodyDim.w * (1-.8-.05)
+
     // Update the SVG to match dimensions
     chart
-      // .attr("viewBox", "0 0 "+(chart.bodyDim.w).toString()+" "+(chart.bodyDim.h).toString())
       .attr("viewBox", "0 0 "+(chart.bodyDim.w+chart.arrowSize).toString()+" "+(chart.bodyDim.h).toString())
       .attr("preserveAspectRatio", "xMinYMax meet")
       .attr('height', perc[1]*100+"%")
       .attr('width', perc[0]*100+"%")
 
-    // Using the bar dimensions to find out how much padding is needed for the the rangeBands scale.
-    let barH = storyData.interact.barDim[1]/storyData.interact.barDim[0]*chart.bodyDim.w
-    let padding = 1 - (barH*barData.length)/chart.bodyDim.h
-    padding = padding > .05? padding:.05
-    padding = storyData.interact.padding
-    console.log("padding", padding)
+    // --- Set up scales ---//
+    // Using the preprocessed JSON data to use as the padding between bars
+    let padding = storyData.interact.padding
 
     chart.yScale = d3.scale.ordinal()
       .domain(labelArray)
-      // able to go from zero to h because images are ordered top down
-      .rangeBands([0, chart.bodyDim.h], padding)
+      .rangeBands([0, chart.bodyDim.h], padding) // [0,h] bc the bars are ordered top down
+
+    chart.barHeight = chart.yScale.rangeBand() // using the scale to get the height of each bar (really is the band width)
 
     chart.xScale = d3.scale.linear()
       // .domain([0, 135])
       .domain([0, storyData.interact.xGridMax])
       .range([0, chart.bodyDim.w])
 
-    chart.barHeight = chart.yScale.rangeBand()
-    // chart.selbarWidth = chart.xScale.domain()[1]/2
+    // Setting the bar to be manipulated to half of the domain.
     if (isInteract){
-      console.log("inhere!")
-      barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2}
+      barData[chart.selBar][storyData.interact.accessors[1]]=chart.xScale.domain()[1]/2 }
 
-    // Add the arrow based on the ...
+    // Image size is dictated by the smallest variable. Since the arrow can be square shaped, using barheight for width as well.
+    // This is flawed by the determination of the viewbox. If the width exceeded the viewbox, the arrow would not be in view.
+    // Width has to be specified as Firefox likes it.
+    // TODO: Somewhere there is a CSS property that keeps the propertions the same.
     chart.append("image")
-      // .attr("href", 'modules/graphQuestions/graphImages/interactBars/bar_interact1_00_artwork.png')
       .attr("xlink:href", 'modules/graphInteract/buttons/left.png')
-      // .attr("width", chart.arrowSize)
       .attr("height", chart.barHeight)
-      // needs to be here because of firefox
       .attr("width", chart.barHeight)
-      // .attr("align", "xMinYMin")
-      .attr("x", chart.bodyDim.w+5)
-      .attr("y", chart.yScale(barData[chart.selBar][storyData.interact.accessors[0]]))
+      .attr("x", chart.bodyDim.w+5) // Attaching it five pixels to the right of the charts
+      .attr("y", chart.yScale(barData[chart.selBar][storyData.interact.accessors[0]])) // Attaching it to the bar height
 
-    // Append the buttons for controlling the width of the bars.
+    // Appending the buttons for controlling the width of the bars.
     for (let i =0; i<2; i++){
       let buttonType = i==0? "up" : "down"
       let isInc = i==0
       d3.select('#interactButtons').append("button")
         .attr("class", "button1 "+buttonType)
         .on("mousedown", ()=>{
-          chart.glowBar.style("opacity", 1)
-          chart.inc=setInterval(function(){ incBar(isInc, .001*chart.xScale.domain()[1]) }, 25)
+          chart.glowBar.style("opacity", 1) // highlight selected bar
+          chart.inc=setInterval(function(){ incBar(isInc, .001*chart.xScale.domain()[1]) }, 25) // call function after 25/1000 seconds
           clearTimeout(chart.timer);
         })
         .on('mouseup', ()=>{
-          clearInterval(chart.inc)
+          clearInterval(chart.inc) // clear function call if mouse lets go of button.
           chart.timer=setTimeout(()=>{
             chart.glowBar.style("opacity", .2)
+            if (lastGraph){mod4[graphCounter].timeQEnd=new Date().getTime()}
           }, 500)
         })
         .on('mouseout', ()=>{
-          clearInterval(chart.inc)
+          clearInterval(chart.inc) // clear function call if mouse leaves button area
           chart.timer=setTimeout(()=>{
-            chart.glowBar.style("opacity", .2)
+            chart.glowBar.style("opacity", .2) // reduce opacity of highlight on selected bar
+            if (lastGraph){mod4[graphCounter].timeQEnd=new Date().getTime()}
           }, 500)
         })
-        // .on("click", ()=>{
-        //   incBar(isInc, .01*chart.xScale.domain()[1])
-        // })
-        // .on("mousedown", ()=>{
-        //   clearTimeout(chart.timer)
-        //   chart.glowBar.style("opacity", 1)
-        //   chart.timer = setTimeout(()=>{chart.glowBar.style("opacity", .2)}, 500)
-        // })
     }
 
-    // BG image
+    // Append BG Image
     chart.append("image")
       .attr("class", "clip-chartArea")
-      // .attr("href", 'modules/graphQuestions/graphImages/interactBars/bar_interact1_00_artwork.png')
       .attr("xlink:href", storyData.interact.imagePath[0])
-      // .attr("height", chart.bodyDim.h)
       .attr("height", chart.imageDim.h)
       .attr("width", chart.imageDim.w)
-      // makes sure the chart is positioned from the top of the image
-      .attr("y", chart.bodyDim.h-chart.imageDim.h)
+      .attr("y", chart.bodyDim.h-chart.imageDim.h) // makes sure the chart is positioned from the top of the image
 
     // Add vertical gridlines
     let vData = []
-    // let vLine = 4
-    // let mLine = 2
     let vLine = storyData.interact.xGrid[0]
     let mLine = storyData.interact.xGrid[1]
     for (let i = 0; i < vLine+1; i++){
@@ -570,7 +560,7 @@
       .attr("y2", (d)=>{return chart.yScale(d[storyData.interact.accessors[0]])+chart.barHeight} )
       // .attr("stroke", "black")
 
-    mod4[graphCounter].value = barData[chart.selBar][storyData.interact.accessors[1]]
+    mod4[graphCounter].inputData.push({'userAnswer':barData[chart.selBar][storyData.interact.accessors[1]]})
 
   }
 
@@ -578,7 +568,7 @@
     // Making sure the bar does not exceed the 0 and 1.
     let bar = storyData.interact.data[chart.selBar]
     bar[storyData.interact.accessors[1]] = clampThings((isInc? bar[storyData.interact.accessors[1]]+step : bar[storyData.interact.accessors[1]]-step), 0, chart.xScale.domain()[1])
-    console.log(bar[storyData.interact.accessors[1]], bar)
+    // console.log(bar[storyData.interact.accessors[1]], bar)
     // Updating the clipping path.
     chart.glowBar.attr('width', chart.xScale(bar[storyData.interact.accessors[1]]))
     d3.select("#clipper"+(chart.selBar+1).toString()).select("rect").attr("width", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
@@ -587,7 +577,7 @@
     // console.log("cha", chart.chartVertical)
     chart.chartVertical.attr("x1", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])}).attr("x2", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
 
-    mod4[graphCounter].value = bar
+    mod4[graphCounter].inputData.push({'userAnswer': bar[storyData.interact.accessors[1]]})
   }
 
     // ----------------- END: MAKE BAR CHARTS ----------------------------//
@@ -620,12 +610,14 @@
           clearInterval(chart.inc)
           chart.timer=setTimeout(()=>{
             chart.highSlice.style("opacity", .4)
+            if (lastGraph){mod4[graphCounter].timeQEnd=new Date().getTime()}
           }, 500)
         })
         .on('mouseup', ()=>{
           clearInterval(chart.inc)
           chart.timer=setTimeout(()=>{
             chart.highSlice.style("opacity", .4)
+            if (lastGraph){mod4[graphCounter].timeQEnd=new Date().getTime()}
           }, 500)
         })
     }
@@ -678,7 +670,8 @@
     }
 
     // Saving the pieSlice value, which should be 1/2 of the sum
-    mod4[graphCounter].value = pieData[storyData.interact.pointLoc][accessors[1]]
+    // mod4[graphCounter].value = pieData[storyData.interact.pointLoc][accessors[1]]
+    mod4[graphCounter].inputData.push({'userAnswer':pieData[storyData.interact.pointLoc][accessors[1]]})
 
     // A function to specify the angles of the pie.
     var pie = d3.layout.pie(pieData).sort(null).value(function(d) { return d[accessors[1]]; });
@@ -890,7 +883,8 @@
     }
     let p = storyData.interact.pointLoc
     // Save the pieSlice value
-    mod4[graphCounter].value = pieData[p][accessors[1]]
+    // mod4[graphCounter].value = pieData[p][accessors[1]]
+    mod4[graphCounter].inputData.push({'userAnswer':pieData[p][accessors[1]]})
 
     // create function to draw the arcs of the pie slices.
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
@@ -970,7 +964,8 @@
 
     // saving value, will change if interacted withs
     if (mod4.length>0)
-      mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+      // mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+      mod4[graphCounter].inputData.push({'userAnswer':lineData[pointLoc][accessors[1]]})
 
     chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
       .attr("preserveAspectRatio", "xMinYMax meet")
@@ -1054,6 +1049,7 @@
           chart.timer=setTimeout(()=>{
             chart.highLine.style("opacity", ".5")
             chart.lineDot.style("opacity", ".1")
+            if (lastGraph){mod4[graphCounter].timeQEnd=new Date().getTime()}
           }, 500)
         })
         .on('mouseup', ()=>{
@@ -1061,6 +1057,7 @@
           chart.timer=setTimeout(()=>{
             chart.highLine.style("opacity", ".5")
             chart.lineDot.style("opacity", ".1")
+            if (lastGraph){mod4[graphCounter].timeQEnd=new Date().getTime()}
           }, 500)
         })
 
@@ -1349,7 +1346,8 @@
     }
 
     // saving value
-    mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+    // mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+    mod4[graphCounter].inputData.push({'userAnswer':lineData[pointLoc][accessors[1]]})
 
     for (let i = 0; i <2; i++){
       let y0 = i==0? chart.yScale(0) : chart.yScale.range()[1]
@@ -1401,15 +1399,6 @@
       experimentr.addData(data);
       experimentr.release();
     // }
-  }
-  // need to edit this
-  function diffGradeMeth(){
-    for (var i=0; i<mod4[graphCounter].inputData.length; i++){
-      if (mod4[graphCounter].inputData[i].userAnswer==storyData.questionBank[i].answer){
-        mod4[graphCounter].inputData[i].answerVerification = true
-      } else { mod4[graphCounter].inputData[i].answerVerification = false}
-      // console.log("apples", JSON.parse("apples"))
-    }
   }
 }());
 </script>

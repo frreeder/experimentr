@@ -1,0 +1,82 @@
+<div id="sess2Instructions">
+
+  <p>
+  <strong>This is the second questionnaire session of a two part study. </strong>
+  </p>
+
+  <p>
+  In the first questionnaire session, you answered questions regarding the information found on charts.
+  In this session, you will be asked to recall the chart and information to answer a new series of questions.
+  </p>
+
+  <p>
+    The following is an example of questions asked in the first questionnaire.
+  </p>
+
+  <div id="sess2Mod1"></div>
+
+  <p></p>
+
+  <button id="sess2Button">
+    I am ready to proceed
+  </button>
+
+  <span id="invalidBrowser">
+    Please use Chrome or Firefox to participate in the study.
+  </span>
+
+</div>
+
+<style>
+  #invalidBrowser {
+    display: none;
+    color: red;
+  }
+  #sess2Button {
+    display: none;
+  }
+</style>
+
+<script>
+(function() {
+  isBW = false
+  browser = experimentr.get_browser_info()
+  data={}
+  experimentr.hideNext();
+  // Read the graph order array to determine if session is black and white
+  d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
+  setTimeout(()=>{
+    // Get the chart color
+    if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
+
+    data.browser_s2 = JSON.stringify(browser)
+    data.complete_s2 = false
+    experimentr.addData(data);
+
+    // Append image of module 1
+    d3.select('#sess2Mod1').append('img')
+      .attr('src', function(d) {
+        if (isBW) { return "modules/graphQuestions/examples/example_bw_mod1.png"; } else {
+          return "modules/graphQuestions/examples/example_mod1.png"; }
+      })
+      .attr('height', '100%').style('max-height', '500px')
+      .attr('width', '100%')
+      .style('display', 'block').style('object-position', '0 0').style('object-fit', 'contain').style("margin-top", '20px')
+
+    // Add button
+    d3.select('#sess2Button')
+      .style('display', 'block')
+      // .append('button')
+      // .text('I am ready to proceed')
+      .on('click', ()=>{
+        if (browser.name == "Firefox" || browser.name == "Chrome"){
+          experimentr.next()
+        } else {
+          d3.select('#invalidBrowser').style('display', 'inline');
+        }
+      })
+
+  }, 500)
+
+}());
+</script>

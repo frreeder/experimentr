@@ -17,13 +17,23 @@
       .on('keypress', function() { data.workerId = this.value; })
       .on('blur', function() { data.workerId = this.value; });
 
-    d3.select('#consentYes').on('click', experimentr.next);
+    d3.select('#consentYes').on('click', function(){
+      if (browser.name == "Firefox" || browser.name == "Chrome"){
+        experimentr.next()
+      } else {
+        d3.select('#invalidBrowser').style('display', 'inline');
+      }
+    });
 
     d3.select('#checkId').on('click', validate);
   }
 
   function validate() {
+    // This check will probably not be necessary in the future.
     if( data.workerId ) {
+      data.browser_s1 = JSON.stringify(browser)
+      data.complete_s1 = false
+      data.complete_s2 = false
       experimentr.addData(data);
 
       if( workers.indexOf(data.workerId) == -1 ) {
@@ -34,5 +44,6 @@
     }
   }
 
-}());
+  let browser = experimentr.get_browser_info();
 
+}());

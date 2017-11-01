@@ -11,12 +11,17 @@ Please enter your Amazon Worker Id. <strong>You may only complete this HIT once.
 <br>
 
 <input type="text" id="workerId" name="workerId" disabled="true" size="30" />
-<button id="checkId" type="button">Check ID</button>
+  <button id="checkId" type="button">Check ID</button>
 <br>
 
 <span id="invalidMessage">
 Our records show that you have taken part in this study before, so we cannot allow you to take this HIT again at this time. Please contact us if you feel this is in error.
 </span>
+
+<span id="invalidBrowser">
+  Please use Chrome or Firefox to participate in the study.
+</span>
+
 </p>
 
 <div id="consentForm">
@@ -64,8 +69,8 @@ Our records show that you have taken part in this study before, so we cannot all
 </span>
 </div>
 
-<p>
-<button id="consentYes" disabled="true" type="button">I Agree</button>
+<p id ="consentYesP">
+  <button id="consentYes" disabled="true" type="button">I Agree</button>
 </p>
 
 <p>
@@ -79,6 +84,10 @@ Our records show that you have taken part in this study before, so we cannot all
     display: none;
     color: red;
   }
+  #invalidBrowser {
+    display: none;
+    color: red;
+  }
   #consentForm {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -89,3 +98,23 @@ Our records show that you have taken part in this study before, so we cannot all
 </style>
 
 <script src="modules/consent/index.js"></script>
+
+<script>
+(function(){
+
+
+  // Consent button
+  // let consentButton = d3.select(#consentYesP)
+  //   .append('button')
+  //   .
+  // <button id="consentYes" disabled="true" type="button">I Agree</button>
+
+  // If browser is NOT chrome or firefox, alert the user
+
+
+  // If the browser is chrome or firefox, do stuff
+
+
+
+}());
+</script>

@@ -10,6 +10,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "In the U.S., what year had the highest number of crabs caught?",
@@ -62,6 +63,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "Which of the following years had the lowest C02 Emissions in the U.S.?",
@@ -71,7 +73,7 @@
         },
         {
           "question": "Which year had a similar amount of C02 Emissions to the U.S. in 2002?",
-          "choices": ["2004", "2006", "2008", "2009"],
+          "choices": ["2004", "2000", "2008", "2009"],
           "answer": "2004",
           "key": "compare"
         }
@@ -114,17 +116,18 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "In which of the following years was the least amount of Ford F-Series Trucks Sold?",
-          "choices": ["2009", "2011", "2001", "2003"],
+          "choices": ["2009", "2011", "2001", "2005"],
           "answer": "2009",
           "key": "identify"
         },
         {
           "question": "What year sold a similar amount of Ford F-Series Trucks to 2001?",
-          "choices": ["2000", "2002", "2004", "2010"],
-          "answer": "2004",
+          "choices": ["2009", "2011", "2000", "2005"],
+          "answer": "2005",
           "key": "compare"
         }
       ],
@@ -135,7 +138,7 @@
           "imagePath": [],
           "imagePathBW": [],
           "imageDim": [],
-          "pointLoc": 10,
+          "pointLoc": 9,
           "gridLines": [2, 4, 2],
           "gridColor": ["black", "grey"],
           "gridPadding": [0, 0],
@@ -166,6 +169,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "Which of the following prices is closes to the peak average gasoline price in the U.S. from June 2010 to June 2012?",
@@ -175,7 +179,7 @@
         },
         {
           "question": "What month and year had a similar average gasoline price to October 2012 in the U.S.?",
-          "choices": ["October 2011", "February 2011", "February 2012", "June2012"],
+          "choices": ["October 2011", "February 2011", "February 2012", "June 2010"],
           "answer": "February 2012",
           "key": "compare"
         }
@@ -217,6 +221,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "Which of the following is closest to the lowest number of manufacturing employment in the U.S. from 2000-2010?",
@@ -268,10 +273,11 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "In 2011 what was the highest average number of hours spent in traffic in the U.S.?",
-          "choices": ["3.6 hours", "4.0 hours", "4.4 hours", "4.8 hours"],
+          "choices": ["5.2 hours", "4.0 hours", "4.4 hours", "4.8 hours"],
           "answer": "4.8 hours",
           "key": "identify"
         },
@@ -321,6 +327,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "imagePathBW": [],
       "questionBank": [
         {
@@ -370,6 +377,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "What is the lowest percent of total sales for a Girl Scout Cookie?",
@@ -418,6 +426,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "In 2012, which of U.K.'s Renewable Energy sources was produced the least?",
@@ -426,7 +435,7 @@
           "key": "identify"
         },
         {
-          "question": "In 2012, which of U.K.'s Renewable Energy source was produced a similar amount to Plant and Bio?",
+          "question": "In 2012, which of U.K.'s Renewable Energy source was produced a similar amount to Plant and Animal Bio?",
           "choices": ["Wind Power", "Sewage and Waste Bio", "Solar and Other Sources", "Hydro Electric"],
           "answer": "Wind Power",
           "key": "compare"
@@ -466,6 +475,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "What is the percent of the Star Wars revenue source with the most of the total sales?",
@@ -514,6 +524,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "Which location had the least amount of robbery occurrences in the U.S, 2012?",
@@ -562,10 +573,11 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "In the U.S, 2010 what was the percent of the industry that the most women worked in?",
-          "choices": ["40.6%", "31.3%", "6.1%", "32.0%"],
+          "choices": ["40.6%", "31.3%", "44.1%", "32.0%"],
           "answer": "40.6%",
           "key": "identify"
         },
@@ -612,6 +624,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "Which of the following artworks was sold for the highest amount of 2012 U.S.currency?",
@@ -620,9 +633,9 @@
           "key": "identify"
         },
         {
-          "question": "Which artwork was sold at auction for a smaller amount of 2012 U.S. currency than L'Homme qui Marche, I?",
-          "choices": ["Garrcon a la pipe", "Nude, Green Leaves", "Dora Maar au Chat", "The Scream"],
-          "answer": "Dora Maar au Chat",
+          "question": "In 2012 U.S. currency, which artwork was sold at auction for less than Nude, Green Leaves and for more than Dora Maar au Chat?",
+          "choices": ["Garrcon a la pipe", "The Starry Night", "L'Homme qui Marche, I", "The Scream"],
+          "answer": "L'Homme qui Marche, I",
           "key": "compare"
         }
       ],
@@ -664,6 +677,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "What is the approximate salary amount of the college undergraduate major with the highest salary?",
@@ -672,7 +686,7 @@
           "key": "identify"
         },
         {
-          "question": "Which college undergraduate major has a salary similar to Aerospace Engineering?",
+          "question": "Which college undergraduate major has a salary closest to Aerospace Engineering?",
           "choices": ["Petroleum Engineering", "Computer Science", "Chemical Engineering", "Civil Engineering"],
           "answer": "Chemical Engineering",
           "key": "compare"
@@ -716,6 +730,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "What was the least used development platform in 2012?",
@@ -768,6 +783,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "Which of the following values is closest to the highest percent viewership for a Summer Olympic year?",
@@ -820,6 +836,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "Which theme park had the least attendance in 2011?",
@@ -872,6 +889,7 @@
       ],
       "imagePathBW":[],
       "basePath": [],
+      "basePathBW": [],
       "questionBank": [
         {
           "question": "In 2011, which country had the highest unemployment rate?",

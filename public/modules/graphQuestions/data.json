@@ -24,6 +24,13 @@
                 "modules/graphTheme/chartBase/line_base_unrelated_01_americanCrabsCaught.png",
                 "modules/graphTheme/chartBase/line_base_unrelated_02_americanCrabsCaught.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/line_base_embellished_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_01_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_02_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_01_americanCrabsCaught.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_02_americanCrabsCaught.png"
+            ],
             "questionBank": [
                 {
                     "question": "In the U.S., what year had the highest number of crabs caught?",
@@ -138,6 +145,13 @@
                 "modules/graphTheme/chartBase/line_base_unrelated_01_climateChange.png",
                 "modules/graphTheme/chartBase/line_base_unrelated_02_climateChange.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/line_base_embellished_climateChange.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_01_climateChange.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_02_climateChange.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_01_climateChange.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_02_climateChange.png"
+            ],
             "questionBank": [
                 {
                     "question": "Which of the following years had the lowest C02 Emissions in the U.S.?",
@@ -154,7 +168,7 @@
                     "question": "Which year had a similar amount of C02 Emissions to the U.S. in 2002?",
                     "choices": [
                         "2004",
-                        "2006",
+                        "2000",
                         "2008",
                         "2009"
                     ],
@@ -252,6 +266,13 @@
                 "modules/graphTheme/chartBase/line_base_unrelated_01_fordFSeries.png",
                 "modules/graphTheme/chartBase/line_base_unrelated_02_fordFSeries.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/line_base_embellished_fordFSeries.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_01_fordFSeries.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_02_fordFSeries.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_01_fordFSeries.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_02_fordFSeries.png"
+            ],
             "questionBank": [
                 {
                     "question": "In which of the following years was the least amount of Ford F-Series Trucks Sold?",
@@ -259,7 +280,7 @@
                         "2009",
                         "2011",
                         "2001",
-                        "2003"
+                        "2005"
                     ],
                     "answer": "2009",
                     "key": "identify"
@@ -267,12 +288,12 @@
                 {
                     "question": "What year sold a similar amount of Ford F-Series Trucks to 2001?",
                     "choices": [
+                        "2009",
+                        "2011",
                         "2000",
-                        "2002",
-                        "2004",
-                        "2010"
+                        "2005"
                     ],
-                    "answer": "2004",
+                    "answer": "2005",
                     "key": "compare"
                 }
             ],
@@ -292,7 +313,7 @@
                     1502,
                     924
                 ],
-                "pointLoc": 10,
+                "pointLoc": 9,
                 "gridLines": [
                     2,
                     4,
@@ -366,6 +387,13 @@
                 "modules/graphTheme/chartBase/line_base_unrelated_01_gasolinePrices.png",
                 "modules/graphTheme/chartBase/line_base_unrelated_02_gasolinePrices.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/line_base_embellished_gasolinePrices.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_01_gasolinePrices.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_02_gasolinePrices.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_01_gasolinePrices.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_02_gasolinePrices.png"
+            ],
             "questionBank": [
                 {
                     "question": "Which of the following prices is closes to the peak average gasoline price in the U.S. from June 2010 to June 2012?",
@@ -384,7 +412,7 @@
                         "October 2011",
                         "February 2011",
                         "February 2012",
-                        "June2012"
+                        "June 2010"
                     ],
                     "answer": "February 2012",
                     "key": "compare"
@@ -478,6 +506,13 @@
                 "modules/graphTheme/chartBase/line_base_norm_02_manuEmployment.png",
                 "modules/graphTheme/chartBase/line_base_unrelated_01_manuEmployment.png",
                 "modules/graphTheme/chartBase/line_base_unrelated_02_manuEmployment.png"
+            ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/line_base_embellished_manuEmployment.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_01_manuEmployment.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_02_manuEmployment.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_01_manuEmployment.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_02_manuEmployment.png"
             ],
             "questionBank": [
                 {
@@ -592,11 +627,18 @@
                 "modules/graphTheme/chartBase/line_base_unrelated_01_trafficCongestion.png",
                 "modules/graphTheme/chartBase/line_base_unrelated_02_trafficCongestion.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/line_base_embellished_trafficCongestion.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_01_trafficCongestion.png",
+                "modules/graphTheme/chartBase_bw/line_base_norm_02_trafficCongestion.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_01_trafficCongestion.png",
+                "modules/graphTheme/chartBase_bw/line_base_unrelated_02_trafficCongestion.png"
+            ],
             "questionBank": [
                 {
                     "question": "In 2011 what was the highest average number of hours spent in traffic in the U.S.?",
                     "choices": [
-                        "3.6 hours",
+                        "5.2 hours",
                         "4.0 hours",
                         "4.4 hours",
                         "4.8 hours"
@@ -706,6 +748,13 @@
                 "modules/graphTheme/chartBase/pie_base_norm_02_beauty.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_beauty.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_beauty.png"
+            ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/pie_base_embellished_beauty.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_01_beauty.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_02_beauty.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_01_beauty.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_02_beauty.png"
             ],
             "questionBank": [
                 {
@@ -886,6 +935,13 @@
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_girlScouts.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_girlScouts.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/pie_base_embellished_girlScouts.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_01_girlScouts.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_02_girlScouts.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_01_girlScouts.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_02_girlScouts.png"
+            ],
             "questionBank": [
                 {
                     "question": "What is the lowest percent of total sales for a Girl Scout Cookie?",
@@ -1052,6 +1108,13 @@
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_renewable.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_renewable.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/pie_base_embellished_renewable.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_01_renewable.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_02_renewable.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_01_renewable.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_02_renewable.png"
+            ],
             "questionBank": [
                 {
                     "question": "In 2012, which of U.K.'s Renewable Energy sources was produced the least?",
@@ -1065,7 +1128,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "In 2012, which of U.K.'s Renewable Energy source was produced a similar amount to Plant and Bio?",
+                    "question": "In 2012, which of U.K.'s Renewable Energy source was produced a similar amount to Plant and Animal Bio?",
                     "choices": [
                         "Wind Power",
                         "Sewage and Waste Bio",
@@ -1229,6 +1292,13 @@
                 "modules/graphTheme/chartBase/pie_base_norm_02_starWars.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_starWars.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_starWars.png"
+            ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/pie_base_embellished_starWars.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_01_starWars.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_02_starWars.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_01_starWars.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_02_starWars.png"
             ],
             "questionBank": [
                 {
@@ -1408,6 +1478,13 @@
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_robbery.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_robbery.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/pie_base_embellished_robbery.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_01_robbery.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_02_robbery.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_01_robbery.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_02_robbery.png"
+            ],
             "questionBank": [
                 {
                     "question": "Which location had the least amount of robbery occurrences in the U.S, 2012?",
@@ -1586,13 +1663,20 @@
                 "modules/graphTheme/chartBase/pie_base_unrelated_01_womenWork.png",
                 "modules/graphTheme/chartBase/pie_base_unrelated_02_womenWork.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/pie_base_embellished_womenWork.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_01_womenWork.png",
+                "modules/graphTheme/chartBase_bw/pie_base_norm_02_womenWork.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_01_womenWork.png",
+                "modules/graphTheme/chartBase_bw/pie_base_unrelated_02_womenWork.png"
+            ],
             "questionBank": [
                 {
                     "question": "In the U.S, 2010 what was the percent of the industry that the most women worked in?",
                     "choices": [
                         "40.6%",
                         "31.3%",
-                        "6.1%",
+                        "44.1%",
                         "32.0%"
                     ],
                     "answer": "40.6%",
@@ -1750,6 +1834,13 @@
                 "modules/graphTheme/chartBase/bar_base_unrelated_01_artwork.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_02_artwork.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/bar_base_embellished_artwork.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_01_artwork.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_02_artwork.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_01_artwork.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_02_artwork.png"
+            ],
             "questionBank": [
                 {
                     "question": "Which of the following artworks was sold for the highest amount of 2012 U.S.currency?",
@@ -1763,14 +1854,14 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which artwork was sold at auction for a smaller amount of 2012 U.S. currency than L'Homme qui Marche, I?",
+                    "question": "In 2012 U.S. currency, which artwork was sold at auction for less than Nude, Green Leaves and for more than Dora Maar au Chat?",
                     "choices": [
                         "Garrcon a la pipe",
-                        "Nude, Green Leaves",
-                        "Dora Maar au Chat",
+                        "The Starry Night",
+                        "L'Homme qui Marche, I",
                         "The Scream"
                     ],
-                    "answer": "Dora Maar au Chat",
+                    "answer": "L'Homme qui Marche, I",
                     "key": "compare"
                 }
             ],
@@ -1869,6 +1960,13 @@
                 "modules/graphTheme/chartBase/bar_base_unrelated_01_majorSalaries.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_02_majorSalaries.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/bar_base_embellished_majorSalaries.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_01_majorSalaries.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_02_majorSalaries.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_01_majorSalaries.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_02_majorSalaries.png"
+            ],
             "questionBank": [
                 {
                     "question": "What is the approximate salary amount of the college undergraduate major with the highest salary?",
@@ -1882,7 +1980,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which college undergraduate major has a salary similar to Aerospace Engineering?",
+                    "question": "Which college undergraduate major has a salary closest to Aerospace Engineering?",
                     "choices": [
                         "Petroleum Engineering",
                         "Computer Science",
@@ -1988,6 +2086,13 @@
                 "modules/graphTheme/chartBase/bar_base_norm_02_developers.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_01_developers.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_02_developers.png"
+            ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/bar_base_embellished_developers.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_01_developers.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_02_developers.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_01_developers.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_02_developers.png"
             ],
             "questionBank": [
                 {
@@ -2107,6 +2212,13 @@
                 "modules/graphTheme/chartBase/bar_base_norm_02_olympics.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_01_olympics.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_02_olympics.png"
+            ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/bar_base_embellished_olympics.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_01_olympics.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_02_olympics.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_01_olympics.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_02_olympics.png"
             ],
             "questionBank": [
                 {
@@ -2231,6 +2343,13 @@
                 "modules/graphTheme/chartBase/bar_base_unrelated_01_themePark.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_02_themePark.png"
             ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/bar_base_embellished_themePark.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_01_themePark.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_02_themePark.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_01_themePark.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_02_themePark.png"
+            ],
             "questionBank": [
                 {
                     "question": "Which theme park had the least attendance in 2011?",
@@ -2351,6 +2470,13 @@
                 "modules/graphTheme/chartBase/bar_base_norm_02_unemploymentRate.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_01_unemploymentRate.png",
                 "modules/graphTheme/chartBase/bar_base_unrelated_02_unemploymentRate.png"
+            ],
+            "basePathBW": [
+                "modules/graphTheme/chartBase_bw/bar_base_embellished_unemploymentRate.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_01_unemploymentRate.png",
+                "modules/graphTheme/chartBase_bw/bar_base_norm_02_unemploymentRate.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_01_unemploymentRate.png",
+                "modules/graphTheme/chartBase_bw/bar_base_unrelated_02_unemploymentRate.png"
             ],
             "questionBank": [
                 {

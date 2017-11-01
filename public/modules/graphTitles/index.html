@@ -5,8 +5,6 @@
 <div id="graphTText"></div>
 </div>
 
-
-
 <script>
 (function(){
   let graphArray = []
@@ -16,81 +14,29 @@
   let pageInfo = [];
   let graphCounter = 0
   let lastGraph = false
-  let isValid = true;
+  let isValid = false;
   let data = {}
   let mod2 = []
+
+  let timer;
+  let minTime = 4000
+
+  let isBW = true
+
+  // ----------------- BEGIN: Fake Data ----------------------------//
 
   let chartType = ["line", "pie", "bar"]
 
   let fakeNames = ["Super Hero Abilities", "Fruit Popularity", "Roadtrip Popularity Throughout the Year", "Favorite Side Dishes",
       "Top Browsers", "Grooming Time", "Halloween Candy Favorites", "Most Purchased Books", "U.S. Vacation States",
-      "Peak Marathon Season", "Minimum Wage Throughout the Years"]
+      "Peak Marathon Season", "Minimum Wage Throughout the Years", "Daily Schedule", "Saltiest Food", "Psychology of Color", "U.S. Health Statistics"]
   let fakeNamesList = []
   for (let i=0; i<fakeNames.length; i++){
     fakeNamesList.push({title: fakeNames[i], chartType: chartType[Math.floor(Math.random()*2.99)]})
   }
 
-  init()
-
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function init(){
-    experimentr.startTimer('graphTitles');
-    d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
-      // grabbing data from image list and putting into an array.
-      for (let i in d){
-        dropSel.push(i)
-        for (let j=0; j<d[i].length; j++){
-          graphArray.push({chartType: i, title: d[i][j].title})
-        }
-      }
-      // Add the fake names
-      Array.prototype.push.apply(graphArray, fakeNamesList)
-      for (let i=0; i<graphArray.length; i++){
-          let j = getRandomInt(i, graphArray.length)
-          let tempI = graphArray[i]
-          graphArray[i]=graphArray[j]
-          graphArray[j]=tempI
-      }
-      // n, calcNum, x%n
-      pageInfo = getCountPerPage(graphArray.length, numPages)
-      for(let i=0; i<pageInfo.length;i++){mod2.push({values:[]})}
-      numPages = pageInfo[0]
-      // console.log("num", getCountPerPage(107, numPages))
-
-      console.log("graphArray", graphArray, dropSel)
-      d3.select('#graphInstructions').selectAll("*").remove()
-      // makeTable()
-      d3.select('#graphInstructions').append('strong').text("Please read the following instructions.").append("br")
-      d3.select('#graphInstructions').append('text').text("In the following section you will be asked to select the titles of the charts viewed in Session 1.")
-      d3.select('#graphInstructions').append('img')
-        .attr('src', function(d) { return "modules/graphQuestions/examples/example_mod2.png"; })
-        .attr('height', '100%').style('max-height', '200px')
-        .attr('width', '100%')
-        .style('display', 'block').style('object-position', '0 0').style('object-fit', 'contain').style("margin-top", '20px')
-      setTimeout(function(){
-        d3.select('#graphInstructions').append('button')
-          .attr('type', 'button').style("margin-top", '20px')
-          .text('I have read the instructions.')
-          .on('click',
-            function(d) {
-              loadData();
-            });
-      }, 500)
-      // loadData()
-      if (!skip){
-        experimentr.hideNext()
-        // experimentr.attachTimer('#graphTTimer', 20, function() {
-        //   // experimentr.showNext()
-        //   // validate();
-        // });
-      } else {
-        validate()
-      }
-    })
-  }
+  // ----------------- END: Fake Data ----------------------------//
+  // ----------------- BEGIN: Setup Data Functions ----------------------------//
 
   function getCountPerPage(x, n){
     let calcNum = x / n
@@ -112,10 +58,87 @@
     }
   }
 
+  // ----------------- END: Setup Data Functions ----------------------------//
+  // ----------------- BEGIN: Initialize Script ----------------------------//
+
+  init()
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function init(){
+    experimentr.startTimer('graphTitles');
+    d3.json('modules/graphOrder.json', function(err, gO) {
+      d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
+        if(gO[0].isBW!=null){isBW = gO[0].isBW} else {isBW = isBW}
+        // grabbing data from image list and putting into an array.
+        for (let i in d){
+          dropSel.push(i)
+          for (let j=0; j<d[i].length; j++){
+            graphArray.push({chartType: i, title: d[i][j].title})
+          }
+        }
+        // Add the fake names
+        Array.prototype.push.apply(graphArray, fakeNamesList)
+        for (let i=0; i<graphArray.length; i++){
+            let j = getRandomInt(i, graphArray.length)
+            let tempI = graphArray[i]
+            graphArray[i]=graphArray[j]
+            graphArray[j]=tempI
+        }
+        // n, calcNum, x%n
+        pageInfo = getCountPerPage(graphArray.length, numPages)
+        for(let i=0; i<pageInfo.length;i++){mod2.push({values:[], userInput:[]})}
+        numPages = pageInfo[0]
+        // console.log("num", getCountPerPage(107, numPages))
+
+        console.log("graphArray", graphArray, dropSel)
+        d3.select('#graphInstructions').selectAll("*").remove()
+        // makeTable()
+        d3.select('#graphInstructions').append('strong').text("Please read the following instructions.").append("br")
+        d3.select('#graphInstructions').append('text').text("In the following section you will be asked to select the titles of the charts viewed in Session 1.")
+        d3.select('#graphInstructions').append('img')
+          .attr('src', function(d) {
+            if(isBW){return "modules/graphQuestions/examples/example_bw_mod2.png";} else{
+              return "modules/graphQuestions/examples/example_mod2.png";
+            }
+          })
+          .attr('height', '100%').style('max-height', '200px')
+          .attr('width', '100%')
+          .style('display', 'block').style('object-position', '0 0').style('object-fit', 'contain').style("margin-top", '20px')
+        setTimeout(function(){
+          d3.select('#graphInstructions').append('button')
+            .attr('type', 'button').style("margin-top", '20px')
+            .text('I have read the instructions.')
+            .on('click',
+              function(d) {
+                loadData();
+              });
+        }, 500)
+        experimentr.hideNext()
+        // // loadData()
+        // if (!skip){
+        //   experimentr.hideNext()
+        //   // experimentr.attachTimer('#graphTTimer', 20, function() {
+        //   //   // experimentr.showNext()
+        //   //   // validate();
+        //   // });
+        // } else {
+        //   validate()
+        // }
+      })
+    })
+  }
+
+  // ----------------- END: Initialize Script ----------------------------//
+  // ----------------- BEGIN: Load Data ----------------------------//
+
   function loadData(){
     d3.select('#graphInstructions').selectAll("*").remove()
     d3.select('#graphInstructions').append('p').text('Please select the titles that were included in the previous study session.')
     if (graphCounter == numPages-1){
+        console.log('LAST GRAPH')
         lastGraph = true;
     }
     if (graphCounter > pageInfo[2]-1){
@@ -124,8 +147,24 @@
       storyData = graphArray.slice(Math.ceil(pageInfo[1])*graphCounter, Math.ceil(pageInfo[1])*(graphCounter+1)-1);
     }
     mod2[graphCounter].timeQStart=new Date().getTime()
+
+    // Start timer here
+    if (!skip){
+      setTimeout(function(){
+        isValid = true
+        d3.select('#graphTText').selectAll('text').remove();
+        console.log('done')
+      }, minTime)
+    } else {
+      isValid = true
+    }
+
+
     makeTable();
   }
+
+  // ----------------- END: Load Data ----------------------------//
+  // ----------------- BEGIN: Make Tale ----------------------------//
 
   function makeTable(){
     d3.select('#graphTitlesTable').selectAll("*").remove()
@@ -133,10 +172,23 @@
     let rows = tableBody.selectAll("tr")
       .data(storyData)
       .enter().append("tr")
-        .attr("class", graphCounter%2==0?"evenPage":"oddPage")
+        .attr("class", ()=>{
+          // Setting class depending on page and bw
+          let c1= isBW?"bw":""
+          let c2 = graphCounter%2==0?"evenPage":"oddPage"
+          return c1+" "+c2
+        })
       // .append("td").text(function (d) { return d.title; });
     // need to make three things per row; radio button, text, dropdown
     let rowRadio = rows.append('input')
+      .on("change", function(){
+        if (lastGraph){
+          mod2[graphCounter].timeQEnd=new Date().getTime()
+          diffGradeMeth()
+          validate()
+          console.log('mod2', mod2)
+        }
+      })
       .attr('type', 'checkbox')
       .attr('value', (d)=>{return d.title})
       .attr("class", (d,i)=>{return "checkbox"+i})
@@ -149,7 +201,13 @@
     let rowText = rows
       .append("td").text(function(d){return d.title})
       .on("click", (d,i)=>{
-        rows.select(".checkbox"+i).node().checked=!rows.select(".checkbox"+i).node().checked})
+        rows.select(".checkbox"+i).node().checked=!rows.select(".checkbox"+i).node().checked
+        if (lastGraph){
+          mod2[graphCounter].timeQEnd=new Date().getTime()
+          diffGradeMeth()
+          validate()
+        }
+      })
         // console.log("clickityclick!", rows.select(".checkbox"+i).node().checked)})
     // Was going to add an option selector for choosing what type of chart.
     // let rowDrop = rows.append("select").selectAll("option")
@@ -161,32 +219,53 @@
         .text('Confirm Answer')
         .on('click',
           function(d) {
-            diffGradeMeth();
+            diffGradeMeth(); // Adding values as a list to upload to database
             if (isValid || skip){
               mod2[graphCounter].timeQEnd=new Date().getTime()
               graphCounter++;
               loadData();
+              diffGradeMeth();
+              validate()
+              isValid = false
+            } else {
+              d3.select('#graphTText').selectAll('text').remove();
+              d3.select('#graphTText').append('text')
+                .style('color', 'red')
+                .text("Please spend more time recalling the titles.")
             }
           });
+      d3.select('#graphTText').append('br')
     } else {
+      mod2[graphCounter].timeQEnd=new Date().getTime()
       diffGradeMeth();
       validate()
       experimentr.showNext();
     }
   }
 
+  // ----------------- END: Make Table ----------------------------//
+  // ----------------- Begin: Prepare and Send Data ----------------------------//
+
   function validate(){
+    console.log('validating!!!!')
     experimentr.endTimer('graphTitles');
-    data.mod2=mod2
+    data.mod2=JSON.stringify(mod2)
     experimentr.addData(data);
     experimentr.release();
   }
   function diffGradeMeth(){
-    d3.selectAll(".checkBox").each(function(d){
-      if (this.checked)
+    mod2[graphCounter].values = []
+    mod2[graphCounter].userInput = []
+    d3.selectAll("input").each(function(d){
+      // console.log('this.val', this.checked, this.value)
+      if (this.checked){
         mod2[graphCounter].values.push(this.value)
+        mod2[graphCounter].userInput.push({'userAnswer': this.value})
+      }
     })
   }
+
+  // ----------------- END: Prepare and Send Data ----------------------------//
 
 }());
 </script>
