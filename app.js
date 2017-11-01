@@ -21,30 +21,30 @@ redisClient.on('connect', function() {
   console.log('Connected to redis.')
 })
 
-var getBW = function getBW() {
-  let isBWCount = [0, 0]
-  // let keys = redisClient.keys('*')
-  // let isBWArr = redisClient.mget("qTest:Alex", 'isBW')
-  // console.log(isBWArr, isBWArr.length)
-  redisClient.keys('*', function(err, keysO) {
-    let keys = Object.keys(keysO);
-    console.log('k0', keys)
-    console.log('k1', keysO)
-    for (let i=0; i<keys.length; i++){
-      redisClient.hget(keys, "isBW", function(err, gO){
-        console.log('isBW', err)
-        if (err){return err} else {
-          if (gO != 'null') {
-            if (gO) {isBWCount[0]+=1} else {isBWCount[0]+=1}
-          }
-        }
-      })
-    }
-    let pBW = isBWCount[0]>isBWCount[1]?false:true
-    console.log('returning', pBW, isBWCount)
-    return (pBW)
-  })
-}
+// let getBW = function getBW() {
+//   let isBWCount = [0, 0]
+//   // let keys = redisClient.keys('*')
+//   // let isBWArr = redisClient.mget("qTest:Alex", 'isBW')
+//   // console.log(isBWArr, isBWArr.length)
+//   redisClient.keys('*', function(err, keysO) {
+//     let keys = Object.keys(keysO);
+//     console.log('k0', keys)
+//     console.log('k1', keysO)
+//     for (let i=0; i<keys.length; i++){
+//       redisClient.hget(keys, "isBW", function(err, gO){
+//         console.log('isBW', err)
+//         if (err){return err} else {
+//           if (gO != 'null') {
+//             if (gO) {isBWCount[0]+=1} else {isBWCount[0]+=1}
+//           }
+//         }
+//       })
+//     }
+//     let pBW = isBWCount[0]>isBWCount[1]?false:true
+//     console.log('returning', pBW, isBWCount)
+//     return (pBW)
+//   })
+// }
 
 // Data handling
 var save = function save(d) {
