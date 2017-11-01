@@ -21,28 +21,48 @@ redisClient.on('connect', function() {
   console.log('Connected to redis.')
 })
 
-// let getBW = function getBW() {
-//   let isBWCount = [0, 0]
-//   // let keys = redisClient.keys('*')
-//   // let isBWArr = redisClient.mget("qTest:Alex", 'isBW')
+// var getBW_redis = function getBW() {
+//   var isBWCount = [0, 0]
+//   var pBW = null
+//   // var keys = redisClient.keys('*')
+//   // var isBWArr = redisClient.mget("qTest:Alex", 'isBW')
 //   // console.log(isBWArr, isBWArr.length)
 //   redisClient.keys('*', function(err, keysO) {
-//     let keys = Object.keys(keysO);
+//     var keys = Object.keys(keysO);
 //     console.log('k0', keys)
 //     console.log('k1', keysO)
-//     for (let i=0; i<keys.length; i++){
-//       redisClient.hget(keys, "isBW", function(err, gO){
-//         console.log('isBW', err)
-//         if (err){return err} else {
-//           if (gO != 'null') {
-//             if (gO) {isBWCount[0]+=1} else {isBWCount[0]+=1}
-//           }
+//
+//     for (var i = 0; i < keysO.length; i++){
+//       redisClient.hget(keysO[i], 'isBW', function(err2, bwList){
+//         console.log('bwList', bwList)
+//         if (bwList != null){
+//           if (bwList) {isBWCount[0]+=1} else {isBWCount[0]+=1}
 //         }
 //       })
+//       if (i==0){pBW = isBWCount[0]>isBWCount[1]?false:true}
 //     }
-//     let pBW = isBWCount[0]>isBWCount[1]?false:true
+//
+//     // console.log('get',
+//     // redisClient.hget(keysO[1], 'isBW', function(err, obj){
+//     //   console.log(obj)
+//     //   return obj})
+//     // for (var i=0; i<keys.length; i++){
+//     //   // redisClient.hget(suff+":"+req.query.pid, "graphOrder", function(err, gO){
+//     //   var pIsBW = redisClient.mget(keysO[i], "isBW")
+//     //   console.log(pIsBW)
+//     //   // , function(err, obj){
+//     //   //   if (err){return err} else {
+//     //   //     console.log(obj)
+//     //   //     return obj}
+//     //   // })
+//     //   console.log('isBW', pIsBW)
+//     //   if (pIsBW != 'null') {
+//     //     if (pIsBW) {isBWCount[0]+=1} else {isBWCount[0]+=1}
+//     //   }
+//     // }
+//
 //     console.log('returning', pBW, isBWCount)
-//     return (pBW)
+//     return pBW
 //   })
 // }
 
@@ -94,7 +114,7 @@ app.post('/', function handlePost(req, res) {
 })
 
 app.get('/', function(req, res){
-  // getBW()
+  // console.log('was', getBW_redis())
   function checkColor(){
     return Math.floor(Math.random()*2)==1?true:false
   }
@@ -128,7 +148,7 @@ app.get('/', function(req, res){
   } else {
     // If the first four characters in string are data then it will be used for testing
     if (req.query.pid.substring(0, 6) == 'iSigns'){
-      let parID = (+new Date()).toString(36)
+      var parID = (+new Date()).toString(36)
       if (req.query.pid.substring(7)!=''){parID = req.query.pid.substring(7)}
       pid = "p:"+parID
     } else {
