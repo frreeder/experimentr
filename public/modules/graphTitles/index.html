@@ -89,7 +89,7 @@
         }
         // n, calcNum, x%n
         pageInfo = getCountPerPage(graphArray.length, numPages)
-        for(let i=0; i<pageInfo.length;i++){mod2.push({values:[], userInput:[]})}
+        for(let i=0; i<pageInfo.length;i++){mod2.push({values:[], inputData:[]})}
         numPages = pageInfo[0]
         // console.log("num", getCountPerPage(107, numPages))
 
@@ -255,12 +255,12 @@
   }
   function diffGradeMeth(){
     mod2[graphCounter].values = []
-    mod2[graphCounter].userInput = []
+    mod2[graphCounter].inputData = []
     d3.selectAll("input").each(function(d){
       // console.log('this.val', this.checked, this.value)
       if (this.checked){
         mod2[graphCounter].values.push(this.value)
-        mod2[graphCounter].userInput.push({'userAnswer': this.value})
+        mod2[graphCounter].inputData.push({'userAnswer': this.value})
       }
     })
   }

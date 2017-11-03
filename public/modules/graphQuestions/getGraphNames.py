@@ -245,5 +245,9 @@ pprint(data["line"][0]["imagePath"][2])
 with open('data.json', 'w') as f:
      json.dump(data, f, indent=4)
 
+# Ideally this would include answers and whatnot while the data.json would include only what is needed on the public side
+with open('graphInfo.json', 'w') as f:
+     json.dump(data, f, indent=4)
+
 with open('allImages.json', 'w') as aI:
     json.dump(allImages, aI)

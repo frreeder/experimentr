@@ -24,23 +24,34 @@ redisClient.on('connect', function() {
 // var getBW_redis = function getBW() {
 //   var isBWCount = [0, 0]
 //   var pBW = null
+//
+//   function cb(){console.log('cb')}
+//
+//   redisClient.zscan{'*', 0, 'isBW', }
+//
+//
+//
 //   // var keys = redisClient.keys('*')
 //   // var isBWArr = redisClient.mget("qTest:Alex", 'isBW')
 //   // console.log(isBWArr, isBWArr.length)
-//   redisClient.keys('*', function(err, keysO) {
-//     var keys = Object.keys(keysO);
-//     console.log('k0', keys)
-//     console.log('k1', keysO)
-//
-//     for (var i = 0; i < keysO.length; i++){
-//       redisClient.hget(keysO[i], 'isBW', function(err2, bwList){
-//         console.log('bwList', bwList)
-//         if (bwList != null){
-//           if (bwList) {isBWCount[0]+=1} else {isBWCount[0]+=1}
-//         }
-//       })
-//       if (i==0){pBW = isBWCount[0]>isBWCount[1]?false:true}
-//     }
+//   // redisClient.keys('*', function(err, keysO) {
+//   //   var keys = Object.keys(keysO);
+//   //   console.log('k0', keys)
+//   //   console.log('k1', keysO)
+//   //
+//   //   for (var i = 0; i < keysO.length; i++){
+//   //     redisClient.hget(keysO[i], 'isBW', function(err2, bwList){
+//   //       console.log('bwList', bwList)
+//   //       if (bwList != null){
+//   //         if (bwList) {isBWCount[0]+=1} else {isBWCount[0]+=1}
+//   //       }
+//   //     })
+//   //     if (i== keysO.length-1){
+//   //       pBW = isBWCount[0]>isBWCount[1]?false:true
+//   //       console.log('returning', pBW, isBWCount)
+//   //       return pBW
+//   //     }
+//   //   }
 //
 //     // console.log('get',
 //     // redisClient.hget(keysO[1], 'isBW', function(err, obj){
@@ -60,10 +71,8 @@ redisClient.on('connect', function() {
 //     //     if (pIsBW) {isBWCount[0]+=1} else {isBWCount[0]+=1}
 //     //   }
 //     // }
-//
-//     console.log('returning', pBW, isBWCount)
-//     return pBW
-//   })
+//     return Math.floor(Math.random()*2)==1?true:false
+//   // })
 // }
 
 // Data handling
@@ -115,8 +124,17 @@ app.post('/', function handlePost(req, res) {
 
 app.get('/', function(req, res){
   // console.log('was', getBW_redis())
+  // Only used in session 1, checks for a color
+  var isBWTemp = Math.floor(Math.random()*2)==1?true:false
+  if (req.query.isBW!=null){
+    if (req.query.isBW == 'true' || req.query.isBW == 'false'){
+      isBWTemp = req.query.isBW
+    }
+  }
+  // var isBWTemp = req.query.isBW!=null?(typeof req.query.isBW == 'boolean'?req.query.isBW:(Math.floor(Math.random()*2)==1?true:false)):(Math.floor(Math.random()*2)==1?true:false)
+  // console.log(isBWTemp)
   function checkColor(){
-    return Math.floor(Math.random()*2)==1?true:false
+      return Math.floor(Math.random()*2)==1?true:false
   }
   // Query the string, if null -> error, test -> make stuff up, pid -> check if first time
   if (req.query.pid==null){
@@ -127,7 +145,10 @@ app.get('/', function(req, res){
     pid = "qTest:"+(req.query.name!=null?req.query.name:(+new Date()).toString(36))
     // If first session asked for -> use session one index
     if (req.query.s==1){
-      fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+      let sendC = req.query.isBW==null?null:req.query.isBW
+      console.log('sendC', sendC)
+      // fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+      fs.writeFile('public/modules/graphOrder.json', '['+isBWTemp+']', function(err) {
         res.sendfile(__dirname+"/public/indexSess1.html")
       })
     } else {
@@ -162,7 +183,8 @@ app.get('/', function(req, res){
         if (gO==null){
           // Somehow the chart order was not in database, redirecting to session one.
           // console.log("graphOrderDNE")
-          fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+          // fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+          fs.writeFile('public/modules/graphOrder.json', '['+isBWTemp+']', function(err) {
             res.sendfile(__dirname+"/public/indexSess1.html")
           })
           return;
@@ -182,7 +204,8 @@ app.get('/', function(req, res){
         // The entry doesn't exist. Pull up session 1
         redisClient.exists("data:"+req.query.pid, function (err, exist){
           if (exist){direct('data')} else{
-            fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
+            fs.writeFile('public/modules/graphOrder.json', '['+isBWTemp+']', function(err) {
+            // fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
               res.sendfile(__dirname+"/public/indexSess1.html")
             })
           }

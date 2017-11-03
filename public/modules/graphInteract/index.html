@@ -577,7 +577,7 @@
     // console.log("cha", chart.chartVertical)
     chart.chartVertical.attr("x1", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])}).attr("x2", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
 
-    mod4[graphCounter].inputData.push({'userAnswer': bar[storyData.interact.accessors[1]]})
+    mod4[graphCounter].inputData[0].userAnswer = bar[storyData.interact.accessors[1]]
   }
 
     // ----------------- END: MAKE BAR CHARTS ----------------------------//
@@ -884,7 +884,7 @@
     let p = storyData.interact.pointLoc
     // Save the pieSlice value
     // mod4[graphCounter].value = pieData[p][accessors[1]]
-    mod4[graphCounter].inputData.push({'userAnswer':pieData[p][accessors[1]]})
+    mod4[graphCounter].inputData[0].userAnswer = pieData[p][accessors[1]]
 
     // create function to draw the arcs of the pie slices.
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
@@ -961,11 +961,6 @@
     let tPoint = storyData.interact.pointLoc
     let pointLoc = typeof(storyData.interact.pointLoc)==='number'? clampThings(storyData.interact.pointLoc, 1, lineData.length-1) : (2<lineData.length-1? 2 : 1)
     storyData.interact.pointLoc = pointLoc
-
-    // saving value, will change if interacted withs
-    if (mod4.length>0)
-      // mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
-      mod4[graphCounter].inputData.push({'userAnswer':lineData[pointLoc][accessors[1]]})
 
     chart = d3.select('#graphIImage').append("svg").attr("class", "lineGraph")
       .attr("preserveAspectRatio", "xMinYMax meet")
@@ -1328,6 +1323,12 @@
       .style("fill", "none")
       .style("stroke", "black")
       .style("stroke-width", 4)
+
+
+    // saving value, will change if interacted withs
+    if (mod4.length>0)
+      // mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
+      mod4[graphCounter].inputData.push({'userAnswer':lineData[pointLoc][accessors[1]]})
   }
 
 
@@ -1347,7 +1348,7 @@
 
     // saving value
     // mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
-    mod4[graphCounter].inputData.push({'userAnswer':lineData[pointLoc][accessors[1]]})
+    mod4[graphCounter].inputData[0].userAnswer = lineData[pointLoc][accessors[1]]
 
     for (let i = 0; i <2; i++){
       let y0 = i==0? chart.yScale(0) : chart.yScale.range()[1]
