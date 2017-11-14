@@ -13,6 +13,7 @@ var express     = require('express')
   , path        = require('path')
   , fs          = require('fs')
   , pid
+  , pug         = require('pug')
 
 // Database setup
 redisClient = redis.createClient(rport)
@@ -21,68 +22,18 @@ redisClient.on('connect', function() {
   console.log('Connected to redis.')
 })
 
-// var getBW_redis = function getBW() {
-//   var isBWCount = [0, 0]
-//   var pBW = null
-//
-//   function cb(){console.log('cb')}
-//
-//   redisClient.zscan{'*', 0, 'isBW', }
-//
-//
-//
-//   // var keys = redisClient.keys('*')
-//   // var isBWArr = redisClient.mget("qTest:Alex", 'isBW')
-//   // console.log(isBWArr, isBWArr.length)
-//   // redisClient.keys('*', function(err, keysO) {
-//   //   var keys = Object.keys(keysO);
-//   //   console.log('k0', keys)
-//   //   console.log('k1', keysO)
-//   //
-//   //   for (var i = 0; i < keysO.length; i++){
-//   //     redisClient.hget(keysO[i], 'isBW', function(err2, bwList){
-//   //       console.log('bwList', bwList)
-//   //       if (bwList != null){
-//   //         if (bwList) {isBWCount[0]+=1} else {isBWCount[0]+=1}
-//   //       }
-//   //     })
-//   //     if (i== keysO.length-1){
-//   //       pBW = isBWCount[0]>isBWCount[1]?false:true
-//   //       console.log('returning', pBW, isBWCount)
-//   //       return pBW
-//   //     }
-//   //   }
-//
-//     // console.log('get',
-//     // redisClient.hget(keysO[1], 'isBW', function(err, obj){
-//     //   console.log(obj)
-//     //   return obj})
-//     // for (var i=0; i<keys.length; i++){
-//     //   // redisClient.hget(suff+":"+req.query.pid, "graphOrder", function(err, gO){
-//     //   var pIsBW = redisClient.mget(keysO[i], "isBW")
-//     //   console.log(pIsBW)
-//     //   // , function(err, obj){
-//     //   //   if (err){return err} else {
-//     //   //     console.log(obj)
-//     //   //     return obj}
-//     //   // })
-//     //   console.log('isBW', pIsBW)
-//     //   if (pIsBW != 'null') {
-//     //     if (pIsBW) {isBWCount[0]+=1} else {isBWCount[0]+=1}
-//     //   }
-//     // }
-//     return Math.floor(Math.random()*2)==1?true:false
-//   // })
-// }
-
 // Data handling
 var save = function save(d) {
   // console.log(pid)
-  d.pid=pid
-  redisClient.hmset(pid, d)
+  // THIS MIGHT BE IT!!!!! -> If the participant comes back at a later time then
+  // when they first loaded the page...then it might get messed up or if two participants try to do something
+  // at the same time
+  // d.pid=pid
+  redisClient.hmset(d.pid, d, function(){
+  })
   // redisClient.hmset(d.postId, d)
   if( debug )
-    console.log('saved to redis: ' + d.postId +', at: '+ (new Date()).toString())
+    console.log('saved to redis: ' + d.pid +', at: '+ (new Date()).toString())
 }
 
 // Server setup
@@ -91,6 +42,7 @@ app.use(express.bodyParser())
 app.use(express.static(__dirname + '/public'))
 // app.use( )
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
+app.engine('pug', require('pug').__express)
 
 // If the study has finished, write the data to file
 // Alyssa Note: This isn't called anywhere.
@@ -110,109 +62,156 @@ app.post('/finish', function(req, res) {
 
 // Handle POSTs from frontend
 app.post('/', function handlePost(req, res) {
-  // Get experiment data from request body
-  var d = req.body
+  var d = req.body // Get experiment data from request body
   // If a postId doesn't exist, add one (Random number based on date)
   if (!d.postId) d.postId = (+new Date()).toString(36)
-  // Add a timestamp
-  d.timestamp = (new Date()).getTime()
-  // Save the data to our database
-  save(d)
-  // Send a 'success' response to the frontend
-  res.send(200)
+  d.timestamp = (new Date()).getTime() // Add a timestamp
+  save(d) // Save the data to our database
+  res.send(200) // Send a 'success' response to the frontend
 })
 
+app.post('/countBW', function handlePost(req, res){
+  var d = req.body[0] // The string in the array with length=1
+  var isBWCount = {"isBW": 0, "notIsBW": 0}
+
+  redisClient.keys(d+'*', function(err, keys) { // getting the keys to loop over
+    (function loop(i) {
+        redisClient.hget(keys[i], 'isBW', function(err2, isBWField){ // get the isBW for the key
+          if (isBWField != null){
+            // console.log('isBWCount', isBWCount, keys[i], isBWField)
+            if (isBWField == "true") { // redis stores boolean as a string
+              // console.log('plusIsBW')
+              isBWCount.isBW+=1} else {
+                // console.log('plusNotISBW')
+                isBWCount.notIsBW+=1}
+          }
+        })
+        const promise = new Promise((resolve, reject) => {
+            const timeout = Math.random() * 100+50; // setting random time amount before next iteration
+            if (false) {reject()}
+            setTimeout( () => {
+                resolve(i); // resolve it!
+            }, timeout);
+        }).then((i)=>{
+          if (i<keys.length){
+            loop(i+1)
+          } else {
+            redisClient.hmset("isBWCount_"+d, isBWCount, ()=>{ // set the final count for the isBW
+              res.send(200);
+            }); }
+        });
+    }(0));
+  })
+});
+
+app.get('/pid', function(req, res){
+  // Not sure this is the right result
+  return res.send('Hahahahahaha')
+  // Make something for extracting
+})
+
+// app.get('/', function(req, res){
+//   res.render(__dirname+"/public/indexTestJade.pug", {name: 'Al', inPID: poop})
+// })
+
 app.get('/', function(req, res){
-  // console.log('was', getBW_redis())
-  // Only used in session 1, checks for a color
+  var loopPID = "", loopSuff = ""
+  // Temporary System for checking if black and white.
   var isBWTemp = Math.floor(Math.random()*2)==1?true:false
   if (req.query.isBW!=null){
     if (req.query.isBW == 'true' || req.query.isBW == 'false'){
       isBWTemp = req.query.isBW
     }
   }
-  // var isBWTemp = req.query.isBW!=null?(typeof req.query.isBW == 'boolean'?req.query.isBW:(Math.floor(Math.random()*2)==1?true:false)):(Math.floor(Math.random()*2)==1?true:false)
-  // console.log(isBWTemp)
-  function checkColor(){
-      return Math.floor(Math.random()*2)==1?true:false
-  }
-  // Query the string, if null -> error, test -> make stuff up, pid -> check if first time
-  if (req.query.pid==null){
-    // Link is invalid
-    res.send(404)
+  var seed = Math.floor(Math.random()*100000) // Random seed if using number generator
+  if (req.query.pid==null){ // Return error or sort of homepage index
+    // res.send(404)
+    res.render(__dirname+"/public/indexBasicJade.pug")
     return;
-  } else if (req.query.pid=="test"){
-    pid = "qTest:"+(req.query.name!=null?req.query.name:(+new Date()).toString(36))
-    // If first session asked for -> use session one index
-    if (req.query.s==1){
-      let sendC = req.query.isBW==null?null:req.query.isBW
-      console.log('sendC', sendC)
-      // fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
-      fs.writeFile('public/modules/graphOrder.json', '['+isBWTemp+']', function(err) {
-        res.sendfile(__dirname+"/public/indexSess1.html")
-      })
-    } else {
-      // Copying a dummy chart order JSON into the chart order JSON read client side.
-      fs.readFile('public/modules/graphOrderTest.json', 'utf8', function(err,data) {
-        if (err) console.log(err);
-        fs.writeFile('public/modules/graphOrder.json', data, function(err) {
-          if(err) console.log(err);
-          // Sending corresponding index file.
-          if (req.query.s == 2){
-            res.sendfile(__dirname+"/public/indexSess2.html")
-          } else {
-            res.sendfile(__dirname+"/public/indexTest.html")
-          }
-        });
-      })
-    }
+  }
+
+  // Create an ID based on pid
+  if (req.query.pid.substring(0, 4)=="test"||req.query.pid==""){
+    loopSuff = "qTest"
+    loopPID = loopSuff+":"+(+new Date()).toString(36)
+  } else if (req.query.pid.substring(0, 6) == 'iSigns'){
+    loopSuff = "iSigns"
+    loopPID = loopSuff+":"+req.query.pid.substring(7)
   } else {
-    // If the first four characters in string are data then it will be used for testing
-    if (req.query.pid.substring(0, 6) == 'iSigns'){
-      var parID = (+new Date()).toString(36)
-      if (req.query.pid.substring(7)!=''){parID = req.query.pid.substring(7)}
-      pid = "p:"+parID
-    } else {
-      pid = "data:"+req.query.pid
-    }
-    // Do something if exist
-    function direct(suff){
-      // Grab the chart order from the database and copy into JSON that will be read client side
-      redisClient.hget(suff+":"+req.query.pid, "graphOrder", function(err, gO){
-        // Could also use a template like jade or something to inject into html or make things dynamic using socket.io.
-        if (gO==null){
-          // Somehow the chart order was not in database, redirecting to session one.
-          // console.log("graphOrderDNE")
-          // fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
-          fs.writeFile('public/modules/graphOrder.json', '['+isBWTemp+']', function(err) {
-            res.sendfile(__dirname+"/public/indexSess1.html")
-          })
-          return;
-        }
-        fs.writeFile('public/modules/graphOrder.json', gO, function(err) {
-          if(err) console.log(err);
-          res.sendfile(__dirname+"/public/indexSess2.html")
-        });
-      })
-    }
-    // Lookup if user in database, ex: pid = p:j60wtjs8
-    redisClient.exists("p:"+req.query.pid, function (err, exist){
-      // If the participant exists pull up session 2.
-      if (exist){
-        direct('p')
-      } else {
-        // The entry doesn't exist. Pull up session 1
-        redisClient.exists("data:"+req.query.pid, function (err, exist){
-          if (exist){direct('data')} else{
-            fs.writeFile('public/modules/graphOrder.json', '['+isBWTemp+']', function(err) {
-            // fs.writeFile('public/modules/graphOrder.json', '['+checkColor().toString()+']', function(err) {
-              res.sendfile(__dirname+"/public/indexSess1.html")
+    loopSuff = "data"
+    loopPID = loopSuff+":"+req.query.pid
+  }
+
+  // Does the participant exist?
+  redisClient.exists(loopPID, function (err, exist){
+    if(exist){ // The participant exists
+      redisClient.hget(loopPID, "graphOrder", function(err, gO){ // get graphorder
+        if(gO==null){
+          if (loopSuff!="qTest"||req.query.s==1){ // Session1 requested or needed if it isn't a test
+            fs.writeFile('public/modules/graphOrder.json', '[{"isBW":'+isBWTemp+'}]', function(err) { // setting the graphorder to isBW so that a real graphorder can be created. If for some odd reason a participant exists but doens't have a graph order and it is not a test it is selecting isBW at random regardless of the isBWCount
+              // var bwObj =[{"isBW": isBWTemp}]
+              var bwObj = [{}]
+              bwObj[0].isBW = isBWTemp
+              res.render(__dirname+"/public/indexSess1Jade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(JSON.stringify(bwObj)) })
+            })
+          } else { // Make up graph order - Test Case; either session1 or session2
+            fs.readFile('public/modules/graphOrderTest.json', 'utf8', function(err,data) {
+              if (err) console.log(err);
+              fs.writeFile('public/modules/graphOrder.json', data, function(err) {
+                if (err) console.log(err);
+                if (req.query.s==2){ // Session2 requested
+                  res.render(__dirname+"/public/indexSess2Jade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(data)})
+                } else { // Using test index
+                  res.render(__dirname+"/public/indexTestJade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(data)})
+                }
+              })
             })
           }
-        })
-      }
-    })
-  }
+        } else { // A graph order file exist, use
+          redisClient.hmget(loopPID, "complete_s1", "complete_s2", "isBW", function(err, comp){ // Check what sessions complete
+            for(var i=0; i<comp.length; i++){ comp[i]=comp[i]=="true"?true:false }
+            if (comp[2] == null) {comp[2]=isBWTemp} //TODO: Check to make sure this is actually working
+            if(comp[0]&&comp[1]){ // Completed
+              res.render(__dirname+"/public/indexCompletedJade.pug")
+            } else if (comp[0] || req.query.s==2){ //sess2
+              res.render(__dirname+"/public/indexSess2Jade.pug", {outPID: loopPID, isBW: comp[2], outGraphOrder: JSON.stringify(gO)})
+            } else if (loopSuff=="qTest" && req.query.s!=1) { //test
+                res.render(__dirname+"/public/indexTestJade.pug", {outPID: loopPID, isBW: comp[2], outGraphOrder: JSON.stringify(gO)})
+            } else { //sess1
+              res.render(__dirname+"/public/indexSess1Jade.pug", {outPID: loopPID, outSeed:0, isBW: comp[2], outGraphOrder: JSON.stringify(gO)})
+            }
+          })
+        }
+      })
+    } else { // The participant doesn't exist
+      // Add getting the bwCount here ... not sure I would ever have to put this above if participant exists...
+      redisClient.hmget('isBWCount_'+loopSuff, "isBW", "notIsBW", function(err, comp){
+        console.log('isb', comp)
+        isBWTemp = comp[0]>comp[1]? false : true; // decide isBWTemp based on the server
+        console.log('isBWTemp', isBWTemp)
+        if (loopSuff!="qTest"||req.query.s==1){ // Session1 requested or needed
+          fs.writeFile('public/modules/graphOrder.json', '[{"isBW":'+isBWTemp+'}]', function(err) {
+            var bwObj = [{}]
+            bwObj[0].isBW = isBWTemp // For some reason need to use stringify twice
+            res.render(__dirname+"/public/indexSess1Jade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(JSON.stringify(bwObj)) })
+          })
+        } else { // Make up graph order - Test Case; either session1 or session2
+          fs.readFile('public/modules/graphOrderTest.json', 'utf8', function(err,data) {
+            if (err) console.log(err);
+            fs.writeFile('public/modules/graphOrder.json', data, function(err) {
+              if (err) console.log(err);
+              if (req.query.s==2){ // Session2 requested
+                res.render(__dirname+"/public/indexSess2Jade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(data)})
+              } else { // Using test index
+                console.log('test', data)
+                res.render(__dirname+"/public/indexTestJade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(data)})
+              }
+            })
+          })
+        }
+      })
+    }
+  })
 });
 
 // Create the server and tell which port to listen to

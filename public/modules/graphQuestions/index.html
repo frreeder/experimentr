@@ -65,6 +65,16 @@
     // console.log("data", data)
   }
 
+  // Change this to match module one and make sure it's doing the right things
+  function setGraphArray(gArr, graphO, graphA){
+    if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
+    for (let i=0; i<graphO.length; i++){
+      gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
+      gArr[i].embType = graphO[i].embType
+      gArr[i].chartType = graphO[i].chartType
+    }
+  }
+
   var embellishType = ["embellished", "normal", "normal2", "unrelated", "unrelated2"]
   function getEmbType(i){
     let embType = ""
@@ -99,11 +109,24 @@
   function init() {
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
-    d3.json('modules/graphOrder.json', function(err, d){
-      if (d.length==1){isBW = d[0]} else {isBW = isBW}
+    d3.json('modules/graphOrder.json', function(err, gO){
+      dGO = experimentr.graphOrder
+      // console.log('dGO', dGO)
+      // Set d to something or change something to reference graphOrder
       d3.json('modules/graphQuestions/data.json', function(err, d) {
         console.log('isBW?', isBW) // Needs to be here to make sure has been initialized.
-        getRandomImageArray(d);
+        if (dGO.length==1){ // this is the first time the participant is doing mod1
+          isBW = dGO[0].isBW
+          getRandomImageArray(d);
+        } else if (dGO.length==0){ //there is no information
+          isBW = isBW
+          getRandomImageArray(d);
+        } else { // participant has attempted, USE experimentr.graphOrder
+          // console.log('graphArray', dGO)
+          graphArray = []
+          graphOrder = dGO
+          setGraphArray(graphArray, dGO, d);
+        }
         for (var i=0; i<graphArray.length; i++){
             mod1.push({key: graphArray[i].chartType, inputData: []})
         }
@@ -128,6 +151,9 @@
             .text('Proceed')
             .on('click',
               function(d) {
+                // experimentr.countBW()
+                data.graphOrder=JSON.stringify(graphOrder)
+                validate()
                 loadData();
               });
         }, 1000)
@@ -141,6 +167,10 @@
   function loadData() {
     isValid = false // cannot proceed to next set of questions
     // Check if the last chart.
+    if (graphCounter == 0){ // send POST to server to add to the coutn of isBW
+      experimentr.countBW()
+    }
+
     if (graphCounter == graphArray.length-1){
         lastGraph = true;
     }
@@ -275,7 +305,7 @@
 
   function addGraphOrder(){
     data.complete_s1 = true
-    data.graphOrder=JSON.stringify(graphOrder)
+    // data.graphOrder=JSON.stringify(graphOrder)
   }
 
   // Format data and submit to database

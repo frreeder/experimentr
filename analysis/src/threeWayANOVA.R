@@ -22,7 +22,9 @@
 
 ### config input settings
 
-datafilename="./results/csvFiles/dummyData_time.csv"  # csv file name
+# datafilename="./results/csvFiles/dummyData_time.csv"  # csv file name
+datafilename="./results/csvFiles/mod1_score.csv"  # csv file name
+
 
 # Header name for participants
 participantName = "p_ID"
@@ -44,16 +46,19 @@ levelLabels2 = c("Related", "Unrelated", "None") # for renaming !!! Need to be i
 # withinLevels3 = c("close", "far") # needs to match second factor in csv column name
 # levelLabels3 = c("Close", "Far") # for renaming !!! Need to be in same order as withinLabels. This is for plotting
 
-outcomeName = "dummy_time"
+# outcomeName = "dummy_time"
+outcomeName = "mod1_score"
 
 # set some parameters for graphs
 ## outcomeName = "angleOffset"
 yMin = 0
-yMax = 100
+yMax = 4
 yInterval = 10
-yLabel = "Dummy Time"
+# yLabel = "Dummy Time"
+yLabel = "Module 1 Score"
 chartTitle = "Chart x Embellishment Type"
-saveFile = "./results/img/three-way-dummy.jpg"
+# saveFile = "./results/img/three-way-dummy.jpg"
+saveFile = "./results/img/three-way-mod1_score.jpg"
 # requires a directory called "r_plots" is already created in directory
 
 #ggsave(saveFile,width=8, height=6) #will only work after the ggplot code is run. wide

@@ -69,7 +69,8 @@
   function setGraphArray(gArr){
     let graphO, graphA, graphI;
     d3.json('modules/graphQuestions/data.json', function(err, d) {graphA = d})
-    d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
+    // d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
+    graphO = experimentr.graphOrder
     d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
     setTimeout(()=>{
       if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
@@ -158,7 +159,7 @@
   }
   function loadQuestion() {
     d3.select('#graphQInstructions').selectAll("*").remove();
-    d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
+    if (skip) {d3.select('#graphQInstructions').append("strong").text(storyData.title+" - "+storyData.embType)}
     d3.select('#graphQText').selectAll("*").remove();
     if (!lastGraph){
       d3.select('#graphQText').append('button')

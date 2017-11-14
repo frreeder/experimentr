@@ -14,6 +14,8 @@ print(keys)
 
 for k in keys:
     # print("k",k)
+    if 'isBWCount' in k: # do not count the counters for isBW
+        continue;
     users = client.hgetall(k)
     # https://stackoverflow.com/questions/15219858/how-to-store-a-complex-object-in-redis-using-redis-py
     for u in users:

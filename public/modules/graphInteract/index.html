@@ -13,6 +13,7 @@
 (function() {
   var skip = true; // Whether or not can click proceed without completing the module
   let mod4 = [] // The data being saved for the module
+  let tutTime = true; // If a tutorial is being done
 
   var stepSize = .005 // The steps for increasing/decreasing selected data values
   let changeAllSlices = true; // true: manipulate all pie slices, false: manipulate selected slice and adjacent ones
@@ -157,8 +158,11 @@
     // Loading the files
     let graphO, graphA, graphI
     d3.json('modules/graphQuestions/data.json', function(err, d) {graphA = d})
-    d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
+    // d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
     d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
+    graphO = experimentr.graphOrder
+    // console.log('graphO', graphO)
+
     // Do something after a few seconds / the data is loaded.
     setTimeout(()=>{
       if (graphO[0].isBW!=null)
@@ -167,6 +171,7 @@
       if (isInteract){
         // Set the graph array based on chart(graph) order saved from the first session.
         for (let i=0; i<graphO.length; i++){
+          // console.log('iGOL', graphO.length)
           gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
           // Set the chart and embellishment type to that of the first session.
           gArr[i].embType = graphO[i].embType
@@ -265,6 +270,8 @@
     experimentr.hideNext(); // Hides the next button
     experimentr.startTimer('graphInteract'); // Starts the timer for the entire module.
 
+    tutTime = true;
+
     getData(graphArray) // Get the data for all of the charts.
     console.log("GRAPH ARRAY", graphArray)
 
@@ -297,6 +304,7 @@
         .text('Proceed')
         .on('click',
           function(d) {
+            tutTime = false;
             loadData();
           });
     }, 1000)
@@ -354,7 +362,7 @@
 
   function loadQuestion() {
     d3.select('#graphIInstructions').selectAll("*").remove();
-    d3.select('#graphIInstructions').append("strong").text(storyData.title+" - "+storyData.embType)
+    if (skip) {d3.select('#graphIInstructions').append("strong").text(storyData.title+" - "+storyData.embType)}
     d3.select('#graphIText').selectAll("*").remove();
     if (!lastGraph){
       d3.select('#graphIText').append('button')
@@ -577,7 +585,10 @@
     // console.log("cha", chart.chartVertical)
     chart.chartVertical.attr("x1", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])}).attr("x2", (d)=>{return chart.xScale(d[storyData.interact.accessors[1]])})
 
-    mod4[graphCounter].inputData[0].userAnswer = bar[storyData.interact.accessors[1]]
+    if(!tutTime) {
+      mod4[graphCounter].inputData[0].userAnswer = bar[storyData.interact.accessors[1]]
+    }
+
   }
 
     // ----------------- END: MAKE BAR CHARTS ----------------------------//
@@ -884,7 +895,7 @@
     let p = storyData.interact.pointLoc
     // Save the pieSlice value
     // mod4[graphCounter].value = pieData[p][accessors[1]]
-    mod4[graphCounter].inputData[0].userAnswer = pieData[p][accessors[1]]
+    if (!tutTime){mod4[graphCounter].inputData[0].userAnswer = pieData[p][accessors[1]]}
 
     // create function to draw the arcs of the pie slices.
     var arc = d3.svg.arc().outerRadius(chart.pieArea.r - 10).innerRadius(0);
@@ -1326,7 +1337,7 @@
 
 
     // saving value, will change if interacted withs
-    if (mod4.length>0)
+    if (mod4.length>0 && !tutTime)
       // mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
       mod4[graphCounter].inputData.push({'userAnswer':lineData[pointLoc][accessors[1]]})
   }
@@ -1348,7 +1359,7 @@
 
     // saving value
     // mod4[graphCounter].value = lineData[pointLoc][accessors[1]]
-    mod4[graphCounter].inputData[0].userAnswer = lineData[pointLoc][accessors[1]]
+    if (!tutTime){mod4[graphCounter].inputData[0].userAnswer = lineData[pointLoc][accessors[1]]}
 
     for (let i = 0; i <2; i++){
       let y0 = i==0? chart.yScale(0) : chart.yScale.range()[1]

@@ -33,7 +33,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "In the U.S., what year had the highest number of crabs caught?",
+                    "question": "What year had the highest number of American Crabs globally caught?",
                     "choices": [
                         "2000",
                         "2003",
@@ -44,7 +44,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "In what year was the amount of crabs caught in the U.S. closest to 2006?",
+                    "question": "In what year was the amount of American Crabs globally caught closest to 2006?",
                     "choices": [
                         "2001",
                         "2007",
@@ -71,7 +71,7 @@
                     1528,
                     939
                 ],
-                "pointLoc": 7,
+                "pointLoc": 6,
                 "gridLines": [
                     2,
                     5,
@@ -705,7 +705,7 @@
                         "related": [
                             "Freeway Congestion",
                             "Rush Hour",
-                            "Commute Time"
+                            "Weekend Commute"
                         ],
                         "unrelated": [
                             "Banana Pudding Sales",

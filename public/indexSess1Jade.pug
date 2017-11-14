@@ -1,0 +1,25 @@
+doctype html
+
+html
+  meta(charset="utf-8")
+  head
+    title InfoSigns
+    script(src='/scripts/d3/d3.min.js')
+    script(src='experimentr.js')
+    link(rel="stylesheet" type="text/css" href="css/main.css")
+  body
+  style
+  script.
+    var inPID = '#{outPID}'
+    var inSeed = #{outSeed}
+    var inGO = JSON.parse(!{outGraphOrder})
+    //- console.log('inGO', [inGO], #{outGraphOrder})
+    experimentr.setPID(inPID)
+    experimentr.setSeed(inSeed)
+    experimentr.setIsBW(#{isBW})
+    experimentr.setGO(inGO)
+    experimentr.sequence([
+      'modules/consent',
+      'modules/graphQuestions',
+      'modules/debrief'
+    ]).start()

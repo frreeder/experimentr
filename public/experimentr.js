@@ -5,6 +5,8 @@ var experimentr = (function() {
     , mainDiv
     , data = {};
 
+  experimentr.graphOrder = []
+
   // Add a random postId for each new participant
   data.postId = (+new Date()).toString(36);
   // experimentr.post = (type)=>{
@@ -20,6 +22,40 @@ var experimentr = (function() {
   experimentr.data = function() {
     return data;
   };
+
+  // ---- Begin: UPDATES FOR INFOSIGNS ---- //
+
+  experimentr.setPID = function(inPID) {
+    data.pid = inPID
+    console.log('pidIS: ', data.pid)
+  }
+
+  experimentr.setSeed = function(inSeed) {
+    data.seed = inSeed
+  }
+
+  experimentr.setIsBW = function(inIsBW) {
+    if (inIsBW == true || inIsBW == false){
+      console.log('inIsBW', inIsBW)
+      // graphOrder = inGO
+      data.isBW = inIsBW
+    }
+  }
+
+  // experimentr.makeGO = function(){
+  //   d3.json('modules/graphQuestions/data.json', function(err, d) {
+  //
+  //   }
+  //   return graphO
+  // }
+
+  experimentr.setGO = function(inGO){
+    if (inGO!=null){
+      experimentr.graphOrder = inGO
+    }
+  }
+
+  // ---- End: UPDATES FOR INFOSIGNS ---- //
 
   // Starts the experiment by loading the first module
   experimentr.start = function() {
@@ -87,6 +123,24 @@ var experimentr = (function() {
       .post(JSON.stringify(data), function(err, res) {
         if(err) console.log(err);
       });
+  }
+
+  experimentr.countBW = function() {
+    console.log('data', data)
+    console.log('d', data.pid.split(':')[0], data.pid)
+    d3.xhr('/countBW')
+      .header("Content-Type", "application/json")
+      .post(JSON.stringify([data.pid.split(':')[0].toString()]), function(err, res) {
+        if(err) console.log(err);
+      });
+  }
+
+  experimentr.getPID = function() {
+    console.log('getPID')
+    d3.xhr('/pid')
+      .get(function(err, res){
+        console.log('the res is: ', res.response)
+      })
   }
 
   // Merges object o2 into o1.

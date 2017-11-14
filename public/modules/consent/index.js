@@ -19,6 +19,10 @@
 
     d3.select('#consentYes').on('click', function(){
       if (browser.name == "Firefox" || browser.name == "Chrome"){
+        data.browser_s1 = JSON.stringify(browser)
+        data.complete_s1 = false
+        data.complete_s2 = false
+        experimentr.addData(data);
         experimentr.next()
       } else {
         d3.select('#invalidBrowser').style('display', 'inline');
@@ -31,10 +35,7 @@
   function validate() {
     // This check will probably not be necessary in the future.
     if( data.workerId ) {
-      data.browser_s1 = JSON.stringify(browser)
-      data.complete_s1 = false
-      data.complete_s2 = false
-      experimentr.addData(data);
+      // experimentr.addData(data);
 
       if( workers.indexOf(data.workerId) == -1 ) {
         d3.select('#consentYes').attr('disabled', null);

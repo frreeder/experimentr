@@ -13,13 +13,13 @@
       "basePathBW": [],
       "questionBank": [
         {
-          "question": "In the U.S., what year had the highest number of crabs caught?",
+          "question": "What year had the highest number of American Crabs globally caught?",
           "choices": ["2000", "2003", "2005", "2010"],
           "answer": "2010",
           "key": "identify"
         },
         {
-          "question": "In what year was the amount of crabs caught in the U.S. closest to 2006?",
+          "question": "In what year was the amount of American Crabs globally caught closest to 2006?",
           "choices": ["2001", "2007", "2008", "2010"],
           "answer": "2008",
           "key": "compare"
@@ -32,7 +32,7 @@
           "imagePathBW": [],
           "dataPath": "",
           "imageDim": [],
-          "pointLoc": 7,
+          "pointLoc": 6,
           "gridLines": [2, 5, 0],
           "gridColor": ["grey", "grey"],
           "gridPadding": [0,0],
@@ -312,7 +312,7 @@
           "question": "Select the best description of the graph shown.",
           "choices": ["Freeway Congestion", "Rush Hour", "Distance Traveled to Work", "Smokey Mountain Visitors", "McDonald's Sales Revenue"],
           "sortedChoices": {
-            "related":["Freeway Congestion", "Rush Hour", "Commute Time"],
+            "related":["Freeway Congestion", "Rush Hour", "Weekend Commute"],
             "unrelated": ["Banana Pudding Sales", "Cable Viewership", "Heat Index"],
             "mix": ["Freeway Congestion", "Banana Pudding Sales", "Cable Viewership"]
           },
