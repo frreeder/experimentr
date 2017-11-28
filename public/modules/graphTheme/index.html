@@ -73,7 +73,7 @@
     graphO = experimentr.graphOrder
     d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
     setTimeout(()=>{
-      if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
+      // if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
       for (let i=0; i<graphO.length; i++){
         gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
         gArr[i].embType = graphO[i].embType
@@ -102,6 +102,8 @@
   function init() {
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
+
+    if(experimentr.isBW!=null){isBW = experimentr.isBW} else {isBW = isBW}
 
     setGraphArray(graphArray)
 

@@ -165,9 +165,9 @@
 
     // Do something after a few seconds / the data is loaded.
     setTimeout(()=>{
-      if (graphO[0].isBW!=null)
-        isBW = graphO[0].isBW
-      else {isBW = isBW}
+      // if (graphO[0].isBW!=null)
+      //   isBW = graphO[0].isBW
+      // else {isBW = isBW}
       if (isInteract){
         // Set the graph array based on chart(graph) order saved from the first session.
         for (let i=0; i<graphO.length; i++){
@@ -269,6 +269,8 @@
   function init() {
     experimentr.hideNext(); // Hides the next button
     experimentr.startTimer('graphInteract'); // Starts the timer for the entire module.
+
+    if(experimentr.isBW!=null){isBW = experimentr.isBW} else {isBW = isBW}
 
     tutTime = true;
 

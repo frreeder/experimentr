@@ -7,7 +7,7 @@ client = redis.StrictRedis(decode_responses=True)
 def main():
     for key in client.scan_iter():
         print('keyBef', key)
-        if key=="qTest:Alex" or 'iSigns:' in key or 'data:' in key:
+        if key=="qTest:Alex" or 'iSigns:' in key or 'data:' in key or 'isBWCount' in key:
             continue
         client.delete(key)
         # print ('key', key)

@@ -39,6 +39,7 @@ var experimentr = (function() {
       console.log('inIsBW', inIsBW)
       // graphOrder = inGO
       data.isBW = inIsBW
+      experimentr.isBW = inIsBW
     }
   }
 

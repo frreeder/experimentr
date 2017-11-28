@@ -293,9 +293,9 @@ def getMod_5(inData, chartInfo, headers):
 # --- End: GET SESSION2_mod5 SCORE AND TIME --- #
 # --- Begin: WRITE DATA TO CSV --- #
 
-def makeCSV(fileName, inData, headers, type):
+def makeCSV(filePath, fileName, inData, headers, type):
     # For loop to add the type to the headers... note: or do I need? .... don't do for now XD
-    with open('./results/csvFiles/'+fileName+'.csv', 'w') as f:
+    with open(filePath+fileName+'.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(headers)
         if len(inData)!=0:
@@ -308,7 +308,13 @@ def makeCSV(fileName, inData, headers, type):
 def main():
     # ----- GET PARTICIPANT DATA
     data = []
-    with open('./results/data2.json', 'r') as data_file:
+    # filePath = './results/data2.json'
+    filePath = './vmResults/JSONData/data2.json'
+
+    # csvFilePath = './results/csvFiles/'
+    csvFilePath = './vmResults/csvFiles/'
+
+    with open(filePath, 'r') as data_file:
         data = json.loads(data_file.read())
 
     # ----- GET ANSWER LIST
@@ -325,41 +331,41 @@ def main():
     csvNames = ['mod1_score', 'mod1_time']
 
     if len(s1_m1_score) != 0:
-        makeCSV(csvNames[0], s1_m1_score, headers, 'score')
-        makeCSV(csvNames[1], s1_m1_time, headers, 'time')
+        makeCSV(csvFilePath, csvNames[0], s1_m1_score, headers, 'score')
+        makeCSV(csvFilePath, csvNames[1], s1_m1_time, headers, 'time')
 
     s2_m3_score, s2_m3_time = getMod_1_3(data, chartInfo, headers, 'mod3')
     csvNames = ['mod3_score', 'mod3_time']
 
     if len(s2_m3_score) != 0:
-        makeCSV(csvNames[0], s2_m3_score, headers, 'score')
-        makeCSV(csvNames[1], s2_m3_time, headers, 'time')
+        makeCSV(csvFilePath, csvNames[0], s2_m3_score, headers, 'score')
+        makeCSV(csvFilePath, csvNames[1], s2_m3_time, headers, 'time')
 
     # I'm thinking of adding a csv file with a more detailed view of the charts... I don't know.
     s2_m2_score, s2_m2_time = getMod_2(data, chartInfo, headers)
     csvNames = ['mod2_score', 'mod2_time']
 
     if len(s2_m2_score) != 0:
-        makeCSV(csvNames[0], s2_m2_score, headers, 'score')
+        makeCSV(csvFilePath, csvNames[0], s2_m2_score, headers, 'score')
         # For the second module, there is really only one time....I think.
         newHeaders = headers[:2]
         newHeaders.append('time')
-        makeCSV(csvNames[1], np.array(s2_m2_time)[:, :3], newHeaders, 'time')
+        makeCSV(csvFilePath, csvNames[1], np.array(s2_m2_time)[:, :3], newHeaders, 'time')
 
     # Not saving values properly for line and pie...maybe bar? I dunno
     s2_m4_score, s2_m4_time = getMod_4(data, chartInfo, headers)
     csvNames = ['mod4_score', 'mod4_time']
 
     if len(s2_m4_score) != 0:
-        makeCSV(csvNames[0], s2_m4_score, headers, 'score')
-        makeCSV(csvNames[1], s2_m4_time, headers, 'time')
+        makeCSV(csvFilePath, csvNames[0], s2_m4_score, headers, 'score')
+        makeCSV(csvFilePath, csvNames[1], s2_m4_time, headers, 'time')
 
-    s2_m5_score, s2_m5_time = getMod_5(data, chartInfo, headers)
-    csvNames = ['mod5_score', 'mod5_time']
-
-    if len(s2_m5_score) != 0:
-        makeCSV(csvNames[0], s2_m5_score, headers, 'score')
-        makeCSV(csvNames[1], s2_m5_time, headers, 'time')
+    # s2_m5_score, s2_m5_time = getMod_5(data, chartInfo, headers)
+    # csvNames = ['mod5_score', 'mod5_time']
+    #
+    # if len(s2_m5_score) != 0:
+    #     makeCSV(csvFilePath, csvNames[0], s2_m5_score, headers, 'score')
+    #     makeCSV(csvFilePath, csvNames[1], s2_m5_time, headers, 'time')
 
     # Making a dummy file for analyis
     newData = []
@@ -369,7 +375,7 @@ def main():
         newData.append([i, isBW])
         for j in range(2, len(headers)):
             newData[i].append(random.randrange(5, 95))
-    makeCSV('dummyData_time', newData, headers, 'time')
+    makeCSV(csvFilePath, 'dummyData_time', newData, headers, 'time')
 
 if __name__ == "__main__":
     main()

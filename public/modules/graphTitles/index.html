@@ -71,7 +71,8 @@
     experimentr.startTimer('graphTitles');
     d3.json('modules/graphOrder.json', function(err, gO) {
       d3.json('modules/graphQuestions/graphImageList.json', function(err, d) {
-        if(gO[0].isBW!=null){isBW = gO[0].isBW} else {isBW = isBW}
+        // if(experimentr.graphOrder[0].isBW!=null){isBW = experimentr.graphOrder[0].isBW} else {isBW = isBW}
+        if(experimentr.isBW!=null){isBW = experimentr.isBW} else {isBW = isBW}
         // grabbing data from image list and putting into an array.
         for (let i in d){
           dropSel.push(i)

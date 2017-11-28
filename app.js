@@ -130,10 +130,15 @@ app.get('/', function(req, res){
     return;
   }
 
+  // console.log('pid', req.query.pid)
   // Create an ID based on pid
   if (req.query.pid.substring(0, 4)=="test"||req.query.pid==""){
     loopSuff = "qTest"
-    loopPID = loopSuff+":"+(+new Date()).toString(36)
+    let tID = req.query.pid.substring(4)
+    // console.log('tID', tID, req.query.pid)
+    if (tID == "") {loopPID = loopSuff+":"+(+new Date()).toString(36)} else {
+      loopPID = loopSuff+":"+tID
+    }
   } else if (req.query.pid.substring(0, 6) == 'iSigns'){
     loopSuff = "iSigns"
     loopPID = loopSuff+":"+req.query.pid.substring(7)
@@ -146,7 +151,7 @@ app.get('/', function(req, res){
   redisClient.exists(loopPID, function (err, exist){
     if(exist){ // The participant exists
       redisClient.hget(loopPID, "graphOrder", function(err, gO){ // get graphorder
-        if(gO==null){
+        if(gO==null){ // Rare case where participant exists but no information found, mainly encountered for testing purposes, should not for non-testing
           if (loopSuff!="qTest"||req.query.s==1){ // Session1 requested or needed if it isn't a test
             fs.writeFile('public/modules/graphOrder.json', '[{"isBW":'+isBWTemp+'}]', function(err) { // setting the graphorder to isBW so that a real graphorder can be created. If for some odd reason a participant exists but doens't have a graph order and it is not a test it is selecting isBW at random regardless of the isBWCount
               // var bwObj =[{"isBW": isBWTemp}]
@@ -154,7 +159,7 @@ app.get('/', function(req, res){
               bwObj[0].isBW = isBWTemp
               res.render(__dirname+"/public/indexSess1Jade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(JSON.stringify(bwObj)) })
             })
-          } else { // Make up graph order - Test Case; either session1 or session2
+          } else { // Make up graph order - Test Case; either session2 or testIndex
             fs.readFile('public/modules/graphOrderTest.json', 'utf8', function(err,data) {
               if (err) console.log(err);
               fs.writeFile('public/modules/graphOrder.json', data, function(err) {
@@ -170,7 +175,8 @@ app.get('/', function(req, res){
         } else { // A graph order file exist, use
           redisClient.hmget(loopPID, "complete_s1", "complete_s2", "isBW", function(err, comp){ // Check what sessions complete
             for(var i=0; i<comp.length; i++){ comp[i]=comp[i]=="true"?true:false }
-            if (comp[2] == null) {comp[2]=isBWTemp} //TODO: Check to make sure this is actually working
+            console.log('caseFoosh', isBWTemp, comp)
+            if (comp[2] == null || loopSuff == "qTest") {comp[2]=isBWTemp} //TODO: Check to make sure this is actually working
             if(comp[0]&&comp[1]){ // Completed
               res.render(__dirname+"/public/indexCompletedJade.pug")
             } else if (comp[0] || req.query.s==2){ //sess2
@@ -187,7 +193,7 @@ app.get('/', function(req, res){
       // Add getting the bwCount here ... not sure I would ever have to put this above if participant exists...
       redisClient.hmget('isBWCount_'+loopSuff, "isBW", "notIsBW", function(err, comp){
         console.log('isb', comp)
-        isBWTemp = comp[0]>comp[1]? false : true; // decide isBWTemp based on the server
+        if (loopSuff !="qTest") {isBWTemp = comp[0]>comp[1]? false : true;} // decide isBWTemp based on the server
         console.log('isBWTemp', isBWTemp)
         if (loopSuff!="qTest"||req.query.s==1){ // Session1 requested or needed
           fs.writeFile('public/modules/graphOrder.json', '[{"isBW":'+isBWTemp+'}]', function(err) {
@@ -203,7 +209,7 @@ app.get('/', function(req, res){
               if (req.query.s==2){ // Session2 requested
                 res.render(__dirname+"/public/indexSess2Jade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(data)})
               } else { // Using test index
-                console.log('test', data)
+                // console.log('test', data)
                 res.render(__dirname+"/public/indexTestJade.pug", {outPID: loopPID, outSeed: seed, isBW: isBWTemp, outGraphOrder: JSON.stringify(data)})
               }
             })

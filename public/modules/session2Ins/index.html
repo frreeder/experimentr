@@ -43,11 +43,13 @@
   browser = experimentr.get_browser_info()
   data={}
   experimentr.hideNext();
+  if(experimentr.isBW!=null){isBW = experimentr.isBW} else {isBW = isBW}
   // Read the graph order array to determine if session is black and white
   d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
   setTimeout(()=>{
     // Get the chart color
-    if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
+    console.log('gO', experimentr.graphOrder)
+    // if(experimentr.graphOrder[0].isBW!=null){isBW = experimentr.graphOrder[0].isBW} else {isBW = isBW}
 
     data.browser_s2 = JSON.stringify(browser)
     data.complete_s2 = false

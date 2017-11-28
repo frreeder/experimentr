@@ -67,7 +67,7 @@
 
   // Change this to match module one and make sure it's doing the right things
   function setGraphArray(gArr, graphO, graphA){
-    if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
+    // if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
     for (let i=0; i<graphO.length; i++){
       gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
       gArr[i].embType = graphO[i].embType
@@ -110,19 +110,20 @@
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
     d3.json('modules/graphOrder.json', function(err, gO){
-      dGO = experimentr.graphOrder
+      dGO = experimentr.graphOrder // Up here because used to contain isBW information
       // console.log('dGO', dGO)
       // Set d to something or change something to reference graphOrder
       d3.json('modules/graphQuestions/data.json', function(err, d) {
-        console.log('isBW?', isBW) // Needs to be here to make sure has been initialized.
+        // console.log('isBW?', isBW) // Needs to be here to make sure has been initialized.
         if (dGO.length==1){ // this is the first time the participant is doing mod1
-          isBW = dGO[0].isBW
+          // isBW = dGO[0].isBW
+          isBW = experimentr.isBW
           getRandomImageArray(d);
         } else if (dGO.length==0){ //there is no information
           isBW = isBW
           getRandomImageArray(d);
         } else { // participant has attempted, USE experimentr.graphOrder
-          // console.log('graphArray', dGO)
+          isBW = experimentr.isBW // This is currently not used because it is taken inside of setGraphArray as part of GraphOrder
           graphArray = []
           graphOrder = dGO
           setGraphArray(graphArray, dGO, d);

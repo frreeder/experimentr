@@ -1,144 +1,10 @@
 [
   {
-      "time_start_graphQuestions": 1509475024639,
-      "time_end_graphQuestions": 1509475335374,
-      "pid": "data:a1",
-      "time_start_experiment": 1509475024630,
-      "complete_s1": true,
-      "graphOrder": [
-          {
-              "chartType": "line",
-              "embType": "unrelated",
-              "key": "trafficCongestion",
-              "index": 4,
-              "isBW": true
-          },
-          {
-              "chartType": "bar",
-              "embType": "normal2",
-              "key": "themePark",
-              "index": 3,
-              "isBW": true
-          },
-          {
-              "chartType": "pie",
-              "embType": "unrelated2",
-              "key": "robbery",
-              "index": 5,
-              "isBW": true
-          },
-          {
-              "chartType": "pie",
-              "embType": "unrelated",
-              "key": "renewable",
-              "index": 4,
-              "isBW": true
-          },
-          {
-              "chartType": "pie",
-              "embType": "normal",
-              "key": "womenWork",
-              "index": 2,
-              "isBW": true
-          },
-          {
-              "chartType": "pie",
-              "embType": "embellished",
-              "key": "girlScouts",
-              "index": 1,
-              "isBW": true
-          },
-          {
-              "chartType": "line",
-              "embType": "unrelated2",
-              "key": "americanCrabsCaught",
-              "index": 5,
-              "isBW": true
-          },
-          {
-              "chartType": "line",
-              "embType": "embellished",
-              "key": "climateChange",
-              "index": 0,
-              "isBW": true
-          },
-          {
-              "chartType": "pie",
-              "embType": "normal2",
-              "key": "beauty",
-              "index": 3,
-              "isBW": true
-          },
-          {
-              "chartType": "line",
-              "embType": "normal",
-              "key": "fordFSeries",
-              "index": 2,
-              "isBW": true
-          },
-          {
-              "chartType": "bar",
-              "embType": "normal",
-              "key": "olympics",
-              "index": 2,
-              "isBW": true
-          },
-          {
-              "chartType": "bar",
-              "embType": "embellished",
-              "key": "artwork",
-              "index": 0,
-              "isBW": true
-          },
-          {
-              "chartType": "bar",
-              "embType": "embellished",
-              "key": "developers",
-              "index": 1,
-              "isBW": true
-          },
-          {
-              "chartType": "pie",
-              "embType": "embellished",
-              "key": "starWars",
-              "index": 0,
-              "isBW": true
-          },
-          {
-              "chartType": "bar",
-              "embType": "unrelated",
-              "key": "majorSalaries",
-              "index": 4,
-              "isBW": true
-          },
-          {
-              "chartType": "bar",
-              "embType": "unrelated2",
-              "key": "unemploymentRate",
-              "index": 5,
-              "isBW": true
-          },
-          {
-              "chartType": "line",
-              "embType": "embellished",
-              "key": "manuEmployment",
-              "index": 1,
-              "isBW": true
-          },
-          {
-              "chartType": "line",
-              "embType": "normal2",
-              "key": "gasolinePrices",
-              "index": 3,
-              "isBW": true
-          }
-      ],
-      "time_diff_experiment": 312235,
-      "postId": "j9fygf78",
-      "comments": "a1-s1",
-      "time_end_experiment": 1509475336865,
-      "time_diff_graphQuestions": 310735,
-      "timestamp": 1509475341966,
+      "comments": "The Experiment was about extracting data from a graph when a specific target is to be found out,or a similarity with a target is to be found out. Also the graphs were presented with various images.I think that was a distraction from the traditional graphs.",
+      "browser_s1": {
+          "version": "56",
+          "name": "Firefox"
+      },
       "mod1": [
           {
               "key": "line",
@@ -152,248 +18,8 @@
                       "userAnswer": "August"
                   }
               ],
-              "timeQStart": 1509475031479,
-              "timeQEnd": 1509475044238
-          },
-          {
-              "key": "bar",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "Universal Studios"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Animal Kingdom"
-                  }
-              ],
-              "timeQStart": 1509475046054,
-              "timeQEnd": 1509475051221
-          },
-          {
-              "key": "pie",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "Banks"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Commercial Buildings"
-                  }
-              ],
-              "timeQStart": 1509475051958,
-              "timeQEnd": 1509475059821
-          },
-          {
-              "key": "pie",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "Hydro Electric"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Wind Power"
-                  }
-              ],
-              "timeQStart": 1509475060613,
-              "timeQEnd": 1509475071164
-          },
-          {
-              "key": "pie",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "40.6%"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Service and Retail"
-                  }
-              ],
-              "timeQStart": 1509475071877,
-              "timeQEnd": 1509475092228
-          },
-          {
-              "key": "pie",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "11%"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Peanut Butter Sandwiches"
-                  }
-              ],
-              "timeQStart": 1509475092964,
-              "timeQEnd": 1509475101540
-          },
-          {
-              "key": "line",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "2010"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "2008"
-                  }
-              ],
-              "timeQStart": 1509475102644,
-              "timeQEnd": 1509475156306
-          },
-          {
-              "key": "line",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "2008"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "2004"
-                  }
-              ],
-              "timeQStart": 1509475157586,
-              "timeQEnd": 1509475178041
-          },
-          {
-              "key": "pie",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "Skin Care"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Toiletries"
-                  }
-              ],
-              "timeQStart": 1509475178889,
-              "timeQEnd": 1509475199000
-          },
-          {
-              "key": "line",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "2009"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "2005"
-                  }
-              ],
-              "timeQStart": 1509475200577,
-              "timeQEnd": 1509475226081
-          },
-          {
-              "key": "bar",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "40%"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Athens 2004"
-                  }
-              ],
-              "timeQStart": 1509475227416,
-              "timeQEnd": 1509475236047
-          },
-          {
-              "key": "bar",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "Garrcon a la pipe"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "L'Homme qui Marche, I"
-                  }
-              ],
-              "timeQStart": 1509475237359,
-              "timeQEnd": 1509475243591
-          },
-          {
-              "key": "bar",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "Flash"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Blackberry"
-                  }
-              ],
-              "timeQStart": 1509475244415,
-              "timeQEnd": 1509475259358
-          },
-          {
-              "key": "pie",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "45.5%"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Video Games"
-                  }
-              ],
-              "timeQStart": 1509475261166,
-              "timeQEnd": 1509475273446
-          },
-          {
-              "key": "bar",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "165,000$"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "Chemical Engineering"
-                  }
-              ],
-              "timeQStart": 1509475275318,
-              "timeQEnd": 1509475283597
-          },
-          {
-              "key": "bar",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "Spain"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "France"
-                  }
-              ],
-              "timeQStart": 1509475284350,
-              "timeQEnd": 1509475299852
-          },
-          {
-              "key": "line",
-              "inputData": [
-                  {
-                      "questionType": "identify",
-                      "userAnswer": "15 million"
-                  },
-                  {
-                      "questionType": "compare",
-                      "userAnswer": "2006"
-                  }
-              ],
-              "timeQStart": 1509475300668,
-              "timeQEnd": 1509475319627
+              "timeQStart": 1510703407914,
+              "timeQEnd": 1510703446399
           },
           {
               "key": "line",
@@ -407,9 +33,389 @@
                       "userAnswer": "February 2012"
                   }
               ],
-              "timeQStart": 1509475320668,
-              "timeQEnd": 1509475335373
+              "timeQStart": 1510703451410,
+              "timeQEnd": 1510703520142
+          },
+          {
+              "key": "bar",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "Garrcon a la pipe"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "L'Homme qui Marche, I"
+                  }
+              ],
+              "timeQStart": 1510703525149,
+              "timeQEnd": 1510703553337
+          },
+          {
+              "key": "bar",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "40%"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Athens 2004"
+                  }
+              ],
+              "timeQStart": 1510703558342,
+              "timeQEnd": 1510703587253
+          },
+          {
+              "key": "pie",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "25%"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Peanut Butter Sandwiches"
+                  }
+              ],
+              "timeQStart": 1510703592263,
+              "timeQEnd": 1510703616765
+          },
+          {
+              "key": "bar",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "Spain"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "France"
+                  }
+              ],
+              "timeQStart": 1510703621771,
+              "timeQEnd": 1510703638021
+          },
+          {
+              "key": "pie",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "Hydro Electric"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Wind Power"
+                  }
+              ],
+              "timeQStart": 1510703643034,
+              "timeQEnd": 1510703672904
+          },
+          {
+              "key": "pie",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "Banks"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Commercial Buildings"
+                  }
+              ],
+              "timeQStart": 1510703677915,
+              "timeQEnd": 1510703708148
+          },
+          {
+              "key": "bar",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "165,000$"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Chemical Engineering"
+                  }
+              ],
+              "timeQStart": 1510703713155,
+              "timeQEnd": 1510703740843
+          },
+          {
+              "key": "pie",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "40.6%"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Health and Wellness"
+                  }
+              ],
+              "timeQStart": 1510703745848,
+              "timeQEnd": 1510703778263
+          },
+          {
+              "key": "line",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "10 million"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "2006"
+                  }
+              ],
+              "timeQStart": 1510703783277,
+              "timeQEnd": 1510703821751
+          },
+          {
+              "key": "pie",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "45.5%"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Video Games"
+                  }
+              ],
+              "timeQStart": 1510703826755,
+              "timeQEnd": 1510703844147
+          },
+          {
+              "key": "bar",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "Flash"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Blackberry"
+                  }
+              ],
+              "timeQStart": 1510703849155,
+              "timeQEnd": 1510703862418
+          },
+          {
+              "key": "line",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "2008"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "2004"
+                  }
+              ],
+              "timeQStart": 1510703867423,
+              "timeQEnd": 1510703894606
+          },
+          {
+              "key": "pie",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "Skin Care"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Toiletries"
+                  }
+              ],
+              "timeQStart": 1510703899621,
+              "timeQEnd": 1510703915630
+          },
+          {
+              "key": "bar",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "Universal Studios"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "Animal Kingdom"
+                  }
+              ],
+              "timeQStart": 1510703920634,
+              "timeQEnd": 1510703942718
+          },
+          {
+              "key": "line",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "2010"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "2008"
+                  }
+              ],
+              "timeQStart": 1510703947731,
+              "timeQEnd": 1510703986489
+          },
+          {
+              "key": "line",
+              "inputData": [
+                  {
+                      "questionType": "identify",
+                      "userAnswer": "2009"
+                  },
+                  {
+                      "questionType": "compare",
+                      "userAnswer": "2005"
+                  }
+              ],
+              "timeQStart": 1510703991494,
+              "timeQEnd": 1510704007906
           }
-      ]
+      ],
+      "time_diff_experiment": 633285,
+      "complete_s1": true,
+      "pid": "data:500",
+      "time_end_graphQuestions": 1510704007909,
+      "graphOrder": [
+          {
+              "key": "trafficCongestion",
+              "embType": "embellished",
+              "isBW": false,
+              "index": 1,
+              "chartType": "line"
+          },
+          {
+              "key": "gasolinePrices",
+              "embType": "unrelated2",
+              "isBW": false,
+              "index": 5,
+              "chartType": "line"
+          },
+          {
+              "key": "artwork",
+              "embType": "unrelated2",
+              "isBW": false,
+              "index": 5,
+              "chartType": "bar"
+          },
+          {
+              "key": "olympics",
+              "embType": "embellished",
+              "isBW": false,
+              "index": 0,
+              "chartType": "bar"
+          },
+          {
+              "key": "girlScouts",
+              "embType": "embellished",
+              "isBW": false,
+              "index": 0,
+              "chartType": "pie"
+          },
+          {
+              "key": "unemploymentRate",
+              "embType": "unrelated",
+              "isBW": false,
+              "index": 4,
+              "chartType": "bar"
+          },
+          {
+              "key": "renewable",
+              "embType": "embellished",
+              "isBW": false,
+              "index": 1,
+              "chartType": "pie"
+          },
+          {
+              "key": "robbery",
+              "embType": "unrelated",
+              "isBW": false,
+              "index": 4,
+              "chartType": "pie"
+          },
+          {
+              "key": "majorSalaries",
+              "embType": "normal",
+              "isBW": false,
+              "index": 2,
+              "chartType": "bar"
+          },
+          {
+              "key": "womenWork",
+              "embType": "normal2",
+              "isBW": false,
+              "index": 3,
+              "chartType": "pie"
+          },
+          {
+              "key": "manuEmployment",
+              "embType": "unrelated",
+              "isBW": false,
+              "index": 4,
+              "chartType": "line"
+          },
+          {
+              "key": "starWars",
+              "embType": "unrelated2",
+              "isBW": false,
+              "index": 5,
+              "chartType": "pie"
+          },
+          {
+              "key": "developers",
+              "embType": "embellished",
+              "isBW": false,
+              "index": 1,
+              "chartType": "bar"
+          },
+          {
+              "key": "climateChange",
+              "embType": "normal",
+              "isBW": false,
+              "index": 2,
+              "chartType": "line"
+          },
+          {
+              "key": "beauty",
+              "embType": "normal",
+              "isBW": false,
+              "index": 2,
+              "chartType": "pie"
+          },
+          {
+              "key": "themePark",
+              "embType": "normal2",
+              "isBW": false,
+              "index": 3,
+              "chartType": "bar"
+          },
+          {
+              "key": "americanCrabsCaught",
+              "embType": "embellished",
+              "isBW": false,
+              "index": 0,
+              "chartType": "line"
+          },
+          {
+              "key": "fordFSeries",
+              "embType": "normal2",
+              "isBW": false,
+              "index": 3,
+              "chartType": "line"
+          }
+      ],
+      "workerId": "Samia Kabir",
+      "time_start_graphQuestions": 1510703387478,
+      "time_end_experiment": 1510704008751,
+      "time_diff_graphQuestions": 620431,
+      "time_start_experiment": 1510703375466,
+      "postId": "ja09s8rl",
+      "complete_s2": false,
+      "timestamp": 1510704209104
   }
 ]
