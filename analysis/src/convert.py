@@ -63,6 +63,7 @@ def getMod_1_3(inData, chartInfo, headers, inModName):
             continue
         if not inData[i]['complete_s2'] and inModName == 'mod3':
             continue
+        # print('inModName', inData[i])
         # Set the array by using headers to determine lengths
         scoreData.append([0]*len(headers))
         timeData.append([0]*len(headers))

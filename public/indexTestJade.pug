@@ -15,6 +15,7 @@ html
     var inGO = JSON.parse(!{outGraphOrder})
     experimentr.setPID(inPID)
     experimentr.setGO(inGO)
+    experimentr.setIsBW(#{isBW})
     experimentr.setSeed(inSeed)
     experimentr.sequence([
       // 'modules/session2Ins',
@@ -23,7 +24,7 @@ html
       // 'modules/consent',
       // 'modules/graphCheck',
       //- 'modules/graphAnalysis',
-      //- 'modules/graphInteract',
+      'modules/graphInteract',
       'modules/graphTheme',
       // 'modules/graphListQuestions',
       'modules/debrief'

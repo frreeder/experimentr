@@ -11,7 +11,7 @@
 
 <script>
 (function() {
-  var skip = true; // Whether or not can click proceed without completing the module
+  var skip = false; // Whether or not can click proceed without completing the module
   let mod4 = [] // The data being saved for the module
   let tutTime = true; // If a tutorial is being done
 
@@ -78,7 +78,7 @@
   var data = {}
     , graphCounter = 0 // Count of the current chart
     , lastGraph = false // boolean for whether or not the last chart
-    , isValid = false // Will not be able to PROCEED if !skip and !isValid
+    , isValid = false // Will not be able to PROCEED if !skip and !isValid, currenlty not being used. 
     , graphArray = [] // The array of all the chart data to create the charts.
     , storyData; // The current chart data
 
@@ -315,7 +315,7 @@
   // ----------------- BEGIN: LOAD CHART INFORMATION ----------------------------//
 
   function loadData() {
-    isValid = false
+    isValid = true
 
     if (graphCounter == graphArray.length-1){
         lastGraph = true;

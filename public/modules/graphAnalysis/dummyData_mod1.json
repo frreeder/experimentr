@@ -1,13 +1,20 @@
 [
   {
-      "comments": "The Experiment was about extracting data from a graph when a specific target is to be found out,or a similarity with a target is to be found out. Also the graphs were presented with various images.I think that was a distraction from the traditional graphs.",
-      "browser_s1": {
+      "pid": "data:500",
+      "browser_s2": {
           "version": "56",
           "name": "Firefox"
       },
+      "complete_s2": false,
+      "workerId": "Samia Kabir",
+      "postId": "ja1dce8a",
+      "complete_s1": true,
+      "time_end_graphQuestions": 1510704007909,
+      "time_diff_graphQuestions": 620431,
       "mod1": [
           {
               "key": "line",
+              "timeQStart": 1510703407914,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -18,11 +25,11 @@
                       "userAnswer": "August"
                   }
               ],
-              "timeQStart": 1510703407914,
               "timeQEnd": 1510703446399
           },
           {
               "key": "line",
+              "timeQStart": 1510703451410,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -33,11 +40,11 @@
                       "userAnswer": "February 2012"
                   }
               ],
-              "timeQStart": 1510703451410,
               "timeQEnd": 1510703520142
           },
           {
               "key": "bar",
+              "timeQStart": 1510703525149,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -48,11 +55,11 @@
                       "userAnswer": "L'Homme qui Marche, I"
                   }
               ],
-              "timeQStart": 1510703525149,
               "timeQEnd": 1510703553337
           },
           {
               "key": "bar",
+              "timeQStart": 1510703558342,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -63,11 +70,11 @@
                       "userAnswer": "Athens 2004"
                   }
               ],
-              "timeQStart": 1510703558342,
               "timeQEnd": 1510703587253
           },
           {
               "key": "pie",
+              "timeQStart": 1510703592263,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -78,11 +85,11 @@
                       "userAnswer": "Peanut Butter Sandwiches"
                   }
               ],
-              "timeQStart": 1510703592263,
               "timeQEnd": 1510703616765
           },
           {
               "key": "bar",
+              "timeQStart": 1510703621771,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -93,11 +100,11 @@
                       "userAnswer": "France"
                   }
               ],
-              "timeQStart": 1510703621771,
               "timeQEnd": 1510703638021
           },
           {
               "key": "pie",
+              "timeQStart": 1510703643034,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -108,11 +115,11 @@
                       "userAnswer": "Wind Power"
                   }
               ],
-              "timeQStart": 1510703643034,
               "timeQEnd": 1510703672904
           },
           {
               "key": "pie",
+              "timeQStart": 1510703677915,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -123,11 +130,11 @@
                       "userAnswer": "Commercial Buildings"
                   }
               ],
-              "timeQStart": 1510703677915,
               "timeQEnd": 1510703708148
           },
           {
               "key": "bar",
+              "timeQStart": 1510703713155,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -138,11 +145,11 @@
                       "userAnswer": "Chemical Engineering"
                   }
               ],
-              "timeQStart": 1510703713155,
               "timeQEnd": 1510703740843
           },
           {
               "key": "pie",
+              "timeQStart": 1510703745848,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -153,11 +160,11 @@
                       "userAnswer": "Health and Wellness"
                   }
               ],
-              "timeQStart": 1510703745848,
               "timeQEnd": 1510703778263
           },
           {
               "key": "line",
+              "timeQStart": 1510703783277,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -168,11 +175,11 @@
                       "userAnswer": "2006"
                   }
               ],
-              "timeQStart": 1510703783277,
               "timeQEnd": 1510703821751
           },
           {
               "key": "pie",
+              "timeQStart": 1510703826755,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -183,11 +190,11 @@
                       "userAnswer": "Video Games"
                   }
               ],
-              "timeQStart": 1510703826755,
               "timeQEnd": 1510703844147
           },
           {
               "key": "bar",
+              "timeQStart": 1510703849155,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -198,11 +205,11 @@
                       "userAnswer": "Blackberry"
                   }
               ],
-              "timeQStart": 1510703849155,
               "timeQEnd": 1510703862418
           },
           {
               "key": "line",
+              "timeQStart": 1510703867423,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -213,11 +220,11 @@
                       "userAnswer": "2004"
                   }
               ],
-              "timeQStart": 1510703867423,
               "timeQEnd": 1510703894606
           },
           {
               "key": "pie",
+              "timeQStart": 1510703899621,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -228,11 +235,11 @@
                       "userAnswer": "Toiletries"
                   }
               ],
-              "timeQStart": 1510703899621,
               "timeQEnd": 1510703915630
           },
           {
               "key": "bar",
+              "timeQStart": 1510703920634,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -243,11 +250,11 @@
                       "userAnswer": "Animal Kingdom"
                   }
               ],
-              "timeQStart": 1510703920634,
               "timeQEnd": 1510703942718
           },
           {
               "key": "line",
+              "timeQStart": 1510703947731,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -258,11 +265,11 @@
                       "userAnswer": "2008"
                   }
               ],
-              "timeQStart": 1510703947731,
               "timeQEnd": 1510703986489
           },
           {
               "key": "line",
+              "timeQStart": 1510703991494,
               "inputData": [
                   {
                       "questionType": "identify",
@@ -273,149 +280,146 @@
                       "userAnswer": "2005"
                   }
               ],
-              "timeQStart": 1510703991494,
               "timeQEnd": 1510704007906
           }
       ],
-      "time_diff_experiment": 633285,
-      "complete_s1": true,
-      "pid": "data:500",
-      "time_end_graphQuestions": 1510704007909,
+      "browser_s1": {
+          "version": "56",
+          "name": "Firefox"
+      },
+      "comments": "The Experiment was about extracting data from a graph when a specific target is to be found out,or a similarity with a target is to be found out. Also the graphs were presented with various images.I think that was a distraction from the traditional graphs.",
+      "time_start_graphQuestions": 1510703387478,
+      "timestamp": 1510769897258,
       "graphOrder": [
           {
+              "index": 1,
+              "isBW": false,
               "key": "trafficCongestion",
               "embType": "embellished",
-              "isBW": false,
-              "index": 1,
               "chartType": "line"
           },
           {
+              "index": 5,
+              "isBW": false,
               "key": "gasolinePrices",
               "embType": "unrelated2",
-              "isBW": false,
-              "index": 5,
               "chartType": "line"
           },
           {
+              "index": 5,
+              "isBW": false,
               "key": "artwork",
               "embType": "unrelated2",
-              "isBW": false,
-              "index": 5,
               "chartType": "bar"
           },
           {
+              "index": 0,
+              "isBW": false,
               "key": "olympics",
               "embType": "embellished",
-              "isBW": false,
-              "index": 0,
               "chartType": "bar"
           },
           {
+              "index": 0,
+              "isBW": false,
               "key": "girlScouts",
               "embType": "embellished",
-              "isBW": false,
-              "index": 0,
               "chartType": "pie"
           },
           {
+              "index": 4,
+              "isBW": false,
               "key": "unemploymentRate",
               "embType": "unrelated",
-              "isBW": false,
-              "index": 4,
               "chartType": "bar"
           },
           {
+              "index": 1,
+              "isBW": false,
               "key": "renewable",
               "embType": "embellished",
-              "isBW": false,
-              "index": 1,
               "chartType": "pie"
           },
           {
+              "index": 4,
+              "isBW": false,
               "key": "robbery",
               "embType": "unrelated",
-              "isBW": false,
-              "index": 4,
               "chartType": "pie"
           },
           {
+              "index": 2,
+              "isBW": false,
               "key": "majorSalaries",
               "embType": "normal",
-              "isBW": false,
-              "index": 2,
               "chartType": "bar"
           },
           {
+              "index": 3,
+              "isBW": false,
               "key": "womenWork",
               "embType": "normal2",
-              "isBW": false,
-              "index": 3,
               "chartType": "pie"
           },
           {
+              "index": 4,
+              "isBW": false,
               "key": "manuEmployment",
               "embType": "unrelated",
-              "isBW": false,
-              "index": 4,
               "chartType": "line"
           },
           {
+              "index": 5,
+              "isBW": false,
               "key": "starWars",
               "embType": "unrelated2",
-              "isBW": false,
-              "index": 5,
               "chartType": "pie"
           },
           {
+              "index": 1,
+              "isBW": false,
               "key": "developers",
               "embType": "embellished",
-              "isBW": false,
-              "index": 1,
               "chartType": "bar"
           },
           {
+              "index": 2,
+              "isBW": false,
               "key": "climateChange",
               "embType": "normal",
-              "isBW": false,
-              "index": 2,
               "chartType": "line"
           },
           {
+              "index": 2,
+              "isBW": false,
               "key": "beauty",
               "embType": "normal",
-              "isBW": false,
-              "index": 2,
               "chartType": "pie"
           },
           {
+              "index": 3,
+              "isBW": false,
               "key": "themePark",
               "embType": "normal2",
-              "isBW": false,
-              "index": 3,
               "chartType": "bar"
           },
           {
+              "index": 0,
+              "isBW": false,
               "key": "americanCrabsCaught",
               "embType": "embellished",
-              "isBW": false,
-              "index": 0,
               "chartType": "line"
           },
           {
+              "index": 3,
+              "isBW": false,
               "key": "fordFSeries",
               "embType": "normal2",
-              "isBW": false,
-              "index": 3,
               "chartType": "line"
           }
       ],
-      "workerId": "Samia Kabir",
-      "time_start_graphQuestions": 1510703387478,
+      "time_start_experiment": 1510769820720,
       "time_end_experiment": 1510704008751,
-      "time_diff_graphQuestions": 620431,
-      "time_start_experiment": 1510703375466,
-      "postId": "ja09s8rl",
-      "complete_s2": false,
-      "timestamp": 1510704209104
+      "time_diff_experiment": 633285
   }
 ]
