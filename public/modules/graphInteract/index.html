@@ -78,7 +78,7 @@
   var data = {}
     , graphCounter = 0 // Count of the current chart
     , lastGraph = false // boolean for whether or not the last chart
-    , isValid = false // Will not be able to PROCEED if !skip and !isValid, currenlty not being used. 
+    , isValid = true // Will not be able to PROCEED if !skip and !isValid, currenlty not being used.
     , graphArray = [] // The array of all the chart data to create the charts.
     , storyData; // The current chart data
 
@@ -321,7 +321,6 @@
         lastGraph = true;
     }
     storyData = graphArray[graphCounter];
-    clearTimeout(chart.timer);
     loadImage();
   }
 
@@ -376,6 +375,8 @@
               mod4[graphCounter].timeQEnd=new Date().getTime()
               d3.select('#graphIVerification').selectAll("*").remove()
               graphCounter++;
+              clearTimeout(chart.timer); // In case there were pending chart changes, stop them.
+              validate(); // This should send to the server.
               loadData();
             }
           });
@@ -385,6 +386,7 @@
         mod4[graphCounter].timeQEnd=new Date().getTime()
         validate()
       }
+      experimentr.release();
       experimentr.showNext();
     }
   }
@@ -1411,7 +1413,6 @@
       data.mod4=JSON.stringify(mod4)
       console.log(JSON.parse(data.mod4))
       experimentr.addData(data);
-      experimentr.release();
     // }
   }
 }());
