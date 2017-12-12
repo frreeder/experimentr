@@ -1,21 +1,33 @@
 
 <div id="demographics">
 <p id="demoinstr">
-Thank you! The experiment is almost complete. Please fill out the following demographics form.
+Please fill out the following demographics form.
 </p>
 
-<div id="age">Your age:
+<!-- choices.append('label')
+  .text(function(d) { return d; })
+  .attr("for", (d,j)=>{return "radio"+i+"_"+j}) -->
+
+<div id="age"><b>Your age (years):</b>
     <div id="ages">
-        <input type="radio" id="a1" name="age" value="18-25"> 18-25
-        <input type="radio" id="a2" name="age" value="25-39"> 25-39
-        <input type="radio" id="a3" name="age" value="40-49"> 40-49
-        <input type="radio" id="a4" name="age" value="50-59"> 50-59
-        <input type="radio" id="a5" name="age" value="60+"> 60+
-        <input type="radio" id="a6" name="age" value="Unspecified"> Unspecified
+        <input name="age" type="text" name="compHours" value="" />
+        <text class="ageText" >Please enter a valid number</text>
+        <!-- <input type="radio" id="a1" name="age" value="18-25">
+        <label class="demo" for='a1'>18-25
+        <input type="radio" id="a2" name="age" value="25-39">
+        <label class="demo" for='a2'>25-39
+        <input type="radio" id="a3" name="age" value="40-49">
+        <label class="demo" for='a3'>40-49
+        <input type="radio" id="a4" name="age" value="50-59">
+        <label class="demo" for='a4'>50-59
+        <input type="radio" id="a5" name="age" value="60+">
+        <label class="demo" for='a5'>60+
+        <input type="radio" id="a6" name="age" value="Unspecified">
+        <label class="demo" for='a6'>Unspecified -->
     </div>
 </div>
 <br>
-<div id="sex">Your gender:
+<div id="sex"><b>Your gender:</b>
     <div id="sexes">
         <input type="radio" id="s1" name="sex" value="Male"> Male
         <input type="radio" id="s2" name="sex" value="Female"> Female
@@ -23,60 +35,242 @@ Thank you! The experiment is almost complete. Please fill out the following demo
     </div>
 </div>
 <br>
-<div id="degree">Highest degree obtained:
+<div id="degree"><b>Highest degree obtained:</b>
     <div id="degrees">
-        <input type="radio" id="d1" name="degree" value="High School"> High School
-        <input type="radio" id="d2" name="degree" value="Bachelors"> Bachelors
-        <input type="radio" id="d3" name="degree" value="Masters"> Masters
-        <input type="radio" id="d4" name="degree" value="PhD"> PhD
-        <input type="radio" id="d5" name="degree" value="Other"> Other
+        <input type="radio" id="d1" name="degree" value="High School">
+        <label class="demo" for='d1'>High School
+        <input type="radio" id="d2" name="degree" value="Bachelors">
+        <label class="demo" for='d2'>Bachelors
+        <input type="radio" id="d3" name="degree" value="Masters">
+        <label class="demo" for='d3'>Masters
+        <input type="radio" id="d4" name="degree" value="PhD">
+        <label class="demo" for='d4'>PhD
+        <input type="radio" id="d5" name="degree" value="Other">
+        <label class="demo" for='d5'>Other
     </div>
 </div>
 <br>
-<div id="monitor">Your monitor size is closest to:
+<div id="major"><b>Major/Degree specialization (NA - Not Applicable):</b>
+    <div id="major">
+      <input name="major" type="text" name="message" value="" />
+      <!-- <input type="button" onclick="DoSubmit();" /> -->
+    </div>
+</div>
+<br>
+<div id="monitor"><b>Your monitor size is closest to:</b>
     <div id="monitors">
-        <input type="radio" id="m4" name="monitor" value="9 or smaller"> 9" or smaller
-        <input type="radio" id="m4" name="monitor" value=11> 11"
-        <input type="radio" id="m4" name="monitor" value=13> 13"
-        <input type="radio" id="m4" name="monitor" value=15> 15"
-        <input type="radio" id="m4" name="monitor" value=17> 17"
-        <input type="radio" id="m4" name="monitor" value=19> 19"
-        <input type="radio" id="m4" name="monitor" value=21> 21"
-        <input type="radio" id="m5" name="monitor" value="23 or larger"> 23" or larger
-        <input type="radio" id="m5" name="monitor" value="dontknow"> I'm not sure
+        <input type="radio" id="m1" name="monitor" value="9 or smaller">
+        <label class="demo" for='m1'>9" or smaller
+        <input type="radio" id="m2" name="monitor" value=11>
+        <label class="demo" for='m2'>11"
+        <input type="radio" id="m3" name="monitor" value=13>
+        <label class="demo" for='m3'>13"
+        <input type="radio" id="m4" name="monitor" value=15>
+        <label class="demo" for='m4'>15"
+        <input type="radio" id="m5" name="monitor" value=17>
+        <label class="demo" for='m5'>17"
+        <input type="radio" id="m6" name="monitor" value=19>
+        <label class="demo" for='m6'>19"
+        <input type="radio" id="m7" name="monitor" value=21>
+        <label class="demo" for='m7'>21"
+        <input type="radio" id="m8" name="monitor" value="23 or larger">
+        <label class="demo" for='m8'>23" or larger
+        <input type="radio" id="m9" name="monitor" value="dontknow">
+        <label class="demo" for='m9'>I'm not sure
     </div>
 </div>
 <br>
+<div id="colorBlindness"><b>Do you have any known color blindness?</b>
+    <div id="colorBlindness">
+        <input type="radio" id="cB1" name="colorBlindness" value="true">
+        <label class="demo" for='cB1'>Yes
+        <input type="radio" id="cB2" name="colorBlindness" value="false">
+        <label class="demo" for='cB2'>No
+    </div>
+</div>
+<br>
+<div id="compHours"><b>How many hours a week do you use computers?</b>
+    <div id="compHours">
+      <input name="compHours" type="text" name="compHours" value="" />
+      <text class="compHoursText" >Please enter a valid number</text>
+      <!-- <input type="button" onclick="DoSubmit();" /> -->
+    </div>
+</div>
+<br>
+<div id="dataAnEx"><b>How would you rate your experience with data analysis, including numerical inspection or descriptive statistics?</b>
+    <div id="dataAnEx">
+      <input name="dataAnEx" type="range" list="tickmarks">
+        <datalist id="tickmarks">
+          <option value="0">
+          <option value="10">
+          <option value="20">
+          <option value="30">
+          <option value="40">
+          <option value="50">
+          <option value="60">
+          <option value="70">
+          <option value="80">
+          <option value="90">
+          <option value="100">
+        </datalist>
+        <text class="dataAnExText" >5</text>
+      </input>
+    </div>
+</div>
+<br>
+<div id="infoVisEx"><b>How would you rate your experience with information visualization?</b>
+    <div id="infoVisEx">
+      <input name="infoVisEx" type="range" list="tickmarks">
+        <datalist id="tickmarks">
+          <option value="0">
+          <option value="10">
+          <option value="20">
+          <option value="30">
+          <option value="40">
+          <option value="50">
+          <option value="60">
+          <option value="70">
+          <option value="80">
+          <option value="90">
+          <option value="100">
+        </datalist>
+        <text class="infoVisExText" >5</text>
+      </input>
+    </div>
+</div>
+<br>
+<div id='submitB'>
+  <div id="submitB">
+    <button name="submitB" type="button" value="Submit">Submit</button>
+    </br>
+    <text class="unfinished" >Please answer all questions.</text>
+  </div>
+</div>
+</br>
 </div>
 
-<script> 
+<script>
+  function DoSubmit(){
+    // var data = {};
+    //
+    // d3.selectAll('input')
+    // .filter(function(d) { return this.name === 'major' ? this : null; })
+    // .each(function(){modDemo.major = this.value})
+    // // .on('change', function() { modDemo.major = this.value; validate(); });
+    //
+    // console.log('submitted!!!', data)
+  }
+</script>
+
+<script>
 (function() {
-  var data = {};
+  var modDemo = {};
+  var data = {}
+  let timer;
+  let timerCompHours;
+  let timerAge;
 
   experimentr.startTimer('demo');
+  experimentr.hideNext()
+
+  d3.selectAll('button')
+  .filter(function(d) { return this.name === 'submitB' ? this : null; })
+  .on('click', function() {
+    d3.selectAll('input')
+      .filter(function(d) { return this.name === 'major' ? this : null; })
+      .each(function(){modDemo.major = this.value;})
+    d3.selectAll('input')
+      .filter(function(d) { return this.name === 'compHours' ? this : null; })
+      .each(function(){
+        if (parseFloat(this.value) >= 0){
+          console.log('here', parseFloat(this.value))
+          modDemo.compHours = this.value;
+          d3.selectAll(".compHoursText").style('display', 'none')
+          clearTimeout(timerCompHours)
+        } else{
+          // console.log('not num')
+          this.value=""
+          d3.selectAll('.compHoursText').style('display', 'inline')
+          timerCompHours = setTimeout(function(){ d3.selectAll(".compHoursText").style('display', 'none') }, 5000);
+        }
+      });
+      d3.selectAll('input')
+        .filter(function(d) { return this.name === 'age' ? this : null; })
+        .each(function(){
+          if (parseFloat(this.value) >= 0){
+            modDemo.age = this.value;
+            d3.selectAll(".ageText").style('display', 'none')
+            clearTimeout(timerAge)
+          } else{
+            this.value=""
+            d3.selectAll('.ageText').style('display', 'inline')
+            timerAge = setTimeout(function(){ d3.selectAll(".ageText").style('display', 'none') }, 5000);
+          }
+        });
+    // console.log('woo');
+    validate();
+  });
+
+  d3.selectAll('.compHoursText').style('display', 'none').style('color', 'red')
+  d3.selectAll('.ageText').style('display', 'none').style('color', 'red')
 
   d3.selectAll('input')
-  .filter(function(d) { return this.name === 'age' ? this : null; })
-  .on('change', function() { data.age = this.value; validate(); });
-  
+  .filter(function(d) { return this.name === 'infoVisEx' ? this : null; })
+  .on('input', function() {
+    // console.log('change')
+    d3.selectAll('.infoVisExText').text(this.value/10)
+    modDemo.infoVisEx = this.value/10; });
+
+  d3.selectAll('input')
+  .filter(function(d) { return this.name === 'dataAnEx' ? this : null; })
+  .on('input', function() {
+    // console.log('change')
+    d3.selectAll('.dataAnExText').text(this.value/10)
+    modDemo.dataAnEx = this.value/10; });
+
+  // d3.selectAll('input')
+  // .filter(function(d) { return this.name === 'age' ? this : null; })
+  // .on('change', function() { modDemo.age = this.value; });
+    // validate(); });
+
   d3.selectAll('input')
   .filter(function(d) { return this.name === 'sex' ? this : null; })
-  .on('change', function() { data.sex = this.value; validate(); });
-  
+  .on('change', function() { modDemo.sex = this.value; });
+    // validate(); });
+
   d3.selectAll('input')
   .filter(function(d) { return this.name === 'degree' ? this : null; })
-  .on('change', function() { data.degree = this.value; validate(); });
-  
+  .on('change', function() { modDemo.degree = this.value; });
+    // validate(); });
+
   d3.selectAll('input')
   .filter(function(d) { return this.name === 'monitor' ? this : null; })
-  .on('change', function() { data.monitor = this.value; validate(); });
-  
+  .on('change', function() { modDemo.monitor = this.value; });
+
+  d3.selectAll('input')
+  .filter(function(d) { return this.name === 'colorBlindness' ? this : null; })
+  .on('change', function() { modDemo.colorBlindness = this.value; });
+    // validate(); });
+
+  d3.selectAll(".unfinished").style('display', 'none')
+
   function validate() {
-	  if(data.age && data.sex && data.degree && data.monitor) {
+    data.modDemo=JSON.stringify(modDemo)
+    experimentr.addData(data);
+	  if(modDemo.age && modDemo.sex && modDemo.degree && modDemo.monitor && modDemo.major && modDemo.colorBlindness && modDemo.compHours) {
+      // experimentr.showNext()
+      // console.log('READY')
 	    experimentr.endTimer('demo');
-	    experimentr.addData(data);
 	    experimentr.release();
+      experimentr.next()
+      clearTimeout(timer)
 	  }
+    else {
+      // Please answer all questions
+      // Put timer here
+      d3.selectAll(".unfinished").style('display', 'inline').style('color', 'red')
+      timer = setTimeout(function(){ d3.selectAll(".unfinished").style('display', 'none') }, 5000);
+    }
 	}
 }());
 </script>

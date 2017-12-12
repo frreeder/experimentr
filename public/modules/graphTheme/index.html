@@ -90,6 +90,9 @@
       }
       for (var i=0; i<graphArray.length; i++){
           mod5.push({key: graphArray[i].chartType, inputData: []})
+          if (i == graphArray.length-1) {
+            document.dispatchEvent(new Event('loaded-all'))
+          }
       }
     }, 100)
   }
@@ -100,8 +103,10 @@
   init();
 
   function init() {
+
+
     experimentr.hideNext();
-    experimentr.startTimer('graphQuestions');
+    experimentr.startTimer('graphTheme');
 
     if(experimentr.isBW!=null){isBW = experimentr.isBW} else {isBW = isBW}
 
@@ -119,15 +124,19 @@
       .attr('height', '100%').style('max-height', '500px')
       .attr('width', 'auto')
       .style('display', 'block').style('object-position', '0 0').style('object-fit', 'contain').style("margin-top", '20px')
-    setTimeout(function(){
-      d3.select('#graphQText').append('button')
-        .attr('type', 'button').style("margin-top", '20px')
-        .text('I have read the instructions.')
-        .on('click',
-          function(d) {
-            loadData();
-          });
-    }, 100)
+
+    // Using event listener in an attempt to avoid error on "Cannot set property 'timeQStart' of undefined"
+    document.addEventListener('loaded-all', function () {
+      setTimeout(function(){
+        d3.select('#graphQText').append('button')
+          .attr('type', 'button').style("margin-top", '20px')
+          .text('I have read the instructions.')
+          .on('click',
+            function(d) {
+              loadData();
+            });
+      }, 100)
+    })
   }
 
   // ----------------- END: Initialize Script ----------------------------//
@@ -181,7 +190,7 @@
       experimentr.hold(); // adding a hold to the next button that is cleared by release in validate
       if (skip){
         mod5[graphCounter].timeQEnd=new Date().getTime()
-        experimentr.endTimer('graphQuestions');
+        experimentr.endTimer('graphTheme');
         validate() // Submit to database.
       }
       experimentr.showNext(); // Go to next module if one exists.
@@ -230,7 +239,7 @@
                   mod5[graphCounter].timeQEnd=new Date().getTime()
                   data.complete_s2 = true
                   validate()
-                  experimentr.endTimer('graphQuestions');
+                  experimentr.endTimer('graphTheme');
                 }
               }
             }
@@ -247,7 +256,7 @@
   // allow the participant to move on to the next
   function validate() {
     // console.log("validate")
-      experimentr.endTimer('graphQuestions');
+      experimentr.endTimer('graphTheme');
       data.mod5=JSON.stringify(mod5)
       experimentr.addData(data);
       experimentr.release();

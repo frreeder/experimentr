@@ -23,9 +23,7 @@
 ### config input settings
 
 # datafilename="./results/csvFiles/dummyData_time.csv"  # csv file name
-datafilename="./vmResults/csvFiles/mod2_score.csv"  # csv file name
-# datafilename="./vmResults/csvFiles/mod3_score.csv"  # csv file name
-# datafilename="./results/csvFiles/mod4_score.csv"  # csv file name
+datafilename="./results/csvFiles/mod1_score.csv"  # csv file name
 
 
 # Header name for participants
@@ -50,29 +48,19 @@ levelLabels2 = c("Related", "Unrelated", "None") # for renaming !!! Need to be i
 
 # outcomeName = "dummy_time"
 # outcomeName = "mod1_score"
-outcomeName = "mod2_score"
-# outcomeName = "mod3_score"
+outcomeName = 'mod3_score'
 
 # set some parameters for graphs
 ## outcomeName = "angleOffset"
 yMin = 0
-yMax = 1 # If using module2, module4
-yInterval = .1 # If using module2, module4
-# yMax = 4 # If using module1, module3
-# yInterval = 1
+yMax = 4
+yInterval = 10
 # yLabel = "Dummy Time"
 # yLabel = "Module 1 Score"
-yLabel = "Module 2 Score"
-# yLabel = "Module 3 Score"
+yLabel = "Module 3 Score"
 chartTitle = "Chart x Embellishment Type"
 # saveFile = "./results/img/three-way-dummy.jpg"
-# saveFile = "./results/img/three-way-mod1_score.jpg"
-saveFile = "./results/img/three-way-mod2_score.jpg"
-# saveFile = "./results/img/three-way-mod3_score.jpg"
-
-# saveFile_02 = "./results/img/three-way-mod1_allScore.jpg"
-saveFile_02 = "./results/img/three-way-mod2_allScore.jpg"
-# saveFile_02 = "./results/img/three-way-mod3_allScore.jpg"
+saveFile = "./results/img/three-way-mod1_score.jpg"
 # requires a directory called "r_plots" is already created in directory
 
 #ggsave(saveFile,width=8, height=6) #will only work after the ggplot code is run. wide
@@ -95,8 +83,8 @@ Data[participantName] = paste("p", p_id_data, sep="_")
 
 # Within independent factors/levels
 wiv <- as.vector(outer(withinLevels1, withinLevels2, paste, sep="_"))
-# print(wiv)
-# print(Data)
+print(wiv)
+print(Data)
 
 
 participantAmount = nrow(Data)
@@ -260,14 +248,14 @@ anova_output
 
 # BUT PRODUCING <0 x 0 matrix> (:()
  # posthoc test: bonferroni t test for isBW=FALSE
- pairwise.t.test(longDataCopy[which(longDataCopy$isBW == 'True'), ]$dvValue,
-                longDataCopy[which(longDataCopy$isBW == 'True'), ]$isBW,
+ pairwise.t.test(longDataCopy[which(longDataCopy$isBW == 'TRUE'), ]$dvValue,
+                longDataCopy[which(longDataCopy$isBW == 'TRUE'), ]$isBW,
                 paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 # posthoc test: bonferroni t test for isBW=FALSE
-pairwise.t.test(longDataCopy[which(longDataCopy$isBW == 'False'), ]$dvValue,
-               longDataCopy[which(longDataCopy$isBW == 'False'), ]$isBW,
+pairwise.t.test(longDataCopy[which(longDataCopy$isBW == 'FALSE'), ]$dvValue,
+               longDataCopy[which(longDataCopy$isBW == 'FALSE'), ]$isBW,
                paired = TRUE,
                p.adjust.method = "bonferroni")
 
@@ -318,7 +306,7 @@ library(plyr)
 # dv1 = plotCopy1[[outcomeName]]
 
 
-plotCopy1 = longData[!(longData[betweenVariable]=='False'),] # I THINK THE ! MAKES IT OPPOSITE!!!
+plotCopy1 = longData[!(longData[betweenVariable]=='FALSE'),] # I THINK THE ! MAKES IT OPPOSITE!!!
 iv1 = plotCopy1[[independentVariableName1]]
 iv2 = mapvalues(plotCopy1[[independentVariableName2]], from=withinLevels2, to=levelLabels2)
 # iv3 = mapvalues(plotCopy1[[betweenVariable]], from=withinLevels3, to=levelLabels3)
@@ -351,11 +339,11 @@ plot1 <- ggplot(plotCopy1, aes(y=dv1, x=mapvalues(iv1, from=withinLevels1, to=le
 # 	cdv1 = plotCopy2[[outcomeName]]
 
 
-plotCopy2 = longData[!(longData[betweenVariable]=='True'),]
-	civ1 = plotCopy2[[independentVariableName1]]
-	civ2 = mapvalues(plotCopy2[[independentVariableName2]], from=withinLevels2, to=levelLabels2)
-	# civ3 = mapvalues(plotCopy2[[independentVariableName3]], from=withinLevels3, to=levelLabels3)
-	cdv1 = plotCopy2[[outcomeName]]
+  plotCopy2 = longData[!(longData[betweenVariable]=='TRUE'),]
+  	civ1 = plotCopy2[[independentVariableName1]]
+  	civ2 = mapvalues(plotCopy2[[independentVariableName2]], from=withinLevels2, to=levelLabels2)
+  	# civ3 = mapvalues(plotCopy2[[independentVariableName3]], from=withinLevels3, to=levelLabels3)
+  	cdv1 = plotCopy2[[outcomeName]]
 
 # BOX PLOT!
 plot2 <- ggplot(plotCopy2, aes(y=cdv1, x=mapvalues(civ1, from=withinLevels1, to=levelLabels1), fill=civ2)) +
@@ -374,30 +362,6 @@ plot2 <- ggplot(plotCopy2, aes(y=cdv1, x=mapvalues(civ1, from=withinLevels1, to=
        	axis.text.y=element_text(size=18) # y axis category label size/font
 
        ) #close theme
-
- plotCopy3 = longData[1==1,]
- 	civ1_02 = plotCopy3[[independentVariableName1]]
- 	civ2_02 = mapvalues(plotCopy3[[independentVariableName2]], from=withinLevels2, to=levelLabels2)
- 	# civ3 = mapvalues(plotCopy2[[independentVariableName3]], from=withinLevels3, to=levelLabels3)
- 	cdv1_02 = plotCopy3[[outcomeName]]
-
- # BOX PLOT!
- plot4 <- ggplot(plotCopy3, aes(y=cdv1_02, x=mapvalues(civ1_02, from=withinLevels1, to=levelLabels1), fill=civ2_02)) +
-    	geom_boxplot(outlier.size=2, lwd=1.0) +
-    	coord_cartesian(ylim=c(yMin, yMax)) +
-    # 	ggtitle(paste(chartTitle, levelLabels3[2], sep=": ")) +
-    	ggtitle(paste(chartTitle, 'ALL', sep=": ")) +
-    	scale_y_continuous(breaks=seq(yMin, yMax, yInterval), expand=c(0, 0)) +   labs(x=independentVariableName1, y=yLabel) +
-    		theme(legend.title=element_blank(),
- 	   	legend.key.size=unit(1, "cm"),
- 	   	legend.text=element_text(size=16),
- 	   	plot.title=element_text(size=20, face="bold", hjust=0.5),
- 	   	axis.title.x=element_blank(),		# Use to remove x axis label/title
-        	axis.text.x=element_text(size=18), # x axis tick label size/font
-        	axis.title.y=element_text(size=20, margin=margin(t=0, r=5, b=0, l=0)), #move xaxis label from x axis
-        	axis.text.y=element_text(size=18) # y axis category label size/font
-
-        ) #close theme
 
 plot3 <- interaction.plot(x.factor = longDataCopy$isBW,
                  trace.factor = longDataCopy$ivFactor1,
@@ -422,11 +386,9 @@ plot3 <- interaction.plot(x.factor = longDataCopy$isBW,
 require(gridExtra)
 grid.arrange(plot1, plot2, ncol=2)
 g <- arrangeGrob(plot1, plot2, ncol=2)
-# g2 <- arrangeGrob(plot4, ncol=1)
 
 # grid.arrange(plot1, plot2, plot3, ncol=3)
 # g <- arrangeGrob(plot1, plot2, plot3, ncol=3)
 
 # automatically save graph to file. requires the output directory specified in "saveFile" has already been created
 ggsave(saveFile,width=20, height=6, g)
-ggsave(saveFile_02, width=10, height=6, plot4)
