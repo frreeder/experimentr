@@ -28,8 +28,16 @@
         experimentr.next()
       } else {
         d3.select('#invalidBrowser').style('display', 'inline');
+        d3.select('#consentNoText').style('display', 'hidden').style('color', 'red');
       }
     });
+
+    d3.select('#consentNo').on('click', function(){
+        console.log('here')
+        d3.select('#consentNoText').style('display', 'inline').style('color', 'red');
+    });
+
+
 
     d3.select('#checkId').on('click', validate);
   }
