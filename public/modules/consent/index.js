@@ -5,6 +5,7 @@
   init();
 
   function init() {
+
     experimentr.hideNext();
 
     // load previous workers file
@@ -19,6 +20,7 @@
 
     d3.select('#consentYes').on('click', function(){
       if (browser.name == "Firefox" || browser.name == "Chrome"){
+        experimentr.startTimer('s1')
         data.browser_s1 = JSON.stringify(browser)
         data.complete_s1 = false
         data.complete_s2 = false

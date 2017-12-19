@@ -1,9 +1,9 @@
 <div id="debrief">
 
-<p>
+<!-- <p>
 <strong>Please copy and paste the following code back on Mechanical Turk before closing this window:</strong>
 </p>
-<h2 id="postId"></h2>
+<h2 id="postId"></h2> -->
 
 <p class="placeholder">
 Mention what the experiment was about and why it's important.
@@ -26,10 +26,12 @@ Thank you again for your participation. Feel free submit any additional comments
 
 <script>
 (function() {
+  experimentr.endTimer('s1')
+
   var postId  = experimentr.postId
     , data    = {};
 
-  d3.select("#postId").text(postId);
+  // d3.select("#postId").text(postId);
 
   var comments = d3.select('#debrief').select('textarea')
     .on('keypress', function() { d3.select('#submitComments').attr('disabled', null); })

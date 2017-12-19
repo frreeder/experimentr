@@ -167,7 +167,7 @@ def getMod_2(inData, chartInfo, headers):
                 allScoreData[len(allScoreData)-1][titleHeaders.index(chartTitle)] += 1
 
     for i in range(len(timeData)):
-        for j in range(2, len(timeData[i])):
+        for j in range(2, len(timeData[i])): # because 0-pID, 1-isBW
             timeData[i][j] /= 2
 
     print('getMod_2_score', scoreData)
@@ -185,6 +185,7 @@ def getMod_4(inData, chartInfo, headers):
     timeData = []
     selDict = {'bar': 'selBar', 'pie': 'pointLoc', 'line': 'pointLoc'}
     titleHeaders = list(chartTitleDict.keys())
+    allScoreHeaders = ['pID']; allScoreHeaders.extend(titleHeaders)
     allScoreData = []
     for i in range(len(inData)):
         # split PID to see if it's data I'm interested in
@@ -194,12 +195,14 @@ def getMod_4(inData, chartInfo, headers):
         if not inData[i]['complete_s2']:
             continue
 
+        print('attempting', inData[i]['pid'], ', ', inModName)
         # Set the array by using headers to determine lengths
         scoreData.append([0]*len(headers))
         scoreCatCount.append([0]*len(headers)) # to be used to check if scores for category collected (precaution for debugging)
         timeData.append([0]*len(headers))
         # Set the array by using title headers to determine lengths
-        allScoreData.append([0]*len(titleHeaders))
+        allScoreData.append([0]*len(allScoreHeaders))
+        allScoreData[len(allScoreData)-1][0] = inData[i]['pid']
         # Set pid and isBW
         scoreData[len(scoreData)-1][0]=timeData[len(scoreData)-1][0]=inData[i]['pid']
         scoreData[len(scoreData)-1][1]=timeData[len(scoreData)-1][1]=inData[i]['graphOrder'][0]['isBW']
@@ -252,7 +255,7 @@ def getMod_4(inData, chartInfo, headers):
             # print ('uVal', uVal)
 
             diff = abs(cVal - uVal)
-            allScoreData[len(allScoreData)-1][titleHeaders.index(chartTitle)] = (cMax - diff)/cMax
+            allScoreData[len(allScoreData)-1][titleHeaders.index(chartTitle)+1] = (cMax - diff)/cMax
             scoreData[len(scoreData)-1][hI] += (cMax - diff)/cMax
             scoreCatCount[len(scoreData)-1][hI] += 1
             # print('diff', diff, ', score', (cMax - diff)/cMax)
@@ -329,9 +332,10 @@ def getMod_5(inData, chartInfo, headers):
 # --- Begin: GET TIME INFO --- #
 
 def getTimeInfo(inData, chartInfo):
-    badPID = ['data:430', 'data:500', 'data:510', 'data:520', 'data:560']
+    ignorePID = []
+    badPID = ['data:430', 'data:500', 'data:510', 'data:520', 'data:560', 'data:570', 'data:550', 'data:580']
     timeLabels = ['time_start_graphQuestions', 'time_start_graphTitles',
-    'time_start_graphNoChartQuestions', 'time_start_graphInteract',
+    'time_start_graphListQuestions', 'time_start_graphInteract',
     'time_start_graphTheme']
     trimTimeLabels = [x.replace('time_', '') for x in timeLabels]
     sessLabels = ['s1_date', 'start_s1', 's2_date', 'start_s2', 'delta(s1-s2)_days', 'delta(s1)_min', 'delta(s2)_min']
@@ -339,42 +343,57 @@ def getTimeInfo(inData, chartInfo):
     outData = []
     print('out', outHeaders)
     for i in range(len(inData)):
+
+        dataType = inData[i]['pid'].split(':')[0]
+        if dataType != 'data' or inData[i]['pid'] in ignorePID:
+            continue
+        if not inData[i]['complete_s2']:
+            continue
+
         outData.append(['NA']*(len(outHeaders)))
         index = len(outData)-1
-        outData[index][0] = inData[i]['pid']
+        outData[index][outHeaders.index('pID')] = inData[i]['pid']
 
         # Getting time if it was collected for the beginning of both sessions
-        try:
-            outData[index][1] = time.strftime('%Y-%m-%d', time.gmtime(inData[i]['time_start_graphQuestions']/1000))
-            outData[index][2] = time.strftime('%H:%M:%S', time.gmtime(inData[i]['time_start_graphQuestions']/1000))
-        except KeyError:
+        try: # Try to get time_start_s1, using mod01 -> time_start_graphQuestions for now
+            outData[index][outHeaders.index('s1_date')] = time.strftime('%Y-%m-%d', time.gmtime(inData[i]['time_start_s1']/1000))
+            outData[index][outHeaders.index('start_s1')] = time.strftime('%H:%M:%S', time.gmtime(inData[i]['time_start_s1']/1000))
+            outData[index][outHeaders.index('delta(s1)_min')] = (inData[i]['time_end_s1']/1000 - inData[i]['time_start_s1']/1000)/60 # time in min
+            # outData[index][6] = outData[index][2] - outData[index][1] #TODO
+        except KeyError: # If I can't get the time for s1, this is bad.
+            print('Missing time_start_s1 for pID: ', inData[i]['pid'])
             pass
-        if inData[i]['pid'] in badPID: # Didn't record the start s1 initially, temporary fix
+        if inData[i]['pid'] in badPID: # Temporary fix: Didn't record the start s1 initially
             timeStart = inData[i]['mod1'][0]['timeQStart']/1000
             timeEnd = inData[i]['mod1'][len(inData[i]['mod1'])-1]['timeQEnd']/1000
-            outData[index][1] = time.strftime('%Y-%m-%d', time.gmtime(timeStart))
-            outData[index][2] = time.strftime('%H:%M:%S', time.gmtime(timeStart))
-            outData[index][6] = (timeEnd - timeStart)/60 # Answer in min
-        try:
-            outData[index][3] = time.strftime('%Y-%m-%d', time.gmtime(inData[i]['time_start_experiment']/1000)) # This might need to change
-            outData[index][4] = time.strftime('%H:%M:%S', time.gmtime(inData[i]['time_start_experiment']/1000)) # This might need to change
-            outData[index][5] = abs(inData[i]['time_start_experiment']/1000 -  inData[i]['time_start_graphQuestions']/1000)/60/60/24
-            if inData[i]['pid'] in badPID: # Didn't record the start s1 initially, temporary fix
-                timeStart = inData[i]['time_start_graphTitles']/1000
-                outData[index][3] = time.strftime('%Y-%m-%d', time.gmtime(timeStart)) # This might need to change
-                outData[index][4] = time.strftime('%H:%M:%S', time.gmtime(timeStart)) # This might need to change
+            outData[index][outHeaders.index('s1_date')] = time.strftime('%Y-%m-%d', time.gmtime(timeStart))
+            outData[index][outHeaders.index('start_s1')] = time.strftime('%H:%M:%S', time.gmtime(timeStart))
+            outData[index][outHeaders.index('delta(s1)_min')] = (timeEnd - timeStart)/60 # delta_s1 (min)
+
+        try: # Try to get time_start_s2, using time_start_experiment as placeholder
+            outData[index][outHeaders.index('s2_date')] = time.strftime('%Y-%m-%d', time.gmtime(inData[i]['time_start_s2']/1000)) # This might need to change
+            outData[index][outHeaders.index('start_s2')] = time.strftime('%H:%M:%S', time.gmtime(inData[i]['time_start_s2']/1000)) # This might need to change
+            outData[index][outHeaders.index('delta(s2)_min')] = (inData[i]['time_end_s2']/1000 - inData[i]['time_start_s2']/1000)/60 # time in min
+            outData[index][outHeaders.index('delta(s1-s2)_days')] = abs(inData[i]['time_start_s2']/1000 -  inData[i]['time_start_s1']/1000)/60/60/24
         except KeyError:
+            print('Missing time_start_s2 for pID: ', inData[i]['pid'])
             pass
+        if inData[i]['pid'] in badPID and inData[i]['complete_s2']: # Temporary Fix, didn't record start s2 initially
+            timeStart = inData[i]['time_start_graphTitles']/1000
+            outData[index][outHeaders.index('s2_date')] = time.strftime('%Y-%m-%d', time.gmtime(timeStart)) # This might need to change
+            outData[index][outHeaders.index('start_s2')] = time.strftime('%H:%M:%S', time.gmtime(timeStart)) # This might need to change
         try:
             if inData[i]['pid'] in badPID: # Didn't record the start s1 initially, temporary fix
                 timeStart = inData[i]['time_start_graphTitles']/1000
                 timeEnd = inData[i]['time_end_graphInteract']/1000
-                outData[index][5] = abs(timeStart-inData[i]['mod1'][0]['timeQStart']/1000)/60/60/24
-                outData[index][7] = (timeEnd - timeStart)/60
+                outData[index][outHeaders.index('delta(s1-s2)_days')] = abs(timeStart-inData[i]['mod1'][0]['timeQStart']/1000)/60/60/24
+                outData[index][outHeaders.index('delta(s2)_min')] = (timeEnd - timeStart)/60
         except KeyError:
+            print('Can"t compute time between s1 and s2 for pID: ', inData[i]['pid'])
             pass
 
         # Getting start time of each of the modules
+        # ['start_graphQuestions', ‘start_graphTitles', ‘start_graphNoChartQuestions', ‘start_graphInteract', ‘start_graphTheme']
         for j in range(len(timeLabels)):
             try:
                 outData[index][8+j] = time.strftime('%H:%M:%S', time.gmtime(inData[i][timeLabels[j]]/1000))
@@ -400,11 +419,16 @@ def makeCSV(filePath, fileName, inData, headers, type):
 def main():
     # ----- GET PARTICIPANT DATA
     data = []
-    # filePath = './results/data2.json'
-    filePath = './vmResults/JSONData/data2.json'
 
-    # csvFilePath = './results/csvFiles/'
+    local = True
+    trim = False
+
+    filePath = './vmResults/JSONData/data2.json'
     csvFilePath = './vmResults/csvFiles/'
+
+    if local:
+        filePath = './results/data2.json'
+        csvFilePath = './results/csvFiles/'
 
     with open(filePath, 'r') as data_file:
         data = json.loads(data_file.read())
@@ -418,6 +442,7 @@ def main():
     # note: I want to make a index for easily finding what I want....
 
     headers = getHeaders()
+    chartHeaders = ['pID']; chartHeaders.extend(list(chartTitleDict.keys()));
 
     s1_m1_score, s1_m1_time, s1_m1_allScore = getMod_1_3(data, chartInfo, headers, 'mod1')
     csvNames = ['mod1_score', 'mod1_time', 'mod1_allScore']
@@ -431,14 +456,15 @@ def main():
     csvNames = ['mod3_score', 'mod3_time', 'mod3_allScore']
 
     if len(s2_m3_score) != 0:
-        for i in range(divmod(len(s2_m3_score), 2)[0] * 2): # To get pretty data for analysis --- for TESTING ONLY
-            isBW = False
-            if i % 2:
-                isBW = True
-            s2_m3_score[i][1] = isBW
-            s2_m3_time[i][1] = isBW
-        s2_m3_score = s2_m3_score[:divmod(len(s2_m3_score), 2)[0] * 2] # Only saving even number to file -> Analysis likes even
-        s2_m3_time = s2_m3_score[:divmod(len(s2_m3_time), 2)[0] * 2] # Only saving even number to file -> Analysis likes even
+        if (trim):
+            for i in range(divmod(len(s2_m3_score), 2)[0] * 2): # To get pretty data for analysis --- for TESTING ONLY
+                isBW = False
+                if i % 2:
+                    isBW = True
+                s2_m3_score[i][1] = isBW
+                s2_m3_time[i][1] = isBW
+            s2_m3_score = s2_m3_score[:divmod(len(s2_m3_score), 2)[0] * 2] # Only saving even number to file -> Analysis likes even
+            s2_m3_time = s2_m3_score[:divmod(len(s2_m3_time), 2)[0] * 2] # Only saving even number to file -> Analysis likes even
         makeCSV(csvFilePath, csvNames[0], s2_m3_score, headers, 'score')
         makeCSV(csvFilePath, csvNames[1], s2_m3_time, headers, 'time')
         makeCSV(csvFilePath, csvNames[2], s2_m3_allScore, list(chartTitleDict.keys()), 'allScore')
@@ -449,14 +475,15 @@ def main():
     csvNames = ['mod2_score', 'mod2_time', 'mod2_allScore']
 
     if len(s2_m2_score) != 0:
-        for i in range(divmod(len(s2_m2_score), 2)[0] * 2): # To get pretty data for analysis --- for TESTING ONLY
-            isBW = False
-            if i % 2:
-                isBW = True
-            s2_m2_score[i][1] = isBW
-            s2_m2_time[i][1] = isBW
-        s2_m2_score = s2_m2_score[:divmod(len(s2_m2_score), 2)[0] * 2]
-        s2_m2_time = s2_m2_time[:divmod(len(s2_m2_time), 2)[0] * 2]
+        if trim:
+            for i in range(divmod(len(s2_m2_score), 2)[0] * 2): # To get pretty data for analysis --- for TESTING ONLY
+                isBW = False
+                if i % 2:
+                    isBW = True
+                s2_m2_score[i][1] = isBW
+                s2_m2_time[i][1] = isBW
+            s2_m2_score = s2_m2_score[:divmod(len(s2_m2_score), 2)[0] * 2]
+            s2_m2_time = s2_m2_time[:divmod(len(s2_m2_time), 2)[0] * 2]
 
         makeCSV(csvFilePath, csvNames[0], s2_m2_score, headers, 'score')
         # For the second module, there is really only one time....I think.
@@ -469,17 +496,18 @@ def main():
     csvNames = ['mod4_score', 'mod4_time', 'mod4_allScore']
 
     if len(s2_m4_score) != 0:
-        for i in range(divmod(len(s2_m4_score), 2)[0] * 2): # To get pretty data for analysis --- for TESTING ONLY
-            isBW = False
-            if i % 2:
-                isBW = True
-            s2_m4_score[i][1] = isBW
-            s2_m4_time[i][1] = isBW
-        s2_m4_score = s2_m4_score[:divmod(len(s2_m4_score), 2)[0] * 2]
-        s2_m4_time = s2_m4_time[:divmod(len(s2_m4_time), 2)[0] * 2]
+        if trim:
+            for i in range(divmod(len(s2_m4_score), 2)[0] * 2): # To get pretty data for analysis --- for TESTING ONLY
+                isBW = False
+                if i % 2:
+                    isBW = True
+                s2_m4_score[i][1] = isBW
+                s2_m4_time[i][1] = isBW
+            s2_m4_score = s2_m4_score[:divmod(len(s2_m4_score), 2)[0] * 2]
+            s2_m4_time = s2_m4_time[:divmod(len(s2_m4_time), 2)[0] * 2]
         makeCSV(csvFilePath, csvNames[0], s2_m4_score, headers, 'score')
         makeCSV(csvFilePath, csvNames[1], s2_m4_time, headers, 'time')
-        makeCSV(csvFilePath, csvNames[2], s2_m4_allScore, list(chartTitleDict.keys()), 'allScore')
+        makeCSV(csvFilePath, csvNames[2], s2_m4_allScore, chartHeaders, 'allScore')
 
     s2_m5_score, s2_m5_time, s2_m5_allScore = getMod_5(data, chartInfo, headers)
     csvNames = ['mod5_score', 'mod5_time', 'mod5_allScore']

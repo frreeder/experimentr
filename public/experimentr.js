@@ -231,6 +231,7 @@ var experimentr = (function() {
   experimentr.endTimer = function(x) {
     console.log('ending timer: '+x);
     data['time_end_'+x] = Date.now();
+    if (data['time_start_'+x] == null){ data['time_start_'+x]=0 } // This is bad but just in case I didn't do things right and it breaks everything...I rather have no proper end time then everything broken.
     data['time_diff_'+x] = parseFloat(data['time_end_'+x]) - parseFloat(data['time_start_'+x]);
     experimentr.save();
   }

@@ -72,6 +72,7 @@
       // .text('I am ready to proceed')
       .on('click', ()=>{
         if (browser.name == "Firefox" || browser.name == "Chrome"){
+          experimentr.startTimer('s2')
           experimentr.next()
         } else {
           d3.select('#invalidBrowser').style('display', 'inline');

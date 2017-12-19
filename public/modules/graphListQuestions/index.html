@@ -44,7 +44,7 @@
 
   function init() {
     experimentr.hideNext();
-    experimentr.startTimer('graphNoChartQuestions');
+    experimentr.startTimer('graphListQuestions');
 
     d3.json('modules/graphQuestions/data.json', function(err, d) {
       d3.json('modules/graphOrder.json', function(err2,gO){
@@ -189,7 +189,7 @@
 
   // allow the participant to move on to the next
   function validate() {
-      // experimentr.endTimer('graphNoChartQuestions');
+      experimentr.endTimer('graphListQuestions');
       data.mod3=JSON.stringify(mod3)
       console.log(JSON.parse(data.mod3))
       experimentr.addData(data);
