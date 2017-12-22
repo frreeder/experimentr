@@ -4,3 +4,5 @@ npm-debug.log
 appendonly.aof
 dump.rdb
 *.swp
+analysis/vmResults
+analysis/results
