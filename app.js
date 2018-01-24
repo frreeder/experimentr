@@ -14,6 +14,7 @@ var express     = require('express')
   , fs          = require('fs')
   , pid
   , pug         = require('pug')
+  , ensureTime  = true
 
 // Database setup
 redisClient = redis.createClient(rport)
@@ -173,14 +174,24 @@ app.get('/', function(req, res){
             })
           }
         } else { // A graph order file exist, use
-          redisClient.hmget(loopPID, "complete_s1", "complete_s2", "isBW", function(err, comp){ // Check what sessions complete
-            for(var i=0; i<comp.length; i++){ comp[i]=comp[i]=="true"?true:false }
+          redisClient.hmget(loopPID, "complete_s1", "complete_s2", "isBW", "time_end_s1", function(err, comp){ // Check what sessions complete
+            for(var i=0; i<comp.length-1; i++){ comp[i]=comp[i]=="true"?true:false }
             console.log('caseFoosh', isBWTemp, comp)
             if (comp[2] == null || loopSuff == "qTest") {comp[2]=isBWTemp} //TODO: Check to make sure this is actually working
             if(comp[0]&&comp[1]){ // Completed
               res.render(__dirname+"/public/indexCompletedJade.pug")
             } else if (comp[0] || req.query.s==2){ //sess2
-              res.render(__dirname+"/public/indexSess2Jade.pug", {outPID: loopPID, isBW: comp[2], outGraphOrder: JSON.stringify(gO)})
+              if (ensureTime?((Date.now()-comp[3])/1000>1*7*24*60*60):true){
+                // console.log('a', Date.now(), 'b', comp[3])
+                res.render(__dirname+"/public/indexSess2Jade.pug", {outPID: loopPID, isBW: comp[2], outGraphOrder: JSON.stringify(gO)})
+              } else {
+                let timeRem = 1*7*24*60*60-(Date.now()-comp[3])/1000
+                // console.log('w', timeRem, (comp[3]-Date.now())/1000)
+                let days = Math.floor(parseInt(timeRem/60/60/24))
+                let hr = Math.floor(parseInt(timeRem-days*60*60*24)/60/60)
+                let min = Math.floor(parseInt((timeRem-hr*60*60-days*60*60*24)/60))
+                res.render(__dirname+"/public/indexWait.pug", {days: days, hr: hr, min: min})
+              }
             } else if (loopSuff=="qTest" && req.query.s!=1) { //test
                 res.render(__dirname+"/public/indexTestJade.pug", {outPID: loopPID, isBW: comp[2], outGraphOrder: JSON.stringify(gO)})
             } else { //sess1
