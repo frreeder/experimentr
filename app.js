@@ -135,6 +135,7 @@ app.get('/', function(req, res){
   // Create an ID based on pid
   if (req.query.pid.substring(0, 4)=="test"||req.query.pid==""){
     loopSuff = "qTest"
+    ensureTime = false;
     let tID = req.query.pid.substring(4)
     // console.log('tID', tID, req.query.pid)
     if (tID == "") {loopPID = loopSuff+":"+(+new Date()).toString(36)} else {
@@ -145,6 +146,7 @@ app.get('/', function(req, res){
     loopPID = loopSuff+":"+req.query.pid.substring(7)
   } else {
     loopSuff = "data"
+    ensureTime = false;
     loopPID = loopSuff+":"+req.query.pid
   }
 
