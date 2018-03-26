@@ -17,9 +17,9 @@
     d3.selectAll('#workerId')
       .on('keypress', function() { data.workerId = this.value; })
       .on('blur', function() { data.workerId = this.value; });
-
     d3.select('#consentYes').on('click', function(){
-      if (browser.name == "Firefox" || browser.name == "Chrome"){
+      console.log(browser);
+      if ((browser.name == "Firefox" && parseFloat(browser.version) >= 29) || (browser.name == "Chrome" && parseFloat(browser.version) >= 32)){
         experimentr.startTimer('s1')
         data.browser_s1 = JSON.stringify(browser)
         data.complete_s1 = false

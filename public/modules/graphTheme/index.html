@@ -10,7 +10,7 @@
 </style>
 
 <script>
-(function() {
+// (function() {
   var skip = false; // Whether or not can click proceed without completing the module
   let mod5 = [] // array for data to be recorded
   let graphOrder = [] // the order of the charts
@@ -66,36 +66,88 @@
   }
 
   let embDict = {normal: "norm_01", normal2: "norm_02", unrelated: "unrelated_01", unrelated2: "unrelated_02", embellished: "embellished"}
-  function setGraphArray(gArr){
-    let graphO, graphA, graphI;
-    d3.json('modules/graphQuestions/data.json', function(err, d) {graphA = d})
-    // d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
-    graphO = experimentr.graphOrder
-    d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
-    setTimeout(()=>{
-      // if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
-      for (let i=0; i<graphO.length; i++){
-        gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
-        gArr[i].embType = graphO[i].embType
-        gArr[i].chartType = graphO[i].chartType
-        // Mixing the questions based on embellishment type
-        for (let j=0; j<gArr[i].themeQuestions.length; j++){
-          if (gArr[i].embType=="embellished"){
-            gArr[i].themeQuestions[j].choices=sortChoices(gArr[i].themeQuestions[j].sortedChoices.related, gArr[i].themeQuestions[j].sortedChoices.unrelated)
-          } else {
-            gArr[i].themeQuestions[j].choices=sortChoices(gArr[i].themeQuestions[j].sortedChoices.mix,
-              graphI[graphO[i].chartType][embDict[graphO[i].embType]][0].sortedChoices.unrelated)
+
+  function loadJSON(){
+    return new Promise((resolve, reject)=>{
+      let graphO, graphA, graphI;
+        d3.json('modules/graphQuestions/data.json', function(err, d) {
+          graphA = d
+          d3.json('modules/graphQuestions/interactData.json', function(err, d2) {
+            graphI = d2
+            graphO = experimentr.graphOrder
+            resolve([graphA, graphI, graphO])
+            console.log('RESOLVED-loadJSON', [graphA, graphI, graphO], graphO.length);
+          })
+        })
+    })
+  }
+
+  function setGraphArray(res){
+      let graphO = res[2];
+      let graphA = res[0];
+      let graphI = res[1];
+      gArr = [];
+      return new Promise((resolve, reject)=>{
+        for (let i=0; i<graphO.length; i++){
+          gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
+          gArr[i].embType = graphO[i].embType
+          gArr[i].chartType = graphO[i].chartType
+          // Mixing the questions based on embellishment type
+          for (let j=0; j<gArr[i].themeQuestions.length; j++){
+            if (gArr[i].embType=="embellished"){
+              gArr[i].themeQuestions[j].choices=sortChoices(gArr[i].themeQuestions[j].sortedChoices.related, gArr[i].themeQuestions[j].sortedChoices.unrelated)
+            } else {
+              gArr[i].themeQuestions[j].choices=sortChoices(gArr[i].themeQuestions[j].sortedChoices.mix,
+                graphI[graphO[i].chartType][embDict[graphO[i].embType]][0].sortedChoices.unrelated)
+            }
           }
         }
-      }
+        resolve(gArr);
+        console.log('RESOLVED-setGraphArray');
+      })
+  }
+
+  function setUserRes(res){
+    graphArray = res;
+    return new Promise((resolve, reject)=>{
       for (var i=0; i<graphArray.length; i++){
           mod5.push({key: graphArray[i].chartType, inputData: []})
-          if (i == graphArray.length-1) {
-            document.dispatchEvent(new Event('loaded-all'))
-          }
       }
-    }, 100)
+      resolve()
+      console.log("RESOLVED-setUserRes");
+    })
   }
+
+  // function setGraphArray(gArr){
+  //   let graphO, graphA, graphI;
+  //   d3.json('modules/graphQuestions/data.json', function(err, d) {graphA = d})
+  //   // d3.json('modules/graphOrder.json', function(err, d) {graphO = d})
+  //   graphO = experimentr.graphOrder
+  //   d3.json('modules/graphQuestions/interactData.json', function(err, d) {graphI = d})
+  //   setTimeout(()=>{
+  //     // if(graphO[0].isBW!=null){isBW = graphO[0].isBW} else {isBW = isBW}
+  //     for (let i=0; i<graphO.length; i++){
+  //       gArr.push(graphA[graphO[i].chartType].filter((d2)=>{return d2.key==graphO[i].key})[0])
+  //       gArr[i].embType = graphO[i].embType
+  //       gArr[i].chartType = graphO[i].chartType
+  //       // Mixing the questions based on embellishment type
+  //       for (let j=0; j<gArr[i].themeQuestions.length; j++){
+  //         if (gArr[i].embType=="embellished"){
+  //           gArr[i].themeQuestions[j].choices=sortChoices(gArr[i].themeQuestions[j].sortedChoices.related, gArr[i].themeQuestions[j].sortedChoices.unrelated)
+  //         } else {
+  //           gArr[i].themeQuestions[j].choices=sortChoices(gArr[i].themeQuestions[j].sortedChoices.mix,
+  //             graphI[graphO[i].chartType][embDict[graphO[i].embType]][0].sortedChoices.unrelated)
+  //         }
+  //       }
+  //     }
+  //     for (var i=0; i<graphArray.length; i++){
+  //         mod5.push({key: graphArray[i].chartType, inputData: []})
+  //         if (i == graphArray.length-1) {
+  //           document.dispatchEvent(new Event('loaded-all'))
+  //         }
+  //     }
+  //   }, 100)
+  // }
 
   // ----------------- END: Setup Data Functions ----------------------------//
   // ----------------- BEGIN: Initialize Script ----------------------------//
@@ -110,7 +162,18 @@
 
     if(experimentr.isBW!=null){isBW = experimentr.isBW} else {isBW = isBW}
 
-    setGraphArray(graphArray)
+    // setGraphArray(graphArray)
+    loadJSON().then(setGraphArray).then(setUserRes).then(()=>{
+      setTimeout(function(){
+        d3.select('#graphQText').append('button')
+          .attr('type', 'button').style("margin-top", '20px')
+          .text('I have read the instructions.')
+          .on('click',
+            function(d) {
+              loadData();
+            });
+      }, 100)
+    })
 
     d3.select('#graphQText').selectAll("*").remove()
     d3.select('#graphQText').append('strong').text("Please read the following instructions. Then click the button to confirm you have read them and to proceed.").append("br")
@@ -126,17 +189,17 @@
       .style('display', 'block').style('object-position', '0 0').style('object-fit', 'contain').style("margin-top", '20px')
 
     // Using event listener in an attempt to avoid error on "Cannot set property 'timeQStart' of undefined"
-    document.addEventListener('loaded-all', function () {
-      setTimeout(function(){
-        d3.select('#graphQText').append('button')
-          .attr('type', 'button').style("margin-top", '20px')
-          .text('I have read the instructions.')
-          .on('click',
-            function(d) {
-              loadData();
-            });
-      }, 100)
-    })
+    // document.addEventListener('loaded-all', function () {
+    //   setTimeout(function(){
+    //     d3.select('#graphQText').append('button')
+    //       .attr('type', 'button').style("margin-top", '20px')
+    //       .text('I have read the instructions.')
+    //       .on('click',
+    //         function(d) {
+    //           loadData();
+    //         });
+    //   }, 100)
+    // })
   }
 
   // ----------------- END: Initialize Script ----------------------------//
@@ -262,5 +325,5 @@
       experimentr.release();
     // }
   }
-}());
+// }());
 </script>

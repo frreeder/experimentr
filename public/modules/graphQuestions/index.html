@@ -118,59 +118,69 @@
   function init() {
     experimentr.hideNext();
     experimentr.startTimer('graphQuestions');
-    d3.json('modules/graphOrder.json', function(err, gO){
-      dGO = experimentr.graphOrder // Up here because used to contain isBW information
-      // console.log('dGO', dGO)
-      // Set d to something or change something to reference graphOrder
-      d3.json('modules/graphQuestions/data.json', function(err, d) {
-        // console.log('isBW?', isBW) // Needs to be here to make sure has been initialized.
-        if (dGO.length==1){ // this is the first time the participant is doing mod1
-          // isBW = dGO[0].isBW
-          isBW = experimentr.isBW
-          getRandomImageArray(d);
-        } else if (dGO.length==0){ //there is no information
-          isBW = isBW
-          getRandomImageArray(d);
-        } else { // participant has attempted, USE experimentr.graphOrder
-          isBW = experimentr.isBW // This is currently not used because it is taken inside of setGraphArray as part of GraphOrder
-          graphArray = []
-          graphOrder = dGO
-          setGraphArray(graphArray, dGO, d);
-        }
-        for (var i=0; i<graphArray.length; i++){
-            mod1.push({key: graphArray[i].chartType, inputData: []})
-        }
 
-        console.log('graphArray', graphArray)
-
-        d3.select('#graphQInstructions').selectAll("*").remove()
-        // Instructions to the current module.
-        // TODO: Add something to check whether or not should be black and white.
-        d3.select('#graphQInstructions').append('strong').text("Please read the following instructions.").append("br")
-        d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions. There are 18 charts in total.').append('br')
-        d3.select('#graphQInstructions').append('img')
-          .attr('src', function(d) {
-            if(isBW) {return "modules/graphQuestions/examples/example_bw_mod1.png";} else{
-              return "modules/graphQuestions/examples/example_mod1.png";
-            }
-          })
-          .attr('height', '100%').style('max-height', '500px')
-          .attr('width', 'auto')
-          .style('display', 'block').style('padding-bottom', "20px")
-        // Show the proceed button after one second.
-        setTimeout(function(){
-          d3.select('#graphQInstructions').append('button')
-            .attr('type', 'button')
-            .text('Proceed')
-            .on('click',
-              function(d) {
-                // experimentr.countBW()
-                data.graphOrder=JSON.stringify(graphOrder)
-                validate()
-                loadData();
-              });
-        }, 1000)
+    // Make promise to allow the data to be loaded for use before proceeding
+    let aPromise = new Promise((resolve, reject)=>{
+      d3.json('modules/graphOrder.json', function(err, gO){
+        dGO = experimentr.graphOrder // Up here because used to contain isBW information
+        // console.log('dGO', dGO)
+        // Set d to something or change something to reference graphOrder
+        d3.json('modules/graphQuestions/data.json', function(err, d) {
+          // console.log('isBW?', isBW) // Needs to be here to make sure has been initialized.
+          if (dGO.length==1){ // this is the first time the participant is doing mod1
+            // isBW = dGO[0].isBW
+            isBW = experimentr.isBW
+            getRandomImageArray(d);
+          } else if (dGO.length==0){ //there is no information
+            isBW = isBW
+            getRandomImageArray(d);
+          } else { // participant has attempted, USE experimentr.graphOrder
+            isBW = experimentr.isBW // This is currently not used because it is taken inside of setGraphArray as part of GraphOrder
+            graphArray = []
+            graphOrder = dGO
+            setGraphArray(graphArray, dGO, d);
+          }
+          for (var i=0; i<graphArray.length; i++){
+              mod1.push({key: graphArray[i].chartType, inputData: []})
+          }
+          resolve();
+          console.log('RESOLVED-aPromise')
+        })
       })
+    })
+
+    aPromise.then(()=>{
+
+      console.log('graphArray', graphArray)
+
+      d3.select('#graphQInstructions').selectAll("*").remove()
+      // Instructions to the current module.
+      // TODO: Add something to check whether or not should be black and white.
+      d3.select('#graphQInstructions').append('strong').text("Please read the following instructions.").append("br")
+      d3.select('#graphQInstructions').append('text').text('You will be presented a chart to look at and then asked to answer a couple of questions. There are 18 charts in total.').append('br')
+      d3.select('#graphQInstructions').append('img')
+        .attr('src', function(d) {
+          if(isBW) {return "modules/graphQuestions/examples/example_bw_mod1.png";} else{
+            return "modules/graphQuestions/examples/example_mod1.png";
+          }
+        })
+        .attr('height', '100%').style('max-height', '500px')
+        .attr('width', 'auto')
+        .style('display', 'block').style('padding-bottom', "20px")
+      // Show the proceed button after one second.
+
+      setTimeout(function(){
+        d3.select('#graphQInstructions').append('button')
+          .attr('type', 'button')
+          .text('Proceed')
+          .on('click',
+            function(d) {
+              // experimentr.countBW()
+              data.graphOrder=JSON.stringify(graphOrder)
+              validate()
+              loadData();
+            });
+      }, 1000)
     })
   }
 
