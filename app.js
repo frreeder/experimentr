@@ -107,7 +107,7 @@ app.post('/countBW', function handlePost(req, res){
 
 app.get('/pid', function(req, res){
   // Not sure this is the right result
-  return res.send('Hahahahahaha')
+  return res.send('...')
   // Make something for extracting
 })
 
@@ -143,7 +143,7 @@ app.get('/', function(req, res){
     }
   } else if (req.query.pid.substring(0, 6) == 'iSigns'){
     loopSuff = "iSigns"
-    loopPID = loopSuff+":"+req.query.pid.substring(7)
+    loopPID = loopSuff+":"+req.query.pid.substring(6)
   } else {
     loopSuff = "data"
     ensureTime = false;
