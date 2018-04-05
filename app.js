@@ -183,7 +183,7 @@ app.get('/', function(req, res){
             if(comp[0]&&comp[1]){ // Completed
               res.render(__dirname+"/public/indexCompletedJade.pug")
             } else if (comp[0] || req.query.s==2){ //sess2
-              if (ensureTime?((Date.now()-comp[3])/1000>1*7*24*60*60):true){
+              if (!ensureTime || (Date.now()-comp[3])/1000>1*7*24*60*60){
                 // console.log('a', Date.now(), 'b', comp[3])
                 res.render(__dirname+"/public/indexSess2Jade.pug", {outPID: loopPID, isBW: comp[2], outGraphOrder: JSON.stringify(gO)})
               } else {
