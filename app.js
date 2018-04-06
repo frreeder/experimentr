@@ -143,6 +143,7 @@ app.get('/', function(req, res){
     }
   } else if (req.query.pid.substring(0, 6) == 'iSigns'){
     loopSuff = "iSigns"
+    ensureTime  = true;
     loopPID = loopSuff+":"+req.query.pid.substring(6)
   } else {
     loopSuff = "data"
