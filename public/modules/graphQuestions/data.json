@@ -1672,7 +1672,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "In the U.S, 2010 what was the percent of the industry that the most women worked in?",
+                    "question": "In the U.S, what was the percent of the industry that the most women worked in?",
                     "choices": [
                         "40.6%",
                         "31.3%",
@@ -1683,7 +1683,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "Which industry is closest in percent of women working to Transportation and Other in the U.S, 2012?",
+                    "question": "Which industry is closest in percent of women working to Transportation and Other in the U.S?",
                     "choices": [
                         "Professional and Management",
                         "Sales and Office",
@@ -2096,7 +2096,7 @@
             ],
             "questionBank": [
                 {
-                    "question": "What was the least used development platform in 2012?",
+                    "question": "What was the least used development platform?",
                     "choices": [
                         "Blackberry",
                         "Android",
@@ -2107,7 +2107,7 @@
                     "key": "identify"
                 },
                 {
-                    "question": "In 2012, which development platform had a percent similar to Windows Phone's percent of developers using the platform?",
+                    "question": "Which development platform had a percent similar to Windows Phone's percent of developers using the platform?",
                     "choices": [
                         "Blackberry",
                         "Linux",

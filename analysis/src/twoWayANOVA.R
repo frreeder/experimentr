@@ -19,11 +19,32 @@
 ##!! level names for factors must be unique
 
 ### config input settings
+args = commandArgs(trailingOnly=TRUE)
+datafile = "" # ex: mod2_score
+if (length(args)==0) {
+  stop("At least one argument must be supplied (input file).n", call.=FALSE)
+} else {
+  datafile = args[1]
+}
 
-datafilename="results/data2.csv"  # csv file name
+## begin: split
+simpleCap <- function(x) {
+  s <- strsplit(x, " ")[[1]]
+  paste(toupper(substring(s, 1,1)), substring(s, 2),
+      sep="", collapse=" ")
+}
+
+#words <- "mod3_score_all"
+wordSplit <- strsplit(datafile, "_")[[1]]
+#wordSplit
+
+newWords <- paste(sapply(wordSplit, simpleCap), collapse=" ")
+## end: split ##
+
+datafilename="./vmResults/csvFiles/"+datafile+".csv"  # csv file name
 
 # Header name for participants
-participantName = "PARTICIPANT_ID"
+participantName = "p_ID"
 
 # Factor names for repeated measures design
 independentVariableName1 = "Chart Type" # for output/naming
@@ -34,16 +55,16 @@ independentVariableName2 = "Embellishment Type" # for output/naming
 withinLevels2 = c("embellished", "unrelated", "normal") # needs to match second factor in csv column name
 levelLabels2 = c("Related", "Unrelated", "None") # for renaming !!! Need to be in same order as withinLabels. This is for plotting
 
-outcomeName = "score"
+outcomeName = newWords#"mod2_score"
 
 # set some parameters for graphs
 ## outcomeName = "angleOffset"
 yMin = 0
-yMax = 100
-yInterval = 10
-yLabel = "Average Mod3 Scores"
+yMax = 1
+yInterval = .1
+yLabel = newWords#"Average Mod2 Scores"
 chartTitle = "Chart Type x Embellishment Type"
-saveFile = "./figures/avg_mod3_scores.jpg"
+saveFile = "./vmResults/figures/two_way_"+datafile+".jpg"
 # requires a directory called "r_plots" is already created in directory
 
 #ggsave(saveFile,width=8, height=6) #will only work after the ggplot code is run. wide
@@ -54,11 +75,13 @@ saveFile = "./figures/avg_mod3_scores.jpg"
 ##### do the things ######
 
 Data<-read.csv(datafilename, header = TRUE)
+print("got data")
 
 # new function for getting column by header
 getColumnByName = function(dataframe, colName){return(dataframe[[which(colnames(dataframe) == colName)]])}
 
 p_id_data = getColumnByName(Data, participantName)
+print("gotColumn")
 
 # make sure subject identifier is not a number by prefixing with "p_201"
 Data[participantName] = paste("p", p_id_data, sep="_")
@@ -75,14 +98,14 @@ temp <- paste(withinLevels2, outcomeName, sep="_")
 withinCombos <- as.vector(outer(withinLevels1, withinLevels2, paste, sep="_"))
 wiv <- paste(withinCombos, outcomeName, sep="_")
 
-
+wiv <-as.vector(outer(withinLevels1, withinLevels2, paste, sep="_"))
 
 participantAmount = nrow(Data)
 participantCases = length(wiv)
 variableAmount = length(wiv)
 variableCases = 1
 
-
+print('length done')
 
 # simple normality checks per condition (i.e., outcome for each factor)
 i = 1 # !! Need to manually adjust per factor index. start with 1
